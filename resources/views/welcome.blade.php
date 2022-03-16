@@ -2,7 +2,7 @@
 
 @section('title', 'Welkom op mijn Portfolio')
 
-@section('background', Illuminate\Support\Facades\Storage::url('img/HBO-ICT-Software-Engineer-1920x600.jpg'))
+@section('background', Illuminate\Support\Facades\Storage::url('img/blue_bg.jpg'))
 
 @section('section')
 <div class="column is-8-desktop is-12-tablet">
