@@ -2,7 +2,8 @@
     <div class="container">
         <div class="navbar-brand">
             <a href="/" class="navbar-item">
-                <strong><i class="fas fa-graduation-cap"></i> Dwaard</strong>
+                <strong><i class="fas fa-tree"></i> Den Doelder</strong>
+
             </a>
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
                 <span aria-hidden="true"></span>
@@ -15,10 +16,6 @@
                 <a href="/"
                    class="navbar-item {{ Request::path() === '/' ? "is-active" : "" }}">
                     Home
-                </a>
-                <a href="/posts"
-                   class="navbar-item {{ Request::path() === 'posts' ? "is-active" : "" }}">
-                    Blog
                 </a>
             </div>
         </div>

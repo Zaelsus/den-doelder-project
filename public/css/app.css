@@ -278,7 +278,8 @@ textarea {
 }
 
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100%;
 }
 
 *, *::before, *::after {
@@ -350,10 +351,11 @@ pre {
 }
 
 body {
-  color: #4a4a4a;
-  font-size: 1em;
-  font-weight: 400;
-  line-height: 1.5;
+    color: #4a4a4a;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5;
+    min-height: 100%;
 }
 
 a {
@@ -10343,3 +10345,30 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem;
 }
+
+.grid-container {
+    display: grid;
+    min-height: 100%;
+    grid-template-columns: 5% 20% 70% 5%;
+    grid-template-rows: 50% 100% 100% 100% 30%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "side side-nav title user"
+    "side side-nav content content"
+    "side side-nav content content"
+    "side side-nav content content"
+    "footer footer footer footer";
+}
+
+.Title { grid-area: title; }
+
+.Side-nav { grid-area: side-nav; }
+
+.Side { grid-area: side; }
+
+.Content { grid-area: content; }
+
+.User { grid-area: user; }
+
+.Footer { grid-area: footer; }

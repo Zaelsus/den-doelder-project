@@ -6,7 +6,6 @@
     <title>Blok 3 Casustoets template</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
