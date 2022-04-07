@@ -10372,3 +10372,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 .User { grid-area: user; }
 
 .Footer { grid-area: footer; }
+
+.greyBackground {
+    background-color: lightgrey;
+}

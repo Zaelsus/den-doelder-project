@@ -11,7 +11,7 @@
 <body>
 @include('common.navbar')
 
-@yield('body')
+@yield('content')
 
 @include('common.footer')
 </body>

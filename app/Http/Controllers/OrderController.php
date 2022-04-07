@@ -14,7 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::orderBy('scheduled_production_date', 'desc')->paginate(10);
+
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -24,7 +26,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+//        $groups = Group::all();
+        return view('orders.create');
     }
 
     /**
@@ -35,7 +38,10 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = Order::create($this->validateOrder($request));
+
+        // redirecting to show a page
+        return redirect(route('orders.show', compact('order')));
     }
 
     /**
@@ -46,7 +52,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -57,7 +63,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('orders.edit', compact('order'));
     }
 
     /**
@@ -69,7 +75,9 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->update($this->validateOrder($request));
+
+        return redirect(route('orders.show', $order));
     }
 
     /**
@@ -80,6 +88,29 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect(route('retros.index'));
+    }
+
+    /**
+     * this function validates the attributes of Retro
+     * @param Request $request
+     * @return array
+     */
+    public function validateOrder(Request $request): array
+    {
+        $validatedAtributes = $request->validate([
+            'order_id'=>'required',
+            'customer_name'=>'required',
+            'order_production_line'=>'required',
+            'scheduled_production_date'=>'required|date',
+            'pallet_type'=>'required',
+            'quantity'=>'required|integer|min:0',
+            'location'=>'required',
+            'material'=>'required',
+            'material_quantity'=>'required|integer',
+        ]);
+
+        return $validatedAtributes;
     }
 }
