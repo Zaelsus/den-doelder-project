@@ -160,7 +160,7 @@
                             </div>
                         </div>
                     </form>
-
+<br>
                     <form method="POST" action="{{route('orders.destroy', $order)}}">
                         @csrf
                         @method('DELETE')
