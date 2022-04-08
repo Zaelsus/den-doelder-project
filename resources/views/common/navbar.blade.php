@@ -17,6 +17,10 @@
                    class="navbar-item ">
                     TRUCK
                 </a>
+                <a href="{{ route('orders.index') }}"
+                   class="navbar-item {{ Request::route()->getName() === 'orders.index' ? "is-active" : "" }}">
+                    Orders
+                </a>
             </div>
         </div>
     </div>

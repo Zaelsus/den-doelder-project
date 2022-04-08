@@ -1,6 +1,6 @@
 @extends('common.master')
 
-@section('body')
+@section('content')
     <section class="section">
         <div class="container">
             <div class="columns">
