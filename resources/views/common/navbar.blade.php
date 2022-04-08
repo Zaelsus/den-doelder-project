@@ -11,11 +11,11 @@
                 <span aria-hidden="true"></span>
             </a>
         </div>
-        <div class="navbar-menu" id="navMenu">
+        <div class="navbar-item" id="navMenu">
             <div class="navbar-start">
-                <a href="/"
-                   class="navbar-item {{ Request::path() === '/' ? "is-active" : "" }}">
-                    Home
+                <a href="{{route('todo.index')}}"
+                   class="navbar-item ">
+                    TRUCK
                 </a>
                 <a href="{{ route('orders.index') }}"
                    class="navbar-item {{ Request::route()->getName() === 'orders.index' ? "is-active" : "" }}">
