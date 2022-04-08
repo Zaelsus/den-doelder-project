@@ -12,6 +12,15 @@ class Order extends Model
         'status' => 'pending',
         'location' => 'Axel',
         'material'=>'HT/KD 1000x100x22 BC (1000x100x22)',
-        'instructions' =>null,
+        'instructions' =>null
     ];
+    protected $fillable = [
+        'delivery_status',
+        'delivered_by',
+    ];
+
+    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Note::class);
+    }
 }

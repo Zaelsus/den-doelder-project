@@ -27,6 +27,8 @@ class CreateOrdersTable extends Migration
             //this column will be replaced by relationship with materials table
             $table->string('material')->default('HT/KD 1000x100x22 BC (1000x100x22)');
             $table->unsignedInteger('material_quantity');
+            $table->string('delivery_status')->default('pending');
+            $table->string('delivered_by')->nullable();
             $table->timestamps();
         });
     }
