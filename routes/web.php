@@ -1,7 +1,5 @@
 <?php
-
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\{HomeController,WelcomeController,OrderController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'show']);
 
 Route::resource('/home', HomeController::class);
+
+//orders
+Route::resource('/orders', OrderController::class);
