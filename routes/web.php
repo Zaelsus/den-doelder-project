@@ -1,6 +1,12 @@
 <?php
 
-use App\Http\Controllers\{HomeController,WelcomeController,OrderController,CompletedController,OnholdController,TruckController};
+use App\Http\Controllers\{HomeController,
+    HourlyReportController,
+    WelcomeController,
+    OrderController,
+    CompletedController,
+    OnholdController,
+    TruckController};
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,7 +25,8 @@ Route::get('/', [WelcomeController::class, 'show']);
 
 Route::resource('/home', HomeController::class);
 
-
+// Hourly Check-up
+Route::resource('/hourlyReports', HourlyReportController::class);
 
 //truck/TODO
 Route::get('/truck/todo', [TruckController::class, 'index'])->name('todo.index');

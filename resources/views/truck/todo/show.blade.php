@@ -19,7 +19,7 @@
             <div class="" >
                 <h2>STATUS: {{$order->delivery_status}} <button class="button is-normal is-clickable has-background-warning" style="border: none;float: right"><a href="{{route('todo.edit',$order)}}" style="text-decoration: none">EDIT</a></button></h2>
             </div>
-            <div class=""><h2>PALLET DETAILS: {{$order->pallet_type}}</h2>s
+            <div class=""><h2>PALLET DETAILS: {{$order->pallet_type}}</h2>
             </div>
             <div class=""><h2>MATERIAL DETAIL: {{$order->material}}</h2></div>
             <div class=""><h2>QUANTITY OF MATERIAL: {{$order->quantity}}</h2></div>
