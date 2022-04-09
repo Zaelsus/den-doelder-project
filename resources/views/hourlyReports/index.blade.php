@@ -17,7 +17,7 @@
             <div class="columns">
                 <div class="column is-full">
                     <div class="has-text-right">
-                        <a href="/hourly/create" class="button is-primary">Add a new log</a>
+                        <a href="/hourlyReports/create" class="button is-primary">Add a new log</a>
                     </div>
                     <div class="content">
                         <table class="table is-fullwidth is-striped">
