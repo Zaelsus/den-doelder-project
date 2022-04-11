@@ -16,10 +16,6 @@ class Order extends Model
         'instructions' =>'',
 
     ];
-    protected $fillable = [
-        'delivery_status',
-        'delivered_by',
-    ];
 
     public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
