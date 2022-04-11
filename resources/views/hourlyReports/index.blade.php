@@ -24,7 +24,7 @@
                             <thead>
                             <tr>
                                 <th>Time</th>
-                                <th>Pallet Name</th>
+{{--                                <th>Pallet Name</th>--}}
                                 <th>Order #</th>
                                 <th>Def #</th>
                                 <th>Extra Info</th>
@@ -38,7 +38,7 @@
                             @foreach($hourlyReports as $report)
                             <tr>
                                 <td>{{ $report->created_at->format('H:i') }}</td>
-                                <td>{{ $report->pallet_name }}</td>
+{{--                                <td>{{ $report->pallet_name }}</td>--}}
                                 <td>{{ $report->order->order_id }}</td>
                                 <td>{{ $report->def_id}}</td>
                                 <td>{{ $report->extra_info }}</td>

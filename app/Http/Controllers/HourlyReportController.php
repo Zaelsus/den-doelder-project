@@ -98,7 +98,7 @@ class HourlyReportController extends Controller
     public function validateHourlyReport(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            'pallet_name'=>'required',
+            // 'pallet_name'=>'required',
             'order_id'=>'required|integer',
             'def_id'=>'required',
             'extra_info'=>'required',

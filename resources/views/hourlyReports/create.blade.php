@@ -17,20 +17,20 @@
                             <div class="card-content">
                                 <div class="content">
                                     {{-- Here are all the form fields --}}
-                                    <div class="field p-2">
-                                        <div class="field">
-                                            <label class="label">Pallet Name</label>
-                                            <div class="control">
-                                                <select name="pallet_name" style="width: 30%;" class="select is-rounded is-medium @error('pallet_name') is-danger @enderror">
-                                                    <option value="">choose a pallet type</option>
-                                                    <option value='Wet Pallet'>Wet Pallet</option>
-                                                    <option value='Dry Pallet'>Dry Pallet</option>
-                                                </select>
-                                            </div>
-                                            @error('pallet_name')
-                                            <p class="help is-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
+{{--                                    <div class="field p-2">--}}
+{{--                                        <div class="field">--}}
+{{--                                            <label class="label">Pallet Name</label>--}}
+{{--                                            <div class="control">--}}
+{{--                                                <select name="pallet_name" style="width: 30%;" class="select is-rounded is-medium @error('pallet_name') is-danger @enderror">--}}
+{{--                                                    <option value="">choose a pallet type</option>--}}
+{{--                                                    <option value='Wet Pallet'>Wet Pallet</option>--}}
+{{--                                                    <option value='Dry Pallet'>Dry Pallet</option>--}}
+{{--                                                </select>--}}
+{{--                                            </div>--}}
+{{--                                            @error('pallet_name')--}}
+{{--                                            <p class="help is-danger">{{ $message }}</p>--}}
+{{--                                            @enderror--}}
+{{--                                        </div>--}}
 
                                         <div class="field">
                                             <label class="label">Order ID</label>

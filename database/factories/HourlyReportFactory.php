@@ -15,7 +15,7 @@ class HourlyReportFactory extends Factory
     public function definition()
     {
         return [
-            'pallet_name' => Order::all()->random()->pallet_type,
+            // 'pallet_name' => Order::all()->random()->pallet_type,
             'def_id' => $this->faker->numberBetween(1, 6),
             'extra_info' => $this->faker->word,
             'action' => $this->faker->word,

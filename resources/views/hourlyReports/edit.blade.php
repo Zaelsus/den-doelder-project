@@ -18,17 +18,17 @@
                             <div class="card-content">
                                 <div class="content">
                                     {{-- Here are all the form fields --}}
-                                    <div class="field p-2">
-                                        <div class="field">
-                                            <label class="label">Pallet Name</label>
-                                            <div class="control">
-                                                <input name="pallet_name" class="input @error('pallet_name') is-danger @enderror"
-                                                       type="text" value="{{ $hourlyReport->pallet_name }}" required>
-                                            </div>
-                                            @error('pallet_name')
-                                            <p class="help is-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
+{{--                                    <div class="field p-2">--}}
+{{--                                        <div class="field">--}}
+{{--                                            <label class="label">Pallet Name</label>--}}
+{{--                                            <div class="control">--}}
+{{--                                                <input name="pallet_name" class="input @error('pallet_name') is-danger @enderror"--}}
+{{--                                                       type="text" value="{{ $hourlyReport->pallet_name }}" required>--}}
+{{--                                            </div>--}}
+{{--                                            @error('pallet_name')--}}
+{{--                                            <p class="help is-danger">{{ $message }}</p>--}}
+{{--                                            @enderror--}}
+{{--                                        </div>--}}
 
                                         <div class="field">
                                             <label class="label">Order ID</label>
