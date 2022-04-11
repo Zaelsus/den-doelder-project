@@ -17,8 +17,8 @@ class Order extends Model
 
     ];
 
-    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function hourlyreports(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Note::class);
+        return $this->hasMany(HourlyReport::class, 'order_id');
     }
 }

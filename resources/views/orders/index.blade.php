@@ -16,7 +16,7 @@
             <div class="columns">
                 <div class="column is-full">
                     <div class="has-text-right">
-                        <a href="/orders/create" class="button is-primary">Add a new order</a>
+                        <a href="{{route('orders.create')}}" class="button is-primary">Add a new order</a>
                     </div>
                     <table class="table is-fullwidth is-striped">
                         <thead>
