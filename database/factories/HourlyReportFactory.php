@@ -16,11 +16,11 @@ class HourlyReportFactory extends Factory
     {
         return [
             'pallet_name' => Order::all()->random()->pallet_type,
-            'order_id' => Order::all()->random()->order_id,
             'def_id' => $this->faker->numberBetween(1, 6),
             'extra_info' => $this->faker->word,
             'action' => $this->faker->word,
             'abnormality' =>  $this->faker->word,
+            'order_id'=>Order::all()->random()->id,
         ];
     }
 }

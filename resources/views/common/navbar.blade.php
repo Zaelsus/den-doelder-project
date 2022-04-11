@@ -22,7 +22,7 @@
                     Orders
                 </a>
                 <a href="{{ route('hourlyReports.index') }}"
-                   class="navbar-item {{ Request::route()->getName() === 'hourly.index' ? "is-active" : "" }}">
+                   class="navbar-item {{ Request::route()->getName() === 'hourlyReports.index' ? "is-active" : "" }}">
                     Hourly Check-up
                 </a>
             </div>

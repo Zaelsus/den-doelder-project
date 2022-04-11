@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HourlyReport;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class HourlyReportController extends Controller
@@ -25,8 +26,8 @@ class HourlyReportController extends Controller
      */
     public function create()
     {
-       //$report = HourlyReport::get(1);
-        return view('hourlyReports.create');
+        $orders = Order::all();
+        return view('hourlyReports.create',compact('orders'));
     }
 
     /**

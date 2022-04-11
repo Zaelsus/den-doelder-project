@@ -21,8 +21,11 @@
                                         <div class="field">
                                             <label class="label">Pallet Name</label>
                                             <div class="control">
-                                                <input name="pallet_name" class="input @error('pallet_name') is-danger @enderror"
-                                                       type="text" placeholder="name of customer" value="{{old('pallet_name')}}" required>
+                                                <select name="pallet_name" style="width: 30%;" class="select is-rounded is-medium @error('pallet_name') is-danger @enderror">
+                                                    <option value="">choose a pallet type</option>
+                                                    <option value='Wet Pallet'>Wet Pallet</option>
+                                                    <option value='Dry Pallet'>Dry Pallet</option>
+                                                </select>
                                             </div>
                                             @error('pallet_name')
                                             <p class="help is-danger">{{ $message }}</p>
@@ -32,8 +35,12 @@
                                         <div class="field">
                                             <label class="label">Order ID</label>
                                             <div class="control">
-                                                <input name="order_id" class="input @error('order_id') is-danger @enderror"
-                                                       type="input" placeholder="number of order here..." value="{{old('order_id')}}" required>
+                                               <select name="order_id" style="width: 30%;" class="select is-rounded is-medium @error('order_id') is-danger @enderror">
+                                                <option value="">choose order</option>
+                                                @foreach($orders as $order)
+                                                    <option value='{{$order->id}}'>{{$order->order_id . '. ' . $order->customer_name}}</option>
+                                                @endforeach
+                                            </select>
                                             </div>
                                             @error('order_id')
                                             <p class="help is-danger">{{ $message }}</p>

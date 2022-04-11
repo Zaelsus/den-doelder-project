@@ -42,7 +42,7 @@
                                     <div class="field">
                                         <label class="label">Location of production</label>
                                         <div class="control">
-                                            <select name="location" class="textarea @error('location') is-danger @enderror">
+                                            <select name="location" class="select @error('location') is-danger @enderror">
                                                 <option value="">choose a location</option>
                                                 <option value='Axel'>Axel</option>
                                                 <option value='Zelzate'>Zelzate</option>
@@ -55,7 +55,7 @@
                                     <div class="field">
                                         <label class="label">Production Line:</label>
                                         <div class="control">
-                                            <select name="order_production_line" class="textarea @error('order_production_line') is-danger @enderror">
+                                            <select name="order_production_line" class="select @error('order_production_line') is-danger @enderror">
                                                 <option value="">choose a production line</option>
                                                     <option value=1>CAPE 1</option>
                                                     <option value=2>CAPE 2</option>
@@ -83,7 +83,7 @@
                                         <div class="field">
                                             <label class="label">Pallet Type</label>
                                             <div class="control">
-                                                <select name="pallet_type" class="textarea @error('pallet_type') is-danger @enderror">
+                                                <select name="pallet_type" class="select @error('pallet_type') is-danger @enderror">
                                                     <option value="">choose a pallet type</option>
                                                     <option value='Wet Pallet'>Wet Pallet</option>
                                                     <option value='Dry Pallet'>Dry Pallet</option>
@@ -106,7 +106,7 @@
                                         <div class="field">
                                             <label class="label">Material</label>
                                             <div class="control">
-                                                <select name="material" class="textarea @error('material') is-danger @enderror">
+                                                <select name="material" class="select @error('material') is-danger @enderror">
                                                     <option value="">choose the material</option>
                                                     <option value='HT/KD 1000x100x22 BC (1000x100x22)'>HT/KD 1000x100x22 BC (1000x100x22)</option>
                                                     <option value='HT/KD 1200x100x22 BC (1200x100x22)'>HT/KD 1200x100x22 BC (1200x100x22)</option>

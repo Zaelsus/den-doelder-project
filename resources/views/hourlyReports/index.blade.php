@@ -17,7 +17,7 @@
             <div class="columns">
                 <div class="column is-full">
                     <div class="has-text-right">
-                        <a href="/hourlyReports/create" class="button is-primary">Add a new log</a>
+                        <a href="{{route('hourlyReports.create')}}" class="button is-primary">Add a new log</a>
                     </div>
                     <div class="content">
                         <table class="table is-fullwidth is-striped">
@@ -39,7 +39,7 @@
                             <tr>
                                 <td>{{ $report->created_at->format('H:i') }}</td>
                                 <td>{{ $report->pallet_name }}</td>
-                                <td>{{ $report->order_id }}</td>
+                                <td>{{ $report->order->order_id }}</td>
                                 <td>{{ $report->def_id}}</td>
                                 <td>{{ $report->extra_info }}</td>
                                 <td>{{ $report->action === null ? 'n/a' : $report->action }}</td>

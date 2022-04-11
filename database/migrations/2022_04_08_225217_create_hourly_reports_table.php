@@ -16,7 +16,6 @@ class CreateHourlyReportsTable extends Migration
         Schema::create('hourly_reports', function (Blueprint $table) {
             $table->id();
             $table->string('pallet_name');
-            $table->unsignedInteger('order_id');
             $table->text('def_id');
             $table->string('extra_info');
             $table->text('action')->nullable();
