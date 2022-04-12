@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'show']);
+Route::get('/', [OrderController::class, 'index']);
 
 Route::resource('/home', HomeController::class);
 

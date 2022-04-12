@@ -15,7 +15,7 @@
             <div class="navbar-start">
                 <a href="{{route('todo.index')}}"
                    class="navbar-item ">
-                    TRUCK
+                    Tuck View
                 </a>
                 <a href="{{ route('orders.index') }}"
                    class="navbar-item {{ Request::route()->getName() === 'orders.index' ? "is-active" : "" }}">
