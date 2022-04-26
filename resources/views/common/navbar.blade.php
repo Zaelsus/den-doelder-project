@@ -12,20 +12,20 @@
             </a>
         </div>
         <div class="navbar-item" id="navMenu">
-            <div class="navbar-start">
-                <a href="{{route('todo.index')}}"
-                   class="navbar-item ">
-                    Tuck View
-                </a>
-                <a href="{{ route('orders.index') }}"
-                   class="navbar-item {{ Request::route()->getName() === 'orders.index' ? "is-active" : "" }}">
-                    Orders
-                </a>
-                <a href="{{ route('hourlyReports.index') }}"
-                   class="navbar-item {{ Request::route()->getName() === 'hourlyReports.index' ? "is-active" : "" }}">
-                    Hourly Check-up
-                </a>
-            </div>
+{{--            <div class="navbar-start">--}}
+{{--                <a href="{{route('todo.index')}}"--}}
+{{--                   class="navbar-item ">--}}
+{{--                    Tuck View--}}
+{{--                </a>--}}
+{{--                <a href="{{ route('orders.index') }}"--}}
+{{--                   class="navbar-item {{ Request::route()->getName() === 'orders.index' ? "is-active" : "" }}">--}}
+{{--                    Orders--}}
+{{--                </a>--}}
+{{--                <a href="{{ route('hourlyReports.index') }}"--}}
+{{--                   class="navbar-item {{ Request::route()->getName() === 'hourlyReports.index' ? "is-active" : "" }}">--}}
+{{--                    Hourly Check-up--}}
+{{--                </a>--}}
+{{--            </div>--}}
         </div>
     </div>
 </nav>
