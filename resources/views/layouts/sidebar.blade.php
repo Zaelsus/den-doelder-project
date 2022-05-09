@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-purple elevation-4">
+<aside class="main-sidebar sidebar-dark-gray-dark bg-purple elevation-4">
         <a href="{{ route('home') }}" class="brand-link">
         <img src="\img\tinygans.png"
              alt="Goose hehe"
