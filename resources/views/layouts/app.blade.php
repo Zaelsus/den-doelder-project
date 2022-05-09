@@ -36,8 +36,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- User image -->
-                    <li class="user-header bg-primary">
-                        <img src="https://infyom.com/images/logo/blue_logo_150x150.jpg"
+                    <li class="user-header bg-gray-dark">
+                        <img src="img/tinygans.png"
                              class="img-circle elevation-2"
                              alt="User Image">
                         <p>
