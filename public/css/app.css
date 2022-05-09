@@ -15,6 +15,7 @@
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
+    --lilac: #b895e0;
   --pink: #e83e8c;
   --red: #dc3545;
   --orange: #fd7e14;
@@ -38447,6 +38448,11 @@ blockquote.quote-gray-dark h6 {
   background-color: #59339d !important;
   border-color: #533093;
   color: #fff;
+}
+
+/*Lilac Additions*/
+.bg-lilac {
+    background-color: #b895e0 !important;
 }
 
 .bg-pink {
