@@ -14,6 +14,7 @@ class MaterialFactory extends Factory
      */
     public function definition()
     {
+        // generating the correct product to get the right id
         $product = Material::addProduct();
         return [
             'product_id'=>$product->id,

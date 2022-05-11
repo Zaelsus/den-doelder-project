@@ -19,8 +19,10 @@ class ProductLocationFactory extends Factory
     {
         $check = false;
         $i = 0;
+        // in this loop we generate values for the new row that will be added while making sure that combination of values does not exist yet (preventing repetition)
         while (!$check && $i <= 100 ) {
             $location = Location::all()->random();
+            // checks if the location generated is pallet type or material type to generate the right product type
             if ($location->type === 'Pallets') {
                 $product_id = Pallet::all()->random()->product_id;
             } else {
@@ -29,6 +31,7 @@ class ProductLocationFactory extends Factory
             if (ProductLocation::all()->count() !== 0) {
                 $j = 1;
                 $innercheck = true;
+                // goes over the table to make sure the combination of values generated dont exist already
                 while ($innercheck && $j <= ProductLocation::all()->count()) {
                     $currentRow = ProductLocation::find($j);
                     $tempLocationID = $currentRow->location_id;
@@ -40,18 +43,22 @@ class ProductLocationFactory extends Factory
                     }
                     $j++;
                 }
+                //if the combination doesnt exist we can exit the big loop and use these values
                 if ($innercheck) {
                     $check = true;
                 } else {
                     $check = false;
                 }
 
-            } else {
+            }
+            // if the table is empty the inner check isnt needed
+            else {
                 $check = true;
             }
             $i++;
         }
 
+        // if the chaeck passed we put the new values
         if ($check) {
             return [
                 'location_id' => $location->id,
@@ -59,7 +66,8 @@ class ProductLocationFactory extends Factory
                 'quantity' => $this->faker->numberBetween(1, 500),
                 'test' => 'works',
             ];
-        } else {
+        } //test for the programmers
+        else {
             return [
                 'location_id' => 1,
                 'product_id' => 1,

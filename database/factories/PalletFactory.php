@@ -15,6 +15,7 @@ class PalletFactory extends Factory
      */
     public function definition()
     {
+        // generating the correct product to get the right id
         $product = Pallet::addProduct();
         return [
             'product_id'=>$product->id,
