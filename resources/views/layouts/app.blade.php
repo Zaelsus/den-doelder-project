@@ -19,7 +19,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <!-- Main Header -->
-    <nav class="main-header navbar navbar-expand navbar-red navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-gray navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -30,14 +30,14 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src="/img/tinygans.png"
+                    <img src="/img/pallets150.jpg"
                          class="user-image img-circle elevation-2" alt="Goose">
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- User image -->
                     <li class="user-header bg-gray-dark">
-                        <img src="/img/tinygans.png"
+                        <img src="/img/pallets150.jpg"
                              class="img-circle elevation-2"
                              alt="User Image">
                         <p>
@@ -71,6 +71,7 @@
         </section>
     </div>
 
+{{--    Removed, but code saved if we need it later--}}
 {{--    <!-- Main Footer -->--}}
 {{--    <footer class="main-footer bg-blue">--}}
 {{--        <div class="float-right d-none d-sm-block">--}}

@@ -1,7 +1,7 @@
-<aside class="main-sidebar sidebar-dark-gray-dark bg-orange elevation-4">
+<aside class="main-sidebar sidebar-dark-gray-dark bg-gray elevation-4">
 {{--    <div class="dropdown-toggle" data-toggle="dropdown">--}}
         <a href="{{ route('home') }}" class="brand-link">
-            <img src="\img\tinygans.png"
+            <img src="\img\pallets150.jpg"
                  alt="Goose hehe"
                  class="brand-image img-circle elevation-3">
             <span class="brand-text font-weight-light">Den Doelder</span>
