@@ -1,10 +1,7 @@
 <?php
 
-use App\Http\Controllers\{
-    WelcomeController,
-};
+use App\Http\Controllers\HourlyReportController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'show']);
+// Hourly Check-up
+Route::resource('/hourlyReports', HourlyReportController::class);
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('beans', function () {
+    return view('layouts.beans_page');
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

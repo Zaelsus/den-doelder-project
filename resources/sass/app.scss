@@ -1,10 +1,8 @@
-// Configures
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
-// FontAwesome
-@import '~@fortawesome/fontawesome-free/css/all.min.css';
-
-// Bulma
-@import "~bulma/bulma.sass";
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
