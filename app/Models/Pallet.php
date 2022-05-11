@@ -31,4 +31,20 @@ class Pallet extends Model
         return DB::table('products')->orderBy('id','desc')->first();
     }
 
+    /**
+     * Gets the product related to the pallet
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    /**
+     *Getts the orders related to the pallet
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class,'pallet_id');
+    }
+
 }

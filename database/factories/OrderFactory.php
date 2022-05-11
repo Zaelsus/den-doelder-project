@@ -15,6 +15,7 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
+            'order_number'=>$this->faker->numberBetween(1000, 3000),
             'pallet_id'=>Pallet::all()->random()->product_id,
             'machine'=>$this->faker->randomElement(['Cape 1', 'Cape 2', 'Cape 5']),
             'quantity_production'=>$this->faker->numberBetween(1000, 3000),

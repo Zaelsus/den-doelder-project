@@ -11,4 +11,12 @@ class Location extends Model
     protected $attributes = [
         'available_storage_space' => 0,
     ];
+
+    /**
+     *Gets the product-locations related to the location
+     */
+    public function productlocations()
+    {
+        return $this->hasMany(ProductLocation::class,'location_id');
+    }
 }

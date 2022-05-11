@@ -15,11 +15,11 @@ class CreatePalletsTable extends Migration
     {
         Schema::create('pallets', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
-            $table->boolean('valid')->default(1);
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')
                 ->onDelete('cascade');
+            $table->boolean('valid')->default(1);
             $table->string('name');
             $table->integer('pallet_number')->unsigned();
             $table->string('measurement');

@@ -22,4 +22,22 @@ class Material extends Model
             'type'=>'material']));
         return DB::table('products')->orderBy('id','desc')->first();
     }
+
+    /**
+     * Gets the product related to the material
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    /**
+     *Getts the orderMaterials related to the material
+     */
+    public function orderMaterials()
+    {
+        return $this->hasMany(OrderMaterial::class,'material_id');
+    }
+
+
 }
