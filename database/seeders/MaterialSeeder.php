@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Material;
 use Illuminate\Database\Seeder;
-use App\Models\Pallet;
 
-class PalletSeeder extends Seeder
+class MaterialSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class PalletSeeder extends Seeder
      */
     public function run()
     {
-        Pallet::factory(3)->create();
+        Material::factory(3)->create();
     }
 }
