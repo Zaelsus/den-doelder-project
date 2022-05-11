@@ -72,9 +72,9 @@
         </ul>
     </div>
     <div class="nav-item">
-        <a href="{{ route('home') }}" class="nav-link active bg-gray-dark">
-            <i class="nav-icon fas fa-home"></i>
-            <p>Home</p>
+        <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark">
+            <i class="nav-icon fas fa-cheese"></i>
+            <p>Hourly Reports</p>
         </a>
         <a href="{{ route('home') }}" class="nav-link active bg-gray-dark">
             <i class="nav-icon fas fa-toilet-paper-slash"></i>

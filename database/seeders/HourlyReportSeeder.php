@@ -2,17 +2,18 @@
 
 namespace Database\Seeders;
 
+use App\Models\HourlyReport;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class HourlyReportSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-         \App\Models\HourlyReport::seed();
+        HourlyReport::factory(5)->create();
     }
 }
