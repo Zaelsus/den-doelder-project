@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductLocation;
 use Illuminate\Database\Seeder;
-use App\Models\Pallet;
 
-class PalletSeeder extends Seeder
+class ProductLocationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,9 @@ class PalletSeeder extends Seeder
      */
     public function run()
     {
-        Pallet::factory(3)->create();
+        for($i=0;$i<8;$i++) {
+            ProductLocation::factory(1)->create();
+        }
+
     }
 }

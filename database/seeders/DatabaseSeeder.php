@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LocationSeeder::class,
             PalletSeeder::class,
+            MaterialSeeder::class,
+            ProductLocationSeeder::class,
+            OrderSeeder::class,
+            OrderMaterialSeeder::class,
         ]);
     }
 }

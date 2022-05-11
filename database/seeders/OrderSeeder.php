@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order;
 use Illuminate\Database\Seeder;
-use App\Models\Pallet;
 
-class PalletSeeder extends Seeder
+class OrderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class PalletSeeder extends Seeder
      */
     public function run()
     {
-        Pallet::factory(3)->create();
+        Order::factory(4)->create();
     }
 }
