@@ -19,7 +19,7 @@ class ProductLocationFactory extends Factory
     {
         $check = false;
         $i = 0;
-        while (!$check && ($i <= ProductLocation::all()->count() || ProductLocation::all()->count() === 0)) {
+        while (!$check && $i <= 100 ) {
             $location = Location::all()->random();
             if ($location->type === 'Pallets') {
                 $product_id = Pallet::all()->random()->product_id;
@@ -57,14 +57,14 @@ class ProductLocationFactory extends Factory
                 'location_id' => $location->id,
                 'product_id' => $product_id,
                 'quantity' => $this->faker->numberBetween(1, 500),
-                'test' => '$current',
+                'test' => 'works',
             ];
         } else {
             return [
                 'location_id' => 1,
                 'product_id' => 1,
                 'quantity' => 1,
-                'test' => 'empty',
+                'test' => 'stop',
             ];
         }
 
