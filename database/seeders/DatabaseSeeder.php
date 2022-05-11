@@ -15,9 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
+            LocationSeeder::class,
+            PalletSeeder::class,
+            MaterialSeeder::class,
+            ProductLocationSeeder::class,
             OrderSeeder::class,
-            TruckSeeder::class,
-            HourlyReportSeeder::class
+            OrderMaterialSeeder::class,
         ]);
     }
 }
