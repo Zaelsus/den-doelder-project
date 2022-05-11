@@ -73,7 +73,7 @@
     </div>
     <div class="nav-item">
         <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark">
-            <i class="nav-icon fas fa-cheese"></i>
+            <i class="nav-icon fas fa-check"></i>
             <p>Hourly Reports</p>
         </a>
         <a href="{{ route('home') }}" class="nav-link active bg-gray-dark">

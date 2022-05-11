@@ -30,14 +30,14 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src="img/tinygans.png"
+                    <img src="/img/tinygans.png"
                          class="user-image img-circle elevation-2" alt="Goose">
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- User image -->
                     <li class="user-header bg-gray-dark">
-                        <img src="img/tinygans.png"
+                        <img src="/img/tinygans.png"
                              class="img-circle elevation-2"
                              alt="User Image">
                         <p>
@@ -71,14 +71,14 @@
         </section>
     </div>
 
-    <!-- Main Footer -->
-    <footer class="main-footer bg-blue">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.5
-        </div>
-        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-        reserved.
-    </footer>
+{{--    <!-- Main Footer -->--}}
+{{--    <footer class="main-footer bg-blue">--}}
+{{--        <div class="float-right d-none d-sm-block">--}}
+{{--            <b>Version</b> 3.0.5--}}
+{{--        </div>--}}
+{{--        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights--}}
+{{--        reserved.--}}
+{{--    </footer>--}}
 </div>
 
 <script src="{{ mix('js/app.js') }}" defer></script>

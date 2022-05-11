@@ -1,4 +1,4 @@
-@extends('common.master')
+@extends('layouts.app')
 
 @section('content')
     <section class="section">
@@ -34,14 +34,14 @@
 
                                         <div class="field">
                                             <label class="label">Order ID</label>
-                                            <div class="control">
-                                               <select name="order_id" style="width: 30%;" class="select is-rounded is-medium @error('order_id') is-danger @enderror">
-                                                <option value="">choose order</option>
-                                                @foreach($orders as $order)
-                                                    <option value='{{$order->id}}'>{{$order->order_id . '. ' . $order->customer_name}}</option>
-                                                @endforeach
-                                            </select>
-                                            </div>
+{{--                                            <div class="control">--}}
+{{--                                               <select name="order_id" style="width: 30%;" class="select is-rounded is-medium @error('order_id') is-danger @enderror">--}}
+{{--                                                <option value="">choose order</option>--}}
+{{--                                                @foreach($orders as $order)--}}
+{{--                                                    <option value='{{$order->id}}'>{{$order->order_id . '. ' . $order->customer_name}}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                            </div>--}}
                                             @error('order_id')
                                             <p class="help is-danger">{{ $message }}</p>
                                             @enderror

@@ -1,4 +1,4 @@
-@extends('common.master')
+@extends('layouts.app')
 
 @section('content')
     <section class="section">
@@ -30,16 +30,16 @@
 {{--                                            @enderror--}}
 {{--                                        </div>--}}
 
-                                        <div class="field">
-                                            <label class="label">Order ID</label>
-                                            <div class="control">
-                                                <input name="order_id" class="input @error('order_id') is-danger @enderror"
-                                                       type="input" placeholder="number of order here..." value="{{ $hourlyReport->order_id }}" required>
-                                            </div>
-                                            @error('order_id')
-                                            <p class="help is-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
+{{--                                        <div class="field">--}}
+{{--                                            <label class="label">Order ID</label>--}}
+{{--                                            <div class="control">--}}
+{{--                                                <input name="order_id" class="input @error('order_id') is-danger @enderror"--}}
+{{--                                                       type="input" placeholder="number of order here..." value="{{ $hourlyReport->order_id }}" required>--}}
+{{--                                            </div>--}}
+{{--                                            @error('order_id')--}}
+{{--                                            <p class="help is-danger">{{ $message }}</p>--}}
+{{--                                            @enderror--}}
+{{--                                        </div>--}}
                                     </div>
 
                                     <div class="field p-2">

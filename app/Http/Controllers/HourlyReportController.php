@@ -26,8 +26,8 @@ class HourlyReportController extends Controller
      */
     public function create()
     {
-        $orders = Order::all();
-        return view('hourlyReports.create',compact('orders'));
+//        $orders = Order::all();
+        return view('hourlyReports.create');
     }
 
     /**
@@ -99,7 +99,7 @@ class HourlyReportController extends Controller
     {
         $validatedAtributes = $request->validate([
             // 'pallet_name'=>'required',
-            'order_id'=>'required|integer',
+//            'order_id'=>'required|integer',
             'def_id'=>'required',
             'extra_info'=>'required',
             'action' =>'string|nullable',

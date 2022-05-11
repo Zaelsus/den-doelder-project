@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\HourlyReport::seed();
+        $this->call([
+            HourlyReportSeeder::class
+        ]);
     }
 }
