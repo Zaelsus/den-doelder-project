@@ -20,13 +20,13 @@
                     <br>
                     <div>
                         <p>
-                            pizza: yes
+                            Coming Soon
                         </p>
                         <p>
-                            pizza: yes
+                            Size: 1200m I guess
                         </p>
                         <p>
-                            pizza: yes
+                            Lorum Ipsum Boxy Pallet
                         </p>
 
                     </div>
