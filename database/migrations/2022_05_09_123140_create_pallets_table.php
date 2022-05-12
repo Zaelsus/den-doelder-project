@@ -14,6 +14,7 @@ class CreatePalletsTable extends Migration
     public function up()
     {
         Schema::create('pallets', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')
                 ->references('id')
@@ -22,7 +23,7 @@ class CreatePalletsTable extends Migration
             $table->boolean('valid')->default(1);
             $table->string('name');
             $table->integer('pallet_number')->unsigned();
-            $table->string('measurement');
+            $table->string('measurements');
             $table->string('classification');
             $table->string('treatments');
             $table->text('specifications')->nullable();

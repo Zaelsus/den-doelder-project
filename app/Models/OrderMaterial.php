@@ -13,7 +13,7 @@ class OrderMaterial extends Model
      */
     public function material()
     {
-        return $this->belongsTo(Material::class, 'material_id');
+        return $this->belongsTo(Material::class, 'material_id','product_id');
     }
 
     /**
