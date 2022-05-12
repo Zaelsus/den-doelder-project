@@ -14,6 +14,7 @@ class CreateMaterialsTable extends Migration
     public function up()
     {
         Schema::create('materials', function (Blueprint $table) {
+            $table->id();
                 $table->unsignedBigInteger('product_id');
                 $table->foreign('product_id')
                     ->references('id')

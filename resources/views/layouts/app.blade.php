@@ -25,6 +25,7 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
+            <li class="secondLiHeader"><h1 class="headerCenter">@yield('header')</h1></li>
         </ul>
 
         <ul class="navbar-nav ml-auto">

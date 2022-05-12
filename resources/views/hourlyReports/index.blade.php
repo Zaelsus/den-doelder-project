@@ -4,14 +4,11 @@
 
 {{--@section('background', Illuminate\Support\Facades\Storage::url('img/blue_bg.jpg'))--}}
 
+@section('header')
+    Hourly Check-up
+@endsection
+
 @section('content')
-    <section class="hero is-small is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title is-2">Hourly Check-up</h1>
-            </div>
-        </div>
-    </section>
     <section class="section">
         <div class="container">
             <div class="columns">
@@ -26,7 +23,7 @@
                             <thead>
                             <tr>
                                 <th>Time</th>
-                                {{--                                <th>Pallet Name</th>--}}
+                                <th>Pallet Name</th>
                                 <th>Order #</th>
                                 <th>Def #</th>
                                 <th>Extra Info</th>
@@ -40,8 +37,8 @@
                             @foreach($hourlyReports as $report)
                                 <tr>
                                     <td>{{ $report->created_at->format('H:i') }}</td>
-                                    <td>{{ $report->pallet_name }}</td>
-                                    {{--                                <td>{{ $report->order->order_id }}</td>--}}
+                                    <td>{{ $report->order->pallet->name}}</td>
+                                    <td>{{ $report->order->order_number }}</td>
                                     <td>{{ $report->def_id}}</td>
                                     <td>{{ $report->extra_info }}</td>
                                     <td>{{ $report->action === null ? 'n/a' : $report->action }}</td>
