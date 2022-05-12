@@ -42,9 +42,13 @@
             <i class="nav-icon fas fa-draw-polygon"></i>
             <p>Drawings</p>
         </a>
-        <a href="#" class="nav-link active bg-white btn text-left disabled">
+        <a href="{{route('prodCheck.show')}}" class="nav-link active bg-gray-dark btn text-left">
             <i class="nav-icon fas fa-tools"></i>
             <p>Production Check</p>
+        </a>
+        <a href="{{route('prodCheck.create')}}" class="nav-link active bg-gray-dark btn text-left">
+            <i class="nav-icon fas fa-tools"></i>
+            <p>New Production Check</p>
         </a>
         <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
             <i class="nav-icon fas fa-check"></i>
