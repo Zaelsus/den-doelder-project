@@ -19,16 +19,22 @@ Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // Order
 Route::resource('/orders', OrderController::class);
 
+// Drawings
+Route::get('/drawings', function () {
+    return view('drawings.show');
+});
+
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
 
-//beans?
+//beans? yes
 Route::get('beans', function () {
     return view('layouts.beans_page');
 });
