@@ -5,7 +5,7 @@
     Create a Production Check
 @endsection
 
-@section('section')
+@section('content')
     <section class="content">
         <form method="POST" action="/prodCheck">
             @csrf
@@ -603,9 +603,9 @@
                         <div class="control">
                             <button type="reset" class="button is-warning">Reset</button>
                         </div>
-                        <div class="control">
-                            <a type="button" href="{{ route('welcome.index') }}" class="button is-light">Cancel</a>
-                        </div>
+{{--                        <div class="control">--}}
+{{--                            <a type="button" href="{{ route('welcome.index') }}" class="button is-light">Cancel</a>--}}
+{{--                        </div>--}}
                     </div>
                 </section>
             </section>

@@ -4,7 +4,7 @@
     Edit a Production Check
 @endsection
 
-@section('section')
+@section('content')
     <section class="content">
         <form method="POST" action="/prodCheck">
             @csrf

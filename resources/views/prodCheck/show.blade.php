@@ -4,7 +4,7 @@
     Production Check
 @endsection
 
-@section('section')
+@section('content')
 
     <div class="column is-9-desktop ">
         <section class="content" >
