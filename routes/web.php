@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/drawings', function () {
+    return view('drawings.show');
+});
+
 Route::get('beans', function () {
     return view('layouts.beans_page');
 });
