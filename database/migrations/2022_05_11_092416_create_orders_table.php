@@ -21,13 +21,14 @@ class CreateOrdersTable extends Migration
                 ->references('product_id')
                 ->on('pallets')
                 ->onDelete('restrict');
-            $table->string('Machine')->default('undefined');
+            $table->string('machine')->default('undefined');
             $table->unsignedInteger('quantity_production');
             $table->date('start_date')->nullable();
             $table->string('site_location')->default('Axel');
             $table->text('production_instructions')->nullable();
             $table->string('client_name');
             $table->string('client_address');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

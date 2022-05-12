@@ -12,6 +12,7 @@ class Order extends Model
         'start_date'=>null,
         'site_location'=>'Axel',
         'production_instructions'=>'',
+        'status'=>'pending',
         ];
 
     /**
@@ -28,6 +29,14 @@ class Order extends Model
      */
     public function pallet()
     {
-        return $this->belongsTo(Pallet::class, 'pallet_id');
+        return $this->belongsTo(Pallet::class, 'pallet_id','product_id');
+    }
+
+    /**
+     * returns the hourly reports related to the order
+     */
+    public function hourlyreports()
+    {
+        return $this->hasMany(HourlyReport::class, 'order_id');
     }
 }

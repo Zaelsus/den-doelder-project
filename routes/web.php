@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HourlyReportController;
+use App\Http\Controllers\{OrderController,HourlyReportController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,25 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Hourly Check-up
-Route::resource('/hourlyReports', HourlyReportController::class);
-
+//home page
+Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// Order
+Route::resource('/orders', OrderController::class);
+
+// Drawings
 Route::get('/drawings', function () {
     return view('drawings.show');
 });
 
+// Hourly Check-up
+Route::resource('/hourlyReports', HourlyReportController::class);
+
+//beans? yes
 Route::get('beans', function () {
     return view('layouts.beans_page');
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

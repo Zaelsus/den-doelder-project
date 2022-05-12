@@ -43127,3 +43127,20 @@ a.text-muted:hover {
 .dark-mode .dark-mode.accent-gray-dark .page-item .page-link:hover, .dark-mode .dark-mode.accent-gray-dark .page-item .page-link:focus {
   color: #3f474e;
 }
+
+
+/*header extra styling*/
+.headerCenter{
+    margin:10%;
+    white-space: nowrap;
+}
+
+.secondLiHeader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+
+
+}
