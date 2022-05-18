@@ -52,7 +52,13 @@ class ProductionController extends Controller
     public function show(Production $production)
     {
         $production = Production::latest()->first();
-        return view('prodCheck.show', compact('production'));
+
+        if($production !== null) {
+            return view('prodCheck.show', compact('production'));
+        }
+        else {
+            return abort(404);
+        }
     }
 
     /**
