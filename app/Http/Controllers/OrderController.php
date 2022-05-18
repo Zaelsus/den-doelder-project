@@ -53,7 +53,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('orders.show', compact('order'));
+        if($order->status === 'in production') {
+            return view('orders.show', compact('order'));
+        }
+        return view('orders.startShow', compact('order'));
+
     }
 
     /**

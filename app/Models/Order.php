@@ -41,4 +41,15 @@ class Order extends Model
     {
         return $this->hasMany(HourlyReport::class, 'order_id');
     }
+
+    /**
+     * changes the ststus of the current order to in production
+     */
+    public function startProduction()
+    {
+        $this->status = 'in production';
+        $order = $this;
+        return view('orders.show', compact('order'));
+    }
+
 }

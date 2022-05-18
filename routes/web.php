@@ -42,8 +42,3 @@ Route::get('/prodCheck/{prodCheck}/delete', [ProductionController::class, 'destr
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
 
-//beans? yes
-Route::get('beans', function () {
-    return view('layouts.beans_page');
-});
-

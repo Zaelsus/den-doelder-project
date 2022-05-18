@@ -10,7 +10,7 @@
     <div class="sidebar">
         <nav class="mt-4">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    @include('layouts.menu')
+                    @include('layouts.home.startMenu')
             </ul>
         </nav>
     </div>
