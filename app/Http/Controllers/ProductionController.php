@@ -57,7 +57,7 @@ class ProductionController extends Controller
             return view('prodCheck.show', compact('production'));
         }
         else {
-            return view('errors.500new');
+            return view('errors.404new');
         }
     }
 
