@@ -51,5 +51,4 @@
         <a class="btn btn-success fas fa-circle" onclick={!! `$order::startProduction()`!!}></a>
     </div>
     <!-- /.card -->
-    href="{{action('YourController@callMeDirectlyFromUrl')}}"
 @endsection
