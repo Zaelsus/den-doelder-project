@@ -48,7 +48,13 @@
 {{--            The footer of the card--}}
         </div>
         <!-- /.card-footer -->
-        <a class="btn btn-success fas fa-circle" onclick={!! `$order::startProduction()`!!}></a>
+{{--        <a class="btn btn-success fas fa-circle" href="{{route('orders.startProduction', $order)}}"></a>--}}
+
+        <form method="POST" action="{{route('orders.startProduction', $order)}}">
+            @csrf
+            <button  onclick="return confirm('Are you sure?')" class="btn btn-success fas fa-circle" type="submit"></button>
+        </form>
+
     </div>
     <!-- /.card -->
 @endsection

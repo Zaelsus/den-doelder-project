@@ -30,7 +30,7 @@
         </ul>
     </div>
     <div class="nav-item">
-        <a href="{{ route('orders.index') }}" class="nav-link active btn bg-gray-dark">
+        <a href="{{ route('orders.show',$order) }}" class="nav-link active btn bg-gray-dark">
             <i class="nav-icon fas fa-clipboard-list"></i>
             <p>Order Details</p>
         </a>

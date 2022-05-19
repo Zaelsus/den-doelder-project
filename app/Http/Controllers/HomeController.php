@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $orders = Order::orderBy('start_date', 'desc')->paginate(10);
+        return view('orders.index', compact('orders'));
     }
 }

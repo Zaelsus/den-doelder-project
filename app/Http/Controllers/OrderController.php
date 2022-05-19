@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -58,6 +69,15 @@ class OrderController extends Controller
         }
         return view('orders.startShow', compact('order'));
 
+    }
+
+    /**
+     * changes the ststus of the current order to in production
+     */
+    public static function startProduction(Order $order)
+    {
+        $order->update(['status'=>'in production','start_time'=>Carbon::now()]);
+        return redirect(route('orders.show', $order));
     }
 
     /**
@@ -118,4 +138,7 @@ class OrderController extends Controller
 
         return $validatedAtributes;
     }
+
+    // status manipulation
+
 }
