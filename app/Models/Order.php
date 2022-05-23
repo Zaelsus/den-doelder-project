@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     protected $attributes = [
         'start_date'=>null,
         'site_location'=>'Axel',
@@ -16,6 +17,7 @@ class Order extends Model
         'start_time'=>null,
         'end_time'=>null,
         ];
+
 
     /**
      *Getts the orderMaterials related to the order
@@ -41,4 +43,6 @@ class Order extends Model
     {
         return $this->hasMany(HourlyReport::class, 'order_id');
     }
+
+
 }

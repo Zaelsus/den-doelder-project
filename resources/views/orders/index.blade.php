@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home.app')
 
 @section('header')
     Orders Overview
@@ -25,7 +25,7 @@
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td><a href="orders/{{ $order->id }}">{{ $order->order_number }}</a></td>
+                                <td><a href="{{Route('orders.show',$order)}}">{{ $order->order_number }}</a></td>
                                 <td>{{$order->pallet->name}}</td>
                                 <td>{{$order->pallet->measurements}}</td>
                                 <td>{{ $order->client_name }}</td>

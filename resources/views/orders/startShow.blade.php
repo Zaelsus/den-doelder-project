@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home.app')
 
 @section('content')
     <div class="card">
@@ -12,7 +12,6 @@
                 <p class="heading">Location: {{$order->site_location}}</p>
                 <p class="heading">Created At: {{$order->created_at}}</p>
                 <p class="heading">Last Update:{{$order->updated_at}}</p>
-                <p class="heading">Started production:{{$order->start_time}}</p>
                 <span class="badge badge-primary {{$order->status === 'pending' ? 'has-background-grey-lighter':''}}">{{$order->status}}</span>
             </div>
             <div>
@@ -23,7 +22,7 @@
         </div>
 
         <div class="card-body">
-{{--            The body of the card--}}
+            The body of the card
         </div>
         <!-- /.card-body -->
         <div class="content">
@@ -44,18 +43,18 @@
             <h4> Instructions</h4>
             <h5> Scheduled Production Date: {{$order->start_date}}</h5>
             <p>{{$order->production_instructions}}</p>
-
-            {{--                        <div class="control">--}}
-            {{--                            <button class="button is-primary"--}}
-            {{--                                    onclick=window.location.href="{{route('orders.edit', $order)}}">--}}
-            {{--                                Edit Order Details--}}
-            {{--                            </button>--}}
-            {{--                        </div>--}}
         </div>
         <div class="card-footer">
 {{--            The footer of the card--}}
         </div>
         <!-- /.card-footer -->
+{{--        <a class="btn btn-success fas fa-circle" href="{{route('orders.startProduction', $order)}}"></a>--}}
+
+        <form method="POST" action="{{route('orders.startProduction', $order)}}">
+            @csrf
+            <button  onclick="return confirm('Are you sure?')" class="btn btn-success fas fa-circle" type="submit"></button>
+        </form>
+
     </div>
     <!-- /.card -->
 @endsection

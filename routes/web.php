@@ -20,11 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// this is temporary until we add the login to the right role and the right production line
+Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');
 
 
 // Order
 Route::resource('/orders', OrderController::class);
+
+//start production route
+Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
 
 // Drawings
 Route::get('/drawings', function () {
@@ -41,9 +45,4 @@ Route::get('/prodCheck/{prodCheck}/delete', [ProductionController::class, 'destr
 
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
-
-//beans? yes
-Route::get('beans', function () {
-    return view('layouts.beans_page');
-});
 

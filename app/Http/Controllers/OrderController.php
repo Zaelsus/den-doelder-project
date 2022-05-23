@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +64,20 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('orders.show', compact('order'));
+        if($order->status === 'in production') {
+            return view('orders.show', compact('order'));
+        }
+        return view('orders.startShow', compact('order'));
+
+    }
+
+    /**
+     * changes the ststus of the current order to in production
+     */
+    public static function startProduction(Order $order)
+    {
+        $order->update(['status'=>'in production','start_time'=> date('Y-m-d H:i:s')]);
+        return redirect(route('orders.show', $order));
     }
 
     /**
@@ -114,4 +138,7 @@ class OrderController extends Controller
 
         return $validatedAtributes;
     }
+
+    // status manipulation
+
 }
