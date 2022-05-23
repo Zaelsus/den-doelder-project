@@ -9,7 +9,7 @@ class Note extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title'];
+    protected $guarded = [];
 
     /**
      * Gets the order related to the note

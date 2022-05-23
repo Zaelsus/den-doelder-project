@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -16,7 +17,7 @@ class NoteController extends Controller
     {
         $notes = Note::orderBy('created_at', 'desc')->get();
 
-        return view('notes.index', compact('notes'));
+        return view('notes.index', ['notes' => $notes]);
     }
 
     /**
@@ -26,7 +27,8 @@ class NoteController extends Controller
      */
     public function create()
     {
-        return view('notes.create');
+        $orders = Order::all();
+        return view('notes.create', ['orders' => $orders]);
     }
 
     /**
@@ -40,7 +42,7 @@ class NoteController extends Controller
         $note = Note::create($this->validateNote($request));
 
         // redirecting to show the note
-        return redirect(route('notes.show', compact('note')));
+        return redirect('/notes');
     }
 
     /**
@@ -51,7 +53,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        return view('notes.show', compact('note'));
+        //
     }
 
     /**
@@ -62,7 +64,8 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        return view('notes.edit', compact('note'));
+        $orders = Order::all();
+        return view('notes.edit', compact('orders', 'note'));
     }
 
     /**
@@ -76,7 +79,7 @@ class NoteController extends Controller
     {
         $note->update($this->validateNote($request));
 
-        return redirect(route('notes.show', $note));
+        return redirect('/notes');
     }
 
     /**
@@ -101,6 +104,7 @@ class NoteController extends Controller
         $validatedAtributes = $request->validate([
             'title'=>'required',
             'content'=>'required',
+            'order_id'=>'required',
         ]);
 
         return $validatedAtributes;

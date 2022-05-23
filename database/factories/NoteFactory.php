@@ -15,7 +15,7 @@ class NoteFactory extends Factory
     public function definition()
     {
         return [
-            'title'=>$this->faker->title,
+            'title'=>$this->faker->sentence,
             'content'=>$this->faker->realTextBetween(100),
             'order_id' => Order::all()->random()->id,
         ];
