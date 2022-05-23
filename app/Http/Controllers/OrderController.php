@@ -149,15 +149,22 @@ class OrderController extends Controller
     public function validateOrder(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            'order_id'=>'required',
-            'customer_name'=>'required',
-            'order_production_line'=>'required',
-            'scheduled_production_date'=>'required|date',
-            'pallet_type'=>'required',
-            'quantity'=>'required|integer|min:0',
-            'location'=>'required',
-            'material'=>'required',
-            'material_quantity'=>'required|integer',
+            'order_number'=>'required',
+            'pallet_id'=>'required',
+            'machine'=>'required',
+            'quantity_production'=>'required|integer|min:1',
+            'start_date'=>'date',
+            'site_location'=>'required',
+            'production_instructions'=>'text',
+            'client_name' =>'required|string',
+            'client_address' =>'required|string',
+            'status'=>'string',
+
+//            'pallet_type'=>'required',
+//            'quantity'=>'required|integer|min:0',
+//
+//            'material'=>'required',
+//            'material_quantity'=>'required|integer',
         ]);
 
         return $validatedAtributes;
