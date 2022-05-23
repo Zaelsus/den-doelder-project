@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{OrderController,HourlyReportController};
+use App\Http\Controllers\{OrderController, HourlyReportController, PalletController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,10 +26,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Order
 Route::resource('/orders', OrderController::class);
 
-// Drawings
-Route::get('/drawings', function () {
-    return view('drawings.show');
-});
+// Pallets
+Route::resource('/pallets', PalletController::class);
 
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
