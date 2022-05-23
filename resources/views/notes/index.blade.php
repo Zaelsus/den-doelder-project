@@ -20,6 +20,9 @@
                         </thead>
                         <tbody>
                         @foreach($notes as $note)
+                            <details>
+                                <summary>{{$note->title}}</summary>
+                            </details>
                             <tr>
                                 <td>{{$note->order->order_number}}</td>
                                 <td>{{$note->created_at}}</td>
