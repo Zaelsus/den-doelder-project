@@ -29,7 +29,7 @@ class CreateOrdersTable extends Migration
             $table->string('client_name');
             $table->string('client_address');
             $table->string('status');
-            $table->date('start_time')->default(null)->nullable();
+            $table->dateTime('start_time')->default(null)->nullable();
             $table->date('end_time')->default(null)->nullable();
             $table->timestamps();
         });

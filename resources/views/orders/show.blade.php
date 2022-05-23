@@ -12,6 +12,7 @@
                 <p class="heading">Location: {{$order->site_location}}</p>
                 <p class="heading">Created At: {{$order->created_at}}</p>
                 <p class="heading">Last Update:{{$order->updated_at}}</p>
+                <p class="heading">Started production:{{$order->start_time}}</p>
                 <span class="badge badge-primary {{$order->status === 'pending' ? 'has-background-grey-lighter':''}}">{{$order->status}}</span>
             </div>
             <div>
