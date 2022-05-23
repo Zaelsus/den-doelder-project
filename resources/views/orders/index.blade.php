@@ -1,4 +1,4 @@
-@extends('layouts.home.app')
+@extends('layouts.app')
 
 @section('header')
     Orders Overview

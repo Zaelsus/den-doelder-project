@@ -64,10 +64,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        if($order->status === 'In Production' ||$order->status === 'Paused') {
-            return view('orders.show', compact('order'));
-        }
-        return view('orders.startShow', compact('order'));
+        return view('orders.show', compact('order'));
+//        if($order->status === 'In Production' ||$order->status === 'Paused') {
+//            return view('orders.show', compact('order'));
+//        }
+//        return view('orders.startShow', compact('order'));
 
     }
 

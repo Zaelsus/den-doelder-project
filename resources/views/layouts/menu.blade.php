@@ -1,4 +1,5 @@
-<!-- need to remove -->
+{{--    Production Status (either 1 is in production or Paused --}}
+@if(\App\Models\Order::isInProduction() !== 'no production')
 <div class="info-box bg-navy">
     <div class="info-box-content">
     <span class="info-box-text">Order Num. {{$order->order_number}}</span>
@@ -8,11 +9,11 @@
                         badge-secondary
                 @elseif($order->status === 'In Production')
                         badge-info
-@elseif($order->status === 'Paused')
-                        badge-warning
-@elseif($order->status === 'Done')
-                        badge-success
-@endif
+                @elseif($order->status === 'Paused')
+                                        badge-warning
+                @elseif($order->status === 'Done')
+                                        badge-success
+                @endif
                         ">{{$order->status}}</span>
         </h4>
     </div>
@@ -76,7 +77,7 @@
                 <i class="nav-icon fas fa-tools"></i>
                 <p>New Production Check</p>
             </a>
-            <a href="{{ route('hourlyReports.index', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+            <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
                 <i class="nav-icon fas fa-check"></i>
                 <p>Hourly Check</p>
             </a>
@@ -100,3 +101,16 @@
         @endif
     </div>
 </li>
+{{--    No Production (either everything is Done or Pending --}}
+@else
+    <li class="nav-item">
+        <div class="nav-item">
+            <a href="{{ route('orders.index') }}" class="nav-link active btn bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Orders</p>
+            </a>
+        </div>
+    </li>
+
+@endif
+
