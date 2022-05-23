@@ -13,6 +13,7 @@
                 alt="sad smiley face"
             >
         </div>
+
         <div style="padding-top: 5rem">
             <h5>We can't seem to find the page you were looking for, please check if you have entered a correct URL.
                 Otherwise, please go back to the Home Page and try again later, we will try to fix the issue as soon as possible.</h5>

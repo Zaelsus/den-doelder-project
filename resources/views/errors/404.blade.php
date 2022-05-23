@@ -21,6 +21,18 @@
                 >
             </div>
         </div>
+        @foreach($orders as $order)
+            <tr>
+                <td><a href="orders/{{ $order->id }}">{{ $order->order_number }}</a></td>
+                <td>{{$order->pallet->name}}</td>
+                <td>{{$order->pallet->measurements}}</td>
+                <td>{{ $order->client_name }}</td>
+                <td>{{$order->machine}}</td>
+                <td> {{$order->start_date}}</td>
+                <td>{{$order->status}}</td>
+                <td>{{$order->created_at}}</td>
+            </tr>
+        @endforeach
         <div style="padding-top: 1rem; padding-bottom: 1rem">
             <p>Our elite search and rescue team of water skiing squirrels are searching for the page you requested.</p>
             <p>Maybe check the URL to help them find the page!</p>
