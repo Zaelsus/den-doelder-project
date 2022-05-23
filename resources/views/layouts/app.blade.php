@@ -44,7 +44,9 @@
                         <p>
                             {{ Auth::user()->name }}
                             <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
+                            <small> {{ Auth::user()->role }}</small>
                         </p>
+
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">

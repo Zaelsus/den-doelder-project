@@ -18,14 +18,7 @@
                           $order = Order::where('status','Paused')->first();
                       }
                @endphp
-{{--                    @if(Order::isInProduction() !== 'no production')--}}
                         @include('layouts.menu',['order'=> $order])
-{{--                    @else--}}
-{{--                         @include('layouts.home.startmenu')--}}
-
-{{--                @endif--}}
-
-
             </ul>
         </nav>
     </div>
