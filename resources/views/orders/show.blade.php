@@ -13,7 +13,19 @@
                 <p class="heading">Created At: {{$order->created_at}}</p>
                 <p class="heading">Last Update:{{$order->updated_at}}</p>
                 <p class="heading">Started production:{{$order->start_time}}</p>
-                <span class="badge badge-primary {{$order->status === 'pending' ? 'has-background-grey-lighter':''}}">{{$order->status}}</span>
+                <h2>
+                    <span class="badge
+                @if($order->status === 'Pending')
+                        badge-secondary
+                @elseif($order->status === 'In Production')
+                        badge-info
+                @elseif($order->status === 'Paused')
+                                        badge-warning
+                @elseif($order->status === 'Done')
+                                        badge-success
+                @endif
+                        ">{{$order->status}}</span>
+                </h2>
             </div>
             <div>
                 <hr>

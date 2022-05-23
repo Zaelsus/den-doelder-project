@@ -1,6 +1,24 @@
 <!-- need to remove -->
+<div class="info-box bg-navy">
+    <div class="info-box-content">
+    <span class="info-box-text">Order Num. {{$order->order_number}}</span>
+        <h4>
+                    <span class="badge
+                @if($order->status === 'Pending')
+                        badge-secondary
+                @elseif($order->status === 'In Production')
+                        badge-info
+@elseif($order->status === 'Paused')
+                        badge-warning
+@elseif($order->status === 'Done')
+                        badge-success
+@endif
+                        ">{{$order->status}}</span>
+        </h4>
+    </div>
+</div>
 <li class="nav-item">
-    <div class="card bg-gray-dark disabled" style="margin-bottom: .2rem">
+    <div class="card bg-gray-dark" style="margin-bottom: .2rem">
         <a href="#" class="nav-link bg-black">
             <i class="nav-icon fas fa-th"></i>
             <p>
@@ -9,24 +27,31 @@
             </p>
         </a>
         <ul class="nav nav-treeview" style="display: none;">
+            @if($order->status === 'Paused')
+                <li class="nav-item">
+                    <form method="POST" action="{{route('orders.startProduction', $order)}}">
+                        @csrf
+                        <button onclick="return confirm('Are you sure you want to restart?')" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                                type="submit"> restart</button>
+                    </form>
+                </li>
+            @endif
+            @if($order->status === 'In Production')
+                <li class="nav-item">
+                    <form method="POST" action="{{route('orders.pauseProduction', $order)}}">
+                        @csrf
+                        <button onclick="return confirm('Are you sure you want to pause the production?')" class="far fa-pause-circle btn btn-warning btn-block "
+                                type="submit"> Pause</button>
+                    </form>
+                </li>
             <li class="nav-item">
-                <a href="#" class="nav-link btn text-left disabled bg-success">
-                    <i class="far fas fa-arrow-alt-circle-up nav-icon"></i>
-                    <p>Start Production</p>
-                </a>
+                <form method="POST" action="{{route('orders.stopProduction', $order)}}">
+                    @csrf
+                    <button onclick="return confirm('Is this order completed?')" class="far fa-stop-circle btn btn-danger btn-block "
+                            type="submit"> Finish Order</button>
+                </form>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link btn text-left disabled bg-orange">
-                    <i class="far fa-pause-circle nav-icon"></i>
-                    <p>Pause Production</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link btn text-left disabled bg-danger">
-                    <i class="far fa-stop-circle nav-icon"></i>
-                    <p>Stop Production</p>
-                </a>
-            </li>
+                @endif
         </ul>
     </div>
     <div class="nav-item">
@@ -34,26 +59,28 @@
             <i class="nav-icon fas fa-clipboard-list"></i>
             <p>Order Details</p>
         </a>
-        <a href="#" class="nav-link active bg-white btn text-left disabled">
-            <i class="nav-icon fas fa-clipboard-check"></i>
-            <p>Initial Check</p>
-        </a>
-        <a href="#" class="nav-link active bg-white btn text-left disabled">
-            <i class="nav-icon fas fa-draw-polygon"></i>
-            <p>Drawings</p>
-        </a>
-        <a href="{{route('prodCheck.show')}}" class="nav-link active bg-gray-dark btn text-left">
-            <i class="nav-icon fas fa-tools"></i>
-            <p>Production Check</p>
-        </a>
-        <a href="{{route('prodCheck.create')}}" class="nav-link active bg-gray-dark btn text-left">
-            <i class="nav-icon fas fa-tools"></i>
-            <p>New Production Check</p>
-        </a>
-        <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
-            <i class="nav-icon fas fa-check"></i>
-            <p>Hourly Check</p>
-        </a>
+        @if($order->status === 'In Production')
+            <a href="#" class="nav-link active bg-white btn text-left disabled">
+                <i class="nav-icon fas fa-clipboard-check"></i>
+                <p>Initial Check</p>
+            </a>
+            <a href="#" class="nav-link active bg-white btn text-left disabled">
+                <i class="nav-icon fas fa-draw-polygon"></i>
+                <p>Drawings</p>
+            </a>
+            <a href="{{route('prodCheck.show')}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-tools"></i>
+                <p>Production Check</p>
+            </a>
+            <a href="{{route('prodCheck.create')}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-tools"></i>
+                <p>New Production Check</p>
+            </a>
+            <a href="{{ route('hourlyReports.index', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-check"></i>
+                <p>Hourly Check</p>
+            </a>
+        @endif
     </div>
     <div class="nav-item">
 
@@ -61,13 +88,15 @@
             <i class="nav-icon fas fa-book"></i>
             <p>Add Notes</p>
         </a>
-        <a href="#" class="nav-link active bg-white btn text-left disabled">
-            <i class="nav-icon fas fa-warehouse"></i>
-            <p>Log Pallets</p>
-        </a>
-        <a href="#" class="nav-link active bg-white btn text-left disabled">
-            <i class="nav-icon fas fa-compass"></i>
-            <p>Location</p>
-        </a>
+        @if($order->status === 'In Production')
+            <a href="#" class="nav-link active bg-white btn text-left disabled">
+                <i class="nav-icon fas fa-warehouse"></i>
+                <p>Log Pallets</p>
+            </a>
+            <a href="#" class="nav-link active bg-white btn text-left disabled">
+                <i class="nav-icon fas fa-compass"></i>
+                <p>Location</p>
+            </a>
+        @endif
     </div>
 </li>

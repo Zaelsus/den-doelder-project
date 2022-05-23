@@ -7,17 +7,14 @@ use App\Models\Production;
 
 class ProductionController extends Controller
 {
-//    /**
-//     * Display a listing of the resource.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function index()
-//    {
-//        route to the admin view
-//        $productions = Production::all();
-//        return view('prodCheck.index', compact('productions'));
-//    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+    }
 
     /**
      * Show the form for creating a new resource.

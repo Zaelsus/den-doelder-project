@@ -13,7 +13,7 @@ class Order extends Model
         'start_date'=>null,
         'site_location'=>'Axel',
         'production_instructions'=>'',
-        'status'=>'pending',
+        'status'=>'Pending',
         'start_time'=>null,
         'end_time'=>null,
         ];
