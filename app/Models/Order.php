@@ -41,4 +41,12 @@ class Order extends Model
     {
         return $this->hasMany(HourlyReport::class, 'order_id');
     }
+
+    /**
+     *Gets the notes related to the order
+     */
+    public function notes()
+    {
+        return $this->hasMany(Note::class,'order_id');
+    }
 }

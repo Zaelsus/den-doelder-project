@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{OrderController, HourlyReportController, ProductionController};
+use App\Http\Controllers\{NoteController, OrderController, HourlyReportController, ProductionController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +41,9 @@ Route::get('/prodCheck/{prodCheck}/delete', [ProductionController::class, 'destr
 
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
+
+// Notes
+Route::resource('/notes', NoteController::class);
 
 //beans? yes
 Route::get('beans', function () {
