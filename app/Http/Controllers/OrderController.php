@@ -76,7 +76,7 @@ class OrderController extends Controller
      */
     public static function startProduction(Order $order)
     {
-        $order->update(['status'=>'in production','start_time'=>Carbon::now()]);
+        $order->update(['status'=>'in production','start_time'=> date('Y-m-d H:i:s')]);
         return redirect(route('orders.show', $order));
     }
 

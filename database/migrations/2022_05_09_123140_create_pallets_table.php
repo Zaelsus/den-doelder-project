@@ -30,13 +30,13 @@ class CreatePalletsTable extends Migration
             $table->text('extra_instructions')->nullable();
             $table->binary('general_images');
             $table->binary('detailed_images');
-            $table->text('details_components_bovendek')->default('Stijl, Type, Nummer: 7, Dikte: 22, Breedte: 95, Lengte: 1200');
-            $table->text('details_components_onderdek')->default('Stijl, Type, Nummer: 7, Dikte: 22, Breedte: 95, Lengte: 1200');
-            $table->text('details_components_boventussendek')->default('Stijl, Type, Nummer: 7, Dikte: 22, Breedte: 95, Lengte: 1200');
-            $table->text('details_components_klossen')->default('Stijl, Type, Nummer: 7, Dikte: 22, Breedte: 95, Lengte: 1200');
-            $table->text('details_materialen')->default('nagels, lengte, draad, ...');
-            $table->text('details_nieuw_hout')->default('merk, ...');
-            $table->text('details_specifieke_bladnotities')->default('Rechterblok: .., Middenblok: .., Linkerblok: ..');
+            $table->text('details_components_bovendek');
+            $table->text('details_components_onderdek');
+            $table->text('details_components_boventussendek');
+            $table->text('details_components_klossen');
+            $table->text('details_materialen');
+            $table->text('details_nieuw_hout');
+            $table->text('details_specifieke_bladnotities');
 
             $table->timestamps();
         });
