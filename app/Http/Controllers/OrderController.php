@@ -64,7 +64,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        if($order->status === 'in production') {
+        if($order->status === 'In Production' ||$order->status === 'Paused') {
             return view('orders.show', compact('order'));
         }
         return view('orders.startShow', compact('order'));
@@ -72,12 +72,35 @@ class OrderController extends Controller
     }
 
     /**
-     * changes the ststus of the current order to in production
+     * changes the status of the current order to in production
      */
     public static function startProduction(Order $order)
     {
-        $order->update(['status'=>'in production','start_time'=> date('Y-m-d H:i:s')]);
+        if($order->status ==='Pending') {
+            $order->update(['status'=>'In Production','start_time'=> date('Y-m-d H:i:s')]);
+        } else {
+            $order->update(['status'=>'In Production']);
+        }
         return redirect(route('orders.show', $order));
+
+    }
+
+    /**
+     * changes the status of the current order to done
+     */
+    public static function stopProduction(Order $order)
+    {
+        $order->update(['status'=>'Done','end_time'=> date('Y-m-d H:i:s')]);
+        return redirect(route('orders.index'));
+    }
+
+    /**
+     * changes the status of the current order to done
+     */
+    public static function pauseProduction(Order $order)
+    {
+        $order->update(['status'=>'Paused']);
+        return redirect(route('orders.show',$order));
     }
 
     /**

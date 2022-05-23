@@ -30,6 +30,13 @@ Route::resource('/orders', OrderController::class);
 //start production route
 Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
 
+//stop production route
+Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
+
+//stop production route
+Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
+
+
 // Drawings
 Route::get('/drawings', function () {
     return view('drawings.show');

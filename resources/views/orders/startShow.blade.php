@@ -12,12 +12,24 @@
                 <p class="heading">Location: {{$order->site_location}}</p>
                 <p class="heading">Created At: {{$order->created_at}}</p>
                 <p class="heading">Last Update:{{$order->updated_at}}</p>
-                <span class="badge badge-primary {{$order->status === 'pending' ? 'has-background-grey-lighter':''}}">{{$order->status}}</span>
+                <h2>
+                    <span class="badge
+                @if($order->status === 'Pending')
+                        badge-secondary
+                @elseif($order->status === 'In Production')
+                                        badge-info
+                @elseif($order->status === 'Paused')
+                                        badge-warning
+                @elseif($order->status === 'Done')
+                                        badge-success
+                @endif
+                        ">{{$order->status}}</span>
+                </h2>
             </div>
             <div>
                 <hr>
-            <p>Client Name - {{$order->client_name}}</p>
-            <p>Address - {{$order->client_address}}</p>
+                <p>Client Name - {{$order->client_name}}</p>
+                <p>Address - {{$order->client_address}}</p>
             </div>
         </div>
 
@@ -45,15 +57,17 @@
             <p>{{$order->production_instructions}}</p>
         </div>
         <div class="card-footer">
-{{--            The footer of the card--}}
+            {{--            The footer of the card--}}
         </div>
         <!-- /.card-footer -->
-{{--        <a class="btn btn-success fas fa-circle" href="{{route('orders.startProduction', $order)}}"></a>--}}
-
-        <form method="POST" action="{{route('orders.startProduction', $order)}}">
-            @csrf
-            <button  onclick="return confirm('Are you sure?')" class="btn btn-success fas fa-circle" type="submit"></button>
-        </form>
+        {{--        <a class="btn btn-success fas fa-circle" href="{{route('orders.startProduction', $order)}}"></a>--}}
+        @if($order->status === 'Pending')
+            <form method="POST" action="{{route('orders.startProduction', $order)}}">
+                @csrf
+                <button onclick="return confirm('Start production for order {{$order->order_number}}?')" class="far fas fa-arrow-alt-circle-up btn btn-success btn-bloc"
+                        type="submit"> Start</button>
+            </form>
+        @endif
 
     </div>
     <!-- /.card -->
