@@ -26,7 +26,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        return view('notes.create');
     }
 
     /**
@@ -37,7 +37,10 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $note = Note::create($this->validateNote($request));
+
+        // redirecting to show the note
+        return redirect(route('notes.show', compact('note')));
     }
 
     /**
@@ -59,7 +62,7 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        //
+        return view('notes.edit', compact('note'));
     }
 
     /**
@@ -71,7 +74,9 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //
+        $note->update($this->validateNote($request));
+
+        return redirect(route('notes.show', $note));
     }
 
     /**
@@ -82,6 +87,22 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $note->delete();
+        return redirect(route('notes.index'));
+    }
+
+    /**
+     * this function validates the attributes of a note
+     * @param Request $request
+     * @return array
+     */
+    public function validateNote(Request $request): array
+    {
+        $validatedAtributes = $request->validate([
+            'title'=>'required',
+            'content'=>'required',
+        ]);
+
+        return $validatedAtributes;
     }
 }

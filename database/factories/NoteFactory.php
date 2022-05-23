@@ -16,7 +16,7 @@ class NoteFactory extends Factory
     {
         return [
             'title'=>$this->faker->title,
-            'content'=>$this->faker->text,
+            'content'=>$this->faker->realTextBetween(100),
             'order_id' => Order::all()->random()->id,
         ];
     }
