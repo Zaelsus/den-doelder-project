@@ -1,4 +1,4 @@
-@extends('layouts.home.app')
+@extends('layouts.app')
 
 @section('header')
     Orders Overview
@@ -9,6 +9,11 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-full">
+                    @if(Auth::user()->role === 'Administrator')
+                    <div class="has-text-right">
+                        <a href="{{route('orders.create')}}" class="button is-primary">Add a new order</a>
+                    </div>
+                    @endif
                     <table class="table is-fullwidth is-striped">
                         <thead>
                         <tr>

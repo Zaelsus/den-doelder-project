@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 // this is temporary until we add the login to the right role and the right production line
-Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // Order

@@ -1,7 +1,7 @@
-@extends('layouts.home.app')
+{{--@extends('layouts.home.app')--}}
 
-@section('content')
-    <div class="container-fluid">
-        <h1 class="text-black-50">You are logged in!</h1>
-    </div>
-@endsection
+{{--@section('content')--}}
+{{--    <div class="container-fluid">--}}
+{{--        <h1 class="text-black-50">You are logged in!</h1>--}}
+{{--    </div>--}}
+{{--@endsection--}}
