@@ -18,6 +18,7 @@
                            $order = Order::where('status','Paused')->first();
                        }
                 @endphp
+
                 @if(Auth::user()->role === 'Production')
                     @include('layouts.menu',['order'=> $order])
                 @elseif(Auth::user()->role === 'Administrator')

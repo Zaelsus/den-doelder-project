@@ -26,6 +26,15 @@
 @endif
                         ">{{$order->status}}</span>
                 </h2>
+                @if($order->status === 'Pending' && Auth::user()->role === 'Production')
+                    <form method="POST" action="{{route('orders.startProduction', $order)}}">
+                        @csrf
+                        <button onclick="return confirm('Start production for order {{$order->order_number}}?')"
+                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-bloc"
+                                type="submit"> Start
+                        </button>
+                    </form>
+                @endif
             </div>
             <div>
                 <hr>
@@ -70,15 +79,7 @@
             {{--            The footer of the card--}}
         </div>
         <!-- /.card-footer -->
-        @if($order->status === 'Pending' && Auth::user()->role === 'Production')
-            <form method="POST" action="{{route('orders.startProduction', $order)}}">
-                @csrf
-                <button onclick="return confirm('Start production for order {{$order->order_number}}?')"
-                        class="far fas fa-arrow-alt-circle-up btn btn-success btn-bloc"
-                        type="submit"> Start
-                </button>
-            </form>
-        @endif
+
     </div>
     <!-- /.card -->
 @endsection
