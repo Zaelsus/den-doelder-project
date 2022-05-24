@@ -7,14 +7,17 @@ use App\Models\Production;
 
 class ProductionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    }
+//    /**
+//     * Display a listing of the resource.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function index()
+//    {
+//        route to the admin view
+//        $productions = Production::all();
+//        return view('prodCheck.index', compact('productions'));
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -46,7 +49,7 @@ class ProductionController extends Controller
      * @param  \App\Models\Production $production
      * @return \Illuminate\Http\Response
      */
-    public function show(Production $production)
+    public function show()
     {
         $production = Production::latest()->first();
         return view('prodCheck.show', compact('production'));
@@ -60,6 +63,7 @@ class ProductionController extends Controller
      */
     public function edit(Production $production)
     {
+//        dd($production);
         return view('prodCheck.edit', compact('production'));
     }
 
@@ -73,8 +77,8 @@ class ProductionController extends Controller
     public function update(Request $request, Production $production)
     {
         $production->update($this->validateProduction($request));
-
-        return redirect(route('prodCheck.show', $production))->with('info','the production with name ' . $production->name . ' has been edited');
+//        dd($production);
+        return redirect(route('prodCheck.show'));
     }
 
     /**
@@ -85,8 +89,8 @@ class ProductionController extends Controller
      */
     public function destroy(Production $production)
     {
-//        $production->delete();
-//        return redirect(route('prodCheck.index'))->with('success','an item has been deleted');
+        $production->delete();
+        return redirect(route('prodCheck.index'))->with('success','an item has been deleted');
     }
 
     /**

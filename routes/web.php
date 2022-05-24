@@ -36,6 +36,13 @@ Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])-
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
+//Initial Check
+Route::get('/initialCheck', [InitialController::class, 'show'])->name('initialCheck.show');
+Route::post('/initialCheck', [InitialController::class, 'store'])->name('initialCheck.store');
+Route::get('/initialCheck/create', [InitialController::class, 'create'])->name('initialCheck.create');;
+Route::get('/initialCheck/{initial}/edit', [InitialController::class, 'edit'])->name('initialCheck.edit');
+Route::put('/initialCheck/{initial}', [InitialController::class, 'update'])->name('initialCheck.update');
+
 
 // Drawings
 Route::get('/drawings', function () {
