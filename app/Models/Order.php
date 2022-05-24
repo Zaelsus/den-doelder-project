@@ -42,7 +42,7 @@ class Order extends Model
      */
     public function production()
     {
-        return $this->hasOne(Production::class, 'production_id');
+        return $this->hasOne(Production::class, 'order_id');
     }
 
     /**

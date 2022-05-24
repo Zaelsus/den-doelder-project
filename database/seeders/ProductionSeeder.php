@@ -17,5 +17,8 @@ class ProductionSeeder extends Seeder
      */
     public function run()
     {
+        for($i=0;$i<4;$i++) {
+            Production::factory(1)->create();
+        }
     }
 }

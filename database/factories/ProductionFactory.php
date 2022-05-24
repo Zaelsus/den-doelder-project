@@ -15,8 +15,38 @@ class ProductionFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'order_id'=>Order::all()->random()->id,
-        ];
+        $check = false;
+        $i = 1;
+
+        while(!$check && $i <= 100) {
+            $order = Order::all()->random();
+            $order_id = $order->id;
+            $production = $order->production;
+//            $production_id = $production->id;
+
+//            dd($production);
+            if ($production === null) {
+//                dd('hi');
+                $check = true;
+//                dd($production);
+//                echo is_null($production);
+
+//                dd($check);
+//                dd($order_id);
+            }
+//            echo $check;
+            $i++;
+            if($check) {
+                return [
+                    'order_id' => $order_id
+                ];
+            }
+        }
+
+
+
+//        return [
+//            'order_id'=>Order::all()->random()->id,
+//        ];
     }
 }
