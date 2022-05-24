@@ -38,6 +38,14 @@ class Order extends Model
     }
 
     /**
+     * Gets the pallet related to the order
+     */
+    public function production()
+    {
+        return $this->belongsTo(Production::class, 'order_id');
+    }
+
+    /**
      * returns the hourly reports related to the order
      */
     public function hourlyreports()

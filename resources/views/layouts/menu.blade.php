@@ -69,9 +69,13 @@
                     <p>Order Details</p>
                 </a>
                 @if($order->status === 'In Production')
-                    <a href="#" class="nav-link active bg-white btn text-left disabled">
+                    <a href="{{route('initialCheck.show')}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-clipboard-check"></i>
-                        <p>Initial Check</p>
+                        <p>View Initial Check</p>
+                    </a>
+                    <a href="{{route('initialCheck.create')}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-clipboard-check"></i>
+                        <p>New Initial Check</p>
                     </a>
                     <a href="#" class="nav-link active bg-white btn text-left disabled">
                         <i class="nav-icon fas fa-draw-polygon"></i>
@@ -79,7 +83,7 @@
                     </a>
                     <a href="{{route('prodCheck.show')}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>
-                        <p>Production Check</p>
+                        <p>View Production Check</p>
                     </a>
                     <a href="{{route('prodCheck.create')}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>

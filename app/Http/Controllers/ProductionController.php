@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Production;
+use App\Models\Order;
 
 class ProductionController extends Controller
 {
@@ -26,7 +27,8 @@ class ProductionController extends Controller
      */
     public function create()
     {
-        return view('prodCheck.create');
+        $orders = Order::all();
+        return view('prodCheck.create', $orders);
     }
 
     /**

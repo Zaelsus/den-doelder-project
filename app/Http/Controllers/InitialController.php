@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Initial;
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class InitialController extends Controller
 {
@@ -75,7 +76,7 @@ class InitialController extends Controller
     public function update(Request $request, Initial $initial)
     {
         $initial->update($this->validateInitial($request));
-        dd($initial);
+//        dd($initial);
         return redirect(route('initialCheck.show'));
     }
 

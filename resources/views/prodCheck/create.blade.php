@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('header')
-    Create a Production Check
+    Create a Production Check {{--{{ $order->order_number }}--}}
 @endsection
 
 @section('content')
