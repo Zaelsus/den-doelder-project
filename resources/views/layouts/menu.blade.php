@@ -73,6 +73,10 @@
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>View Initial Check</p>
                     </a>
+                    <a href="{{route('initialCheck.create')}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-clipboard-check"></i>
+                        <p>New Initial Check</p>
+                    </a>
                     <a href="#" class="nav-link active bg-white btn text-left disabled">
                         <i class="nav-icon fas fa-draw-polygon"></i>
                         <p>Drawings</p>
