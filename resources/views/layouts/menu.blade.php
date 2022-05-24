@@ -2,11 +2,11 @@
 @if(Auth::user()->role === 'Production')
     {{--    Production Status (either 1 is in production or Paused --}}
     @if(\App\Models\Order::isInProduction() !== 'no production')
-        <div class="info-box bg-navy">
+        <div class="info-box shade">
             <div class="info-box-content">
-                <span class="info-box-text">Order Num. {{$order->order_number}}</span>
+                <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
                 <h4>
-                    <span class="badge
+                    <span class="align-content-lg-stretch d-flex justify-content-center badge
                 @if($order->status === 'Pending')
                         badge-secondary
                 @elseif($order->status === 'In Production')
@@ -136,4 +136,5 @@
         </div>
     </li>
 @endif
+
 

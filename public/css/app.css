@@ -14,11 +14,11 @@
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
-  --purple: #6f42c1;
-    --lilac: #b895e0;
+  --purple: #63274eed;
+    /*--lilac: #b895e0;*/
   --pink: #e83e8c;
   --red: #dc3545;
-  --orange: #fd7e14;
+  --orange: #fda014;
   --yellow: #ffc107;
   --green: #28a745;
   --teal: #20c997;
@@ -14353,7 +14353,7 @@ body.text-sm .control-sidebar {
   }
 }
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer {
-  background-color: #f8f9fa;
+  background-color: #63274eed;
   padding: 10px;
 }
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer::after {
@@ -22928,7 +22928,7 @@ body.text-sm .input-group-text {
 .bg-purple > .card-header .btn-tool,
 .bg-gradient-purple > .card-header .btn-tool,
 .card-purple:not(.card-outline) > .card-header .btn-tool {
-  color: rgba(255, 255, 255, 0.8);
+  color: purple;
 }
 .bg-purple > .card-header .btn-tool:hover,
 .bg-gradient-purple > .card-header .btn-tool:hover,
@@ -22952,7 +22952,7 @@ body.text-sm .input-group-text {
 .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.hour:hover,
 .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.minute:hover,
 .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.second:hover {
-  background-color: #5d36a4;
+  background-color: purple;
   color: #fff;
 }
 .card.bg-purple .bootstrap-datetimepicker-widget table td.today::before,
@@ -22963,7 +22963,7 @@ body.text-sm .input-group-text {
 .card.bg-purple .bootstrap-datetimepicker-widget table td.active:hover,
 .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.active,
 .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.active:hover {
-  background-color: #8c68ce;
+  background-color: purple;
   color: #fff;
 }
 
@@ -43142,5 +43142,33 @@ a.text-muted:hover {
     transform: translate(-50%, -50%);
     margin: 0;
 
+}
 
+.colour-purple {
+    background-color: #63274eed;
+    color: white;
+}
+
+.colour-orange {
+    background-color: #e7b54f;
+    color: black;
+}
+
+.shade {
+    background-color: lightgrey;
+    color: black;
+}
+
+.bg-image {
+    background-image: url('/img/bg-img.jpg');
+}
+
+
+.create-order-card {
+    border: 2px solid #e7b54f; !important;
+}
+
+.create-order-card-header {
+    background-color: #e7b54f;
+    color: white;
 }

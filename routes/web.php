@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //home page
 Auth::routes();
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // this is temporary until we add the login to the right role and the right production line

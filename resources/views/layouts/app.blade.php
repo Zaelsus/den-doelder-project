@@ -19,7 +19,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <!-- Main Header -->
-    <nav class="main-header navbar navbar-expand navbar-gray navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-light colour-purple">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -37,21 +37,22 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- User image -->
-                    <li class="user-header bg-gray-dark">
+                    <li class="user-header shade">
                         <img src="/img/pallets150.jpg"
                              class="img-circle elevation-2"
                              alt="User Image">
                         <p>
-                            {{ Auth::user()->name }}
-                            <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
-                            <small> {{ Auth::user()->role }}</small>
+                            <h6> {{ Auth::user()->name }}</h6>
+                            <span class="badge colour-orange ">{{ Auth::user()->role }} team</span>
+                        <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
+
                         </p>
 
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                        <a href="#" class="btn btn-default btn-flat float-right"
+                        <a href="#" class="btn shade ">Profile</a>
+                        <a href="#" class="btn shade float-right"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Sign out
                         </a>
