@@ -15,6 +15,12 @@ class CreateInitialsTable extends Migration
     {
         Schema::create('initials', function (Blueprint $table) {
             $table->id();
+            $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')
+                ->references('id')
+                ->on('orders')
+                ->onDelete('cascade');
 //            Bovendek
             $table->boolean('afmetingTickB');
             $table->string('afmetingAangB')->nullable();

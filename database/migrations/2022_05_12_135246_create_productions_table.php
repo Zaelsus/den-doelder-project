@@ -20,7 +20,7 @@ class CreateProductionsTable extends Migration
                 ->references('id')
                 ->on('orders')
                 ->onDelete('cascade');
-//            Bovendek
+//Bovendek
             $table->boolean('afmetingTickB')->default(0);
             $table->string('afmetingAangB')->nullable();
             $table->string('afmetingCorrectB')->nullable();

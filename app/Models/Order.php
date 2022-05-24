@@ -38,11 +38,19 @@ class Order extends Model
     }
 
     /**
-     * Gets the pallet related to the order
+     * Gets the production check related to the order
      */
     public function production()
     {
-        return $this->belongsTo(Production::class, 'order_id');
+        return $this->hasOne(Production::class, 'production_id');
+    }
+
+    /**
+     * Gets the pallet related to the order
+     */
+    public function initial()
+    {
+        return $this->hasOne(Initial::class, 'initial_id');
     }
 
     /**

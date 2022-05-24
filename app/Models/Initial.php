@@ -10,4 +10,12 @@ class Initial extends Model
     use HasFactory;
 
     protected $guarded =[];
+
+    /**
+     * Gets the pallet related to the order
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
 }

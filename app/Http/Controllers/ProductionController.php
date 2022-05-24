@@ -27,8 +27,8 @@ class ProductionController extends Controller
      */
     public function create()
     {
-        $orders = Order::all();
-        return view('prodCheck.create', $orders);
+//        dd($order->id);
+        return view('prodCheck.create');
     }
 
     /**
