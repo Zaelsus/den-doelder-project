@@ -2,12 +2,12 @@
 @extends('layouts.app')
 
 @section('header')
-    Create a Production Check 
+    Create a Production Check
 @endsection
 
 @section('content')
     <section class="content">
-        <form method="POST" action="/prodCheck">
+        <form method="POST" action="/production">
             @csrf
 
             <section class="section">

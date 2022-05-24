@@ -6,7 +6,7 @@
 
 @section('content')
     <section class="content">
-        <form method="POST" action="{{route('prodCheck.update',$production)}}">
+        <form method="POST" action="{{route('production.update',$production)}}">
             @csrf
 
             @method('PUT')
@@ -570,7 +570,7 @@
                             <button type="reset" class="button is-warning">Reset</button>
                         </div>
                         <div class="control">
-                            <a type="button" href="/initialCheck" class="button is-light">Cancel</a>
+                            <a type="button" href="{{route('production.show', $production)}}" class="button is-light">Cancel</a>
                         </div>
                     </div>
                 </section>

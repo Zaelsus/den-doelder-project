@@ -13,12 +13,10 @@ class ProductionController extends Controller
 //     *
 //     * @return \Illuminate\Http\Response
 //     */
-//    public function index()
-//    {
-//        route to the admin view
-//        $productions = Production::all();
-//        return view('prodCheck.index', compact('productions'));
-//    }
+    public function index()
+    {
+        return redirect(route('home'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -42,7 +40,7 @@ class ProductionController extends Controller
         Production::create($this->validateProduction($request));
 
         // redirecting to show a page
-        return redirect(route('prodCheck.show'))->with('success','an item has been created successfully');
+        return redirect(route('production.show'))->with('success','an item has been created successfully');
     }
 
     /**
@@ -51,10 +49,10 @@ class ProductionController extends Controller
      * @param  \App\Models\Production $production
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Production $production)
     {
-        $production = Production::latest()->first();
-        return view('prodCheck.show', compact('production'));
+        $order = $production->order;
+        return view('prodCheck.show', compact('production', 'order'));
     }
 
     /**
@@ -80,7 +78,7 @@ class ProductionController extends Controller
     {
         $production->update($this->validateProduction($request));
 //        dd($production);
-        return redirect(route('prodCheck.show'));
+        return redirect(route('production.show', $production));
     }
 
     /**
@@ -92,7 +90,7 @@ class ProductionController extends Controller
     public function destroy(Production $production)
     {
         $production->delete();
-        return redirect(route('prodCheck.index'))->with('success','an item has been deleted');
+        return redirect(route('production.index'))->with('success','an item has been deleted');
     }
 
     /**

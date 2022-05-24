@@ -8,10 +8,9 @@
 
     <div class="column is-9-desktop ">
         <section class="content" >
-
             <div class="control is-pulled-right">
                 <button class="button "
-                        onclick=window.location.href="{{route('prodCheck.edit', $production)}}">
+                        onclick=window.location.href="{{route('production.edit', $production)}}">
                     Edit
                 </button>
             </div>

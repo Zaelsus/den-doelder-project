@@ -50,12 +50,13 @@ Route::get('/drawings', function () {
 });
 
 //Production Check
-Route::get('/prodCheck', [ProductionController::class, 'show'])->name('prodCheck.show');
-Route::post('/prodCheck', [ProductionController::class, 'store'])->name('prodCheck.store');
-Route::get('/prodCheck/create', [ProductionController::class, 'create'])->name('prodCheck.create');;
-Route::get('/prodCheck/{production}/edit', [ProductionController::class, 'edit'])->name('prodCheck.edit'); //name wildcat the same in controller RMB
-Route::put('/prodCheck/{production}', [ProductionController::class, 'update'])->name('prodCheck.update');
-Route::get('/prodCheck/{production}/delete', [ProductionController::class, 'destroy'])->name('prodCheck.delete');
+//Route::get('/prodCheck', [ProductionController::class, 'show'])->name('prodCheck.show');
+//Route::post('/prodCheck', [ProductionController::class, 'store'])->name('prodCheck.store');
+//Route::get('/prodCheck/create', [ProductionController::class, 'create'])->name('prodCheck.create');;
+//Route::get('/prodCheck/{production}/edit', [ProductionController::class, 'edit'])->name('prodCheck.edit'); //name wildcat the same in controller RMB
+//Route::put('/prodCheck/{production}', [ProductionController::class, 'update'])->name('prodCheck.update');
+//Route::get('/prodCheck/{production}/delete', [ProductionController::class, 'destroy'])->name('prodCheck.delete');
+Route::resource('/production', ProductionController::class);
 
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
