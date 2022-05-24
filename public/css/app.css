@@ -43165,10 +43165,11 @@ a.text-muted:hover {
 
 
 .create-order-card {
-    border: 2px solid #e7b54f; !important;
+    border: 2px solid #17a2b8; !important;
+    background-color: #dcedef;
 }
 
-.create-order-card-header {
-    background-color: #e7b54f;
-    color: white;
+.create-order-card-titles {
+    background-color: #d3e6e8;
+    color: #17a2b8;
 }

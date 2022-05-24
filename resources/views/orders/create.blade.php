@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <br>
     <div class="container-fluid">
-    <div class="card card-primary">
+    <div class="card create-order-card">
         <div class="card-header bg-gradient-info">
             <h3 class="  text-center ">New Order Form:</h3>
             <div class="card-tools">
@@ -24,7 +25,7 @@
                     <p class="help is-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                <h5 class="card bg-gradient-info text-center">Client and Order Details</h5>
+                <h5 class="card create-order-card-titles text-center">Client and Order Details</h5>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="client_name">Client Name</label>
@@ -68,7 +69,7 @@
                         @enderror
                     </div>
                 </div>
-                <h5 class="card bg-gradient-info text-center">Production Details</h5>
+                <h5 class="card create-order-card-titles text-center">Production Details</h5>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="site_location">Site of Production</label>
@@ -118,14 +119,14 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-info btn-lg btn-lg btn-block">Submit</button>
 
             </form>
         </div>
         <!-- /.card-body -->
-        <div class="card-footer">
-            The footer of the card
-        </div>
+{{--        <div class="card-footer">--}}
+{{--            The footer of the card--}}
+{{--        </div>--}}
         <!-- /.card-footer -->
     </div>
     <!-- /.card -->
