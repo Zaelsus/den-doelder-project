@@ -11,7 +11,7 @@
 
                         <div class="control is-pulled-right">
                             <button class="button "
-                                    onclick=window.location.href="{{route('initialCheck.edit', $initial)}}">
+                                    onclick=window.location.href="{{route('initial.edit', $initial)}}">
                                 Edit
                             </button>
                         </div>

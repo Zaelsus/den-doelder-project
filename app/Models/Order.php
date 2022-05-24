@@ -50,7 +50,7 @@ class Order extends Model
      */
     public function initial()
     {
-        return $this->hasOne(Initial::class, 'initial_id');
+        return $this->hasOne(Initial::class, 'order_id');
     }
 
     /**

@@ -37,11 +37,7 @@ Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])-
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
 //Initial Check
-Route::get('/initialCheck', [InitialController::class, 'show'])->name('initialCheck.show');
-Route::post('/initialCheck', [InitialController::class, 'store'])->name('initialCheck.store');
-Route::get('/initialCheck/create', [InitialController::class, 'create'])->name('initialCheck.create');;
-Route::get('/initialCheck/{initial}/edit', [InitialController::class, 'edit'])->name('initialCheck.edit');
-Route::put('/initialCheck/{initial}', [InitialController::class, 'update'])->name('initialCheck.update');
+Route::resource('/initial', InitialController::class);
 
 
 // Drawings
@@ -50,12 +46,6 @@ Route::get('/drawings', function () {
 });
 
 //Production Check
-//Route::get('/prodCheck', [ProductionController::class, 'show'])->name('prodCheck.show');
-//Route::post('/prodCheck', [ProductionController::class, 'store'])->name('prodCheck.store');
-//Route::get('/prodCheck/create', [ProductionController::class, 'create'])->name('prodCheck.create');;
-//Route::get('/prodCheck/{production}/edit', [ProductionController::class, 'edit'])->name('prodCheck.edit'); //name wildcat the same in controller RMB
-//Route::put('/prodCheck/{production}', [ProductionController::class, 'update'])->name('prodCheck.update');
-//Route::get('/prodCheck/{production}/delete', [ProductionController::class, 'destroy'])->name('prodCheck.delete');
 Route::resource('/production', ProductionController::class);
 
 // Hourly Check-up

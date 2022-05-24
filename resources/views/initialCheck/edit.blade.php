@@ -6,7 +6,7 @@
 
 @section('content')
     <section class="content">
-        <form method="POST" action="{{ route('initialCheck.update',$initial) }}">
+        <form method="POST" action="{{ route('initial.update',$initial) }}">
             @csrf
 
             @method('PUT')
@@ -614,7 +614,7 @@
                             <button type="reset" class="button is-warning">Reset</button>
                         </div>
                         <div class="control">
-                            <a type="button" href="/initialCheck" class="button is-light">Cancel</a>
+                            <a type="button" href="{{route('initial.show', $initial)}}" class="button is-light">Cancel</a>
                         </div>
                     </div>
                 </section>

@@ -4,20 +4,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Initial;
+use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Models\Order;
 
 class InitialController extends Controller
 {
-//    /**
-//     * Display a listing of the resource.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function index()
-//    {
-//        //
-//    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return redirect(route('home'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +41,7 @@ class InitialController extends Controller
         Initial::create($this->validateInitial($request));
 
         // redirecting to show a page
-        return redirect(route('initialCheck.show'))->with('success','an item has been created successfully');
+        return redirect(route('initial.show'))->with('success','an item has been created successfully');
     }
 
     /**
@@ -49,10 +50,10 @@ class InitialController extends Controller
      * @param  \App\Models\Initial  $initial
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(initial $initial)
     {
-        $initial = Initial::latest()->first();
-        return view('initialCheck.show', compact('initial'));
+        $order = $initial->order;
+        return view('initialCheck.show', compact('order','initial'));
     }
 
     /**
@@ -77,7 +78,7 @@ class InitialController extends Controller
     {
         $initial->update($this->validateInitial($request));
 //        dd($initial);
-        return redirect(route('initialCheck.show'));
+        return redirect(route('initial.show', $initial));
     }
 
     /**
@@ -89,7 +90,7 @@ class InitialController extends Controller
     public function destroy(Initial $initial)
     {
         $initial->delete();
-        return redirect(route('initialCheck.create'))->with('success','an item has been deleted');
+        return redirect(route('initial.index'))->with('success','an item has been deleted');
     }
 
     /**
