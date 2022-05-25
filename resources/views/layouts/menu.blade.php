@@ -64,22 +64,22 @@
                 </ul>
             </div>
             <div class="nav-item">
-                <a href="{{ route('orders.show', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                <a href="{{ route('orders.show', $order) }}" class="nav-link active btn text-left bg-gray-dark">
                     <i class="nav-icon fas fa-clipboard-list"></i>
                     <p>Order Details</p>
                 </a>
                 @if($order->status === 'In Production')
                     <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-clipboard-check"></i>
-                        <p>View Initial Check</p>
+                        <p>Initial Check</p>
                     </a>
-                    <a href="#" class="nav-link active bg-white btn text-left disabled">
+                    <a href="{{route('pallets.show', $order->pallet)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-draw-polygon"></i>
                         <p>Drawings</p>
                     </a>
                     <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>
-                        <p>View Production Check</p>
+                        <p>Production Check</p>
                     </a>
                     <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
