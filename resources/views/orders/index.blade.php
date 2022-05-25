@@ -9,6 +9,11 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-full">
+                    @if(Auth::user()->role === 'Administrator')
+                    <div class="has-text-right">
+                        <a href="{{route('orders.create')}}" class="button is-primary">Add a new order</a>
+                    </div>
+                    @endif
                     <table class="table is-fullwidth is-striped">
                         <thead>
                         <tr>
@@ -25,7 +30,7 @@
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td><a href="orders/{{ $order->id }}">{{ $order->order_number }}</a></td>
+                                <td><a href="{{Route('orders.show',$order)}}">{{ $order->order_number }}</a></td>
                                 <td>{{$order->pallet->name}}</td>
                                 <td>{{$order->pallet->measurements}}</td>
                                 <td>{{ $order->client_name }}</td>
@@ -33,6 +38,7 @@
                                 <td> {{$order->start_date}}</td>
                                 <td>{{$order->status}}</td>
                                 <td>{{$order->created_at}}</td>
+                                <td>{{is_null($order->production)}}</td>
                             </tr>
                         @endforeach
                         </tbody>

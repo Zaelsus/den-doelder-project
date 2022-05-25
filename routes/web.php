@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{OrderController, HourlyReportController, ProductionController};
+use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, ProductionController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,11 +20,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// this is temporary until we add the login to the right role and the right production line
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // Order
 Route::resource('/orders', OrderController::class);
+
+//start production route
+Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
+
+//stop production route
+Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
+
+//stop production route
+Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
+
+//Initial Check
+Route::resource('/initial', InitialController::class);
+
 
 // Drawings
 Route::get('/drawings', function () {
@@ -32,18 +46,8 @@ Route::get('/drawings', function () {
 });
 
 //Production Check
-Route::get('/prodCheck', [ProductionController::class, 'show'])->name('prodCheck.show');
-Route::post('/prodCheck', [ProductionController::class, 'store'])->name('prodCheck.store');
-Route::get('/prodCheck/create', [ProductionController::class, 'create'])->name('prodCheck.create');;
-Route::get('/prodCheck/{prodCheck}/edit', [ProductionController::class, 'edit'])->name('prodCheck.edit'); //name wildcat the same in controller RMB
-Route::put('/prodCheck/{prodCheck}', [ProductionController::class, 'update'])->name('prodCheck.update');
-Route::get('/prodCheck/{prodCheck}/delete', [ProductionController::class, 'destroy'])->name('prodCheck.delete');
+Route::resource('/production', ProductionController::class);
 
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
-
-//beans? yes
-Route::get('beans', function () {
-    return view('layouts.beans_page');
-});
 

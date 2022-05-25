@@ -4,9 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,6 +65,43 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return view('orders.show', compact('order'));
+//        if($order->status === 'In Production' ||$order->status === 'Paused') {
+//            return view('orders.show', compact('order'));
+//        }
+//        return view('orders.startShow', compact('order'));
+
+    }
+
+    /**
+     * changes the status of the current order to in production
+     */
+    public static function startProduction(Order $order)
+    {
+        if($order->status ==='Pending') {
+            $order->update(['status'=>'In Production','start_time'=> date('Y-m-d H:i:s')]);
+        } else {
+            $order->update(['status'=>'In Production']);
+        }
+        return redirect(route('orders.show', $order));
+
+    }
+
+    /**
+     * changes the status of the current order to done
+     */
+    public static function stopProduction(Order $order)
+    {
+        $order->update(['status'=>'Done','end_time'=> date('Y-m-d H:i:s')]);
+        return redirect(route('orders.index'));
+    }
+
+    /**
+     * changes the status of the current order to done
+     */
+    public static function pauseProduction(Order $order)
+    {
+        $order->update(['status'=>'Paused']);
+        return redirect(route('orders.show',$order));
     }
 
     /**
@@ -101,17 +149,27 @@ class OrderController extends Controller
     public function validateOrder(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            'order_id'=>'required',
-            'customer_name'=>'required',
-            'order_production_line'=>'required',
-            'scheduled_production_date'=>'required|date',
-            'pallet_type'=>'required',
-            'quantity'=>'required|integer|min:0',
-            'location'=>'required',
-            'material'=>'required',
-            'material_quantity'=>'required|integer',
+            'order_number'=>'required',
+            'pallet_id'=>'required',
+            'machine'=>'required',
+            'quantity_production'=>'required|integer|min:1',
+            'start_date'=>'date',
+            'site_location'=>'required',
+            'production_instructions'=>'text',
+            'client_name' =>'required|string',
+            'client_address' =>'required|string',
+            'status'=>'string',
+
+//            'pallet_type'=>'required',
+//            'quantity'=>'required|integer|min:0',
+//
+//            'material'=>'required',
+//            'material_quantity'=>'required|integer',
         ]);
 
         return $validatedAtributes;
     }
+
+    // status manipulation
+
 }

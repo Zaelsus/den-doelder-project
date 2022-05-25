@@ -6,18 +6,19 @@
 
 @section('content')
     <section class="content">
-        <form method="POST" action="/prodCheck">
+        <form method="POST" action="{{route('production.update',$production)}}">
             @csrf
 
+            @method('PUT')
+
             <section class="section">
-                Bovendek
+                {{--                Bovendek--}}
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
                             <p class="title">
                                 Bovendek
                             </p>
-                            set to danger
                             <p class="subtitle has-text-danger">
                                 Controle na eerste stapel bovendekken!
                             </p>
@@ -36,24 +37,22 @@
                             <td>Afmeting</td>
 
                             <td>
-<!--                                --><?php // echo $production ;?>
-                                <label for="afmetingTickB" class="has-text-success has-text-weight-bold">&check;</label> }}
-                                <input type="radio" id="" name="afmetingTickB" value="1"  <?php if (isset($production) == 1) echo "checked" ;?>  >
+                                <label for="afmetingTickB" class="has-text-success has-text-weight-bold">&check;</label>
+                                <input type="radio" id="" name="afmetingTickB" value="1"  {{$production->afmetingTickB === 1 ? 'checked': '' }} >
                                 <label for="afmetingTickB" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmetingTickB" value="0" <?php if (isset($production)  == 0)  echo "checked";?> >
+                                <input type="radio" id="" name="afmetingTickB" value="0" {{$production->afmetingTickB === 0 ? 'checked': '' }} >
                             </td>
-                            && $production->afmetingTickB
-                            {{$production->afmetingTickB === 1 ? 'checked': ''
+
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingAangB" id="" value="{{old('subject')}} ">
+                                    <input class="input" type="text" name="afmetingAangB" id="" value="{{$production->afmetingAangB}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingCorrectB" id="" value="{{old('subject')}} ">
+                                    <input class="input" type="text" name="afmetingCorrectB" id="" value="{{$production->afmetingCorrectB}} ">
                                 </div>
                             </td>
                         </tr>
@@ -63,22 +62,22 @@
 
                             <td>
                                 <label for="aantalTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="aantalTick" value="1" {{$production->aantalTick === 0 ? 'checked': '' }}>
+                                <input type="radio" id="" name="aantalTick" value="1" {{$production->aantalTick === 1 ? 'checked': '' }}>
 
                                 <label for="aantalTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="aantalTick" value="0" {{$production->aantalTick === 0 ? '': 'checked' }}>
+                                <input type="radio" id="" name="aantalTick" value="0" {{$production->aantalTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalAang" id="" >
+                                    <input class="input" type="text" name="aantalAang" id="" value="{{$production->aantalAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalCorrect" id="">
+                                    <input class="input" type="text" name="aantalCorrect" id="" value="{{$production->aantalCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -88,21 +87,21 @@
 
                             <td>
                                 <label for="spatiesTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="spatiesTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="spatiesTick" value="1" {{$production->spatiesTick === 1 ? 'checked': '' }}>
                                 <label for="spatiesTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="spatiesTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="spatiesTick" value="0" {{$production->spatiesTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spatiesAang" id=" ">
+                                    <input class="input" type="text" name="spatiesAang" id=" " value="{{$production->spatiesAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spatiesCorrect" id="">
+                                    <input class="input" type="text" name="spatiesCorrect" id="" value="{{$production->spatiesCorrect}}">
                                 </div>
                             </td>
                         </tr>
@@ -112,21 +111,21 @@
 
                             <td>
                                 <label for="klampenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="klampenTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="klampenTick" value="1" {{$production->klampenTick === 1 ? 'checked': '' }}>
                                 <label for="klampenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="klampenTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="klampenTick" value="0" {{$production->klampenTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="klampenAang" id=" ">
+                                    <input class="input" type="text" name="klampenAang" id="" value="{{$production->klampenAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="klampenCorrect" id="">
+                                    <input class="input" type="text" name="klampenCorrect" id="" value="{{$production->klampenCorrect}}">
                                 </div>
                             </td>
                         </tr>
@@ -136,28 +135,28 @@
 
                             <td>
                                 <label for="overstekTickB" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="overstekTickB" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="overstekTickB" value="1" {{$production->overstekTickB === 1 ? 'checked': '' }}>
                                 <label for="overstekTickB" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="overstekTickB" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="overstekTickB" value="0" {{$production->overstekTickB === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="overstekAangB" id=" ">
+                                    <input class="input" type="text" name="overstekAangB" id="" value="{{$production->overstekAangB}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="overstekCorrectB" id="">
+                                    <input class="input" type="text" name="overstekCorrectB" id="" value="{{$production->overstekCorrectB}} ">
                                 </div>
                             </td>
                         </tr>
                     </table>
                 </section>
 
-                Klossen
+
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
@@ -180,21 +179,21 @@
 
                             <td>
                                 <label for="soortTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="soortTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="soortTick" value="1" {{$production->soortTick === 1 ? 'checked': '' }}>
                                 <label for="soortTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="aantalTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="soortTick" value="0" {{$production->soortTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="soortAang" id="" >
+                                    <input class="input" type="text" name="soortAang" id="" value="{{$production->soortAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="soortCorrect" id="">
+                                    <input class="input" type="text" name="soortCorrect" id="" value="{{$production->soortCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -204,21 +203,21 @@
 
                             <td>
                                 <label for="balkTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="balkTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="balkTick" value="1" {{$production->balkTick === 1 ? 'checked': '' }}>
                                 <label for="balkTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="balkTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="balkTick" value="0" {{$production->balkTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkAang" id="" value="{{old('subject')}} ">
+                                    <input class="input" type="text" name="balkAang" id="" value="{{$production->balkAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkCorrect" id="" value="{{old('subject')}} ">
+                                    <input class="input" type="text" name="balkCorrect" id="" value="{{$production->balkCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -228,21 +227,21 @@
 
                             <td>
                                 <label for="afmeting1Tick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmeting1Tick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="afmeting1Tick" value="1" {{$production->afmeting1Tick === 1 ? 'checked': '' }}>
                                 <label for="afmeting1Tick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmeting1Tick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="afmeting1Tick" value="0" {{$production->afmeting1Tick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmeting1Aang" id=" ">
+                                    <input class="input" type="text" name="afmeting1Aang" id="" value="{{$production->afmeting1Aang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmeting1Correct" id="">
+                                    <input class="input" type="text" name="afmeting1Correct" id="" value="{{$production->afmeting1Correct}} ">
                                 </div>
                             </td>
                         </tr>
@@ -252,21 +251,21 @@
 
                             <td>
                                 <label for="afmeting2Tick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmeting2Tick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="afmeting2Tick" value="1" {{$production->afmeting2Tick === 1 ? 'checked': '' }}>
                                 <label for="afmeting2Tick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmeting2Tick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="afmeting2Tick" value="0" {{$production->afmeting2Tick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmeting2Aang" id=" ">
+                                    <input class="input" type="text" name="afmeting2Aang" id="" value="{{$production->afmeting2Aang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmeting2Correct" id="">
+                                    <input class="input" type="text" name="afmeting2Correct" id="" value="{{$production->afmeting2Correct}} ">
                                 </div>
                             </td>
                         </tr>
@@ -274,7 +273,7 @@
                     </table>
                 </section>
 
-                Onderdek
+
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
@@ -297,21 +296,21 @@
 
                             <td>
                                 <label for="brugTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="brugTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="brugTick" value="1" {{$production->brugTick === 1 ? 'checked': '' }}>
                                 <label for="brugTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="brugTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="brugTick" value="0" {{$production->brugTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="brugAang" id="" >
+                                    <input class="input" type="text" name="brugAang" id="" value="{{$production->brugAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="brugCorrect" id="">
+                                    <input class="input" type="text" name="brugCorrect" id="" value="{{$production->brugCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -321,21 +320,21 @@
 
                             <td>
                                 <label for="rondTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="rondTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="rondTick" value="1" {{$production->rondTick === 1 ? 'checked': '' }}>
                                 <label for="rondTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="rondTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="rondTick" value="0" {{$production->rondTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="rondAang" id="" value="{{old('subject')}} ">
+                                    <input class="input" type="text" name="rondAang" id="" value="{{$production->rondAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="rondCorrect" id="" value="{{old('subject')}} ">
+                                    <input class="input" type="text" name="rondCorrect" id="" value="{{$production->rondCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -345,21 +344,21 @@
 
                             <td>
                                 <label for="kruisTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="kruisTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="kruisTick" value="1" {{$production->kruisTick === 1 ? 'checked': '' }}>
                                 <label for="kruisTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="kruisTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="kruisTick" value="0" {{$production->kruisTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="kruisAang" id=" ">
+                                    <input class="input" type="text" name="kruisAang" id="" value="{{$production->kruisAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="kruisCorrect" id="">
+                                    <input class="input" type="text" name="kruisCorrect" id="" value="{{$production->kruisCorrect}}">
                                 </div>
                             </td>
                         </tr>
@@ -369,21 +368,21 @@
 
                             <td>
                                 <label for="afmetingTickO" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmetingTickO" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="afmetingTickO" value="1" {{$production->afmetingTickO === 1 ? 'checked': '' }}>
                                 <label for="afmetingTickO" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmetingTickO" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="afmetingTickO" value="0" {{$production->afmetingTickO === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingAangO" id=" ">
+                                    <input class="input" type="text" name="afmetingAangO" id=" " value="{{$production->afmetingAangO}}">
                                 </div>
-
                             </td>
 
+
                             <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="afmetingCorrectO" id="">
+                                <div class="control">
+                                    <input class="input" type="text" name="afmetingCorrectO" id="" value="{{$production->afmetingCorrectO}} ">
                                 </div>
                             </td>
                         </tr>
@@ -393,21 +392,21 @@
 
                             <td>
                                 <label for="overstekTickO" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="overstekTickO" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="overstekTickO" value="1" {{$production->overstekTickO === 1 ? 'checked': '' }}>
                                 <label for="overstekTickO" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="overstekTickO" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="overstekTickO" value="0" {{$production->overstekTickO === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="overstekAangO" id=" ">
+                                    <input class="input" type="text" name="overstekAangO" id="" value="{{$production->overstekAangO}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="overstekCorrectO" id="">
+                                    <input class="input" type="text" name="overstekCorrectO" id="" value="{{$production->overstekCorrectO}} ">
                                 </div>
                             </td>
                         </tr>
@@ -415,7 +414,6 @@
                     </table>
                 </section>
 
-                Overig
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
@@ -439,21 +437,21 @@
 
                             <td>
                                 <label for="hoekenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="hoekenTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="hoekenTick" value="1" {{$production->hoekenTick === 1 ? 'checked': '' }}>
                                 <label for="hoekenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="hoekenTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="hoekenTick" value="0" {{$production->hoekenTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="hoekenAang" id="" >
+                                    <input class="input" type="text" name="hoekenAang" id="" value="{{$production->hoekenAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="hoekenCorrect" id="">
+                                    <input class="input" type="text" name="hoekenCorrect" id="" value="{{$production->hoekenCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -463,21 +461,21 @@
 
                             <td>
                                 <label for="stempelsTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="stempelsTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="stempelsTick" value="1" {{$production->stempelsTick === 1 ? 'checked': '' }}>
                                 <label for="stempelsTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="stempelsTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="stempelsTick" value="0" {{$production->stempelsTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stempelsAang" id="" value="{{old('subject')}} ">
+                                    <input class="input" type="text" name="stempelsAang" id="" value="{{$production->stempelsAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stempelsCorrect" id="" value="{{old('subject')}} ">
+                                    <input class="input" type="text" name="stempelsCorrect" id="" value="{{$production->stempelsCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -487,21 +485,21 @@
 
                             <td>
                                 <label for="stapelTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="stapelTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="stapelTick" value="1" {{$production->stapelTick === 1 ? 'checked': '' }}>
                                 <label for="stapelTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="stapelTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="stapelTick" value="0" {{$production->stapelTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stapelAang" id=" ">
+                                    <input class="input" type="text" name="stapelAang" id="" value="{{$production->stapelAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stapelCorrect" id="">
+                                    <input class="input" type="text" name="stapelCorrect" id="" value="{{$production->stapelCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -511,21 +509,21 @@
 
                             <td>
                                 <label for="strappenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="strappenTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="strappenTick" value="1" {{$production->strappenTick === 1 ? 'checked': '' }}>
                                 <label for="strappenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="strappenTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="strappenTick" value="0" {{$production->strappenTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="strappenAang" id=" ">
+                                    <input class="input" type="text" name="strappenAang" id="" value="{{$production->strappenAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="strappenCorrect" id="">
+                                    <input class="input" type="text" name="strappenCorrect" id="" value="{{$production->strappenCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -535,21 +533,21 @@
 
                             <td>
                                 <label for="spijkerTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="spijkerTick" value="1" {{$production->afmetingTickB === 1 ? 'checked': '' }}>
+                                <input type="radio" id="" name="spijkerTick" value="1" {{$production->spijkerTick === 1 ? 'checked': '' }}>
                                 <label for="spijkerTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="spijkerTick" value="0" {{$production->afmetingTickB === 1 ? '': 'checked' }}>
+                                <input type="radio" id="" name="spijkerTick" value="0" {{$production->spijkerTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spijkerAang" id=" ">
+                                    <input class="input" type="text" name="spijkerAang" id="" value="{{$production->spijkerAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spijkerCorrect" id="">
+                                    <input class="input" type="text" name="spijkerCorrect" id="" value="{{$production->spijkerCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -572,7 +570,7 @@
                             <button type="reset" class="button is-warning">Reset</button>
                         </div>
                         <div class="control">
-                            <a type="button" href="{{ route('welcome.index') }}" class="button is-light">Cancel</a>
+                            <a type="button" href="{{route('production.show', $production)}}" class="button is-light">Cancel</a>
                         </div>
                     </div>
                 </section>
