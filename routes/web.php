@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, ProductionController};
+use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, ProductionController, PalletController};
 use Illuminate\Support\Facades\Route;
 
 /*
