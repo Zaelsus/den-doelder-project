@@ -36,6 +36,10 @@ Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])-
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
+//pallet editing route
+Route::get('/orders/{order}/editquantity', [OrderController::class, 'editquantity'])->name('orders.editquantity');
+Route::put('/orders/{order}', [OrderController::class, 'updatequantity'])->name('orders.updatequantity');
+
 //Initial Check
 Route::resource('/initial', InitialController::class);
 

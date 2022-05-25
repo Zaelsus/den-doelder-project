@@ -116,6 +116,31 @@ class OrderController extends Controller
     }
 
     /**
+     * Show the form for editing only pallets
+     *
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function editquantity(Order $order)
+    {
+//        dd($order);
+        return view('orders.editquantity', compact('order'));
+    }
+
+    /**
+     * Update the pallet details in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function updatequantity(Request $request, Order $order)
+    {
+        $order->update($this->validateQuantity($request));
+        return redirect(route('orders.show', $order));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -170,6 +195,20 @@ class OrderController extends Controller
         return $validatedAtributes;
     }
 
+
+    /**
+     * this function validates Quantity
+     * @param Request $request
+     * @return array
+     */
+    public function validateQuantity(Request $request): array
+    {
+        $validatedAtributes = $request->validate([
+            'quantity_produced'=>'required|integer'
+        ]);
+
+        return $validatedAtributes;
+    }
     // status manipulation
 
 }
