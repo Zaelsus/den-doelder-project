@@ -38,6 +38,22 @@ class Order extends Model
     }
 
     /**
+     * Gets the production check related to the order
+     */
+    public function production()
+    {
+        return $this->hasOne(Production::class, 'order_id');
+    }
+
+    /**
+     * Gets the pallet related to the order
+     */
+    public function initial()
+    {
+        return $this->hasOne(Initial::class, 'order_id');
+    }
+
+    /**
      * returns the hourly reports related to the order
      */
     public function hourlyreports()
