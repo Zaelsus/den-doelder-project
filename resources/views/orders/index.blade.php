@@ -38,6 +38,7 @@
                                 <td> {{$order->start_date}}</td>
                                 <td>{{$order->status}}</td>
                                 <td>{{$order->created_at}}</td>
+                                <td>{{is_null($order->production)}}</td>
                             </tr>
                         @endforeach
                         </tbody>

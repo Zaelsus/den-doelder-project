@@ -1,19 +1,20 @@
 @extends('layouts.app')
 
 @section('header')
-    Production Check
+    Initial Check
 @endsection
 
 @section('content')
 
     <div class="column is-9-desktop ">
         <section class="content" >
-            <div class="control is-pulled-right">
-                <button class="button "
-                        onclick=window.location.href="{{route('production.edit', $production)}}">
-                    Edit
-                </button>
-            </div>
+
+                        <div class="control is-pulled-right">
+                            <button class="button "
+                                    onclick=window.location.href="{{route('initial.edit', $initial)}}">
+                                Edit
+                            </button>
+                        </div>
 
             {{--Bovendek--}}
             <section class="section">
@@ -21,10 +22,6 @@
                     <div class="hero-body">
                         <p class="title">
                             Bovendek
-                        </p>
-                        {{--set to danger--}}
-                        <p class="subtitle">
-                            Controle na eerste stapel bovendekken!
                         </p>
                     </div>
                 </section>
@@ -34,89 +31,87 @@
                         <th></th>
                         <th>Condition</th>
                         <th>Aangepast naar</th>
-                        <th>Correctie</th>
+                        <th>Ht/Kd: vocht %</th>
                     </tr>
 
 
                     <tr>
                         <td>Afmeting</td>
                         <td>
-                            {{$production->afmetingTickB === 1 ? '✔': '✖' }}
+                            {{$initial->afmetingTickB === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->afmetingAangB}}
+                            {{$initial->afmetingAangB}}
                         </td>
 
                         <td>
-                            {{$production->afmetingCorrectB}}
+                            {{$initial->afmetingHtKdB}}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Aantal planken</td>
                         <td>
-                            {{$production->aantalTick === 1 ? '✔': '✖' }}
+                            {{$initial->aantalTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->aantalAang}}
+                            {{$initial->aantalAang}}
                         </td>
 
                         <td>
-                            {{$production->aantalCorrect}}
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Spaties</td>
-                        <td>
-                            {{$production->spatiesTick === 1 ? '✔': '✖' }}
-                        </td>
-
-                        <td>
-                            {{$production->spatiesAang}}
-                        </td>
-
-                        <td>
-                            {{$production->spatiesCorrect}}
+                            {{$initial->aantalHtKd}}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Klampen	</td>
                         <td>
-                            {{$production->klampenTick === 1 ? '✔': '✖' }}
+                            {{$initial->klampenTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->klampenAang}}
+                            {{$initial->klampenAang}}
                         </td>
 
                         <td>
-                            {{$production->klampenCorrect}}
+                            {{$initial->klampenHtKd}}
                         </td>
                     </tr>
 
                     <tr>
-                        <td>Overstek</td>
+                        <td>Schimmel Ja/Nee</td>
                         <td>
-                            {{$production->overstekTickB === 1 ? '✔': '✖' }}
+                            {{$initial->schimmelTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->overstekAangB}}
+                            {{$initial->schimmelAang}}
                         </td>
 
                         <td>
-                            {{$production->overstekCorrectB}}
+                            {{$initial->schimmelHtKd}}
                         </td>
                     </tr>
 
+                    <tr>
+                        <td>Waan Ja/Nee</td>
+                        <td>
+                            {{$initial->waanTick === 1 ? '✔': '✖' }}
+                        </td>
+
+                        <td>
+                            {{$initial->waanAang}}
+                        </td>
+
+                        <td>
+                            {{$initial->waanHtKd}}
+                        </td>
+                    </tr>
                 </table>
             </section>
 
-            Klossen
             <section class="section">
                 <section class="hero">
                     <div class="hero-body">
@@ -131,74 +126,73 @@
                         <th></th>
                         <th>Condition</th>
                         <th>Aangepast naar</th>
-                        <th>Correctie</th>
+                        <th>Ht/Kd: vocht %</th>
                     </tr>
 
 
                     <tr>
                         <td>Soort (Spaan/ Hout)</td>
                         <td>
-                            {{$production->soortTick === 1 ? '✔': '✖' }}
+                            {{$initial->soortTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->soortAang}}
+                            {{$initial->soortAang}}
                         </td>
 
                         <td>
-                            {{$production->soortCorrect}}
+                            {{$initial->soortHtKd}}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Balk</td>
                         <td>
-                            {{$production->balkTick === 1 ? '✔': '✖' }}
+                            {{$initial->balkTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->balkAang}}
+                            {{$initial->balkAang}}
                         </td>
 
                         <td>
-                            {{$production->balkCorrect}}
+                            {{$initial->balkHtKd}}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Afmeting 1</td>
                         <td>
-                            {{$production->afmeting1Tick === 1 ? '✔': '✖' }}
+                            {{$initial->afmeting1Tick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->afmeting1Aang}}
+                            {{$initial->afmeting1Aang}}
                         </td>
 
                         <td>
-                            {{$production->afmeting1Correct}}
+                            {{$initial->afmeting1HtKd}}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Afmeting 2</td>
                         <td>
-                            {{$production->afmeting2Tick === 1 ? '✔': '✖' }}
+                            {{$initial->afmeting2Tick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->afmeting2Aang}}
+                            {{$initial->afmeting2Aang}}
                         </td>
 
                         <td>
-                            {{$production->afmeting2Correct}}
+                            {{$initial->afmeting2HtKd}}
                         </td>
                     </tr>
 
                 </table>
             </section>
 
-            Onderdek
             <section class="section">
                 <section class="hero">
                     <div class="hero-body">
@@ -213,88 +207,104 @@
                         <th></th>
                         <th>Condition</th>
                         <th>Aangepast naar</th>
-                        <th>Correctie</th>
+                        <th>Ht/Kd: vocht %</th>
                     </tr>
 
 
                     <tr>
                         <td>Brug</td>
                         <td>
-                            {{$production->brugTick === 1 ? '✔': '✖' }}
+                            {{$initial->brugTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->brugAang}}
+                            {{$initial->brugAang}}
                         </td>
 
                         <td>
-                            {{$production->brugCorrect}}
+                            {{$initial->brugHtKd}}
                         </td>
                     </tr>
 
                     <tr>
-                        <td>Ronddloper</td>
+                        <td>Ronddloper Afm(2x)
+                        </td>
                         <td>
-                            {{$production->rondTick === 1 ? '✔': '✖' }}
+                            {{$initial->rond2xTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->rondAang}}
+                            {{$initial->rond2xAang}}
                         </td>
 
                         <td>
-                            {{$production->rondCorrect}}
+                            {{$initial->rond2xHtKd}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Ronddloper Afm(3x)
+                        </td>
+                        <td>
+                            {{$initial->rond3xTick === 1 ? '✔': '✖' }}
+                        </td>
+
+                        <td>
+                            {{$initial->rond3xAang}}
+                        </td>
+
+                        <td>
+                            {{$initial->rond3xHtKd}}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Kruisdek</td>
                         <td>
-                            {{$production->kruisTick === 1 ? '✔': '✖' }}
+                            {{$initial->kruisTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->kruisAang}}
+                            {{$initial->kruisAang}}
                         </td>
 
                         <td>
-                            {{$production->kruisCorrect}}
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Afmetingen</td>
-                        <td>
-                            {{$production->afmetingTickO === 1 ? '✔': '✖' }}
-                        </td>
-
-                        <td>
-                            {{$production->afmetingAangO}}
-                        </td>
-
-                        <td>
-                            {{$production->afmetingCorrectO}}
+                            {{$initial->kruisHtKd}}
                         </td>
                     </tr>
 
                     <tr>
-                        <td>Overstek</td>
+                        <td>Elementen</td>
                         <td>
-                            {{$production->overstekTickO === 1 ? '✔': '✖' }}
+                            {{$initial->elementenTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->overstekAangO}}
+                            {{$initial->elementenAang}}
                         </td>
 
                         <td>
-                            {{$production->overstekCorrectO}}
+                            {{$initial->elementenHtKd}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Dubbel Dek</td>
+                        <td>
+                            {{$initial->dubbelTick === 1 ? '✔': '✖' }}
+                        </td>
+
+                        <td>
+                            {{$initial->dubbelAang}}
+                        </td>
+
+                        <td>
+                            {{$initial->dubbelHtKd}}
                         </td>
                     </tr>
                 </table>
             </section>
 
-            Overvig
             <section class="section">
                 <section class="hero">
                     <div class="hero-body">
@@ -308,84 +318,99 @@
                     <tr>
                         <th></th>
                         <th>Condition</th>
-                        <th>Aangepast naar</th>
-                        <th>Correctie</th>
+                        <th></th>
+                        <th></th>
                     </tr>
 
 
                     <tr>
                         <td>Hoeken zaag</td>
                         <td>
-                            {{$production->hoekenTick === 1 ? '✔': '✖' }}
+                            {{$initial->hoekenTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->hoekenAang}}
+                            {{$initial->hoekenAang}}
                         </td>
 
                         <td>
-                            {{$production->hoekenCorrect}}
+                            {{$initial->hoekenHtKd}}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Stempels</td>
                         <td>
-                            {{$production->stempelsTick === 1 ? '✔': '✖' }}
+                            {{$initial->stempelsTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->stempelsAang}}
+                            {{$initial->stempelsAang}}
                         </td>
 
                         <td>
-                            {{$production->stempelsCorrect}}
+                            {{$initial->stempelsHtKd}}
                         </td>
                     </tr>
 
                     <tr>
-                        <td>Stapel hoogte</td>
+                        <td>Stapel hoogte St/M</td>
                         <td>
-                            {{$production->stapelTick === 1 ? '✔': '✖' }}
+                            {{$initial->stapelTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->stapelAang}}
+                            {{$initial->stapelAang}}
                         </td>
 
                         <td>
-                            {{$production->stapelCorrect}}
+                            {{$initial->stapelHtKd}}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Strappen/ Markeren</td>
                         <td>
-                            {{$production->strappenTick === 1 ? '✔': '✖' }}
+                            {{$initial->strappenTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->strappenAang}}
+                            {{$initial->strappenAang}}
                         </td>
 
                         <td>
-                            {{$production->strappenCorrect}}
+                            {{$initial->strappenHtKd}}
                         </td>
                     </tr>
 
 
                     <tr>
-                        <td>Spijkers (BD,TD,OD)</td>
+                        <td>Q(kamer)/Loods/A</td>
                         <td>
-                            {{$production->spijkerTick === 1 ? '✔': '✖' }}
+                            {{$initial->kamerTick === 1 ? '✔': '✖' }}
                         </td>
 
                         <td>
-                            {{$production->spijkerAang}}
+                            {{$initial->kamerAang}}
                         </td>
 
                         <td>
-                            {{$production->spijkerCorrect}}
+                            {{$initial->kamerHtKd}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Speciale Instructie</td>
+                        <td>
+                            {{$initial->specialeTick === 1 ? '✔': '✖' }}
+                        </td>
+
+                        <td>
+                            {{$initial->specialeAang}}
+                        </td>
+
+                        <td>
+                            {{$initial->specialeHtKd}}
                         </td>
                     </tr>
                 </table>
@@ -393,10 +418,9 @@
 
             <section class="section">
                 <label class='' for=''>Additional Notes:</label>
-                <p>{{$production->additionalNotes}}</p>
+                <p>{{$initial->additionalNotes}}</p>
             </section>
 
         </section>
     </div>
 @endsection
-

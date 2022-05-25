@@ -46,5 +46,4 @@ class HomeController extends Controller
         return view('orders.index', compact('orders'));
 
     }
-
 }
