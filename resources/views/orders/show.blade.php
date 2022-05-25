@@ -52,6 +52,7 @@
             <ul>
                 <li>Pallet Type: {{ $order->pallet->name }} </li>
                 <li>Quantity to Produce: {{$order->quantity_production}}  </li>
+                <li>Quantity Produced: {{$order->quantitymade}}  </li>
             </ul>
             <h4>Materials:</h4>
             <ul>

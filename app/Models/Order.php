@@ -83,4 +83,28 @@ class Order extends Model
         }
         return 'no production';
     }
+
+    public function getQuantityMadeAttribute()
+    {
+        if ($this->quantity_produced > $this->quantity_production)
+        {
+            return $this->quantity_production;
+        }
+        else
+        {
+            return $this->quantity_produced;
+        }
+    }
+
+    /**
+     * Function to add pallets to the running total
+     * @return void
+     */
+    public function addProduced()
+    {
+        // TODO: Needs update to use a parameter in the above () instead of the add_quantity column
+        $this->quantity_produced +=  $this->add_quantity;
+        $this->add_quantity = 0;
+        $this->save();
+    }
 }
