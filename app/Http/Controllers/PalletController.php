@@ -14,7 +14,7 @@ class PalletController extends Controller
      */
     public function index()
     {
-        //
+        // Nothing to see here!
     }
 
     /**
@@ -39,14 +39,14 @@ class PalletController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified pallet.
      *
      * @param  \App\Models\Pallet  $pallet
      * @return \Illuminate\Http\Response
      */
     public function show(Pallet $pallet)
     {
-        //
+        return view('pallets.show', compact('pallet'));
     }
 
     /**

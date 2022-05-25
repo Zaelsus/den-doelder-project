@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, ProductionController};
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Order
 Route::resource('/orders', OrderController::class);
 
+// Pallets
+Route::resource('/pallets', PalletController::class);
+
 //start production route
 Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
 
@@ -38,12 +42,6 @@ Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction']
 
 //Initial Check
 Route::resource('/initial', InitialController::class);
-
-
-// Drawings
-Route::get('/drawings', function () {
-    return view('drawings.show');
-});
 
 //Production Check
 Route::resource('/production', ProductionController::class);
