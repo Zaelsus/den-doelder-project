@@ -77,4 +77,15 @@ class Order extends Model
         return 'no production';
     }
 
+    public function getQuantityMadeAttribute()
+    {
+        if ($this->quantity_produced > $this->quantity_production)
+        {
+            return $this->quantity_production;
+        }
+        else
+        {
+            return $this->quantity_produced;
+        }
+    }
 }
