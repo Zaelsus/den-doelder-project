@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Production;
+use App\Models\Order;
 
 class ProductionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//    /**
+//     * Display a listing of the resource.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
     public function index()
     {
+        return redirect(route('home'));
     }
 
     /**
@@ -23,6 +25,7 @@ class ProductionController extends Controller
      */
     public function create()
     {
+//        dd($order->id);
         return view('prodCheck.create');
     }
 
@@ -37,7 +40,7 @@ class ProductionController extends Controller
         Production::create($this->validateProduction($request));
 
         // redirecting to show a page
-        return redirect(route('prodCheck.show'))->with('success','an item has been created successfully');
+        return redirect(route('production.show'))->with('success','an item has been created successfully');
     }
 
     /**
@@ -48,8 +51,8 @@ class ProductionController extends Controller
      */
     public function show(Production $production)
     {
-        $production = Production::latest()->first();
-        return view('prodCheck.show', compact('production'));
+        $order = $production->order;
+        return view('prodCheck.show', compact('production', 'order'));
     }
 
     /**
@@ -60,6 +63,7 @@ class ProductionController extends Controller
      */
     public function edit(Production $production)
     {
+//        dd($production);
         return view('prodCheck.edit', compact('production'));
     }
 
@@ -73,8 +77,8 @@ class ProductionController extends Controller
     public function update(Request $request, Production $production)
     {
         $production->update($this->validateProduction($request));
-
-        return redirect(route('prodCheck.show', $production))->with('info','the production with name ' . $production->name . ' has been edited');
+//        dd($production);
+        return redirect(route('production.show', $production));
     }
 
     /**
@@ -85,8 +89,8 @@ class ProductionController extends Controller
      */
     public function destroy(Production $production)
     {
-//        $production->delete();
-//        return redirect(route('prodCheck.index'))->with('success','an item has been deleted');
+        $production->delete();
+        return redirect(route('production.index'))->with('success','an item has been deleted');
     }
 
     /**
