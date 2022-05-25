@@ -8,6 +8,10 @@
     <section class="section">
         <div class="container">
             <div class="columns">
+                <button
+                    onclick=window.location.href="{{route('notes.create')}}">
+                    Create Note
+                </button>
                 <div class="column is-full">
                     <br>
                         @foreach($notes as $note)
