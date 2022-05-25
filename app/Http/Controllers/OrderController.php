@@ -45,7 +45,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -59,11 +59,12 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
     {
+        $order->addProduced();
         return view('orders.show', compact('order'));
 //        if($order->status === 'In Production' ||$order->status === 'Paused') {
 //            return view('orders.show', compact('order'));
@@ -77,10 +78,10 @@ class OrderController extends Controller
      */
     public static function startProduction(Order $order)
     {
-        if($order->status ==='Pending') {
-            $order->update(['status'=>'In Production','start_time'=> date('Y-m-d H:i:s')]);
+        if ($order->status === 'Pending') {
+            $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
         } else {
-            $order->update(['status'=>'In Production']);
+            $order->update(['status' => 'In Production']);
         }
         return redirect(route('orders.show', $order));
 
@@ -91,7 +92,7 @@ class OrderController extends Controller
      */
     public static function stopProduction(Order $order)
     {
-        $order->update(['status'=>'Done','end_time'=> date('Y-m-d H:i:s')]);
+        $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
         return redirect(route('orders.index'));
     }
 
@@ -100,14 +101,14 @@ class OrderController extends Controller
      */
     public static function pauseProduction(Order $order)
     {
-        $order->update(['status'=>'Paused']);
-        return redirect(route('orders.show',$order));
+        $order->update(['status' => 'Paused']);
+        return redirect(route('orders.show', $order));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Order  $order
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -118,33 +119,37 @@ class OrderController extends Controller
     /**
      * Show the form for editing only pallets
      *
-     * @param  \App\Models\Order  $order
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function editquantity(Order $order)
     {
 //        dd($order);
+
         return view('orders.editquantity', compact('order'));
     }
 
     /**
      * Update the pallet details in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function updatequantity(Request $request, Order $order)
     {
-        $order->update($this->validateQuantity($request));
+        $validatedAtributes = $request->validate([
+            'add_quantity' => 'required|integer'
+        ]);
+        $order->update($validatedAtributes);
         return redirect(route('orders.show', $order));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Order $order)
@@ -157,7 +162,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Order  $order
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function destroy(Order $order)
@@ -174,16 +179,16 @@ class OrderController extends Controller
     public function validateOrder(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            'order_number'=>'required',
-            'pallet_id'=>'required',
-            'machine'=>'required',
-            'quantity_production'=>'required|integer|min:1',
-            'start_date'=>'date',
-            'site_location'=>'required',
-            'production_instructions'=>'text',
-            'client_name' =>'required|string',
-            'client_address' =>'required|string',
-            'status'=>'string',
+            'order_number' => 'required',
+            'pallet_id' => 'required',
+            'machine' => 'required',
+            'quantity_production' => 'required|integer|min:1',
+            'start_date' => 'date',
+            'site_location' => 'required',
+            'production_instructions' => 'text',
+            'client_name' => 'required|string',
+            'client_address' => 'required|string',
+            'status' => 'string',
 
 //            'pallet_type'=>'required',
 //            'quantity'=>'required|integer|min:0',
@@ -194,21 +199,5 @@ class OrderController extends Controller
 
         return $validatedAtributes;
     }
-
-
-    /**
-     * this function validates Quantity
-     * @param Request $request
-     * @return array
-     */
-    public function validateQuantity(Request $request): array
-    {
-        $validatedAtributes = $request->validate([
-            'quantity_produced'=>'required|integer'
-        ]);
-
-        return $validatedAtributes;
-    }
-    // status manipulation
 
 }

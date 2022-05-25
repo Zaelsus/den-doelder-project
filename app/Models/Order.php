@@ -88,4 +88,11 @@ class Order extends Model
             return $this->quantity_produced;
         }
     }
+
+
+    public function addProduced()
+    {
+        $this->quantity_produced +=  $this->add_quantity;
+        $this->save();
+    }
 }

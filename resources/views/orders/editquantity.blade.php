@@ -20,7 +20,10 @@
                                     Quantity Ordered: {{$order->quantity_production}}
                                 </div>
                                 <div>
-                                    Quantity Produced: <input class="input" type="number" name="quantity_produced" id=" " value="{{$order->quantity_produced}}">
+                                    Quantity Produced: {{$order->quantity_produced}}
+                                </div>
+                                <div>
+                                    Quantity Produced: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
                                 </div>
                             </div>
 

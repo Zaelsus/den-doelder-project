@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('machine');
             $table->unsignedInteger('quantity_production');
             $table->unsignedInteger('quantity_produced')->default(0);
+            $table->unsignedInteger('add_quantity')->default(0);
             $table->date('start_date')->nullable();
             $table->string('site_location');
             $table->text('production_instructions')->nullable();
