@@ -15,15 +15,16 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page bg-image">
 <div class="login-box">
-    <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
-    </div>
+
     <!-- /.login-logo -->
 
     <!-- /.login-box-body -->
     <div class="card">
+        <div class="login-logo">
+            <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        </div>
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
 

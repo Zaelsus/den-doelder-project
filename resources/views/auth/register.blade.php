@@ -15,14 +15,15 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
 </head>
-<body class="hold-transition register-page">
-<div class="register-box">
-    <div class="register-logo">
-        <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
-    </div>
+<body class="hold-transition register-page bg-image">
 
     <div class="card">
-        <div class="card-body register-card-body">
+        <div class="register-box">
+            <div class="register-logo">
+                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+            </div>
+
+            <div class="card-body register-card-body">
             <p class="login-box-msg">Register a new membership</p>
 
             <form method="post" action="{{ route('register') }}">
