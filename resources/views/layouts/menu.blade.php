@@ -89,7 +89,7 @@
             </div>
             <div class="nav-item">
 
-                <a href="#" class="nav-link active bg-white btn text-left disabled">
+                <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Add Notes</p>
                 </a>
