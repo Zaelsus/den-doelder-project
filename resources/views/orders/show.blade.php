@@ -60,6 +60,7 @@
             <h6 class="card bg-info">Materials:</h6>
             <table>
             <tbody>
+
                 @foreach($order->orderMaterials as $orderMaterial)
                     <tr>
                         <td>Measurements {{$orderMaterial->material->measurements}}</td>

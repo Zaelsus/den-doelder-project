@@ -89,13 +89,13 @@
             </div>
             <div class="nav-item">
 
-                <a href="#" class="nav-link active bg-white btn text-left disabled">
+                <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Add Notes</p>
                 </a>
                 @if($order->status === 'In Production')
-                    <a href="#" class="nav-link active bg-white btn text-left disabled">
-                        <i class="nav-icon fas fa-warehouse"></i>
+                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
                     </a>
                     <a href="#" class="nav-link active bg-white btn text-left disabled">
