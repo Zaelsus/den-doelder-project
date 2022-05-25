@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{OrderController, HourlyReportController, ProductionController};
+use App\Http\Controllers\{OrderController, OrderMaterialController, HourlyReportController, ProductionController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +36,8 @@ Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])-
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
+// OrderMaterials
+Route::resource('/orderMaterials', OrderMaterialController::class);
 
 // Drawings
 Route::get('/drawings', function () {

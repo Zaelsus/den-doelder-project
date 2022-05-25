@@ -22,7 +22,7 @@ class OrderMaterialFactory extends Factory
         while (!$check && $i <= 100) {
             $order_id = Order::all()->random()->id;
             $material_id = Material::all()->random()->product_id;
-           // making sure the table isnt empty
+            // making sure the table isnt empty
             if (OrderMaterial::all()->count() !== 0) {
                 $j = 1;
                 $innercheck = true;
@@ -45,27 +45,28 @@ class OrderMaterialFactory extends Factory
                     $check = false;
                 }
 
-            }
-            // if the table is empty the inner check isnt needed
+            } // if the table is empty the inner check isnt needed
             else {
                 $check = true;
             }
             $i++;
         }
         // if the check passed we put the new values
-        if($check) {
+        if ($check) {
             return [
-                'order_id'=>$order_id,
-                'material_id'=>$material_id,
+                'order_id' => $order_id,
+                'material_id' => $material_id,
+                'total_quantity' => $this->faker->numberBetween(1000, 10000),
                 'test' => 'works',
             ];
         } //test for the programmers
         else {
             return [
-            'order_id'=>1,
-            'material_id'=>4,
-            'test' => 'stop',
-        ];
+                'order_id' => 1,
+                'material_id' => 4,
+                'total_quantity' =>0,
+                'test' => 'stop',
+            ];
         }
     }
 }
