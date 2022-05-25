@@ -125,10 +125,10 @@
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>Orders</p>
             </a>
-            <a href="#" class="nav-link active bg-white btn text-left disabled">
-                <i class="nav-icon fas fa-clipboard-check"></i>
-                <p>Initial Check</p>
-            </a>
+{{--            <a href="#" class="nav-link active bg-white btn text-left disabled">--}}
+{{--                <i class="nav-icon fas fa-clipboard-check"></i>--}}
+{{--                <p>Initial Check</p>--}}
+{{--            </a>--}}
         </div>
     </li>
 @endif

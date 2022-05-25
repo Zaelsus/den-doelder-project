@@ -1,7 +1,12 @@
 <?php
 
-use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, NoteController, ProductionController, PalletController};
-
+use App\Http\Controllers\{InitialController,
+    OrderController,
+    HourlyReportController,
+    NoteController,
+    OrderMaterialController,
+    ProductionController,
+    PalletController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +44,9 @@ Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])-
 
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
+
+// OrderMaterials
+Route::resource('/orderMaterials', OrderMaterialController::class);
 
 //pallet editing route
 Route::get('/orders/{order}/editquantity', [OrderController::class, 'editquantity'])->name('orders.editquantity');
