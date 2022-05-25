@@ -23,7 +23,7 @@
                                     Quantity Produced: {{$order->quantity_produced}}
                                 </div>
                                 <div>
-                                    Quantity Produced: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
+                                    Add to Produced: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
                                 </div>
                             </div>
 
