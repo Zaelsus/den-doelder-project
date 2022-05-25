@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\{OrderController, HourlyReportController, PalletController};
+
+use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, ProductionController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// this is temporary until we add the login to the right role and the right production line
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -29,10 +31,21 @@ Route::resource('/orders', OrderController::class);
 // Pallets
 Route::resource('/pallets', PalletController::class);
 
+//start production route
+Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
+
+//stop production route
+Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
+
+//stop production route
+Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
+
+//Initial Check
+Route::resource('/initial', InitialController::class);
+
+//Production Check
+Route::resource('/production', ProductionController::class);
+
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
 
-//beans? yes
-Route::get('beans', function () {
-    return view('layouts.beans_page');
-});

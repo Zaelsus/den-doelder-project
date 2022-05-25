@@ -45,6 +45,27 @@
                 </div>
 
                 <div class="input-group mb-3">
+{{--                    <input type="role"--}}
+{{--                           name="role"--}}
+{{--                           class="form-control @error('role') is-invalid @enderror"--}}
+{{--                           value="{{ old('role') }}"--}}
+{{--                           placeholder="Your role">--}}
+                    <div class="input-group-append">
+{{--                        <div class="input-group-text"><span class="fas fa-user"></span></div>--}}
+                        <select name="role" class="select @error('role') is-danger @enderror">
+                            <option value="">choose a role</option>
+                            <option value='Administrator'>Administrator</option>
+                            <option value='Production'>Production</option>
+                        </select>
+                    </div>
+                    @error('role')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="input-group mb-3">
                     <input type="email"
                            name="email"
                            value="{{ old('email') }}"
