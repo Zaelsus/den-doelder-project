@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, NoteController, ProductionController, PalletController};
 
-use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, ProductionController, PalletController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,3 +49,5 @@ Route::resource('/production', ProductionController::class);
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
 
+// Notes
+Route::resource('/notes', NoteController::class);

@@ -61,6 +61,13 @@ class Order extends Model
         return $this->hasMany(HourlyReport::class, 'order_id');
     }
 
+    /**
+     *Gets the notes related to the order
+     */
+    public function notes()
+    {
+        return $this->hasMany(Note::class,'order_id');
+    }
 
     /**
      * returns if there is an order in production
@@ -76,5 +83,4 @@ class Order extends Model
         }
         return 'no production';
     }
-
 }
