@@ -95,6 +95,7 @@ class Order extends Model
      */
     public function addProduced()
     {
+        // Needs update to use a parameter in the above () instead of the add_quantity column
         $this->quantity_produced +=  $this->add_quantity;
         $this->add_quantity = 0;
         $this->save();
