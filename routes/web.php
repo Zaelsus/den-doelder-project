@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, NoteController, ProductionController, PalletController};
 
-use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, ProductionController, PalletController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //home page
 Auth::routes();
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // this is temporary until we add the login to the right role and the right production line
@@ -53,3 +53,5 @@ Route::resource('/production', ProductionController::class);
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
 
+// Notes
+Route::resource('/notes', NoteController::class);

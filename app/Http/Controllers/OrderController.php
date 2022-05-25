@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Pallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -38,8 +39,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-//        $groups = Group::all();
-        return view('orders.create');
+        $pallets = Pallet::all();
+        return view('orders.create',compact('pallets'));
     }
 
     /**
@@ -51,7 +52,6 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order = Order::create($this->validateOrder($request));
-
         // redirecting to show a page
         return redirect(route('orders.show', compact('order')));
     }
@@ -66,10 +66,6 @@ class OrderController extends Controller
     {
         $order->addProduced();
         return view('orders.show', compact('order'));
-//        if($order->status === 'In Production' ||$order->status === 'Paused') {
-//            return view('orders.show', compact('order'));
-//        }
-//        return view('orders.startShow', compact('order'));
 
     }
 
@@ -113,7 +109,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('orders.edit', compact('order'));
+        $pallets = Pallet::all();
+        return view('orders.edit', compact('order','pallets'));
     }
 
     /**
@@ -179,16 +176,16 @@ class OrderController extends Controller
     public function validateOrder(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            'order_number' => 'required',
-            'pallet_id' => 'required',
-            'machine' => 'required',
-            'quantity_production' => 'required|integer|min:1',
-            'start_date' => 'date',
-            'site_location' => 'required',
-            'production_instructions' => 'text',
-            'client_name' => 'required|string',
-            'client_address' => 'required|string',
-            'status' => 'string',
+            'order_number'=>'required',
+            'pallet_id'=>'required',
+            'machine'=>'required',
+            'quantity_production'=>'required|integer|min:1',
+            'start_date'=>'date',
+            'site_location'=>'required',
+            'production_instructions'=>'',
+            'client_name' =>'required|string',
+            'client_address' =>'required|string',
+            'status'=>'string',
 
 //            'pallet_type'=>'required',
 //            'quantity'=>'required|integer|min:0',
