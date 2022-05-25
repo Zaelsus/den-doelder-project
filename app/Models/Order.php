@@ -89,7 +89,10 @@ class Order extends Model
         }
     }
 
-
+    /**
+     * Function to add pallets to the running total
+     * @return void
+     */
     public function addProduced()
     {
         $this->quantity_produced +=  $this->add_quantity;
