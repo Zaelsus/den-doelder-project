@@ -11,7 +11,7 @@
                 <div class="column is-full">
                     @if(Auth::user()->role === 'Administrator')
                     <div class="has-text-right">
-                        <a href="{{route('orders.create')}}" class="btn btn-info btn-lg btn-lg btn-block">Add a new order</a>
+                        <a href="{{route('orders.create')}}" class="btn btn-info btn-lg btn-block">Add a new order</a>
                     </div>
                     @endif
                     <table class="table table-bordered table-hover table-secondary">

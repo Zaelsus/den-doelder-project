@@ -1,11 +1,11 @@
 <?php
 
-<<<<<<< HEAD
-use App\Http\Controllers\{OrderController, OrderMaterialController, HourlyReportController, ProductionController};
-=======
-
-use App\Http\Controllers\{InitialController, OrderController, HourlyReportController, ProductionController, PalletController};
->>>>>>> 222a08273951a7802e7b20c13a4f63fca44019b5
+use App\Http\Controllers\{InitialController,
+    OrderController,
+    HourlyReportController,
+    OrderMaterialController,
+    ProductionController,
+    PalletController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,18 +44,11 @@ Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])-
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
-<<<<<<< HEAD
 // OrderMaterials
 Route::resource('/orderMaterials', OrderMaterialController::class);
 
-// Drawings
-Route::get('/drawings', function () {
-    return view('drawings.show');
-});
-=======
 //Initial Check
 Route::resource('/initial', InitialController::class);
->>>>>>> 222a08273951a7802e7b20c13a4f63fca44019b5
 
 //Production Check
 Route::resource('/production', ProductionController::class);
