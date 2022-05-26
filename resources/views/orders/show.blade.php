@@ -57,7 +57,7 @@
                 </tr>
                 </tbody>
             </table>
-            <h6 class="card bg-info">Materials:</h6>
+            <h6 class="card shade">Materials:</h6>
             <table>
             <tbody>
 
