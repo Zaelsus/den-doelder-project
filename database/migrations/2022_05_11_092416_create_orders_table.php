@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
                 ->references('product_id')
                 ->on('pallets')
                 ->onDelete('restrict');
-            $table->string('machine');
+            $table->string('machine')->nullable();
             $table->unsignedInteger('quantity_production');
             $table->date('start_date')->nullable();
             $table->string('site_location');

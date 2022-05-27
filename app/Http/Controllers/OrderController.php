@@ -64,7 +64,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('orders.show', compact('order'));
+        return abort(500);
+//        return view('orders.show', compact('order'));
 
     }
 
@@ -148,9 +149,9 @@ class OrderController extends Controller
         $validatedAtributes = $request->validate([
             'order_number'=>'required',
             'pallet_id'=>'required',
-            'machine'=>'required',
+            'machine'=>'',
             'quantity_production'=>'required|integer|min:1',
-            'start_date'=>'date',
+            'start_date'=>'',
             'site_location'=>'required',
             'production_instructions'=>'',
             'client_name' =>'required|string',

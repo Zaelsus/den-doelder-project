@@ -56,3 +56,8 @@ Route::resource('/production', ProductionController::class);
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
 
+//500 error temp
+Route::get('servererror', function () {
+    abort(500);
+})->name('servererror');
+
