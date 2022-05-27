@@ -77,7 +77,6 @@ class InitialController extends Controller
     public function update(Request $request, Initial $initial)
     {
         $initial->update($this->validateInitial($request));
-//        dd($initial);
         return redirect(route('initial.show', $initial));
     }
 
