@@ -43173,3 +43173,10 @@ a.text-muted:hover {
     background-color: #d3e6e8;
     color: #17a2b8;
 }
+
+/*Notes form*/
+.requirednote:after {
+    content:" *";
+    font-size:20px;
+    color: red;
+}

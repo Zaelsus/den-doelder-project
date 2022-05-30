@@ -27,8 +27,12 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $orders = Order::all();
-        return view('notes.create', ['orders' => $orders]);
+        if(Order::isInProduction() ==='In Production'){
+            $order = Order::where('status','In Production')->first();
+        }elseif(Order::isInProduction() ==='Paused') {
+            $order = Order::where('status','Paused')->first();
+        }
+        return view('notes.create', compact('order'));
     }
 
     /**
@@ -39,10 +43,21 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $note = Note::create($this->validateNote($request));
-
-        // redirecting to show the note
-        return redirect('/notes');
+        if(Order::isInProduction() ==='In Production'){
+            $order = Order::where('status','In Production')->first();
+        }elseif(Order::isInProduction() ==='Paused') {
+            $order = Order::where('status','Paused')->first();
+        }
+        $note = new Note();
+        $note->order_id = $order->id;
+        $note->title = $request->title;
+        $note->content = $request->content;
+        $note->save();
+//
+//        $note = Note::create($this->validateNote($request));
+//
+//      redirecting to show the note
+        return redirect(route('notes.index', compact('note')));
     }
 
     /**
@@ -101,12 +116,11 @@ class NoteController extends Controller
      */
     public function validateNote(Request $request): array
     {
-        $validatedAtributes = $request->validate([
+        $validatedAttributes = $request->validate([
             'title'=>'required',
             'content'=>'required',
-            'order_id'=>'required',
         ]);
 
-        return $validatedAtributes;
+        return $validatedAttributes;
     }
 }
