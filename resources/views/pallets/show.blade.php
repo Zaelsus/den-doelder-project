@@ -13,8 +13,8 @@
             <div class="columns">
                 <div class="column is-full">
                     <div>
-                        <img src="{{ $pallet->general_images }}" width="300px">
-                        <img src="{{ $pallet->detailed_images }}" width="300px">
+                        <img src="{{ $pallet->general_images }}" width="400px">
+                        <img src="{{ $pallet->detailed_images }}" width="400px">
                     </div>
                     <br>
                     <div>

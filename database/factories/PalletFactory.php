@@ -24,10 +24,8 @@ class PalletFactory extends Factory
             'measurements'=>$this->faker->randomElement(['1200 X 1000', '1000 X 1000']),
             'classification'=>$this->faker->randomElement(['Klos Klasse', 'Dubbeldek niel-omkeerbaar']),
             'treatments'=>$this->faker->randomElement(['Heat Treatment', 'No Treatment']),
-            'general_images' => 'http://loremflickr.com/800/600?lock='.
-                $this->faker->numberBetween(1,65535),
-            'detailed_images' => 'http://loremflickr.com/800/600?lock='.
-                $this->faker->numberBetween(1,65535),
+            'general_images' => 'https://dummyimage.com/800x600/000/fff.jpg&text=Pallet+Design',
+            'detailed_images' => 'https://dummyimage.com/800x600/000/fff.jpg&text=Pallet+Design',
         ];
     }
 }
