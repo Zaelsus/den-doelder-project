@@ -98,11 +98,11 @@
                             <label class="required" for="site_location">Select site of Production</label>
                             <div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline1" name="site_location" class="custom-control-input" value="Axel" required>
+                                    <input type="radio" id="customRadioInline1" name="site_location" class="custom-control-input" value="Axel" {{ old('site_location')==="Axel" ? 'checked='.'"'.'checked'.'"' : '' }} required>
                                     <label class="custom-control-label" for="customRadioInline1">Axel</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline2" name="site_location" class="custom-control-input" value="Zelzete" required>
+                                    <input type="radio" id="customRadioInline2" name="site_location" class="custom-control-input" value="Zelzete" {{ old('site_location')==="Zelzete" ? 'checked='.'"'.'checked'.'"' : '' }}required>
                                     <label class="custom-control-label" for="customRadioInline2">Zelzete</label>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                         <textarea name="production_instructions"
                                   class="form-control @error('production_instructions') is-invalid @enderror"
                                   type="text"
-                                  placeholder="Fill in if there are any additional instructions">Fill in if there are any additional instructions{{old('production_instructions')}} </textarea>
+                                  placeholder="Fill in if there are any additional instructions">{{old('production_instructions')}} </textarea>
                        </div>
                            @error('production_instructions')
                         <p class="text-red">{{ $message }}</p>

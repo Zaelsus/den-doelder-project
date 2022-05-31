@@ -33,6 +33,8 @@ class CreateOrdersTable extends Migration
             $table->string('status');
             $table->dateTime('start_time')->default(null)->nullable();
             $table->date('end_time')->default(null)->nullable();
+            // Temporary until sections for admin nav
+            $table->boolean('selected')->default(0);
             $table->timestamps();
         });
     }

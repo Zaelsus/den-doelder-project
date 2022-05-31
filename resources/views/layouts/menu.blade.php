@@ -73,7 +73,8 @@
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Initial Check</p>
                     </a>
-                    <a href="{{route('pallets.show', $order->pallet)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('pallets.show', $order->pallet)}}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-draw-polygon"></i>
                         <p>Drawings</p>
                     </a>
@@ -94,10 +95,10 @@
                     <p>Add Notes</p>
                 </a>
                 @if($order->status === 'In Production')
-                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">
-                        <i class="nav-icon fas fa-clipboard-check"></i>
-                        <p>Log Pallets</p>
-                    </a>
+                    {{--                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">--}}
+                    {{--                        <i class="nav-icon fas fa-clipboard-check"></i>--}}
+                    {{--                        <p>Log Pallets</p>--}}
+                    {{--                    </a>--}}
                     <a href="#" class="nav-link active bg-white btn text-left disabled">
                         <i class="nav-icon fas fa-compass"></i>
                         <p>Location</p>
@@ -117,20 +118,72 @@
         </li>
 
     @endif
-{{--    checks if the role is of administrator--}}
+    {{--    checks if the role is of administrator--}}
 @elseif(Auth::user()->role === 'Administrator')
-    <li class="nav-item">
-        <div class="nav-item">
-            <a href="{{ route('orders.index') }}" class="nav-link active btn bg-gray-dark">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>Orders</p>
-            </a>
-{{--            <a href="#" class="nav-link active bg-white btn text-left disabled">--}}
-{{--                <i class="nav-icon fas fa-clipboard-check"></i>--}}
-{{--                <p>Initial Check</p>--}}
-{{--            </a>--}}
+    @if($order === null)
+        <li class="nav-item">
+            <div class="nav-item">
+                <a href="{{ route('orders.index') }}" class="nav-link active btn bg-gray-dark">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <p>Orders</p>
+                </a>
+            </div>
+        </li>
+    @else
+        <div class="info-box shade">
+            <div class="info-box-content">
+                <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
+                <h4>
+                    <span class="align-content-lg-stretch d-flex justify-content-center badge
+                @if($order->status === 'Pending')
+                        badge-secondary
+                @elseif($order->status === 'In Production')
+                        badge-info
+                @elseif($order->status === 'Paused')
+                        badge-warning
+                @elseif($order->status === 'Done')
+                        badge-success
+                @endif
+                        ">{{$order->status}}</span>
+                </h4>
+            </div>
         </div>
-    </li>
-@endif
+        <li class="nav-item">
+            <div class="nav-item">
+            <form method="POST" action="{{route('orders.unselectOrder', $order)}}">
+                @csrf
+                <button class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                        type="submit"> Back to overview
+                </button>
+            </form>
+            </div>
+        </li>
 
+
+        <div class="nav-item">
+            <a href="{{ route('orders.show', $order) }}" class="nav-link active btn text-left bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Order Details</p>
+            </a>
+            <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-clipboard-check"></i>
+                <p>Initial Check</p>
+            </a>
+            <a href="{{route('pallets.show', $order->pallet)}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-draw-polygon"></i>
+                <p>Drawings</p>
+            </a>
+            <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-tools"></i>
+                <p>Production Check</p>
+            </a>
+            <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-check"></i>
+                <p>Hourly Check</p>
+            </a>
+        </div>
+
+    @endif
+
+@endif
 

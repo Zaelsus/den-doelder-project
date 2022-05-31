@@ -18,6 +18,7 @@ class Order extends Model
         'status' => 'Pending',
         'start_time' => null,
         'end_time' => null,
+        'selected' => 0,
     ];
 
 
@@ -71,7 +72,7 @@ class Order extends Model
     }
 
     /**
-     * returns if there is an order in production
+     * returns if there is an order in production (for production view)
      */
     public static function isInProduction()
     {
@@ -83,6 +84,18 @@ class Order extends Model
             return 'Paused';
         }
         return 'no production';
+    }
+
+    /**
+     * returns if there is an order selected (for admin view)
+     */
+    public static function isSelected()
+    {
+        $orderSelected = Order::where('selected', 1)->first();
+        if ($orderSelected !== null) {
+            return $orderSelected;
+        }
+        return null;
     }
 
     public function getQuantityMadeAttribute()

@@ -29,28 +29,32 @@ Route::get('/', function () {
 // this is temporary until we add the login to the right role and the right production line
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 // Order
 Route::resource('/orders', OrderController::class);
 
 // Pallets
 Route::resource('/pallets', PalletController::class);
 
+//Production View
 //start production route
 Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
-
 //stop production route
 Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
-
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
+
+//Admin View
+//select
+Route::post('/orders/select/{order}', [OrderController::class, 'selectOrder'])->name('orders.selectOrder');
+//unselect
+Route::post('/orders/unselect/{order}', [OrderController::class, 'unselectOrder'])->name('orders.unselectOrder');
 
 // OrderMaterials
 Route::resource('/orderMaterials', OrderMaterialController::class);
 
 //pallet editing route
-Route::get('/orders/{order}/editquantity', [OrderController::class, 'editquantity'])->name('orders.editquantity');
-Route::put('/orders/{order}', [OrderController::class, 'updatequantity'])->name('orders.updatequantity');
+// Route::get('/orders/{order}/editquantity', [OrderController::class, 'editquantity'])->name('orders.editquantity');
+//Route::put('/orders/{order}', [OrderController::class, 'addquantity'])->name('orders.addquantity');
 
 //Initial Check
 Route::resource('/initial', InitialController::class);

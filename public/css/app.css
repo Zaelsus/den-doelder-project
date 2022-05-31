@@ -24979,7 +24979,7 @@ html.maximized-card {
 .dark-mode .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.hour:hover,
 .dark-mode .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.minute:hover,
 .dark-mode .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.second:hover {
-  background-color: #5d36a4;
+  background-color: purple;
   color: #fff;
 }
 .dark-mode .card.bg-purple .bootstrap-datetimepicker-widget table td.today::before,
@@ -24990,7 +24990,7 @@ html.maximized-card {
 .dark-mode .card.bg-purple .bootstrap-datetimepicker-widget table td.active:hover,
 .dark-mode .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.active,
 .dark-mode .card.bg-gradient-purple .bootstrap-datetimepicker-widget table td.active:hover {
-  background-color: #8c68ce;
+  background-color: purple;
   color: #fff;
 }
 .dark-mode .card-pink:not(.card-outline) > .card-header {
@@ -38934,7 +38934,7 @@ blockquote.quote-gray-dark h6 {
 }
 
 .bg-gradient-purple {
-  background: #6f42c1 linear-gradient(180deg, #855eca, #6f42c1) repeat-x !important;
+  background: #63274e linear-gradient(180deg, #842f66, #a84385) repeat-x !important;
   color: #fff;
 }
 .bg-gradient-purple.btn.disabled, .bg-gradient-purple.btn:disabled, .bg-gradient-purple.btn:not(:disabled):not(.disabled):active, .bg-gradient-purple.btn:not(:disabled):not(.disabled).active, .show > .bg-gradient-purple.btn.dropdown-toggle {
@@ -43184,5 +43184,6 @@ input:required {
     font-size:20px;
     color: #fda014;
 }
+
 
 
