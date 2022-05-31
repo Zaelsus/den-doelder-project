@@ -61,13 +61,6 @@ Route::resource('/production', ProductionController::class);
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
 
-<<<<<<< HEAD
-//500 error temp
-Route::get('servererror', function () {
-    abort(500);
-})->name('servererror');
-
-=======
 // Notes
 Route::resource('/notes', NoteController::class);
->>>>>>> 0a874dc6f067a1ff1018bfa4e78028c4b5029ebc
+

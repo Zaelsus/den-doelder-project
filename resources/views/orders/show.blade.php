@@ -2,6 +2,14 @@
 
 @section('content')
     <br>
+    @if(session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            {{ session()->get('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card ">
         <div class="card-header bg-gradient-info">
             <h3 class="  text-center ">Order Details for {{$order->order_number}}</h3>
@@ -13,10 +21,10 @@
         <div class="card-body">
             <div class="card-subtitle float-right border-left">
                 <h5 class="card create-order-card-titles ">General Info</h5>
-            <p class="heading">Location: {{$order->site_location}}</p>
-            <p class="heading">Created At: {{$order->created_at}}</p>
-            <p class="heading">Last Update:{{$order->updated_at}}</p>
-            <p class="heading">Started production:{{$order->start_time}}</p>
+            <p class="heading">Location - {{$order->site_location}}</p>
+            <p class="heading">Created At - {{$order->created_at}}</p>
+            <p class="heading">Last Update - {{$order->updated_at}}</p>
+            <p class="heading">Started production At - {{$order->start_time}}</p>
             <h2>
                     <span class="badge
                 @if($order->status === 'Pending')
@@ -38,6 +46,7 @@
                             type="submit"> Start
                     </button>
                 </form>
+
             @endif
             </div>
             <h5 class="card bg-gradient-info ">Client and Order Details</h5>
@@ -48,11 +57,11 @@
             <table>
                 <tbody>
                 <tr>
-                    <td>Pallet Type</td>
+                    <td>Pallet Type - </td>
                     <td>{{$order->pallet->name}}</td>
                 </tr>
                 <tr>
-                    <td> Quantity to Produce </td>
+                    <td> Quantity to Produce - </td>
                     <td> {{$order->quantity_production}}</td>
                 </tr>
                 </tbody>
@@ -63,8 +72,8 @@
 
                 @foreach($order->orderMaterials as $orderMaterial)
                     <tr>
-                        <td>Measurements {{$orderMaterial->material->measurements}}</td>
-                        <td>Comments {{$orderMaterial->material->comments}}</td>
+                        <td>Measurements: {{$orderMaterial->material->measurements}}</td>
+                        <td>Comments: {{$orderMaterial->material->comments}}</td>
                     </tr>
                 @endforeach
             </tbody>

@@ -64,14 +64,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-<<<<<<< HEAD
-        return abort(500);
-//        return view('orders.show', compact('order'));
-=======
-        $order->addProduced();
+       // $order->addProduced();
         return view('orders.show', compact('order'));
->>>>>>> 0a874dc6f067a1ff1018bfa4e78028c4b5029ebc
-
     }
 
     /**
@@ -79,13 +73,16 @@ class OrderController extends Controller
      */
     public static function startProduction(Order $order)
     {
+        if($order->machine !== null && $order->start_date !== null) {
         if ($order->status === 'Pending') {
             $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
         } else {
             $order->update(['status' => 'In Production']);
         }
         return redirect(route('orders.show', $order));
-
+        } else {
+            return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
+        }
     }
 
     /**
@@ -126,8 +123,6 @@ class OrderController extends Controller
      */
     public function editquantity(Order $order)
     {
-//        dd($order);
-
         return view('orders.editquantity', compact('order'));
     }
 
@@ -174,7 +169,7 @@ class OrderController extends Controller
     }
 
     /**
-     * this function validates the attributes of Retro
+     * this function validates the attributes of Order
      * @param Request $request
      * @return array
      */
