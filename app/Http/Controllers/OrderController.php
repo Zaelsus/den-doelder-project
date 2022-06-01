@@ -183,7 +183,7 @@ class OrderController extends Controller
         return redirect(route('orders.index'));
     }
 
-    //    /**
+//        /**
 //     * Show the form for editing only pallets
 //     *
 //     * @param \App\Models\Order $order
@@ -209,7 +209,7 @@ class OrderController extends Controller
 //        $order->update($validatedAtributes);
 //        return redirect(route('orders.show', $order));
 //    }
-
+//
 
 
 }
