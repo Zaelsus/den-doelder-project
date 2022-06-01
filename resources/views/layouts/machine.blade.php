@@ -21,65 +21,43 @@
     <!-- Main Header -->
     <div class="card-header navbar navbar-expand navbar-light colour-purple">
         <!-- Left navbar links -->
-        <ul class="navbar-nav">
-            <li class="secondLiHeader"><h1 class="headerCenter">@yield('header')</h1></li>
-        </ul>
-
+        @yield('header')
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown user-menu">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src="/img/pallets150.jpg"
-                         class="user-image img-circle elevation-2" alt="Goose">
-                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <!-- User image -->
-                    <li class="user-header shade">
-                        <img src="/img/pallets150.jpg"
-                             class="img-circle elevation-2"
-                             alt="User Image">
-                        <p>
-                        <h6> {{ Auth::user()->name }}</h6>
-                        <span class="badge colour-orange ">{{ Auth::user()->role }} team</span>
-                        <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
-                        </p>
-
-                    </li>
-                    <!-- Menu Footer-->
-                    <li class="user-footer">
-                        <a href="#" class="btn shade ">Profile</a>
-                        <a href="#" class="btn shade float-right"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Sign out
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-            </li>
+            <div class="container">
+                <div>
+                    <img src="/img/user.png"
+                         class=" img-lg img-circle elevation-2" alt="Goose">
+                </div>
+                <div>
+                    <a href="#" class="btn shade"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Sign out
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </div>
+            </div>
         </ul>
     </div>
 
     <!-- Left side column. contains the logo and sidebar -->
-{{--@include('layouts.sidebar')--}}
+    {{--@include('layouts.sidebar')--}}
 
-<!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <section class="content">
-            <div class="card-body">
+    <!-- Content Wrapper. Contains page content -->
+
+    <section class="content text-center">
+        <div class="card-body">
             @yield('content')
-            </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
 
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
-<script src="{{ mix('js/app.js') }}" defer></script>
+    @yield('third_party_scripts')
 
-@yield('third_party_scripts')
-
-@stack('page_scripts')
+    @stack('page_scripts')
     </body>
 </div>
 
