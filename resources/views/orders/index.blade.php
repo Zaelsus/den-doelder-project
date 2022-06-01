@@ -45,7 +45,9 @@
                                                 <td>{{ $order->client_name }}</td>
                                                 <td>{{$order->machine}}</td>
                                                 <td> {{$order->start_date}}</td>
-                                                <td>{{$order->status}}</td>
+                                                <td class = "{{$order->status === 'Pending' ? 'bg-secondary':''}}
+                                                {{$order->status === 'Paused' ? 'bg-warning':''}}
+                                                {{$order->status === 'Done' ? 'bg-success':''}}">{{$order->status}}</td>
                                                 <td>{{$order->created_at}}</td>
                                             </tr>
                                         @endif
@@ -79,7 +81,9 @@
                                     <td>{{ $order->client_name }}</td>
                                     <td>{{$order->machine}}</td>
                                     <td> {{$order->start_date}}</td>
-                                    <td>{{$order->status}}</td>
+                                    <td class = "{{$order->status === 'Pending' ? 'bg-secondary':''}}
+                                    {{$order->status === 'Paused' ? 'bg-warning':''}}
+                                    {{$order->status === 'Done' ? 'bg-success':''}}">{{$order->status}}</td>
                                     <td>{{$order->created_at}}</td>
                                 </tr>
                             @endforeach
