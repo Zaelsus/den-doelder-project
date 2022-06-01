@@ -45,9 +45,13 @@
                                                 <td>{{ $order->client_name }}</td>
                                                 <td>{{$order->machine}}</td>
                                                 <td> {{$order->start_date}}</td>
-                                                <td class = "{{$order->status === 'Pending' ? 'bg-secondary':''}}
+                                                <td class = "{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
                                                 {{$order->status === 'Paused' ? 'bg-warning':''}}
-                                                {{$order->status === 'Done' ? 'bg-success':''}}">{{$order->status}}</td>
+                                                {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
+                                                {{$order->status === 'Done' ? 'bg-success':''}}
+                                                {{$order->status === 'In Production' ? 'bg-info':''}}
+                                                {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
+                                                {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}</td>
                                                 <td>{{$order->created_at}}</td>
                                             </tr>
                                         @endif
@@ -81,9 +85,13 @@
                                     <td>{{ $order->client_name }}</td>
                                     <td>{{$order->machine}}</td>
                                     <td> {{$order->start_date}}</td>
-                                    <td class = "{{$order->status === 'Pending' ? 'bg-secondary':''}}
+                                    <td class = "{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
                                     {{$order->status === 'Paused' ? 'bg-warning':''}}
-                                    {{$order->status === 'Done' ? 'bg-success':''}}">{{$order->status}}</td>
+                                    {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
+                                    {{$order->status === 'Done' ? 'bg-success':''}}
+                                    {{$order->status === 'In Production' ? 'bg-info':''}}
+                                    {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
+                                    {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}</td>
                                     <td>{{$order->created_at}}</td>
                                 </tr>
                             @endforeach

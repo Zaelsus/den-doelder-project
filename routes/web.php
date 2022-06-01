@@ -54,6 +54,8 @@ Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction']
 Route::post('/orders/select/{order}', [OrderController::class, 'selectOrder'])->name('orders.selectOrder');
 //unselect
 Route::post('/orders/unselect/{order}', [OrderController::class, 'unselectOrder'])->name('orders.unselectOrder');
+//stop production route
+Route::post('/orders/cancel/{order}', [OrderController::class, 'cancelOrder'])->name('orders.cancelOrder');
 
 // OrderMaterials
 Route::resource('/orderMaterials', OrderMaterialController::class);

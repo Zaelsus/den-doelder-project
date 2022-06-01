@@ -15,7 +15,7 @@ class Order extends Model
         'site_location' => 'Axel',
         'production_instructions' => '',
         'machine' => '',
-        'status' => 'Pending',
+        'status' => 'Admin Hold',
         'start_time' => null,
         'end_time' => null,
         'selected' => 0,

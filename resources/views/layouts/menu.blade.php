@@ -1,25 +1,32 @@
+@if(((Auth::user()->role === 'Production') && (\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production'))
+|| ((Auth::user()->role === 'Administrator') && ($order !== null)))
+    <div class="info-box shade">
+        <div class="info-box-content">
+            <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
+            <h4>
+                    <span class="align-content-lg-stretch d-flex justify-content-center badge
+                @if($order->status === 'Production Pending')
+                        badge-secondary
+                @elseif($order->status === 'In Production')
+                        badge-info
+                @elseif(($order->status === 'Paused') || ($order->status === 'Admin Hold'))
+                        badge-warning
+                @elseif($order->status === 'Done')
+                        badge-success
+                @elseif($order->status === 'Quality Check Pending')
+                        bg-lightblue
+                @elseif($order->status === 'Canceled')
+                        badge-dark
+                @endif
+                        ">{{$order->status}}</span>
+            </h4>
+        </div>
+    </div>
+@endif
 {{--checking role if production worker--}}
 @if(Auth::user()->role === 'Production')
     {{--    Production Status (either 1 is in production or Paused --}}
     @if(\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production')
-        <div class="info-box shade">
-            <div class="info-box-content">
-                <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
-                <h4>
-                    <span class="align-content-lg-stretch d-flex justify-content-center badge
-                @if($order->status === 'Pending')
-                        badge-secondary
-                @elseif($order->status === 'In Production')
-                        badge-info
-                @elseif($order->status === 'Paused')
-                        badge-warning
-                @elseif($order->status === 'Done')
-                        badge-success
-                @endif
-                        ">{{$order->status}}</span>
-                </h4>
-            </div>
-        </div>
         <li class="nav-item">
             <div class="card bg-gray-dark" style="margin-bottom: .2rem">
                 <a href="#" class="nav-link bg-black">
@@ -106,7 +113,7 @@
                 @endif
             </div>
         </li>
-        {{--    No Production (either everything is Done or Pending --}}
+        {{--    No Production (no In Production Or Pause) --}}
     @else
         <li class="nav-item">
             <div class="nav-item">
@@ -116,7 +123,6 @@
                 </a>
             </div>
         </li>
-
     @endif
     {{--    checks if the role is of administrator--}}
 @elseif(Auth::user()->role === 'Administrator')
@@ -130,35 +136,16 @@
             </div>
         </li>
     @else
-        <div class="info-box shade">
-            <div class="info-box-content">
-                <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
-                <h4>
-                    <span class="align-content-lg-stretch d-flex justify-content-center badge
-                @if($order->status === 'Pending')
-                        badge-secondary
-                @elseif($order->status === 'In Production')
-                        badge-info
-                @elseif($order->status === 'Paused')
-                        badge-warning
-                @elseif($order->status === 'Done')
-                        badge-success
-                @endif
-                        ">{{$order->status}}</span>
-                </h4>
-            </div>
-        </div>
         <li class="nav-item">
             <div class="nav-item">
-            <form method="POST" action="{{route('orders.unselectOrder', $order)}}">
-                @csrf
-                <button class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
-                        type="submit"> Back to overview
-                </button>
-            </form>
+                <form method="POST" action="{{route('orders.unselectOrder', $order)}}">
+                    @csrf
+                    <button class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                            type="submit"> Back to overview
+                    </button>
+                </form>
             </div>
         </li>
-
 
         <div class="nav-item">
             <a href="{{ route('orders.show', $order) }}" class="nav-link active btn text-left bg-gray-dark">

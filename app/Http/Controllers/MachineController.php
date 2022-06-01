@@ -42,7 +42,11 @@ class MachineController extends Controller
         //will get the status of the production
         $productionStatus = Order::isInProduction($machine);
         //all the orders currently
-        $orders = Order::where('machine', $machine->name)->where('status','!=','Done')->orderBy('start_date', 'desc')->get();
+        $orders = Order::where('machine', $machine->name)
+            ->where('status','!=','Done')
+            ->where('status','!=','Quality Check Pending')
+            ->where('status','!=','Canceled')
+            ->orderBy('start_date', 'desc')->get();
         //checks the role and loads the correct view
         if (Auth::user()->role === 'Production') {
             // if there isnt any order in production

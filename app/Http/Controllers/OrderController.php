@@ -136,7 +136,7 @@ class OrderController extends Controller
     public static function startProduction(Order $order)
     {
         if($order->machine !== null && $order->start_date !== null) {
-            if ($order->status === 'Pending') {
+            if ($order->status === 'Production Pending') {
                 $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
             } else {
                 $order->update(['status' => 'In Production']);
@@ -162,6 +162,15 @@ class OrderController extends Controller
     public static function pauseProduction(Order $order)
     {
         $order->update(['status' => 'Paused']);
+        return redirect(route('orders.show', $order));
+    }
+
+    /**
+     * changes the status of the current order to Canceled
+     */
+    public static function cancelOrder(Order $order)
+    {
+        $order->update(['status' => 'Canceled']);
         return redirect(route('orders.show', $order));
     }
 
