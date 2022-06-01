@@ -28,9 +28,9 @@ class OrderController extends Controller
     public function index()
     {
         //looking about adding another order by accoridng to status as well as scheduled production
-        $orders = Order::orderBy('start_date', 'desc')->paginate(10);
-//        $orders = Order::where('machine', $machine->name)->orderBy('start_date', 'desc');
-        return view('orders.index', compact('orders'));
+        $orders = Order::orderBy('machine', 'desc')->get();
+        $previousMachine=null;
+        return view('orders.index', compact('orders','previousMachine'));
     }
 
     /**
