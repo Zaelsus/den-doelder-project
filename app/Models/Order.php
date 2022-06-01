@@ -74,9 +74,11 @@ class Order extends Model
     /**
      * returns if there is an order in production (for production view)
      */
-    public static function isInProduction()
+    public static function isInProduction(Machine $machine)
     {
-        $orderInProduction = Order::where('status', 'In Production')->orwhere('status', 'Paused')->first();
+        $orderInProduction = Order::where('machine',$machine->name)->where(function($query) {
+            $query->where('status', 'In Production')->orwhere('status', 'Paused');
+        })->first();
         if ($orderInProduction !== null) {
             if ($orderInProduction->status === 'In Production') {
                 return 'In Production';

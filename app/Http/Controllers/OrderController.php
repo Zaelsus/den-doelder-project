@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Machine;
 use App\Models\Order;
 use App\Models\Pallet;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class OrderController extends Controller
     {
         //looking about adding another order by accoridng to status as well as scheduled production
         $orders = Order::orderBy('start_date', 'desc')->paginate(10);
-
+//        $orders = Order::where('machine', $machine->name)->orderBy('start_date', 'desc');
         return view('orders.index', compact('orders'));
     }
 
@@ -149,10 +150,10 @@ class OrderController extends Controller
     /**
      * changes the status of the current order to done
      */
-    public static function stopProduction(Order $order)
+    public static function stopProduction(Order $order ,Machine $machine)
     {
         $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
-        return redirect(route('orders.index'));
+        return redirect(route('machines.show',compact('machine')));
     }
 
     /**

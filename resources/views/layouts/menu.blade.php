@@ -1,7 +1,7 @@
 {{--checking role if production worker--}}
 @if(Auth::user()->role === 'Production')
     {{--    Production Status (either 1 is in production or Paused --}}
-    @if(\App\Models\Order::isInProduction() !== 'no production')
+    @if(\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production')
         <div class="info-box shade">
             <div class="info-box-content">
                 <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
@@ -52,7 +52,7 @@
                             </form>
                         </li>
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.stopProduction', $order)}}">
+                            <form method="POST" action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
                                 @csrf
                                 <button onclick="return confirm('Is this order completed?')"
                                         class="far fa-stop-circle btn btn-danger btn-block "
@@ -110,7 +110,7 @@
     @else
         <li class="nav-item">
             <div class="nav-item">
-                <a href="{{ route('orders.index') }}" class="nav-link active btn bg-gray-dark">
+                <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}" class="nav-link active btn bg-gray-dark">
                     <i class="nav-icon fas fa-clipboard-list"></i>
                     <p>Orders</p>
                 </a>

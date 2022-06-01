@@ -16,37 +16,21 @@
     @stack('page_css')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+<div class="card">
+    <body>
     <!-- Main Header -->
-    <nav class="main-header navbar navbar-expand navbar-light colour-purple">
+    <div class="card-header navbar navbar-expand navbar-light colour-purple">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
             <li class="secondLiHeader"><h1 class="headerCenter">@yield('header')</h1></li>
         </ul>
 
         <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown user-menu">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <span class="d-none d-md-inline btn btn-warning">Change Production Line</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <!-- User image -->
-                    <li class="user-header shade">
-                        <a href="{{ route('machines.index') }}" class="btn btn-success">
-                            <p>Change Machine</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                     <img src="/img/pallets150.jpg"
                          class="user-image img-circle elevation-2" alt="Goose">
-                    <span class="d-none d-md-inline">User {{ Auth::user()->name }}</span>
+                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- User image -->
@@ -59,6 +43,7 @@
                         <span class="badge colour-orange ">{{ Auth::user()->role }} team</span>
                         <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
                         </p>
+
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
@@ -74,33 +59,28 @@
                 </ul>
             </li>
         </ul>
-    </nav>
+    </div>
 
     <!-- Left side column. contains the logo and sidebar -->
-@include('layouts.sidebar')
+{{--@include('layouts.sidebar')--}}
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
+            <div class="card-body">
             @yield('content')
+            </div>
         </section>
     </div>
 
-{{--    Removed, but code saved if we need it later--}}
-{{--    <!-- Main Footer -->--}}
-{{--    <footer class="main-footer bg-blue">--}}
-{{--        <div class="float-right d-none d-sm-block">--}}
-{{--            <b>Version</b> 3.0.5--}}
-{{--        </div>--}}
-{{--        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights--}}
-{{--        reserved.--}}
-{{--    </footer>--}}
-</div>
+
 
 <script src="{{ mix('js/app.js') }}" defer></script>
 
 @yield('third_party_scripts')
 
 @stack('page_scripts')
-</body>
+    </body>
+</div>
+
 </html>
