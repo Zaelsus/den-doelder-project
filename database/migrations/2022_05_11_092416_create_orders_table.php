@@ -21,8 +21,10 @@ class CreateOrdersTable extends Migration
                 ->references('product_id')
                 ->on('pallets')
                 ->onDelete('restrict');
-            $table->string('machine');
+            $table->string('machine')->nullable();
             $table->unsignedInteger('quantity_production');
+            $table->unsignedInteger('quantity_produced')->default(0);
+            $table->unsignedInteger('add_quantity')->default(0);
             $table->date('start_date')->nullable();
             $table->string('site_location');
             $table->text('production_instructions')->nullable();
@@ -31,6 +33,8 @@ class CreateOrdersTable extends Migration
             $table->string('status');
             $table->dateTime('start_time')->default(null)->nullable();
             $table->date('end_time')->default(null)->nullable();
+            // Temporary until sections for admin nav
+            $table->boolean('selected')->default(0);
             $table->timestamps();
         });
     }

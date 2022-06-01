@@ -14,9 +14,11 @@ class Order extends Model
         'start_date' => null,
         'site_location' => 'Axel',
         'production_instructions' => '',
+        'machine' => '',
         'status' => 'Pending',
         'start_time' => null,
         'end_time' => null,
+        'selected' => 0,
     ];
 
 
@@ -61,9 +63,16 @@ class Order extends Model
         return $this->hasMany(HourlyReport::class, 'order_id');
     }
 
+    /**
+     *Gets the notes related to the order
+     */
+    public function notes()
+    {
+        return $this->hasMany(Note::class,'order_id');
+    }
 
     /**
-     * returns if there is an order in production
+     * returns if there is an order in production (for production view)
      */
     public static function isInProduction()
     {
@@ -77,4 +86,39 @@ class Order extends Model
         return 'no production';
     }
 
+    /**
+     * returns if there is an order selected (for admin view)
+     */
+    public static function isSelected()
+    {
+        $orderSelected = Order::where('selected', 1)->first();
+        if ($orderSelected !== null) {
+            return $orderSelected;
+        }
+        return null;
+    }
+
+    public function getQuantityMadeAttribute()
+    {
+        if ($this->quantity_produced > $this->quantity_production)
+        {
+            return $this->quantity_production;
+        }
+        else
+        {
+            return $this->quantity_produced;
+        }
+    }
+
+    /**
+     * Function to add pallets to the running total
+     * @return void
+     */
+    public function addProduced()
+    {
+        // TODO: Needs update to use a parameter in the above () instead of the add_quantity column
+        $this->quantity_produced +=  $this->add_quantity;
+        $this->add_quantity = 0;
+        $this->save();
+    }
 }

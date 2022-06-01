@@ -11,26 +11,26 @@
                 <div class="column is-full">
                     @if(Auth::user()->role === 'Administrator')
                     <div class="has-text-right">
-                        <a href="{{route('orders.create')}}" class="button is-primary">Add a new order</a>
+                        <a href="{{route('orders.create')}}" class="btn btn-info btn-lg btn-block">Add a new order</a>
                     </div>
                     @endif
-                    <table class="table is-fullwidth is-striped">
-                        <thead>
+                    <table class="table table-bordered table-hover table-secondary">
+                        <thead class="thead-dark">
                         <tr>
-                            <th>Order Number</th>
-                            <th>Pallet Name</th>
-                            <th>Pallet Measurements</th>
-                            <th>Customer Name</th>
-                            <th>Production Line</th>
-                            <th>Scheduled Production Date</th>
-                            <th>Status</th>
-                            <th>Created at</th>
+                            <th scope="col">Order Number</th>
+                            <th scope="col">Pallet Name</th>
+                            <th scope="col">Pallet Measurements</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Production Line</th>
+                            <th scope="col">Scheduled Production Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Created at</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($orders as $order)
                             <tr>
-                                <td><a href="{{Route('orders.show',$order)}}">{{ $order->order_number }}</a></td>
+                                <th scope="row"><a href="{{Route('orders.show',$order)}}">{{ $order->order_number }}</a></th>
                                 <td>{{$order->pallet->name}}</td>
                                 <td>{{$order->pallet->measurements}}</td>
                                 <td>{{ $order->client_name }}</td>
@@ -38,7 +38,6 @@
                                 <td> {{$order->start_date}}</td>
                                 <td>{{$order->status}}</td>
                                 <td>{{$order->created_at}}</td>
-                                <td>{{is_null($order->production)}}</td>
                             </tr>
                         @endforeach
                         </tbody>
