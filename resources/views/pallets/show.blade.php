@@ -54,7 +54,7 @@
                     {{ $pallet->details_specifieke_bladnotities }}</p>
             </div>
             <div class="flex-item-right">
-                <h3><span class="badge colour-purple align-content-lg-stretch justify-content-center">Componenten</span></h3>
+                <h3><span class="badge colour-orange align-content-lg-stretch justify-content-center">Componenten</span></h3>
                 <ul style="padding: 0; margin: 0">
                     <li class="list_no_bullets" style="list-style: none">
                         <p class="no-margin-bottom"><strong>Bovendek:</strong></p>
