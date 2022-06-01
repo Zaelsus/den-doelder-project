@@ -1,12 +1,12 @@
 <aside class="main-sidebar sidebar-dark-gray-dark colour-purple elevation-4">
     {{--    <div class="dropdown-toggle" data-toggle="dropdown">--}}
 
-    <a href="{{ route('home') }}" class="brand-link">
+    <div  class="brand-link">
         <img src="\img\pallets150.jpg"
              alt="Den Doelder Logo"
              class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light">Den Doelder</span>
-    </a>
+    </div>
     <div class="sidebar">
         @if(Auth::user()->role==='Production')
         <h3><span class="badge colour-orange align-content-lg-stretch d-flex justify-content-center">Production {{ Auth::user()->machine->name }}</span>

@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-info-circle"></i>
+                    <i class="fas fa-pallet"></i>
                 </div>
                 <div>
                     @if($order->status === 'Production Pending' && Auth::user()->role === 'Production')

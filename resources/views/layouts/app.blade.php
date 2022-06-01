@@ -33,9 +33,9 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                     <span class="d-none d-md-inline btn btn-warning">Change Production Line</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-right bg-transparent">
+                <ul class="dropdown-menu  bg-transparent text-center">
                     <li>
-                        <a href="{{ route('machines.index') }}" class="text-center btn btn-success btn-block">
+                        <a href="{{ route('machines.index') }}" class="text-center btn btn-success">
                             <span>Change Machine</span>
                         </a>
                     </li>

@@ -100,6 +100,33 @@ class Order extends Model
         return null;
     }
 
+    /**
+     * returns if there is a quality check that exists for the current order
+     */
+    public static function initialCheckExists(Order $order)
+    {
+        $initialCheck = $order->initial;
+        if ($initialCheck !== null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * returns if there is a first batch check that exists for the current order
+     */
+    public static function prodCheckExists(Order $order)
+    {
+        $prodCheck = $order->production;
+        if ($prodCheck !== null) {
+            if($order->start_date !== null && $order->machine !==null && $order->status==='Quality Check Pending') {
+                $order->status ='Production Pending';
+            }
+            return true;
+        }
+        return false;
+    }
+
     public function getQuantityMadeAttribute()
     {
         if ($this->quantity_produced > $this->quantity_production)

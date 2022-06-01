@@ -33,7 +33,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="status">Order Status</label>
+                            <label class="required" for="status">Order Status</label>
                             <div>
                                 <select name="status" class="custom-select @error('status') is-invalid @enderror">
                                     @if($order->status === 'In Production' || $order->status === 'Done')
@@ -51,14 +51,16 @@
                                             value='Quality Check Pending' {{$order->status === 'Quality Check Pending' ? 'selected':''}}>
                                             Quality Check Pending
                                         </option>
-                                        <option
-                                            value='Production Pending' {{$order->status === 'Production Pending' ? 'selected':''}}>
-                                            Production Pending
-                                        </option>
+                                        @if(\App\Models\Order::initialCheckExists($order) && $order->start_date !==null && $order->machine !==null)
+                                            <option
+                                                value='Production Pending' {{$order->status === 'Production Pending' ? 'selected':''}}>
+                                                Production Pending
+                                            </option>
+                                        @endif
                                     @endif
-                                        <option value='Admin Hold' {{$order->status === 'Admin Hold' ? 'selected':''}}>Admin
-                                            Hold
-                                        </option>
+                                    <option value='Admin Hold' {{$order->status === 'Admin Hold' ? 'selected':''}}>Admin
+                                        Hold
+                                    </option>
                                 </select>
                             </div>
                             @error('status')
@@ -141,9 +143,9 @@
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="customRadioInline2" name="site_location"
-                                           class="custom-control-input" value="Zelzete"
-                                           {{ $order->site_location==="Zelzete" ? 'checked='.'"'.'checked'.'"' : '' }}required>
-                                    <label class="custom-control-label" for="customRadioInline2">Zelzete</label>
+                                           class="custom-control-input" value="Zelzate"
+                                           {{ $order->site_location==="Zelzate" ? 'checked='.'"'.'checked'.'"' : '' }}required>
+                                    <label class="custom-control-label" for="customRadioInline2">Zelzate</label>
                                 </div>
                             </div>
                             @error('site_location')
@@ -155,6 +157,8 @@
                             <label for="machine">Production machine</label>
                             <div>
                                 <select name="machine" class="custom-select @error('machine') is-invalid @enderror">
+                                    <option value='' >Select Production Machine
+                                    </option>
                                     <option value='Cape 1' {{$order->machine === 'Cape 1' ? 'selected':''}}>Cape 1
                                     </option>
                                     <option value='Cape 2' {{$order->machine === 'Cape 2' ? 'selected':''}}>Cape 2

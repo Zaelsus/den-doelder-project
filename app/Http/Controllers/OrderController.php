@@ -135,7 +135,7 @@ class OrderController extends Controller
      */
     public static function startProduction(Order $order)
     {
-        if($order->machine !== null && $order->start_date !== null) {
+        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
             if ($order->status === 'Production Pending') {
                 $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
             } else {

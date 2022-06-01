@@ -59,7 +59,8 @@
                             </form>
                         </li>
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
+                            <form method="POST"
+                                  action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
                                 @csrf
                                 <button onclick="return confirm('Is this order completed?')"
                                         class="far fa-stop-circle btn btn-danger btn-block "
@@ -85,10 +86,17 @@
                         <i class="nav-icon fas fa-draw-polygon"></i>
                         <p>Drawings</p>
                     </a>
+                @if(\App\Models\Order::prodCheckExists($order))
                     <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>Production Check</p>
                     </a>
+                    @else
+                        <a href="{{route('production.create')}}" class="nav-link active bg-gray-dark btn text-left">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p> Add Production Check</p>
+                        </a>
+                    @endif
                     <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
                         <p>Hourly Check</p>
@@ -117,7 +125,8 @@
     @else
         <li class="nav-item">
             <div class="nav-item">
-                <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}" class="nav-link active btn bg-gray-dark">
+                <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+                   class="nav-link active btn bg-gray-dark">
                     <i class="nav-icon fas fa-clipboard-list"></i>
                     <p>Orders</p>
                 </a>
@@ -152,10 +161,17 @@
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>Order Details</p>
             </a>
-            <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
-                <i class="nav-icon fas fa-clipboard-check"></i>
-                <p>Initial Check</p>
-            </a>
+            @if(\App\Models\Order::initialCheckExists($order))
+                <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <i class="nav-icon fas fa-clipboard-check"></i>
+                    <p> Initial Check</p>
+                </a>
+            @else
+                <a href="{{route('initial.create')}}" class="nav-link active bg-gray-dark btn text-left">
+                    <i class="nav-icon fas fa-clipboard-check"></i>
+                    <p> Add Initial Check</p>
+                </a>
+            @endif
             <a href="{{route('pallets.show', $order->pallet)}}" class="nav-link active bg-gray-dark btn text-left">
                 <i class="nav-icon fas fa-draw-polygon"></i>
                 <p>Drawings</p>
