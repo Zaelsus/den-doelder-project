@@ -45,7 +45,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                     <img src="/img/pallets150.jpg"
                          class="user-image img-circle elevation-2" alt="Goose">
-                    <span class="d-none d-md-inline">User {{ Auth::user()->name }}</span>
+                    <span class="d-none d-md-inline text-white">User: {{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- User image -->
@@ -57,7 +57,6 @@
                         <h6> {{ Auth::user()->name }}</h6>
                         <span class="badge colour-orange ">{{ Auth::user()->role }} team</span>
                         <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
-                        </p>
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">

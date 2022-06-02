@@ -17,13 +17,13 @@
 </head>
 <body class="hold-transition register-page bg-image">
 
-    <div class="card">
-        <div class="register-box">
-            <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
-            </div>
+<div class="card">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+        </div>
 
-            <div class="card-body register-card-body">
+        <div class="card-body register-card-body">
             <p class="login-box-msg">Register a new membership</p>
 
             <form method="post" action="{{ route('register') }}">
@@ -45,20 +45,12 @@
                     @enderror
                 </div>
 
-                <div class="input-group mb-3">
-{{--                    <input type="role"--}}
-{{--                           name="role"--}}
-{{--                           class="form-control @error('role') is-invalid @enderror"--}}
-{{--                           value="{{ old('role') }}"--}}
-{{--                           placeholder="Your role">--}}
-                    <div class="input-group-append">
-{{--                        <div class="input-group-text"><span class="fas fa-user"></span></div>--}}
-                        <select name="role" class="select @error('role') is-danger @enderror">
-                            <option value="">choose a role</option>
-                            <option value='Administrator'>Administrator</option>
-                            <option value='Production'>Production</option>
-                        </select>
-                    </div>
+                <div class="form-group mb-3">
+                    <select name="role" class="form-control @error('role') is-invalid @enderror">
+                        <option value="">Choose a Role</option>
+                        <option value='Administrator'>Administrator</option>
+                        <option value='Production'>Production</option>
+                    </select>
                     @error('role')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
