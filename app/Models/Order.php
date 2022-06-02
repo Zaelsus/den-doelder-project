@@ -99,7 +99,7 @@ class Order extends Model
     }
 
     /**
-     * Function to add pallets to the running total
+     * Function to add pallets to the quantity produced
      * @return void
      */
     public function addProduced()
@@ -118,7 +118,7 @@ class Order extends Model
     }
 
     /**
-     * Function to add pallets to the running total
+     * Function to complete order when all pallets are produced
      * @return void
      */
     public function stopProduced()

@@ -184,7 +184,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for editing only pallets
+     * Show the form for editing only quantity produced
      *
      * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
@@ -197,7 +197,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Update the pallet details in storage.
+     * Update the quantity produced in storage.
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Order $order
