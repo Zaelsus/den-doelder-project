@@ -213,7 +213,7 @@ class OrderController extends Controller
             $order->update($validatedAtributes);
             $order->addProduced();
             $order->stopProduced();
-            return redirect(route('orders.editquantity', $order));
+            return redirect(route('orders.show', $order));
         }
         catch (\Exception $exception)
         {
