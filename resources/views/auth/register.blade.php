@@ -48,8 +48,8 @@
                 <div class="form-group mb-3">
                     <select name="role" class="form-control @error('role') is-invalid @enderror">
                         <option value="">Choose a Role</option>
-                        <option value='Administrator'>Administrator</option>
-                        <option value='Production'>Production</option>
+                        <option value='Administrator'@if(old('role') === 'Administrator') {{'selected'}}@endif>Administrator</option>
+                        <option value='Production'@if(old('role') === 'Production') {{'selected'}}@endif>Production</option>
                     </select>
                     @error('role')
                     <span class="invalid-feedback" role="alert">
