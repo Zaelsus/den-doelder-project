@@ -52,9 +52,9 @@ Route::post('/orders/unselect/{order}', [OrderController::class, 'unselectOrder'
 // OrderMaterials
 Route::resource('/orderMaterials', OrderMaterialController::class);
 
-////pallet editing route
-// Route::get('/orders/{order}/editquantity', [OrderController::class, 'editquantity'])->name('orders.editquantity');
-//Route::put('/orders/{order}', [OrderController::class, 'addquantity'])->name('orders.addquantity');
+//pallet editing route
+Route::get('/orders/{order}/editquantity', [OrderController::class, 'editquantity'])->name('orders.editquantity');
+Route::put('/orders/{order}', [OrderController::class, 'updatequantity'])->name('orders.updatequantity');
 
 //Initial Check
 Route::resource('/initial', InitialController::class);
