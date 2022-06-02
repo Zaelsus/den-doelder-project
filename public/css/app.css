@@ -43235,6 +43235,13 @@ input:required {
     }
 }
 
+/* button be gone! */
+.button-without-style {
+    background: none;
+    color: inherit;
+    border: none;
+}
+
 
 
 

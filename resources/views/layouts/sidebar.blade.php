@@ -9,10 +9,10 @@
     </div>
     <div class="sidebar">
         @if(Auth::user()->role==='Production')
-        <h3><span class="badge colour-orange align-content-lg-stretch d-flex justify-content-center">Production {{ Auth::user()->machine->name }}</span>
+        <h3><span class="badge colour-orange align-content-lg-stretch d-flex justify-content-center brand-text">Production {{ Auth::user()->machine->name }}</span>
         </h3>
         @else
-            <h3><span class="badge colour-orange align-content-lg-stretch d-flex justify-content-center">{{ Auth::user()->role }} View</span>
+            <h3><span class="badge colour-orange align-content-lg-stretch d-flex justify-content-center brand-text">{{ Auth::user()->role }} View</span>
             </h3>
         @endif
         <nav class="mt-4">
