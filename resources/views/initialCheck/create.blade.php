@@ -7,7 +7,7 @@
 
 @section('content')
     <section class="content">
-        <form method="POST" action="{{route('initialCheck.store')}}">
+        <form method="POST" action="{{route('initial.store')}}">
             @csrf
 
             <section class="section">
