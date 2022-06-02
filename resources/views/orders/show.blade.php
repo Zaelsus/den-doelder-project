@@ -16,14 +16,18 @@
                     <h3 class="">Order {{$order->order_number}}</h3>
                     <h2 class="float-right">
                     <span class=" badge badge-pill
-                @if($order->status === 'Pending')
+                @if($order->status === 'Production Pending')
                         badge-secondary
                 @elseif($order->status === 'In Production')
                         badge-info
-                @elseif($order->status === 'Paused')
+                @elseif($order->status === 'Paused' || $order->status === 'Admin Hold')
                         badge-warning
                 @elseif($order->status === 'Done')
                         badge-success
+                @elseif($order->status === 'Quality Check Pending')
+                        bg-lightblue
+                @elseif($order->status === 'Canceled')
+                        badge-dark
                 @endif  ">{{$order->status}}</span></h2>
                     <p>{{$order->site_location}}</p>
                     <div class="text-center">
@@ -33,10 +37,10 @@
                     </div>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-info-circle"></i>
+                    <i class="fas fa-pallet"></i>
                 </div>
                 <div>
-                    @if($order->status === 'Pending' && Auth::user()->role === 'Production')
+                    @if($order->status === 'Production Pending' && Auth::user()->role === 'Production')
                         <form method="POST" action="{{route('orders.startProduction', $order)}}">
                             @csrf
                             <button onclick="return confirm('Start production for order {{$order->order_number}}?')"
