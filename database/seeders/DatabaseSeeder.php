@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             HourlyReportSeeder::class,
             NoteSeeder::class,
             ProductionSeeder::class,
-            InitialSeeder::class
+            InitialSeeder::class,
+            MachineSeeder::class,
         ]);
     }
 }

@@ -15,7 +15,7 @@ class Order extends Model
         'site_location' => 'Axel',
         'production_instructions' => '',
         'machine' => '',
-        'status' => 'Pending',
+        'status' => 'Admin Hold',
         'start_time' => null,
         'end_time' => null,
         'selected' => 0,
@@ -74,9 +74,11 @@ class Order extends Model
     /**
      * returns if there is an order in production (for production view)
      */
-    public static function isInProduction()
+    public static function isInProduction(Machine $machine)
     {
-        $orderInProduction = Order::where('status', 'In Production')->orwhere('status', 'Paused')->first();
+        $orderInProduction = Order::where('machine',$machine->name)->where(function($query) {
+            $query->where('status', 'In Production')->orwhere('status', 'Paused');
+        })->first();
         if ($orderInProduction !== null) {
             if ($orderInProduction->status === 'In Production') {
                 return 'In Production';
@@ -96,6 +98,33 @@ class Order extends Model
             return $orderSelected;
         }
         return null;
+    }
+
+    /**
+     * returns if there is a quality check that exists for the current order
+     */
+    public static function initialCheckExists(Order $order)
+    {
+        $initialCheck = $order->initial;
+        if ($initialCheck !== null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * returns if there is a first batch check that exists for the current order
+     */
+    public static function prodCheckExists(Order $order)
+    {
+        $prodCheck = $order->production;
+        if ($prodCheck !== null) {
+            if($order->start_date !== null && $order->machine !==null && $order->status==='Quality Check Pending') {
+                $order->status ='Production Pending';
+            }
+            return true;
+        }
+        return false;
     }
 
     public function getQuantityMadeAttribute()

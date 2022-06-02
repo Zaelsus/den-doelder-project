@@ -102,8 +102,8 @@
                                     <label class="custom-control-label" for="customRadioInline1">Axel</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline2" name="site_location" class="custom-control-input" value="Zelzete" {{ old('site_location')==="Zelzete" ? 'checked='.'"'.'checked'.'"' : '' }}required>
-                                    <label class="custom-control-label" for="customRadioInline2">Zelzete</label>
+                                    <input type="radio" id="customRadioInline2" name="site_location" class="custom-control-input" value="Zelzate" {{ old('site_location')==="Zelzate" ? 'checked='.'"'.'checked'.'"' : '' }}required>
+                                    <label class="custom-control-label" for="customRadioInline2">Zelzate</label>
                                 </div>
                             </div>
                             @error('site_location')
