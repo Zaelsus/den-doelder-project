@@ -89,6 +89,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
+        dd($order);
         $order->update($this->validateOrder($request));
         return redirect(route('orders.show', $order));
     }
@@ -205,12 +206,12 @@ class OrderController extends Controller
      */
     public function updatequantity(Request $request, Order $order)
     {
-        $validatedAtributes = $request->validate([
+        $validated = $request->validate([
             'add_quantity' => 'required|integer'
         ]);
         try
         {
-            $order->update($validatedAtributes);
+            $order->update($validated);
             $order->addProduced();
             $order->stopProduced();
             return redirect(route('orders.show', $order));
