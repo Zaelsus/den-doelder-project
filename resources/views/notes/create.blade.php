@@ -13,7 +13,7 @@
                     <div class="mb-3">
                         <label class="requirednote" for="title">Title</label>
                         <div>
-                            <input class="form-control is-invalid" name="title"
+                            <input class="form-control" name="title"
                                    type="text" placeholder="Title of note" value="{{old('title')}}" required>
                         </div>
                         @error('title')
@@ -33,14 +33,14 @@
                         @enderror
                     </div>
                     <div>
-                        <label class="requirednote" for="labels">Labels</label><br>
-                        <i>Please select the label applicable</i>
+                        <label class="form-check-label requirednote">Labels</label><br>
+                        <i class="required">Please select the label applicable</i>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="label" value="Error"
-                                       onclick="myFunction()">
+                                       onclick="myFunction()" required>
                                 <span class="form-check-label badge badge-danger" style="color: white">Error</span>
                             </div>
                             <div class="form-check">
@@ -57,13 +57,13 @@
 
                         <div class="col-md-4" id="text" style="display:none">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="low">Low priority
+                                <input class="form-check-input" type="radio" name="priority" value="low" required>Low priority
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="medium">Medium priority
+                                <input class="form-check-input" type="radio" name="priority" value="medium">Medium priority
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" value="high">High priority
+                                <input class="form-check-input" type="radio" name="priority" value="high">High priority
                             </div>
                         </div>
                     </div>

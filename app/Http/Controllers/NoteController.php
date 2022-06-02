@@ -13,11 +13,17 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($filter = '', $machine = '')
     {
+        if(Order::isInProduction() ==='In Production'){
+            $order = Order::where('status','In Production')->first();
+        }elseif(Order::isInProduction() ==='Paused') {
+            $order = Order::where('status','Paused')->first();
+        }
+
         $notes = Note::orderBy('created_at', 'desc')->get();
 
-        return view('notes.index', ['notes' => $notes]);
+        return view('notes.index', ['notes' => $notes], ['order' => $order]);
     }
 
     /**
@@ -48,16 +54,11 @@ class NoteController extends Controller
         }elseif(Order::isInProduction() ==='Paused') {
             $order = Order::where('status','Paused')->first();
         }
-        $note = new Note();
-        $note->order_id = $order->id;
-        $note->title = $request->title;
-        $note->content = $request->content;
-        $note->save();
-//
-//        $note = Note::create($this->validateNote($request));
-//
+
+        $note = Note::create($this->validateNote($request, $order));
+
 //      redirecting to show the note
-        return redirect(route('notes.index', compact('note')));
+        return redirect(route('notes.index', $note));
     }
 
     /**
@@ -114,12 +115,15 @@ class NoteController extends Controller
      * @param Request $request
      * @return array
      */
-    public function validateNote(Request $request): array
+    public function validateNote(Request $request, $order): array
     {
         $validatedAttributes = $request->validate([
             'title'=>'required',
             'content'=>'required',
+            'label'=>'required',
+            'priority'=>'required'
         ]);
+        $validatedAttributes['order_id'] = $order->id;
 
         return $validatedAttributes;
     }

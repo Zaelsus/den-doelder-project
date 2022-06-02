@@ -43184,3 +43184,27 @@ a.text-muted:hover {
 .opacity-70 {
     opacity: 0.7;
 }
+
+.required {
+    font-size: 90%;
+    color: #dc3545;
+}
+
+table {
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th {
+    cursor: pointer;
+}
+
+th, td {
+    text-align: left;
+    padding: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
