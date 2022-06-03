@@ -35,12 +35,16 @@ class ProductionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Production $production)
     {
-        Production::create($this->validateProduction($request));
+        $order = Order::isSelected();
+
+        $production = Production::create($this->validateProduction($request));
+
+        $production->assignorderid($order->id);
 
         // redirecting to show a page
-        return redirect(route('production.show'))->with('success','an item has been created successfully');
+        return redirect(route('production.show',$production))->with('success','an item has been created successfully');
     }
 
     /**

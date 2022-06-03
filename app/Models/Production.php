@@ -18,4 +18,13 @@ class Production extends Model
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
+
+    /**
+     * Assigns order id to production check
+     */
+    public function assignorderid($id)
+    {
+        $this->order_id = $id;
+        $this->save();
+    }
 }

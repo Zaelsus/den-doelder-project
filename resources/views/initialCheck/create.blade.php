@@ -7,7 +7,7 @@
 
 @section('content')
     <section class="content">
-        <form method="POST" action="{{route('initialCheck.store')}}">
+        <form method="POST" action="{{route('initial.store')}}">
             @csrf
 
             <section class="section">
@@ -16,7 +16,7 @@
                     <section class="hero">
                         <div class="hero-body">
                             <p class="title">
-                                Bovendek
+{{--                                Bovendek {{$order->order_id}}--}}
                             </p>
                         </div>
                     </section>

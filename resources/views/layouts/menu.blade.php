@@ -77,9 +77,9 @@
                     <p>Order Details</p>
                 </a>
                 @if($order->status === 'In Production')
-                    <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('initial.show', $order->id)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-clipboard-check"></i>
-                        <p>Initial Check</p>
+                        <p> Initial Check</p>
                     </a>
                     <a href="{{route('pallets.show', $order->pallet)}}"
                        class="nav-link active bg-gray-dark btn text-left">
@@ -87,7 +87,7 @@
                         <p>Drawings</p>
                     </a>
                 @if(\App\Models\Order::prodCheckExists($order))
-                    <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('production.show', $order->id)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>Production Check</p>
                     </a>
@@ -162,7 +162,7 @@
                 <p>Order Details</p>
             </a>
             @if(\App\Models\Order::initialCheckExists($order))
-                <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                <a href="{{route('initial.show', $order->id)}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-clipboard-check"></i>
                     <p> Initial Check</p>
                 </a>
