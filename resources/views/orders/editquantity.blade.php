@@ -24,6 +24,11 @@
                                 </div>
                                 <div>
                                     Add to Produced: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
+                                    @if(session()->has('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session()->get('error') }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -31,8 +36,6 @@
                                 {{-- Here are the form buttons: save, reset and cancel --}}
                                 <div class="control">
                                     <button type="submit" class="button is-primary">Save</button>
-
-                                    <button type="reset" class="button is-warning">Reset</button>
 
                                     <a type="button" href="{{ route('orders.show', $order) }}" class="button is-light">Cancel</a>
                                 </div>
