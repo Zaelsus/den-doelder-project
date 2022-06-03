@@ -100,7 +100,7 @@ class Order extends Model
         return null;
     }
 
- 
+    /**
      * returns if there is a quality check that exists for the current order
      */
     public static function initialCheckExists(Order $order)
@@ -127,12 +127,13 @@ class Order extends Model
         return false;
     }
 
-   
+
   /**
      * Function to add pallets to the quantity produced
      * @return void
      */
     public function addProduced()
+    {
         $total = $this->quantity_produced +  $this->add_quantity;
         if($total> $this->quantity_production){
             $this->quantity_produced = "string";
