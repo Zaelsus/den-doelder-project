@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Machine;
 use App\Models\Order;
 use App\Models\Pallet;
 use Illuminate\Http\Request;
@@ -27,9 +28,9 @@ class OrderController extends Controller
     public function index()
     {
         //looking about adding another order by accoridng to status as well as scheduled production
-        $orders = Order::orderBy('start_date', 'desc')->paginate(10);
-
-        return view('orders.index', compact('orders'));
+        $orders = Order::orderBy('machine', 'desc')->get();
+        $previousMachine=null;
+        return view('orders.index', compact('orders','previousMachine'));
     }
 
     /**
@@ -134,8 +135,8 @@ class OrderController extends Controller
      */
     public static function startProduction(Order $order)
     {
-        if($order->machine !== null && $order->start_date !== null) {
-            if ($order->status === 'Pending') {
+        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
+            if ($order->status === 'Production Pending') {
                 $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
             } else {
                 $order->update(['status' => 'In Production']);
@@ -149,10 +150,10 @@ class OrderController extends Controller
     /**
      * changes the status of the current order to done
      */
-    public static function stopProduction(Order $order)
+    public static function stopProduction(Order $order ,Machine $machine)
     {
         $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
-        return redirect(route('orders.index'));
+        return redirect(route('machines.show',compact('machine')));
     }
 
     /**
@@ -161,6 +162,15 @@ class OrderController extends Controller
     public static function pauseProduction(Order $order)
     {
         $order->update(['status' => 'Paused']);
+        return redirect(route('orders.show', $order));
+    }
+
+    /**
+     * changes the status of the current order to Canceled
+     */
+    public static function cancelOrder(Order $order)
+    {
+        $order->update(['status' => 'Canceled']);
         return redirect(route('orders.show', $order));
     }
 

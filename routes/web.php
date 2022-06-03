@@ -6,7 +6,8 @@ use App\Http\Controllers\{InitialController,
     NoteController,
     OrderMaterialController,
     ProductionController,
-    PalletController};
+    PalletController,
+    MachineController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,11 @@ Route::get('/', function () {
 // this is temporary until we add the login to the right role and the right production line
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Machines
+Route::resource('/machines', MachineController::class);
+//select machine
+Route::post('/machines/{machine}/{user}', [MachineController::class, 'selectMachine'])->name('machines.selectMachine');
+
 // Order
 Route::resource('/orders', OrderController::class);
 
@@ -39,7 +45,7 @@ Route::resource('/pallets', PalletController::class);
 //start production route
 Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
 //stop production route
-Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
+Route::post('/orders/stop/{order}/{machine}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
@@ -48,6 +54,8 @@ Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction']
 Route::post('/orders/select/{order}', [OrderController::class, 'selectOrder'])->name('orders.selectOrder');
 //unselect
 Route::post('/orders/unselect/{order}', [OrderController::class, 'unselectOrder'])->name('orders.unselectOrder');
+//stop production route
+Route::post('/orders/cancel/{order}', [OrderController::class, 'cancelOrder'])->name('orders.cancelOrder');
 
 // OrderMaterials
 Route::resource('/orderMaterials', OrderMaterialController::class);
