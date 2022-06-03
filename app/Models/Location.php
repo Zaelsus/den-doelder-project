@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
     protected $attributes = [
         'available_storage_space' => 0,
     ];
