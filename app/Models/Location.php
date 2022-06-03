@@ -15,7 +15,7 @@ class Location extends Model
     /**
      *Gets the product-locations related to the location
      */
-    public function productlocations()
+    public function productLocation()
     {
         return $this->hasMany(ProductLocation::class,'location_id');
     }

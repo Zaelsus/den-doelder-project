@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\ProductLocation;
 use Illuminate\Http\Request;
 
@@ -44,9 +46,13 @@ class ProductLocationController extends Controller
      * @param  \App\Models\ProductLocation  $productLocation
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductLocation $productLocation)
+    public function show($order)
     {
-        //
+        $pallet = Order::find($order)->pallet;
+        $product = Product::find($pallet->product_id);
+        $productLocation = ProductLocation::where('product_id', $product->id)->first();
+
+        return view('productLocations.show', compact('productLocation', 'pallet'));
     }
 
     /**

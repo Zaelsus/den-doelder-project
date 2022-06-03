@@ -6,7 +6,8 @@ use App\Http\Controllers\{InitialController,
     NoteController,
     OrderMaterialController,
     ProductionController,
-    PalletController};
+    PalletController,
+    ProductLocationController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,4 +68,7 @@ Route::resource('/hourlyReports', HourlyReportController::class);
 
 // Notes
 Route::resource('/notes', NoteController::class);
+
+// Locations
+Route::resource('/productLocations', ProductLocationController::class);
 

@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-{{--@section('title', 'Welkom op mijn Portfolio')--}}
-
-{{--@section('background', Illuminate\Support\Facades\Storage::url('img/blue_bg.jpg'))--}}
-
 @section('header')
     Hourly Check-up
 @endsection
