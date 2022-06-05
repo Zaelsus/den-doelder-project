@@ -29,16 +29,40 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown user-menu">
+            <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                     <span class="d-none d-md-inline btn btn-warning">Change Production Line</span>
                 </a>
                 <ul class="dropdown-menu  bg-transparent text-center">
-                    <li>
-                        <a href="{{ route('machines.index') }}" class="text-center btn btn-success">
-                            <span>Change Machine</span>
-                        </a>
-                    </li>
+                    @if(Auth::user()->role === 'Production')
+                        @php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->get();@endphp
+                        @foreach($machines as $machine)
+                            <li class="align-content-center">
+                                <form method="POST"
+                                      action="{{route('machines.selectMachine', ['machine'=>$machine, 'user'=>(Auth::user())])}}">
+                                    @csrf
+                                    <div class="container-lg ">
+                                        <div>
+                                            <button
+                                                onclick="return confirm('Choose production line {{$machine->name}}?')"
+                                                class=" text-center btn  {{$machine->id === 1 ? 'btn-success mr-10':''}}
+                                                {{$machine->id === 2 ? 'btn-info':''}} {{$machine->id === 3 ? 'btn-warning':''}}"
+                                                type="submit"> Enter Machine {{$machine->name}}
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </li>
+                        @endforeach
+                    @else
+                        <li>
+                            <a href="{{ route('machines.index') }}" class="text-center btn btn-success">
+                                <span>Change View</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
             <li class="nav-item dropdown user-menu">
@@ -85,15 +109,15 @@
         </section>
     </div>
 
-{{--    Removed, but code saved if we need it later--}}
-{{--    <!-- Main Footer -->--}}
-{{--    <footer class="main-footer bg-blue">--}}
-{{--        <div class="float-right d-none d-sm-block">--}}
-{{--            <b>Version</b> 3.0.5--}}
-{{--        </div>--}}
-{{--        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights--}}
-{{--        reserved.--}}
-{{--    </footer>--}}
+    {{--    Removed, but code saved if we need it later--}}
+    {{--    <!-- Main Footer -->--}}
+    {{--    <footer class="main-footer bg-blue">--}}
+    {{--        <div class="float-right d-none d-sm-block">--}}
+    {{--            <b>Version</b> 3.0.5--}}
+    {{--        </div>--}}
+    {{--        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights--}}
+    {{--        reserved.--}}
+    {{--    </footer>--}}
 </div>
 
 <script src="{{ mix('js/app.js') }}" defer></script>
