@@ -58,6 +58,55 @@ class OrderController extends Controller
     }
 
     /**
+     * Show the step One Form for creating a new product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createStepOne(Request $request)
+    {
+        $pallets = Pallet::all();
+        $order = $request->session()->get('order');
+
+        return view('orders.create-step-one',compact('order','pallets'));
+    }
+
+    /**
+     * Post Request to store step1 info in session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postCreateStepOne(Request $request)
+    {
+        $validatedData = $request->validate([
+            'order_number'=>'required',
+            'pallet_id'=>'required',
+            'machine'=>'',
+            'quantity_production'=>'required|integer|min:1',
+            'start_date'=>'nullable|date|after:today',
+            'site_location'=>'required',
+            'production_instructions'=>'',
+            'client_name' =>'required|string',
+            'client_address' =>'required|string',
+            'status'=>'string',
+        ]);
+
+        if(empty($request->session()->get('order'))){
+            $order = new Order();
+            $order->fill($validatedData);
+            $request->session()->put('order', $order);
+        }else{
+            $order = $request->session()->get('order');
+            $order->fill($validatedData);
+            $request->session()->put('order', $order);
+        }
+        $order->save();
+
+        return redirect()->route('orders.create.step.two');
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param \App\Models\Order $order

@@ -49,6 +49,53 @@ class OrderMaterialController extends Controller
     }
 
     /**
+     * Show the step One Form for creating a new product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createStepTwo(Request $request)
+    {
+        $materials = Material::all();
+        $order = $request->session()->get('order');
+        $orderMaterial = $request->session()->get('orderMaterial');
+
+        return view('orders.create-step-two',compact('order','orderMaterial','materials'));
+    }
+
+    /**
+     * Show the step One Form for creating a new product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postCreateStepTwo(Request $request)
+    {
+        $order = $request->session()->get('order');
+        $order->save();
+
+        $request->session()->forget('order');
+
+        $validatedData = $request->validate([
+            'order_id'=>'required',
+            'material_id'=>'required',
+            'total_quantity'=>'required|integer|min:0',
+        ]);
+
+        if(empty($request->session()->get('orderMaterial'))){
+            $orderMaterial = new OrderMaterial();
+            $orderMaterial->fill($validatedData);
+            $request->session()->put('orderMaterial', $orderMaterial);
+        }else{
+            $orderMaterial = $request->session()->get('orderMaterial');
+            $orderMaterial->fill($validatedData);
+            $request->session()->put('orderMaterial', $orderMaterial);
+        }
+        $orderMaterial->save();
+        $request->session()->forget('orderMaterial');
+
+
+        return redirect(route('orders.show',compact('order')));
+    }
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Order  $order

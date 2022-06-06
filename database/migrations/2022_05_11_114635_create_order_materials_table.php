@@ -26,7 +26,7 @@ class CreateOrderMaterialsTable extends Migration
                 ->on('materials')
                 ->onDelete('cascade');
             $table->unsignedInteger(('total_quantity'));
-            $table->string('test');
+            $table->string('test')->nullable();
             $table->timestamps();
         });
     }

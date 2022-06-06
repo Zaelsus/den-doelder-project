@@ -35,7 +35,7 @@ Route::resource('/machines', MachineController::class);
 //select machine
 Route::post('/machines/{machine}/{user}', [MachineController::class, 'selectMachine'])->name('machines.selectMachine');
 
-// Order
+//// Order
 Route::resource('/orders', OrderController::class);
 
 // Pallets
@@ -75,4 +75,15 @@ Route::resource('/hourlyReports', HourlyReportController::class);
 
 // Notes
 Route::resource('/notes', NoteController::class);
+
+
+//Double Form
+//Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+
+Route::get('/create-step-one', [OrderController::Class,'createStepOne'])->name('orders.create.step.one');
+Route::post('/create-step-one', [OrderController::class,'postCreateStepOne'])->name('orders.create.step.one.post');
+
+Route::get('/create-step-two', [OrderMaterialController::class,'createStepTwo'])->name('orders.create.step.two');
+Route::post('/create-step-two', [OrderMaterialController::class,'postCreateStepTwo'])->name('orders.create.step.two.post');
+
 

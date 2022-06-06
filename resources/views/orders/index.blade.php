@@ -11,7 +11,7 @@
                 <div class="column is-full">
                     @if(Auth::user()->role === 'Administrator')
                         <div class="has-text-right">
-                            <a href="{{route('orders.create')}}" class="btn btn-info btn-lg float-right">Add a new
+                            <a href="{{route('orders.create.step.one')}}" class="btn btn-info btn-lg float-right">Add a new
                                 order</a>
                         </div>
                         @foreach($orders as $order)

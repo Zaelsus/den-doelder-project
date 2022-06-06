@@ -15,9 +15,9 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form method="POST" action="{{ route('orderMaterials.store') }}">
+                <form method="POST" action="{{ route('orders.create.step.two.post') }}">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group hidden">
                         <label for="order_id">Order Number - {{$order->order_number}}</label>
                         <div>
                             <input type="text" class="form-control is-valid @error('order_id') is-invalid @enderror"
