@@ -13,13 +13,11 @@
                         <section class="section">
                             <section class="hero">
                                 <div class="hero-body">
-                                    <p class="title">
-                                        Bovendek
-                                    </p>
+                                    <h5 class="card bg-gradient-purple">Bovendek</h5>
                                 </div>
                             </section>
 
-                            <table>
+                            <table class="table table-bordered table-hover table-secondary">
                                 <tr>
                                     <th></th>
                                     <th>Condition</th>
@@ -108,13 +106,11 @@
                         <section class="section">
                             <section class="hero">
                                 <div class="hero-body">
-                                    <p class="title">
-                                        Klossen
-                                    </p>
+                                    <h5 class="card bg-gradient-purple">Klossen</h5>
                                 </div>
                             </section>
 
-                            <table>
+                            <table class="table table-bordered table-hover table-secondary">
                                 <tr>
                                     <th></th>
                                     <th>Condition</th>
@@ -189,13 +185,13 @@
                         <section class="section">
                             <section class="hero">
                                 <div class="hero-body">
-                                    <p class="title">
-                                        Onderdek
-                                    </p>
+                                    <h5 class="card bg-gradient-purple">Onderdek</h5>
+
                                 </div>
                             </section>
 
-                            <table>
+
+                            <table class="table table-bordered table-hover table-secondary">
                                 <tr>
                                     <th></th>
                                     <th>Condition</th>
@@ -301,13 +297,13 @@
                         <section class="section">
                             <section class="hero">
                                 <div class="hero-body">
-                                    <p class="title">
-                                        Overvig
-                                    </p>
+                                    <h5 class="card bg-gradient-purple">Overvig</h5>
+
                                 </div>
                             </section>
 
-                            <table>
+
+                            <table class="table table-bordered table-hover table-secondary">
                                 <tr>
                                     <th></th>
                                     <th>Condition</th>
@@ -411,7 +407,7 @@
 
                         <section class="section">
                             <label class='' for=''>Additional Notes:</label>
-                            <p>{{$initial->additionalNotes}}</p>
+                            <p class="table table-bordered table-hover table-secondary">{{$initial->additionalNotes}}</p>
                         </section>
 
                     </section>
@@ -419,26 +415,20 @@
 
 
             @elseif(Auth::user()->role === 'Administrator')
+                <div class="has-text-right">
+                    <a href="{{route('initial.edit', $initial)}}" class="btn btn-info btn-lg float-right">Edit</a>
+                </div>
                 <div class="column is-9-desktop ">
                     <section class="content" >
-
-                        <div class="control is-pulled-right">
-                            <button class="button "
-                                    onclick=window.location.href="{{route('initial.edit', $initial)}}">
-                                Edit
-                            </button>
-                        </div>
 
                         <section class="section">
                             <section class="hero">
                                 <div class="hero-body">
-                                    <p class="title">
-                                        Bovendek
-                                    </p>
+                                    <h5 class="card bg-gradient-purple">Bovendek</h5>
                                 </div>
                             </section>
 
-                            <table>
+                            <table class="table table-bordered table-hover table-secondary ">
                                 <tr>
                                     <th></th>
                                     <th>Condition</th>
@@ -527,13 +517,11 @@
                         <section class="section">
                             <section class="hero">
                                 <div class="hero-body">
-                                    <p class="title">
-                                        Klossen
-                                    </p>
+                                    <h5 class="card bg-gradient-purple">Klossen</h5>
                                 </div>
                             </section>
 
-                            <table>
+                            <table class="table table-bordered table-hover table-secondary">
                                 <tr>
                                     <th></th>
                                     <th>Condition</th>
@@ -608,13 +596,13 @@
                         <section class="section">
                             <section class="hero">
                                 <div class="hero-body">
-                                    <p class="title">
-                                        Onderdek
-                                    </p>
+                                    <h5 class="card bg-gradient-purple">Onderdek</h5>
+
                                 </div>
                             </section>
 
-                            <table>
+
+                            <table class="table table-bordered table-hover table-secondary">
                                 <tr>
                                     <th></th>
                                     <th>Condition</th>
@@ -720,13 +708,13 @@
                         <section class="section">
                             <section class="hero">
                                 <div class="hero-body">
-                                    <p class="title">
-                                        Overvig
-                                    </p>
+                                    <h5 class="card bg-gradient-purple">Overvig</h5>
+
                                 </div>
                             </section>
 
-                            <table>
+
+                            <table class="table table-bordered table-hover table-secondary">
                                 <tr>
                                     <th></th>
                                     <th>Condition</th>
@@ -830,7 +818,7 @@
 
                         <section class="section">
                             <label class='' for=''>Additional Notes:</label>
-                            <p>{{$initial->additionalNotes}}</p>
+                            <p class="table table-bordered table-hover table-secondary">{{$initial->additionalNotes}}</p>
                         </section>
 
                     </section>

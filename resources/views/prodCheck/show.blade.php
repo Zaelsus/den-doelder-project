@@ -9,28 +9,23 @@
     @if(Auth::user()->role === 'Production')
         <div class="column is-9-desktop ">
             <section class="content" >
-                <div class="control is-pulled-right">
-                    <button class="button "
-                            onclick=window.location.href="{{route('production.edit', $production)}}">
-                        Edit
-                    </button>
+                <div class="has-text-right">
+                    <a href="{{route('production.edit', $production)}}" class="btn btn-info btn-lg float-right">Edit</a>
                 </div>
 
                 {{--Bovendek--}}
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Bovendek
-                            </p>
+                            <h5 class="card bg-gradient-purple">Bovendek</h5>
                             {{--set to danger--}}
-                            <p class="subtitle">
+                            <p class="card bg-gradient-red subtitle">
                                 Controle na eerste stapel bovendekken!
                             </p>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -117,17 +112,15 @@
                     </table>
                 </section>
 
-                Klossen
+
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Klossen
-                            </p>
+                            <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -199,17 +192,14 @@
                     </table>
                 </section>
 
-                Onderdek
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Onderdek
-                            </p>
+                            <h5 class="card bg-gradient-purple">Onderdek</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -295,17 +285,14 @@
                     </table>
                 </section>
 
-                Overvig
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Overvig
-                            </p>
+                            <h5 class="card bg-gradient-purple">Overvig</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -394,7 +381,7 @@
 
                 <section class="section">
                     <label class='' for=''>Additional Notes:</label>
-                    <p>{{$production->additionalNotes}}</p>
+                    <p class="table table-bordered table-hover table-secondary">{{$production->additionalNotes}}</p>
                 </section>
 
             </section>
@@ -408,17 +395,12 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Bovendek
-                            </p>
-                            {{--set to danger--}}
-                            <p class="subtitle">
-                                Controle na eerste stapel bovendekken!
-                            </p>
+                            <h5 class="card bg-gradient-purple">Bovendek</h5>
+
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -505,17 +487,14 @@
                     </table>
                 </section>
 
-                Klossen
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Klossen
-                            </p>
+                            <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -587,17 +566,14 @@
                     </table>
                 </section>
 
-                Onderdek
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Onderdek
-                            </p>
+                            <h5 class="card bg-gradient-purple">Onderdek</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -683,17 +659,14 @@
                     </table>
                 </section>
 
-                Overvig
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Overvig
-                            </p>
+                            <h5 class="card bg-gradient-purple">Overvig</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
