@@ -50,9 +50,9 @@ class ProductLocationController extends Controller
     public function show($order)
     {
         $productLocationDetails = $this->getProductLocation($order);
-        $orderId = $productLocationDetails[0];
-        $pallet = $productLocationDetails[1];
-        $productLocation = $productLocationDetails[2];
+        $orderId = $productLocationDetails['orderId'];
+        $pallet = $productLocationDetails['pallet'];
+        $productLocation = $productLocationDetails['productLocation'];
 
         return view('productLocations.show', compact('productLocation', 'pallet', 'orderId'));
     }
@@ -66,8 +66,8 @@ class ProductLocationController extends Controller
     public function edit($order)
     {
         $productLocationDetails = $this->getProductLocation($order);
-        $orderId = $productLocationDetails[0];
-        $productLocation = $productLocationDetails[2];
+        $orderId = $productLocationDetails['orderId'];
+        $productLocation = $productLocationDetails['productLocation'];
 
         return view('productLocations.edit', compact('productLocation', 'orderId'));
     }
@@ -83,7 +83,7 @@ class ProductLocationController extends Controller
     {
 
         $productLocationDetails = $this->getProductLocation($order);
-        $location = $productLocationDetails[3];
+        $location = $productLocationDetails['location'];
 
         $location->update($this->validateLocationChange($request));
 
@@ -98,7 +98,7 @@ class ProductLocationController extends Controller
      */
     public function destroy(ProductLocation $productLocation)
     {
-
+        //
     }
 
     public function validateLocationChange(Request $request){
@@ -118,6 +118,6 @@ class ProductLocationController extends Controller
         $productLocation = ProductLocation::where('product_id', $product->id)->first();
         $location = Location::find($productLocation->location_id);
 
-        return [$orderId, $pallet, $productLocation, $location];
+        return ['orderId' => $orderId, 'pallet' => $pallet, 'productLocation' => $productLocation, 'location' => $location];
     }
 }
