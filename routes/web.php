@@ -63,3 +63,5 @@ Route::resource('/hourlyReports', HourlyReportController::class);
 
 // Notes
 Route::resource('/notes', NoteController::class);
+Route::get('/notes/stoppage/{order}', [NoteController::class, 'stoppage'])->name('notes.stoppage');
+Route::get('notes/fixStoppage/{note}', [NoteController::class, 'fixStoppage'])->name('notes.fixStoppage');

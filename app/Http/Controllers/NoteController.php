@@ -13,7 +13,7 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($filter = '', $machine = '')
+    public function index()
     {
         if(Order::isInProduction() ==='In Production'){
             $order = Order::where('status','In Production')->first();
@@ -55,7 +55,9 @@ class NoteController extends Controller
             $order = Order::where('status','Paused')->first();
         }
 
-        $note = Note::create($this->validateNote($request, $order));
+        $order_id = $order->id;
+
+        $note = Note::create($this->validateNote($request, $order_id));
 
 //      redirecting to show the note
         return redirect(route('notes.index', $note));
@@ -80,8 +82,8 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        $orders = Order::all();
-        return view('notes.edit', compact('orders', 'note'));
+//        $orders = Order::all();
+//        return view('notes.edit', compact('orders', 'note'));
     }
 
     /**
@@ -93,7 +95,8 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        $note->update($this->validateNote($request));
+        $order_id = $note->order_id;
+        $note->update($this->validateNote($request, $order_id));
 
         return redirect('/notes');
     }
@@ -111,19 +114,42 @@ class NoteController extends Controller
     }
 
     /**
+     * Returns the view of adding a new note for a stoppage
+     *
+     * @param Order $order
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function stoppage(Order $order) {
+        return view('notes.stoppage', compact('order'));
+    }
+
+    /**
+     * Returns the view of adding a fix to a stoppage note
+     *
+     * @param Order $order
+     *
+     */
+    public function fixStoppage(Note $note) {
+        $order_id = $note->order->order_number;
+        return view('notes.fixStoppage', compact('order_id', 'note'));
+    }
+
+    /**
      * this function validates the attributes of a note
      * @param Request $request
      * @return array
      */
-    public function validateNote(Request $request, $order): array
+    public function validateNote(Request $request, $order_id): array
     {
+
         $validatedAttributes = $request->validate([
             'title'=>'required',
             'content'=>'required',
-            'label'=>'required',
-            'priority'=>'required'
+            'label'=>'',
+            'priority'=>'',
+            'fix'=>''
         ]);
-        $validatedAttributes['order_id'] = $order->id;
+        $validatedAttributes['order_id'] = $order_id;
 
         return $validatedAttributes;
     }

@@ -98,7 +98,7 @@ class OrderController extends Controller
     public static function pauseProduction(Order $order)
     {
         $order->update(['status' => 'Paused']);
-        return redirect(route('orders.show', $order));
+        return redirect(route('notes.stoppage', $order));
     }
 
     /**

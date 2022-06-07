@@ -22,6 +22,7 @@
                         <th scope="col">Labels</th>
                         <th scope="col">Priority</th>
                         <th scope="col">Created At</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +38,7 @@
                             <td style="width: 30%">
                                 <details>
                                     <summary>{{ substr($note->content, 0, 40) }}</summary>
-                                    <p>{{ substr($note->content, 40) }}</p>
+                                    <p>{{ substr($note->content, 40) }} <b>Fix: </b>{{ $note->fix }}</p>
                                 </details>
                             </td>
                             <td>
@@ -45,8 +46,10 @@
                                       class="badge badge-danger"
                                       @elseif ($note->label==='Fix')
                                       class="badge badge-success"
-                                      @else
+                                      @elseif ($note->label === 'Other')
                                       class="badge badge-info"
+                                      @elseif ($note->label === 'stoppage')
+                                      class="badge badge-danger"
                                 @endif >{{$note->label}}</span>
                             </td>
                             <td>
@@ -54,12 +57,17 @@
                                        class="badge bg-yellow"
                                        @elseif ($note->priority==='medium')
                                        class="badge bg-orange"
-                                       @else
+                                       @elseif ($note->priority === 'high')
                                        class="badge bg-red"
                                 @endif >{{ $note->priority }}
                                 </span>
                             </td>
                             <td>{{ $note->created_at }}</td>
+                            <td @if ($note->label === 'stoppage') style="width: 10%" @endif>
+                                @if ($note->label === 'stoppage')
+                                    <button class="btn btn-lg bg-gradient-olive opacity-70" onclick=window.location.href="{{ route('notes.fixStoppage', $note)}}">Log fix</button>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -80,58 +88,6 @@
         </div>
     </div>
     <script>
-        function sortTableNumber(n) {
-            console.log("table is sorting");
-            let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("myTable");
-            switching = true;
-            dir = "asc";
-            /*Make a loop that will continue until
-            no switching has been done:*/
-            while (switching) {
-                //start by saying: no switching is done:
-                switching = false;
-                rows = table.rows;
-                /*Loop through all table rows (except the
-                first, which contains table headers):*/
-                for (i = 1; i < (rows.length - 1); i++) {
-                    //start by saying there should be no switching:
-                    shouldSwitch = false;
-                    /*Get the two elements you want to compare,
-                    one from current row and one from the next:*/
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
-                    /*check if the two rows should switch place,
-                    based on the direction, asc or desc:*/
-                    if (dir === "asc") {
-                        if ((Number(x.innerHTML) > Number(y.innerHTML))) {
-                            //if so, mark as a switch and break the loop:
-                            shouldSwitch= true;
-                            break;
-                        }
-                    } else {
-                        if ((Number(x.innerHTML) < Number(y.innerHTML))) {
-                            //if so, mark as a switch and break the loop:
-                            shouldSwitch= true;
-                            break;
-                        }
-                    }
-                }
-                if (shouldSwitch) {
-                    /*If a switch has been marked, make the switch
-                    and mark that a switch has been done:*/
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchcount++;
-                } else {
-                    if(switchcount === 0 && dir === "asc") {
-                        dir = "desc";
-                        switching = true;
-                    }
-                }
-            }
-        }
-
         function changeButton(order_number, machine) {
             overviewButton = document.getElementById("overviewButton")
             if (overviewButton.innerText === "Notes for current order") {

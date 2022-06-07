@@ -33,14 +33,13 @@
                         @enderror
                     </div>
                     <div>
-                        <label class="form-check-label requirednote">Labels</label><br>
-                        <i class="required">Please select the label applicable</i>
+                        <label class="form-check-label"><b>Labels</b></label><br>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="label" value="Error"
-                                       onclick="myFunction()" required>
+                                       onclick="myFunction()">
                                 <span class="form-check-label badge badge-danger" style="color: white">Error</span>
                             </div>
                             <div class="form-check">
@@ -57,7 +56,7 @@
 
                         <div class="col-md-4" id="text" style="display:none">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="priority" value="low" required>Low priority
+                                <input class="form-check-input" type="radio" name="priority" value="low">Low priority
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="priority" value="medium">Medium priority
