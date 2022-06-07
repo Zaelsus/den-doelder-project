@@ -15,7 +15,7 @@
                 <div class="column is-full">
                     <div class="has-text-right">
                         <button>
-                            <a href="{{route('hourlyReports.create')}}">Add a new log</a>
+                            <a href="{{route('hourlyReports.create', $orderId )}}">Add a new log</a>
                         </button>
                     </div>
                     <div class="content">

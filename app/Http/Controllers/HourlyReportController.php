@@ -15,8 +15,7 @@ class HourlyReportController extends Controller
      */
     public function index()
     {
-        $hourlyReports = HourlyReport::get();
-        return view('hourlyReports.index', compact('hourlyReports'));
+        return view('hourlyReports.index');
     }
 
     /**
@@ -24,10 +23,12 @@ class HourlyReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($orderId)
     {
-//        $orders = Order::all();
-        return view('hourlyReports.create');
+        // TOFIX Need to get a parameter passed in here somehow,
+        // possibly need to create a new route that redirects to here
+        $hourlyReport = HourllyReport::where('order_id', $orderId);
+        return view('hourlyReports.create', compact('hourlyReport', 'orderId'));
     }
 
     /**
@@ -36,11 +37,11 @@ class HourlyReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $hourlyReport)
     {
         HourlyReport::create($this->validateHourlyReport($request));
 
-        return redirect(route('hourlyReports.index'));
+        return redirect(route('hourlyReports.list'), ['order' => $hourlyReport->order_id]);
     }
 
     /**
@@ -76,7 +77,7 @@ class HourlyReportController extends Controller
     {
         $hourlyReport->update($this->validateHourlyReport($request));
 
-        return redirect(route('hourlyReports.index'));
+        return redirect(route('hourlyReports.list', ['order' => $hourlyReport->order_id]));
     }
 
     /**
@@ -98,8 +99,7 @@ class HourlyReportController extends Controller
     public function validateHourlyReport(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            // 'pallet_name'=>'required',
-//            'order_id'=>'required|integer',
+            'order_id'=>'integer',
             'def_id'=>'required',
             'extra_info'=>'required',
             'action' =>'string|nullable',
@@ -108,5 +108,24 @@ class HourlyReportController extends Controller
         ]);
 
         return $validatedAtributes;
+    }
+
+    public function list($details)
+    {
+        $reports = $this->getReportDetails($details);
+        $order = $reports['order'];
+        $orderId = $reports['orderId'];
+        $hourlyReports = $reports['hourlyReports'];
+
+        return view('hourlyReports.index', ['hourlyReports' => $hourlyReports, 'orderId' => $orderId]);
+    }
+
+    public function getReportDetails($details)
+    {
+        $order = Order::find($details);
+        $orderId = $order->id;
+        $hourlyReports = HourlyReport::where('order_id', $orderId)->get();
+
+        return ['order' => $order, 'orderId' => $orderId, 'hourlyReports' => $hourlyReports];
     }
 }

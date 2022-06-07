@@ -97,7 +97,7 @@
                             <p> Add Production Check</p>
                         </a>
                     @endif
-                    <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
                         <p>Hourly Check</p>
                     </a>
@@ -180,7 +180,7 @@
                 <i class="nav-icon fas fa-tools"></i>
                 <p>Production Check</p>
             </a>
-            <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
+            <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
                 <i class="nav-icon fas fa-check"></i>
                 <p>Hourly Check</p>
             </a>

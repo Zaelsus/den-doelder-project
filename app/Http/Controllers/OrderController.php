@@ -27,7 +27,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //looking about adding another order by accoridng to status as well as scheduled production
+        //looking about adding another order by according to status as well as scheduled production
         $orders = Order::orderBy('machine', 'desc')->get();
         $previousMachine=null;
         return view('orders.index', compact('orders','previousMachine'));

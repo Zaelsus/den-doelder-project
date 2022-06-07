@@ -23,7 +23,7 @@
 {{--                                            <label class="label">Pallet Name</label>--}}
 {{--                                            <div class="control">--}}
 {{--                                                <input name="pallet_name" class="input @error('pallet_name') is-danger @enderror"--}}
-{{--                                                       type="text" value="{{ $hourlyReport->pallet_name }}" required>--}}
+{{--                                                       type="text" value="{{ $hourlyReports->pallet_name }}" required>--}}
 {{--                                            </div>--}}
 {{--                                            @error('pallet_name')--}}
 {{--                                            <p class="help is-danger">{{ $message }}</p>--}}
@@ -34,7 +34,7 @@
 {{--                                            <label class="label">Order ID</label>--}}
 {{--                                            <div class="control">--}}
 {{--                                                <input name="order_id" class="input @error('order_id') is-danger @enderror"--}}
-{{--                                                       type="input" placeholder="number of order here..." value="{{ $hourlyReport->order_id }}" required>--}}
+{{--                                                       type="input" placeholder="number of order here..." value="{{ $hourlyReports->order_id }}" required>--}}
 {{--                                            </div>--}}
 {{--                                            @error('order_id')--}}
 {{--                                            <p class="help is-danger">{{ $message }}</p>--}}
