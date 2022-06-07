@@ -15,15 +15,17 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form method="POST" action="{{ route('orders.store') }}">
+               <h4> <span class="badge badge-warning float-right"><i class="fa fa-exclamation-circle" style="font-size:20px;color:white"></i> * Required</span>  </h4>
+                <form class="was-validated" method="POST" action="{{ route('orders.store') }}">
                     @csrf
-                    <div class="form-group">
-                        <label for="order_number">Order Number</label>
+                    <div class="mb-3">
+                        <label class="required" for="order_number">Order Number</label>
                         <div>
-                        <input type="text" class="form-control is-valid @error('order_number') is-invalid @enderror"
+                        <input type="text" class="form-control is-invalid "
                                name="order_number"
-                               placeholder="Number of Order" value="{{old('order_number')}}">
+                               placeholder="Number of Order e.g Order-4891" value="{{old('order_number')}}" required>
                         </div>
+
                             @error('order_number')
                         <p class="text-red">{{ $message }}</p>
                         @enderror
@@ -31,11 +33,12 @@
                     <h5 class="card create-order-card-titles text-center">Client and Order Details</h5>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="client_name">Client Name</label>
+                            <label class="required" for="client_name">Client Name</label>
                             <div>
-                            <input type="text" class="form-control @error('client_name') is-invalid @enderror"
+                            <input type="text" class="form-control is-invalid"
                                    name="client_name"
-                                   placeholder="client name" value="{{old('client_name')}}">
+                                   placeholder="client name" value="{{old('client_name')}}"
+                            required>
                             </div>
                                 @error('client_name')
                             <p class="text-red">{{ $message }}</p>
@@ -43,11 +46,11 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="client_address">Client Address</label>
+                            <label class="required" for="client_address">Client Address</label>
                             <div>
-                            <input type="text" class="form-control @error('client_address') is-invalid @enderror"
+                            <input type="text" class="form-control is-invalid @error('client_address') is-invalid @enderror"
                                    name="client_address"
-                                   placeholder="client address" value="{{old('client_address')}}">
+                                   placeholder="client address" value="{{old('client_address')}}" required>
                             </div>
                             @error('client_address')
                             <p class="text-red">{{ $message }}</p>
@@ -57,14 +60,18 @@
 
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="pallet_id">Pallet Required</label>
+                            <label class="required" for="pallet_id">Pallet Required</label>
                             <div>
-                            <select name="pallet_id" class="custom-select @error('pallet_id') is-invalid @enderror">
-                                <option value="">choose a pallet</option>
-                                @foreach($pallets as $pallet)
-                                    <option
-                                        value={{$pallet->id}}>{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
-                                @endforeach
+                            <select name="pallet_id" class="custom-select @error('pallet_id') is-invalid @enderror" required>
+                                <option value="">Choose a pallet</option>
+                                    @foreach($pallets as $pallet)
+                                        @if (old('pallet_id') == $pallet->id)
+                                            <option value="{{ $pallet->id }}" selected>{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
+                                        @else
+                                            <option value="{{ $pallet->id }}">{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
+                                        @endif
+                                    @endforeach
+
                             </select>
                             </div>
                             @error('pallet_id')
@@ -73,12 +80,12 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="quantity_production">Quantity for production</label>
+                            <label class="required" for="quantity_production">Quantity for production</label>
                            <div>
-                            <input type="number"
-                                   class="form-control @error('quantity_production') is-invalid @enderror"
+                            <input type="number" min="1"
+                                   class="form-control is-invalid @error('quantity_production') is-invalid @enderror"
                                   name="quantity_production"
-                                   placeholder="quantity for production" value="{{old('quantity_production')}}">
+                                   placeholder="quantity for production e.g 100" value="{{old('quantity_production')}}" required>
                            </div>
                                @error('quantity_production')
                             <p class="text-red">{{ $message }}</p>
@@ -88,14 +95,16 @@
                     <h5 class="card create-order-card-titles text-center">Production Details</h5>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="site_location">Site of Production</label>
+                            <label class="required" for="site_location">Select site of Production</label>
                             <div>
-                            <select name="site_location"
-                                    class="custom-select  @error('site_location') is-invalid @enderror">
-                                <option value="">choose a site</option>
-                                <option value='Axel'>Axel</option>
-                                <option value='Zelzete'>Zelzete</option>
-                            </select>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline1" name="site_location" class="custom-control-input" value="Axel" {{ old('site_location')==="Axel" ? 'checked='.'"'.'checked'.'"' : '' }} required>
+                                    <label class="custom-control-label" for="customRadioInline1">Axel</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline2" name="site_location" class="custom-control-input" value="Zelzate" {{ old('site_location')==="Zelzate" ? 'checked='.'"'.'checked'.'"' : '' }}required>
+                                    <label class="custom-control-label" for="customRadioInline2">Zelzate</label>
+                                </div>
                             </div>
                             @error('site_location')
                             <p class="text-red">{{ $message }}</p>
@@ -106,10 +115,10 @@
                             <label for="machine">Production machine</label>
                             <div>
                                 <select name="machine" class="custom-select @error('machine') is-invalid @enderror">
-                                    <option value="">choose a production machine</option>
-                                    <option value='Cape 1'>Cape 1</option>
-                                    <option value='Cape 2'>Cape 2</option>
-                                    <option value='Cape 5'>Cape 5</option>
+                                    <option value="">Choose a production machine</option>
+                                    <option value='Cape 1'@if(old('machine') === 'Cape 1') {{'selected'}}@endif>Cape 1</option>
+                                    <option value='Cape 2'@if(old('machine') === 'Cape 2') {{'selected'}}@endif>Cape 2</option>
+                                    <option value='Cape 5'@if(old('machine') === 'Cape 5') {{'selected'}}@endif>Cape 5</option>
                                 </select>
                             </div>
                             @error('machine')
@@ -121,7 +130,7 @@
                             <label for="start_date">Schedule Production Date</label>
                             <div class="control">
                                 <input name="start_date" class="form-control @error('start_date') is-invalid @enderror"
-                                       type="date" placeholder="date for production" value="{{old('start_date')}}">
+                                       type="date" placeholder="Date for production" value="{{old('start_date')}}">
                             </div>
                             @error('start_date')
                             <p class="text-red">{{ $message }}</p>
@@ -135,14 +144,14 @@
                         <textarea name="production_instructions"
                                   class="form-control @error('production_instructions') is-invalid @enderror"
                                   type="text"
-                                  placeholder="Fill in if there are any additional instructions">{{old('order_id')}} </textarea>
+                                  placeholder="Fill in if there are any additional instructions">{{old('production_instructions')}} </textarea>
                        </div>
                            @error('production_instructions')
                         <p class="text-red">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <button type="submit" class="btn btn-info btn-lg btn-lg btn-block">Submit</button>
+                    <button type="submit" class="btn btn-info btn-lg btn-lg btn-block">Create Order</button>
                 </form>
             </div>
             <!-- /.card-body -->

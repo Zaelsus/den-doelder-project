@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Machine;
 use App\Models\Order;
 use App\Models\Pallet;
 use Illuminate\Http\Request;
@@ -27,9 +28,9 @@ class OrderController extends Controller
     public function index()
     {
         //looking about adding another order by accoridng to status as well as scheduled production
-        $orders = Order::orderBy('start_date', 'desc')->paginate(10);
-
-        return view('orders.index', compact('orders'));
+        $orders = Order::orderBy('machine', 'desc')->get();
+        $previousMachine=null;
+        return view('orders.index', compact('orders','previousMachine'));
     }
 
     /**
@@ -64,7 +65,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $order->addProduced();
+       // $order->addProduced();
         return view('orders.show', compact('order'));
 
     }
@@ -74,22 +75,25 @@ class OrderController extends Controller
      */
     public static function startProduction(Order $order)
     {
-        if ($order->status === 'Pending') {
-            $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
+        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
+            if ($order->status === 'Production Pending') {
+                $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
+            } else {
+                $order->update(['status' => 'In Production']);
+            }
+            return redirect(route('orders.show', $order));
         } else {
-            $order->update(['status' => 'In Production']);
+            return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
         }
-        return redirect(route('orders.show', $order));
-
     }
 
     /**
      * changes the status of the current order to done
      */
-    public static function stopProduction(Order $order)
+    public static function stopProduction(Order $order ,Machine $machine)
     {
         $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
-        return redirect(route('orders.index'));
+        return redirect(route('machines.show',compact('machine')));
     }
 
     /**
@@ -114,35 +118,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for editing only pallets
-     *
-     * @param \App\Models\Order $order
-     * @return \Illuminate\Http\Response
-     */
-    public function editquantity(Order $order)
-    {
-//        dd($order);
-
-        return view('orders.editquantity', compact('order'));
-    }
-
-    /**
-     * Update the pallet details in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Order $order
-     * @return \Illuminate\Http\Response
-     */
-    public function updatequantity(Request $request, Order $order)
-    {
-        $validatedAtributes = $request->validate([
-            'add_quantity' => 'required|integer'
-        ]);
-        $order->update($validatedAtributes);
-        return redirect(route('orders.show', $order));
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -152,7 +127,6 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $order->update($this->validateOrder($request));
-
         return redirect(route('orders.show', $order));
     }
 
@@ -169,7 +143,7 @@ class OrderController extends Controller
     }
 
     /**
-     * this function validates the attributes of Retro
+     * this function validates the attributes of Order
      * @param Request $request
      * @return array
      */
@@ -178,23 +152,77 @@ class OrderController extends Controller
         $validatedAtributes = $request->validate([
             'order_number'=>'required',
             'pallet_id'=>'required',
-            'machine'=>'required',
+            'machine'=>'',
             'quantity_production'=>'required|integer|min:1',
-            'start_date'=>'date',
+            'start_date'=>'nullable|date|after:today',
             'site_location'=>'required',
             'production_instructions'=>'',
             'client_name' =>'required|string',
             'client_address' =>'required|string',
             'status'=>'string',
-
-//            'pallet_type'=>'required',
-//            'quantity'=>'required|integer|min:0',
-//
-//            'material'=>'required',
-//            'material_quantity'=>'required|integer',
         ]);
 
         return $validatedAtributes;
     }
+
+
+
+
+    /**
+     * changes the status of the current order to Canceled
+     */
+    public static function cancelOrder(Order $order)
+    {
+        $order->update(['status' => 'Canceled']);
+        return redirect(route('orders.show', $order));
+    }
+
+
+    /**
+     * changes the "selected" status of the current order to selected
+     */
+    public static function selectOrder(Order $order)
+    {
+        $order->update(['selected' => 1]);
+        return redirect(route('orders.show', $order));
+    }
+
+    /**
+     * changes the "selected" status of the current order to unselected
+     */
+    public static function unselectOrder(Order $order)
+    {
+        $order->update(['selected' => 0]);
+        return redirect(route('orders.index'));
+    }
+
+//        /**
+//     * Show the form for editing only pallets
+//     *
+//     * @param \App\Models\Order $order
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function editquantity(Order $order)
+//    {
+//        return view('orders.editquantity', compact('order'));
+//    }
+//
+//    /**
+//     * Update the pallet details in storage.
+//     *
+//     * @param \Illuminate\Http\Request $request
+//     * @param \App\Models\Order $order
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function addquantity(Request $request, Order $order)
+//    {
+//        $validatedAtributes = $request->validate([
+//            'add_quantity' => 'required|integer'
+//        ]);
+//        $order->update($validatedAtributes);
+//        return redirect(route('orders.show', $order));
+//    }
+//
+
 
 }

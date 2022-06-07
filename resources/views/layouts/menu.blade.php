@@ -1,25 +1,32 @@
-{{--checking role if production worker--}}
-@if(Auth::user()->role === 'Production')
-    {{--    Production Status (either 1 is in production or Paused --}}
-    @if(\App\Models\Order::isInProduction() !== 'no production')
-        <div class="info-box shade">
-            <div class="info-box-content">
-                <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
-                <h4>
+@if(((Auth::user()->role === 'Production') && (\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production'))
+|| ((Auth::user()->role === 'Administrator') && ($order !== null)))
+    <div class="info-box shade">
+        <div class="info-box-content">
+            <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
+            <h4>
                     <span class="align-content-lg-stretch d-flex justify-content-center badge
-                @if($order->status === 'Pending')
+                @if($order->status === 'Production Pending')
                         badge-secondary
                 @elseif($order->status === 'In Production')
                         badge-info
-                @elseif($order->status === 'Paused')
+                @elseif(($order->status === 'Paused') || ($order->status === 'Admin Hold'))
                         badge-warning
                 @elseif($order->status === 'Done')
                         badge-success
+                @elseif($order->status === 'Quality Check Pending')
+                        bg-lightblue
+                @elseif($order->status === 'Canceled')
+                        badge-dark
                 @endif
                         ">{{$order->status}}</span>
-                </h4>
-            </div>
+            </h4>
         </div>
+    </div>
+@endif
+{{--checking role if production worker--}}
+@if(Auth::user()->role === 'Production')
+    {{--    Production Status (either 1 is in production or Paused --}}
+    @if(\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production')
         <li class="nav-item">
             <div class="card bg-gray-dark" style="margin-bottom: .2rem">
                 <a href="#" class="nav-link bg-black">
@@ -52,7 +59,8 @@
                             </form>
                         </li>
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.stopProduction', $order)}}">
+                            <form method="POST"
+                                  action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
                                 @csrf
                                 <button onclick="return confirm('Is this order completed?')"
                                         class="far fa-stop-circle btn btn-danger btn-block "
@@ -73,14 +81,22 @@
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Initial Check</p>
                     </a>
-                    <a href="{{route('pallets.show', $order->pallet)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('pallets.show', $order->pallet)}}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-draw-polygon"></i>
                         <p>Drawings</p>
                     </a>
+                @if(\App\Models\Order::prodCheckExists($order))
                     <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>Production Check</p>
                     </a>
+                    @else
+                        <a href="{{route('production.create')}}" class="nav-link active bg-gray-dark btn text-left">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p> Add Production Check</p>
+                        </a>
+                    @endif
                     <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
                         <p>Hourly Check</p>
@@ -94,10 +110,10 @@
                     <p>Add Notes</p>
                 </a>
                 @if($order->status === 'In Production')
-                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">
-                        <i class="nav-icon fas fa-clipboard-check"></i>
-                        <p>Log Pallets</p>
-                    </a>
+                    {{--                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">--}}
+                    {{--                        <i class="nav-icon fas fa-clipboard-check"></i>--}}
+                    {{--                        <p>Log Pallets</p>--}}
+                    {{--                    </a>--}}
                     <a href="#" class="nav-link active bg-white btn text-left disabled">
                         <i class="nav-icon fas fa-compass"></i>
                         <p>Location</p>
@@ -105,8 +121,21 @@
                 @endif
             </div>
         </li>
-        {{--    No Production (either everything is Done or Pending --}}
+        {{--    No Production (no In Production Or Pause) --}}
     @else
+        <li class="nav-item">
+            <div class="nav-item">
+                <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+                   class="nav-link active btn bg-gray-dark">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <p>Orders</p>
+                </a>
+            </div>
+        </li>
+    @endif
+    {{--    checks if the role is of administrator--}}
+@elseif(Auth::user()->role === 'Administrator')
+    @if($order === null)
         <li class="nav-item">
             <div class="nav-item">
                 <a href="{{ route('orders.index') }}" class="nav-link active btn bg-gray-dark">
@@ -115,22 +144,49 @@
                 </a>
             </div>
         </li>
+    @else
+        <li class="nav-item">
+            <div class="nav-item">
+                <form method="POST" action="{{route('orders.unselectOrder', $order)}}">
+                    @csrf
+                    <button class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                            type="submit"> Back to overview
+                    </button>
+                </form>
+            </div>
+        </li>
+
+        <div class="nav-item">
+            <a href="{{ route('orders.show', $order) }}" class="nav-link active btn text-left bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Order Details</p>
+            </a>
+            @if(\App\Models\Order::initialCheckExists($order))
+                <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <i class="nav-icon fas fa-clipboard-check"></i>
+                    <p> Initial Check</p>
+                </a>
+            @else
+                <a href="{{route('initial.create')}}" class="nav-link active bg-gray-dark btn text-left">
+                    <i class="nav-icon fas fa-clipboard-check"></i>
+                    <p> Add Initial Check</p>
+                </a>
+            @endif
+            <a href="{{route('pallets.show', $order->pallet)}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-draw-polygon"></i>
+                <p>Drawings</p>
+            </a>
+            <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-tools"></i>
+                <p>Production Check</p>
+            </a>
+            <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-check"></i>
+                <p>Hourly Check</p>
+            </a>
+        </div>
 
     @endif
-{{--    checks if the role is of administrator--}}
-@elseif(Auth::user()->role === 'Administrator')
-    <li class="nav-item">
-        <div class="nav-item">
-            <a href="{{ route('orders.index') }}" class="nav-link active btn bg-gray-dark">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>Orders</p>
-            </a>
-{{--            <a href="#" class="nav-link active bg-white btn text-left disabled">--}}
-{{--                <i class="nav-icon fas fa-clipboard-check"></i>--}}
-{{--                <p>Initial Check</p>--}}
-{{--            </a>--}}
-        </div>
-    </li>
-@endif
 
+@endif
 
