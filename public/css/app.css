@@ -43174,6 +43174,21 @@ a.text-muted:hover {
     color: #17a2b8;
 }
 
+/*Notes form*/
+.requirednote:after {
+    content:" *";
+    font-size:20px;
+    color: red;
+}
+
+.opacity-70 {
+    opacity: 0.7;
+}
+
+.required {
+    font-size: 90%;
+    color: #dc3545;
+}
 
 input:required {
     border: 1px solid #ffc107;
