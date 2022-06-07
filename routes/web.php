@@ -78,8 +78,6 @@ Route::resource('/notes', NoteController::class);
 
 
 //Double Form
-//Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
-
 Route::get('/create-step-one', [OrderController::Class,'createStepOne'])->name('orders.create.step.one');
 Route::post('/create-step-one', [OrderController::class,'postCreateStepOne'])->name('orders.create.step.one.post');
 

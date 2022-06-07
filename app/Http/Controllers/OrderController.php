@@ -40,8 +40,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $pallets = Pallet::all();
-        return view('orders.create',compact('pallets'));
+      //
     }
 
     /**
@@ -52,9 +51,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($this->validateOrder($request));
-        // redirecting to show a page
-        return redirect(route('orders.show', compact('order')));
+      //
     }
 
     /**
@@ -78,18 +75,7 @@ class OrderController extends Controller
      */
     public function postCreateStepOne(Request $request)
     {
-        $validatedData = $request->validate([
-            'order_number'=>'required',
-            'pallet_id'=>'required',
-            'machine'=>'',
-            'quantity_production'=>'required|integer|min:1',
-            'start_date'=>'nullable|date|after:today',
-            'site_location'=>'required',
-            'production_instructions'=>'',
-            'client_name' =>'required|string',
-            'client_address' =>'required|string',
-            'status'=>'string',
-        ]);
+        $validatedData = $this->validateOrder($request);
 
         if(empty($request->session()->get('order'))){
             $order = new Order();
@@ -114,7 +100,6 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-       // $order->addProduced();
         return view('orders.show', compact('order'));
     }
 
