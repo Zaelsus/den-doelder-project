@@ -77,21 +77,22 @@
                     <p>Order Details</p>
                 </a>
                 @if($order->status === 'In Production')
-                    <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('initial.show', $order->id)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-clipboard-check"></i>
-                        <p>Initial Check</p>
+                        <p> Initial Check</p>
                     </a>
                     <a href="{{route('pallets.show', $order->pallet)}}"
                        class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-draw-polygon"></i>
                         <p>Drawings</p>
                     </a>
-                    @if(\App\Models\Order::prodCheckExists($order))
-                        <a href="{{route('production.show', $order)}}"
-                           class="nav-link active bg-gray-dark btn text-left">
-                            <i class="nav-icon fas fa-tools"></i>
-                            <p>Production Check</p>
-                        </a>
+
+                @if(\App\Models\Order::prodCheckExists($order))
+                    <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-tools"></i>
+                        <p>Production Check</p>
+                    </a>
+
                     @else
                         <a href="{{route('production.create')}}" class="nav-link active bg-gray-dark btn text-left">
                             <i class="nav-icon fas fa-tools"></i>
@@ -111,11 +112,11 @@
                     <p>Notes</p>
                 </a>
                 @if($order->status === 'In Production')
-                    {{--                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">--}}
-                    {{--                        <i class="nav-icon fas fa-clipboard-check"></i>--}}
-                    {{--                        <p>Log Pallets</p>--}}
-                    {{--                    </a>--}}
-                    <a href="{{route('productLocations.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-clipboard-check"></i>
+                        <p>Log Pallets</p>
+                    </a>
+                    <a href="#" class="nav-link active bg-white btn text-left disabled">
                         <i class="nav-icon fas fa-compass"></i>
                         <p>Location</p>
                     </a>
@@ -148,13 +149,6 @@
     @else
         <li class="nav-item">
             <div class="nav-item">
-                {{--                <form method="POST" action="{{route('orders.unselectOrder', $order)}}">--}}
-                {{--                    @csrf--}}
-                {{--                    <button class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"--}}
-                {{--                            type="submit"><span class="brand-text"> Back to Overview</span>--}}
-                {{--                    </button>--}}
-                {{--                </form>--}}
-
                 <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
                       class="nav-link active btn text-left bg-success">
                     @csrf
@@ -165,13 +159,12 @@
                     </button>
                 </form>
 
-
-                <a href="{{ route('orders.show', $order) }}" class="nav-link active btn text-left bg-gray-dark">
+                <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
                     <i class="nav-icon fas fa-clipboard-list"></i>
                     <p>Order Details</p>
                 </a>
                 @if(\App\Models\Order::initialCheckExists($order))
-                    <a href="{{route('initial.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('initial.show', $order->id)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p> Initial Check</p>
                     </a>
@@ -185,10 +178,12 @@
                     <i class="nav-icon fas fa-draw-polygon"></i>
                     <p>Drawings</p>
                 </a>
-                <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
-                    <i class="nav-icon fas fa-tools"></i>
-                    <p>Production Check</p>
-                </a>
+                @if($order->production != null)
+            <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-tools"></i>
+                <p>Production Check</p>
+            </a>
+            @endif
                 <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-check"></i>
                     <p>Hourly Check</p>

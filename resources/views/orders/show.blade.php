@@ -92,6 +92,10 @@
                     <th> Quantity to Produce -</th>
                     <td> {{$order->quantity_production}}</td>
                 </tr>
+                <tr>
+                    <td> Quantity Produced-</td>
+                    <td> {{$order->quantity_produced}}</td>
+                </tr>
                 </tbody>
             </table>
             <h6 class="card bg-gray">Materials:</h6>
