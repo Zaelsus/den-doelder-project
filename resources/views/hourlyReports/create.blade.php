@@ -22,6 +22,7 @@
                 <form class="was-validated" method="POST" action="{{ route('hourlyReports.store') }}">
                     @csrf
                     <div class="form-row">
+                        <input name="order_id" value="{{$order->id}}" hidden>
                         <div class="col-md-6 mb-3" style="width:100%;">
                             <label class="required" for="def_id">Def #</label>
                             <div>
@@ -149,7 +150,7 @@
                         <br>
                         <div class="float-left">
                             <button type="reset" class="btn btn-warning btn-lg">Reset</button>
-                            <a type="button" href="{{route('hourlyReports.list', $orderId)}}"
+                            <a type="button" href="{{route('hourlyReports.list', $order)}}"
                                class="btn btn-light btn-lg">Cancel</a>
                         </div>
                     </div>

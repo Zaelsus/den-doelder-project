@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    Hourly Check-up
+    Hourly Check
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="columns">
                 <div class="column is-full">
                     <div class="has-text-right">
-                            <a href="{{route('hourlyReports.add', $orderId )}}" class="btn btn-info btn-lg float-right">Add a new log</a>
+                            <a href="{{route('hourlyReports.add', $order->id )}}" class="btn btn-info btn-lg float-right">Add a new log</a>
                     </div>
                     <div class="content">
                         <table class="table table-bordered table-hover table-secondary">

@@ -15,7 +15,9 @@ class HourlyReportController extends Controller
      */
     public function index()
     {
-        return view('hourlyReports.index');
+        $order = Order::isInProduction();
+        $hourlyReport = $order->hourlyReport;
+        return view('hourlyReports.index', compact('order', 'hourlyReport'));
     }
 
     /**
@@ -40,7 +42,12 @@ class HourlyReportController extends Controller
         // Order's ID through so we can go back to the list page
         HourlyReport::create($this->validateHourlyReport($request));
 
-        return redirect(route('hourlyReports.list'), ['order' => $request->id]);
+        $order = Order::find($request->order_id);
+        $hourlyReports = $order->hourlyReports;
+
+//        return redirect(route('hourlyReports.index'), compact('order') );
+        return view('hourlyReports.index', compact('order', 'hourlyReports'));
+
     }
 
     /**
@@ -116,13 +123,16 @@ class HourlyReportController extends Controller
      * @param $details - the order's slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function list($details)
+    public function list(Order $order)
     {
-        $reports = $this->getReportDetails($details);
-        $orderId = $reports['orderId'];
-        $hourlyReports = $reports['hourlyReports'];
+//        $reports = $this->getReportDetails($order)
+//
+//        $orderId = $reports['orderId'];
+//        $hourlyReports = $reports['hourlyReports'];
 
-        return view('hourlyReports.index', ['hourlyReports' => $hourlyReports, 'orderId' => $orderId]);
+        $hourlyReports = $order->hourlyReports;
+
+        return view('hourlyReports.index', compact('order', 'hourlyReports'));
     }
 
     /**
@@ -131,14 +141,11 @@ class HourlyReportController extends Controller
      * @param $details - the order's slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function add($details)
+    public function add(Order $order)
     {
-        $reports = $this->getReportDetails($details);
-        $order = $reports['order'];
-        $orderId = $reports['orderId'];
-        $hourlyReports = $reports['hourlyReports'];
+        $hourlyReports = $order->hourlyReports;
 
-        return view('hourlyReports.create', ['order' => $order, 'orderId' => $orderId, 'hourlyReports' => $hourlyReports]);
+        return view('hourlyReports.create', ['order' => $order, 'hourlyReports' => $hourlyReports]);
     }
 
     /**
