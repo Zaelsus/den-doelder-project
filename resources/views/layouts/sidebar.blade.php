@@ -19,13 +19,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @php
                     use App\Models\Order;
-                    $order=null;
                     if(Auth::user()->role === 'Production') {
-                        if(Order::isInProduction(Auth::user()->machine) ==='In Production'){
-                       $order = Order::where('status','In Production')->first();
-                       }elseif(Order::isInProduction(Auth::user()->machine) ==='Paused') {
-                           $order = Order::where('status','Paused')->first();
-                       }
+                        $order=Order::getOrder(Auth::user()->machine);
                         } elseif(Auth::user()->role === 'Administrator') {
                         $order = Order::isSelected();
                         }
