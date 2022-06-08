@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Machine;
 use App\Models\Note;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -17,7 +16,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $order = $this->getOrder();
+        $order = $this->findOrderForUser();
 
         $notes = Note::orderBy('created_at', 'desc')->get();
 
@@ -31,7 +30,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $order = $this->getOrder();
+        $order = $this->findOrderForUser();
 
         return view('notes.create', compact('order'));
     }
@@ -44,7 +43,7 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $order_id = $this->getOrder()->id;
+        $order_id = $this->findOrderForUser()->id;
 
         $note = Note::create($this->validateNote($request, $order_id));
 
@@ -131,6 +130,15 @@ class NoteController extends Controller
         }elseif(Order::isInProduction($machine) ==='Paused') {
             $order = Order::where('status','Paused')->first();
         }
+
+        return $order;
+    }
+
+    public function findOrderForUser() {
+        if(Auth::user()->role === 'Administrator') {
+            $order = Order::isSelected();
+        } else
+            $order = $this->getOrder();
 
         return $order;
     }
