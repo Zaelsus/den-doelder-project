@@ -8,6 +8,7 @@ use App\Http\Controllers\{InitialController,
     ProductionController,
     PalletController,
     ProductLocationController};
+    MachineController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +31,12 @@ Route::get('/', function () {
 // this is temporary until we add the login to the right role and the right production line
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Order
+// Machines
+Route::resource('/machines', MachineController::class);
+//select machine
+Route::post('/machines/{machine}/{user}', [MachineController::class, 'selectMachine'])->name('machines.selectMachine');
+
+//// Order
 Route::resource('/orders', OrderController::class);
 
 // Pallets
@@ -40,7 +46,7 @@ Route::resource('/pallets', PalletController::class);
 //start production route
 Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
 //stop production route
-Route::post('/orders/stop/{order}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
+Route::post('/orders/stop/{order}/{machine}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
@@ -49,6 +55,8 @@ Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction']
 Route::post('/orders/select/{order}', [OrderController::class, 'selectOrder'])->name('orders.selectOrder');
 //unselect
 Route::post('/orders/unselect/{order}', [OrderController::class, 'unselectOrder'])->name('orders.unselectOrder');
+//stop production route
+Route::post('/orders/cancel/{order}', [OrderController::class, 'cancelOrder'])->name('orders.cancelOrder');
 
 // OrderMaterials
 Route::resource('/orderMaterials', OrderMaterialController::class);
@@ -68,6 +76,18 @@ Route::resource('/hourlyReports', HourlyReportController::class);
 
 // Notes
 Route::resource('/notes', NoteController::class);
+Route::get('/notes/stoppage/{order}', [NoteController::class, 'stoppage'])->name('notes.stoppage');
+Route::get('notes/fixStoppage/{note}', [NoteController::class, 'fixStoppage'])->name('notes.fixStoppage');
+
+
+
+//Double Form
+Route::get('/create-step-one', [OrderController::Class,'createStepOne'])->name('orders.create.step.one');
+Route::post('/create-step-one', [OrderController::class,'postCreateStepOne'])->name('orders.create.step.one.post');
+
+Route::get('/create-step-two', [OrderMaterialController::class,'createStepTwo'])->name('orders.create.step.two');
+Route::post('/create-step-two', [OrderMaterialController::class,'postCreateStepTwo'])->name('orders.create.step.two.post');
+
 
 // Locations
 Route::resource('/productLocations', ProductLocationController::class);

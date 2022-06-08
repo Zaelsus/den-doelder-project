@@ -22,10 +22,12 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'machine_id',
     ];
 
     protected $attributes = [
-        'role' => 'Production',
+        'machine_id' => null,
+
     ];
 
     /**
@@ -46,4 +48,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Gets the order related to the hourly report log
+     */
+    public function machine()
+    {
+        return $this->belongsTo(Machine::class, 'machine_id');
+    }
 }

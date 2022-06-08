@@ -15,7 +15,7 @@ class Order extends Model
         'site_location' => 'Axel',
         'production_instructions' => '',
         'machine' => '',
-        'status' => 'Pending',
+        'status' => 'Admin Hold',
         'start_time' => null,
         'end_time' => null,
         'selected' => 0,
@@ -68,15 +68,17 @@ class Order extends Model
      */
     public function notes()
     {
-        return $this->hasMany(Note::class,'order_id');
+        return $this->hasMany(Note::class, 'order_id');
     }
 
     /**
      * returns if there is an order in production (for production view)
      */
-    public static function isInProduction()
+    public static function isInProduction(Machine $machine)
     {
-        $orderInProduction = Order::where('status', 'In Production')->orwhere('status', 'Paused')->first();
+        $orderInProduction = Order::where('machine', $machine->name)->where(function ($query) {
+            $query->where('status', 'In Production')->orwhere('status', 'Paused');
+        })->first();
         if ($orderInProduction !== null) {
             if ($orderInProduction->status === 'In Production') {
                 return 'In Production';
@@ -85,6 +87,24 @@ class Order extends Model
         }
         return 'no production';
     }
+
+    /**
+     * returns if there is an order in production (for production view)
+     */
+    public static function getOrder(Machine $machine)
+    {
+        if (Order::isInProduction($machine) === 'In Production') {
+            $order = Order::where('status', 'In Production')->first();
+        } elseif (Order::isInProduction($machine) === 'Paused') {
+            $order = Order::where('status', 'Paused')->first();
+        } else{
+            return null;
+        }
+
+        return $order;
+
+    }
+
 
     /**
      * returns if there is an order selected (for admin view)
@@ -98,14 +118,38 @@ class Order extends Model
         return null;
     }
 
+    /**
+     * returns if there is a quality check that exists for the current order
+     */
+    public static function initialCheckExists(Order $order)
+    {
+        $initialCheck = $order->initial;
+        if ($initialCheck !== null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * returns if there is a first batch check that exists for the current order
+     */
+    public static function prodCheckExists(Order $order)
+    {
+        $prodCheck = $order->production;
+        if ($prodCheck !== null) {
+            if ($order->start_date !== null && $order->machine !== null && $order->status === 'Quality Check Pending') {
+                $order->status = 'Production Pending';
+            }
+            return true;
+        }
+        return false;
+    }
+
     public function getQuantityMadeAttribute()
     {
-        if ($this->quantity_produced > $this->quantity_production)
-        {
+        if ($this->quantity_produced > $this->quantity_production) {
             return $this->quantity_production;
-        }
-        else
-        {
+        } else {
             return $this->quantity_produced;
         }
     }
@@ -117,7 +161,7 @@ class Order extends Model
     public function addProduced()
     {
         // TODO: Needs update to use a parameter in the above () instead of the add_quantity column
-        $this->quantity_produced +=  $this->add_quantity;
+        $this->quantity_produced += $this->add_quantity;
         $this->add_quantity = 0;
         $this->save();
     }

@@ -16,7 +16,7 @@
             <!-- /.card-header -->
             <div class="card-body">
                <h4> <span class="badge badge-warning float-right"><i class="fa fa-exclamation-circle" style="font-size:20px;color:white"></i> * Required</span>  </h4>
-                <form class="was-validated" method="POST" action="{{ route('orders.store') }}">
+                <form class="was-validated" method="POST" action="{{ route('orders.create.step.one.post') }}">
                     @csrf
                     <div class="mb-3">
                         <label class="required" for="order_number">Order Number</label>
@@ -102,8 +102,8 @@
                                     <label class="custom-control-label" for="customRadioInline1">Axel</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline2" name="site_location" class="custom-control-input" value="Zelzete" {{ old('site_location')==="Zelzete" ? 'checked='.'"'.'checked'.'"' : '' }}required>
-                                    <label class="custom-control-label" for="customRadioInline2">Zelzete</label>
+                                    <input type="radio" id="customRadioInline2" name="site_location" class="custom-control-input" value="Zelzate" {{ old('site_location')==="Zelzate" ? 'checked='.'"'.'checked'.'"' : '' }}required>
+                                    <label class="custom-control-label" for="customRadioInline2">Zelzate</label>
                                 </div>
                             </div>
                             @error('site_location')
