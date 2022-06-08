@@ -33,7 +33,7 @@
                             <td>
                                 <input type="hidden" class="form-control" name="product[{{ $key}}][order_id]" value="{{$order->id}}">
                                 <input type="hidden" class="form-control" name="product[{{ $key}}][material_id]" value="{{$products->product_id}}">
-                                <input type="number" class="form-control" name="product[{{ $key}}][total_quantity]" value="0" >
+                                <input type="number" min="0" max="10" class="form-control" name="product[{{ $key}}][total_quantity]" value="0" >
                             </td>
                             </tr>
                         @endforeach

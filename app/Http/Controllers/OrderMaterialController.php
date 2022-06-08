@@ -66,12 +66,13 @@ class OrderMaterialController extends Controller
     {
         $order = $request->session()->get('order');
         $request->session()->forget('order');
-
         $array = $request->product;
 
         for ($i = 0; $i < count($array); $i++) {
             if ($array[$i]['total_quantity'] > 0) {
-                OrderMaterial::create($request->product[$i]);
+                $quantity=$request->product[$i]['total_quantity']*$order->quantity_production;
+                OrderMaterial::create(['order_id'=>$request->product[$i]['order_id'],
+                    'material_id'=>$request->product[$i]['material_id'],'total_quantity'=>$quantity]);
             }
         }
 
