@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-    Hourly Check-up
+    Hourly Check
 @endsection
 
 @section('content')
@@ -10,23 +10,21 @@
             <div class="columns">
                 <div class="column is-full">
                     <div class="has-text-right">
-                        <button>
-                            <a href="{{route('hourlyReports.create')}}">Add a new log</a>
-                        </button>
+                            <a href="{{route('hourlyReports.add', $order->id )}}" class="btn btn-info btn-lg float-right">Add a new log</a>
                     </div>
                     <div class="content">
-                        <table class="table is-fullwidth is-striped">
-                            <thead>
+                        <table class="table table-bordered table-hover table-secondary">
+                            <thead class="bg-gray">
                             <tr>
-                                <th>Time</th>
-                                <th>Pallet Name</th>
-                                <th>Order #</th>
-                                <th>Def #</th>
-                                <th>Extra Info</th>
-                                <th>Action</th>
-                                <th>Abnormality</th>
-                                <th>Approved</th>
-                                <th></th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Pallet Name</th>
+                                <th scope="col">Order #</th>
+                                <th scope="col">Def #</th>
+                                <th scope="col">Extra Info</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Abnormality</th>
+                                <th scope="col">Approved</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,10 +41,10 @@
                                         <i class="icon fas {{ $report->approved === 1 ? 'fa-check fa-2x has-text-success' : 'fa-xmark fa-2x has-text-danger' }}"></i>
                                     </td>
                                     <td>
-                                        <button class="button is-primary"
+                                        <a class="btn btn-info btn-lg float-right"
                                                 onclick=window.location.href="{{route('hourlyReports.edit', $report)}}">
                                             Edit
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
