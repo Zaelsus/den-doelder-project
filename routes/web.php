@@ -73,6 +73,7 @@ Route::resource('/production', ProductionController::class);
 // Hourly Check-up
 Route::resource('/hourlyReports', HourlyReportController::class);
 Route::get('/hourlyReports/list/{order}', [HourlyReportController::class, 'list'])->name('hourlyReports.list');
+Route::get('/hourlyReports/add/{order}', [HourlyReportController::class, 'add'])->name('hourlyReports.add');
 
 
 // Notes

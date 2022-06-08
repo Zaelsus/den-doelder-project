@@ -21,7 +21,7 @@
                     <div class="mb-3">
                         <label class="required" for="order_number">Order Number</label>
                         <div>
-                        <input type="text" class="form-control is-invalid "
+                        <input type="text" class="form-control is-invalid"
                                name="order_number"
                                placeholder="Number of Order e.g Order-4891" value="{{old('order_number')}}" required>
                         </div>

@@ -23,12 +23,9 @@ class HourlyReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($orderId)
+    public function create()
     {
-        // TOFIX Need to get a parameter passed in here somehow,
-        // possibly need to create a new route that redirects to here
-        $hourlyReport = HourllyReport::where('order_id', $orderId);
-        return view('hourlyReports.create', compact('hourlyReport', 'orderId'));
+        return view('hourlyReports.create');
     }
 
     /**
@@ -37,11 +34,13 @@ class HourlyReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $hourlyReport)
+    public function store(Request $request)
     {
+        // TOFIX Can't store the details to the table and having issues passing the
+        // Order's ID through so we can go back to the list page
         HourlyReport::create($this->validateHourlyReport($request));
 
-        return redirect(route('hourlyReports.list'), ['order' => $hourlyReport->order_id]);
+        return redirect(route('hourlyReports.list'), ['order' => $request->id]);
     }
 
     /**
@@ -111,16 +110,42 @@ class HourlyReportController extends Controller
         return $validatedAtributes;
     }
 
+    /**
+     * Function to list all Hourly Check logs for a specific order
+     *
+     * @param $details - the order's slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function list($details)
     {
         $reports = $this->getReportDetails($details);
-        $order = $reports['order'];
         $orderId = $reports['orderId'];
         $hourlyReports = $reports['hourlyReports'];
 
         return view('hourlyReports.index', ['hourlyReports' => $hourlyReports, 'orderId' => $orderId]);
     }
 
+    /**
+     * Function to create an Hourly Check log for a specific order
+     *
+     * @param $details - the order's slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function add($details)
+    {
+        $reports = $this->getReportDetails($details);
+        $order = $reports['order'];
+        $orderId = $reports['orderId'];
+        $hourlyReports = $reports['hourlyReports'];
+
+        return view('hourlyReports.create', ['order' => $order, 'orderId' => $orderId, 'hourlyReports' => $hourlyReports]);
+    }
+
+    /**
+     * Function that accepts the order's slug and finds the corresponding attributes in the Order's table
+     * @param $details - the order's slug
+     * @return array containing specific attributes associated with the order's slug
+     */
     public function getReportDetails($details)
     {
         $order = Order::find($details);
