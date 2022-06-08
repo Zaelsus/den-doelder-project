@@ -54,7 +54,7 @@ class OrderController extends Controller
     {
         $order = Order::create($this->validateOrder($request));
         // redirecting to show a page
-        return redirect(route('orders.show', compact('order')));
+        return redirect(route('orders.index', compact('order')));
     }
 
     /**
