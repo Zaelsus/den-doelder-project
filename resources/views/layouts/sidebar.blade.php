@@ -23,7 +23,6 @@
                         $order=Order::getOrder(Auth::user()->machine);
                         } elseif(Auth::user()->role === 'Administrator') {
                         $order = Order::isSelected();
-
                         }
                 @endphp
                     @include('layouts.menu',['order'=> $order])
