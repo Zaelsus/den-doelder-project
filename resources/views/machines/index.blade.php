@@ -45,10 +45,18 @@
             @endforeach
         </div>
     @elseif(Auth::user()->role ==='Administrator')
-        <a href="{{ route('orders.index') }}" class="btn bg-gray-dark">
-            <i class="nav-icon fas fa-clipboard-list"></i>
-            <p>Enter Administration View</p>
-        </a>
+        @php
+             $order = App\Models\Order::isSelected();
+             @endphp
+        <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
+              class="nav-link active btn ">
+            @csrf
+
+            <button type="submit" class="btn bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p class="brand-text">Enter Administration View</p>
+            </button>
+        </form>
         @endif
         </section>
 @endsection
