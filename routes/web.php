@@ -7,6 +7,7 @@ use App\Http\Controllers\{InitialController,
     OrderMaterialController,
     ProductionController,
     PalletController,
+    ProductLocationController};
     MachineController};
 use Illuminate\Support\Facades\Route;
 
@@ -87,4 +88,7 @@ Route::post('/create-step-one', [OrderController::class,'postCreateStepOne'])->n
 Route::get('/create-step-two', [OrderMaterialController::class,'createStepTwo'])->name('orders.create.step.two');
 Route::post('/create-step-two', [OrderMaterialController::class,'postCreateStepTwo'])->name('orders.create.step.two.post');
 
+
+// Locations
+Route::resource('/productLocations', ProductLocationController::class);
 

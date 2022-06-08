@@ -115,7 +115,7 @@
                     {{--                        <i class="nav-icon fas fa-clipboard-check"></i>--}}
                     {{--                        <p>Log Pallets</p>--}}
                     {{--                    </a>--}}
-                    <a href="#" class="nav-link active bg-white btn text-left disabled">
+                    <a href="{{route('productLocations.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-compass"></i>
                         <p>Location</p>
                     </a>
