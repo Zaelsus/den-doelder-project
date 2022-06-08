@@ -48,8 +48,9 @@
         @php
              $order = App\Models\Order::isSelected();
              @endphp
+        @if($order !== null)
         <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
-              class="nav-link active btn ">
+              class="nav-link active btn text-left bg-success">
             @csrf
 
             <button type="submit" class="btn bg-gray-dark">
@@ -57,6 +58,12 @@
                 <p class="brand-text">Enter Administration View</p>
             </button>
         </form>
+        @else
+            <a href="{{ route('orders.index') }}" class="btn bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Enter Administration View</p>
+            </a>
+            @endif
         @endif
         </section>
 @endsection

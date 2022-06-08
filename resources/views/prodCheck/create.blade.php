@@ -7,7 +7,7 @@
 
 @section('content')
     <section class="content">
-        <form method="POST" action="/production">
+        <form method="POST" action="{{ route('production.store') }}">
             @csrf
 
             <section class="section">
