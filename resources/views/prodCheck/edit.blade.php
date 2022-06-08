@@ -16,16 +16,14 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Bovendek
-                            </p>
-                            <p class="subtitle has-text-danger">
+                            <h5 class="card bg-gradient-purple">Bovendek</h5>
+                            <p class="card bg-gradient-red subtitle">
                                 Controle na eerste stapel bovendekken!
                             </p>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -160,13 +158,11 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Klossen
-                            </p>
+                            <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -277,13 +273,11 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Onderdek
-                            </p>
+                            <h5 class="card bg-gradient-purple">Onderdek</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -417,14 +411,12 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Overvig
-                            </p>
+                            <h5 class="card bg-gradient-purple">Overvig</h5>
                         </div>
                     </section>
 
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary ">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -557,7 +549,7 @@
 
 
                 <label class='has-text-weight-bold' for='additionalNotes'>Additional Notes:</label>
-                <div class="control "><input class="input" type="text" name="additionalNotes" id="" placeholder="Optional comments" value={{$production->additionalNotes}} >
+                <div class="control "><input class="table table-bordered table-hover table-secondary" type="text" name="additionalNotes" id="" placeholder="Optional comments" value={{$production->additionalNotes}} >
                 </div>
 
                 <section class="section">
