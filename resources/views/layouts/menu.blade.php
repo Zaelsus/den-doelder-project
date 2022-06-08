@@ -108,7 +108,7 @@
 
                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
-                    <p>Add Notes</p>
+                    <p>Notes</p>
                 </a>
                 @if($order->status === 'In Production')
                     {{--                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">--}}
