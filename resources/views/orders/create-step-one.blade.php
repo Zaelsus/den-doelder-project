@@ -16,7 +16,7 @@
             <!-- /.card-header -->
             <div class="card-body">
                <h4> <span class="badge badge-warning float-right"><i class="fa fa-exclamation-circle" style="font-size:20px;color:white"></i> * Required</span>  </h4>
-                <form class="was-validated" method="POST" action="{{ route('orders.store') }}">
+                <form class="was-validated" method="POST" action="{{ route('orders.create.step.one.post') }}">
                     @csrf
                     <div class="mb-3">
                         <label class="required" for="order_number">Order Number</label>

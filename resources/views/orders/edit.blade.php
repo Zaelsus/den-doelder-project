@@ -51,7 +51,7 @@
                                             value='Quality Check Pending' {{$order->status === 'Quality Check Pending' ? 'selected':''}}>
                                             Quality Check Pending
                                         </option>
-                                        @if(\App\Models\Order::initialCheckExists($order) && $order->start_date !==null && $order->machine !==null)
+                                        @if(\App\Models\Order::initialCheckExists($order) && $order->start_date !==null && $order->machine !==null && count($order->orderMaterials) >0)
                                             <option
                                                 value='Production Pending' {{$order->status === 'Production Pending' ? 'selected':''}}>
                                                 Production Pending

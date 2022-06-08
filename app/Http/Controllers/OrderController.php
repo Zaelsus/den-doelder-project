@@ -40,8 +40,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $pallets = Pallet::all();
-        return view('orders.create',compact('pallets'));
+      //
     }
 
     /**
@@ -52,10 +51,46 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($this->validateOrder($request));
-        // redirecting to show a page
-        return redirect(route('orders.show', compact('order')));
+      //
     }
+
+    /**
+     * Show the step One Form for creating a new product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createStepOne(Request $request)
+    {
+        $pallets = Pallet::all();
+        $order = $request->session()->get('order');
+
+        return view('orders.create-step-one',compact('order','pallets'));
+    }
+
+    /**
+     * Post Request to store step1 info in session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postCreateStepOne(Request $request)
+    {
+        $validatedData = $this->validateOrder($request);
+
+        if(empty($request->session()->get('order'))){
+            $order = new Order();
+            $order->fill($validatedData);
+            $request->session()->put('order', $order);
+        }else{
+            $order = $request->session()->get('order');
+            $order->fill($validatedData);
+            $request->session()->put('order', $order);
+        }
+        $order->save();
+
+        return redirect()->route('orders.create.step.two');
+    }
+
 
     /**
      * Display the specified resource.
@@ -65,7 +100,6 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-       // $order->addProduced();
         return view('orders.show', compact('order'));
 
     }
