@@ -7,7 +7,7 @@ use App\Http\Controllers\{InitialController,
     OrderMaterialController,
     ProductionController,
     PalletController,
-    ProductLocationController};
+    ProductLocationController,
     MachineController};
 use Illuminate\Support\Facades\Route;
 
