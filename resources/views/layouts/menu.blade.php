@@ -87,11 +87,12 @@
                         <p>Drawings</p>
                     </a>
 
-                @if(\App\Models\Order::prodCheckExists($order))
-                    <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
-                        <i class="nav-icon fas fa-tools"></i>
-                        <p>Production Check</p>
-                    </a>
+                    @if(\App\Models\Order::prodCheckExists($order))
+                        <a href="{{route('production.show', $order)}}"
+                           class="nav-link active bg-gray-dark btn text-left">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Production Check</p>
+                        </a>
 
                     @else
                         <a href="{{route('production.create')}}" class="nav-link active bg-gray-dark btn text-left">
@@ -99,7 +100,8 @@
                             <p> Add Production Check</p>
                         </a>
                     @endif
-                    <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{ route('hourlyReports.list', $order) }}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
                         <p>Hourly Check</p>
                     </a>
@@ -112,7 +114,8 @@
                     <p>Notes</p>
                 </a>
                 @if($order->status === 'In Production')
-                    <a href="{{route('orders.editquantity',$order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('orders.editquantity',$order)}}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
                     </a>
@@ -179,19 +182,21 @@
                     <p>Drawings</p>
                 </a>
                 @if($order->production != null)
-            <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
-                <i class="nav-icon fas fa-tools"></i>
-                <p>Production Check</p>
-            </a>
-            @endif
-                <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-tools"></i>
+                        <p>Production Check</p>
+                    </a>
+                @endif
+
+                <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-check"></i>
                     <p>Hourly Check</p>
                 </a>
-                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
-                <i class="nav-icon fas fa-book"></i>
-                <p>Notes</p>
-            </a>
+                <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>Notes</p>
+
+                </a>
             </div>
         </li>
     @endif

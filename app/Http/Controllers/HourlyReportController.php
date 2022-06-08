@@ -15,8 +15,9 @@ class HourlyReportController extends Controller
      */
     public function index()
     {
-        $hourlyReports = HourlyReport::get();
-        return view('hourlyReports.index', compact('hourlyReports'));
+        $order = Order::isInProduction();
+        $hourlyReport = $order->hourlyReport;
+        return view('hourlyReports.index', compact('order', 'hourlyReport'));
     }
 
     /**
@@ -26,7 +27,6 @@ class HourlyReportController extends Controller
      */
     public function create()
     {
-//        $orders = Order::all();
         return view('hourlyReports.create');
     }
 
@@ -38,9 +38,16 @@ class HourlyReportController extends Controller
      */
     public function store(Request $request)
     {
+        // TOFIX Can't store the details to the table and having issues passing the
+        // Order's ID through so we can go back to the list page
         HourlyReport::create($this->validateHourlyReport($request));
 
-        return redirect(route('hourlyReports.index'));
+        $order = Order::find($request->order_id);
+        $hourlyReports = $order->hourlyReports;
+
+//        return redirect(route('hourlyReports.index'), compact('order') );
+        return view('hourlyReports.index', compact('order', 'hourlyReports'));
+
     }
 
     /**
@@ -62,6 +69,7 @@ class HourlyReportController extends Controller
      */
     public function edit(HourlyReport $hourlyReport)
     {
+        // TOFIX need to have the Edit blade correctly display saved data
         return view('hourlyReports.edit', compact('hourlyReport'));
     }
 
@@ -76,7 +84,7 @@ class HourlyReportController extends Controller
     {
         $hourlyReport->update($this->validateHourlyReport($request));
 
-        return redirect(route('hourlyReports.index'));
+        return redirect(route('hourlyReports.list', ['order' => $hourlyReport->order_id]));
     }
 
     /**
@@ -98,8 +106,7 @@ class HourlyReportController extends Controller
     public function validateHourlyReport(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            // 'pallet_name'=>'required',
-//            'order_id'=>'required|integer',
+            'order_id'=>'integer',
             'def_id'=>'required',
             'extra_info'=>'required',
             'action' =>'string|nullable',
@@ -108,5 +115,50 @@ class HourlyReportController extends Controller
         ]);
 
         return $validatedAtributes;
+    }
+
+    /**
+     * Function to list all Hourly Check logs for a specific order
+     *
+     * @param $details - the order's slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function list(Order $order)
+    {
+//        $reports = $this->getReportDetails($order)
+//
+//        $orderId = $reports['orderId'];
+//        $hourlyReports = $reports['hourlyReports'];
+
+        $hourlyReports = $order->hourlyReports;
+
+        return view('hourlyReports.index', compact('order', 'hourlyReports'));
+    }
+
+    /**
+     * Function to create an Hourly Check log for a specific order
+     *
+     * @param $details - the order's slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function add(Order $order)
+    {
+        $hourlyReports = $order->hourlyReports;
+
+        return view('hourlyReports.create', ['order' => $order, 'hourlyReports' => $hourlyReports]);
+    }
+
+    /**
+     * Function that accepts the order's slug and finds the corresponding attributes in the Order's table
+     * @param $details - the order's slug
+     * @return array containing specific attributes associated with the order's slug
+     */
+    public function getReportDetails($details)
+    {
+        $order = Order::find($details);
+        $orderId = $order->id;
+        $hourlyReports = HourlyReport::where('order_id', $orderId)->get();
+
+        return ['order' => $order, 'orderId' => $orderId, 'hourlyReports' => $hourlyReports];
     }
 }
