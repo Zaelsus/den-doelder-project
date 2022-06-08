@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class OrderMaterial extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+    protected $attributes = [
+        'test' => null,
+    ];
     /**
      * Gets the material related to the orderMaterial
      */

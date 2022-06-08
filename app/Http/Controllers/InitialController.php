@@ -27,6 +27,7 @@ class InitialController extends Controller
      */
     public function create()
     {
+
         return view('initialCheck.create');
     }
 
@@ -36,12 +37,16 @@ class InitialController extends Controller
      * @param  \App\Http\Requests\StoreInitialRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Initial $initial)
     {
-        Initial::create($this->validateInitial($request));
+        $order = Order::isSelected();
 
+//        dd($initial);
+        $initial = Initial::create($this->validateInitial($request));
+        $initial->assignorderid($order->id);
+//        dd($initial);
         // redirecting to show a page
-        return redirect(route('initial.show'))->with('success','an item has been created successfully');
+        return redirect(route('initial.show',$initial))->with('success','an item has been created successfully');
     }
 
     /**

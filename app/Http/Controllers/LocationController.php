@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\Order;
+use App\Models\OrderMaterial;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller

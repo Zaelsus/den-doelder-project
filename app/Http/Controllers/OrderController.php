@@ -40,8 +40,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $pallets = Pallet::all();
-        return view('orders.create',compact('pallets'));
+      //
     }
 
     /**
@@ -52,10 +51,46 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($this->validateOrder($request));
-        // redirecting to show a page
-        return redirect(route('orders.show', compact('order')));
+      //
     }
+
+    /**
+     * Show the step One Form for creating a new product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createStepOne(Request $request)
+    {
+        $pallets = Pallet::all();
+        $order = $request->session()->get('order');
+
+        return view('orders.create-step-one',compact('order','pallets'));
+    }
+
+    /**
+     * Post Request to store step1 info in session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postCreateStepOne(Request $request)
+    {
+        $validatedData = $this->validateOrder($request);
+
+        if(empty($request->session()->get('order'))){
+            $order = new Order();
+            $order->fill($validatedData);
+            $request->session()->put('order', $order);
+        }else{
+            $order = $request->session()->get('order');
+            $order->fill($validatedData);
+            $request->session()->put('order', $order);
+        }
+        $order->save();
+
+        return redirect()->route('orders.create.step.two');
+    }
+
 
     /**
      * Display the specified resource.
@@ -65,7 +100,6 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-       // $order->addProduced();
         return view('orders.show', compact('order'));
 
     }
@@ -196,33 +230,45 @@ class OrderController extends Controller
         return redirect(route('orders.index'));
     }
 
-//        /**
-//     * Show the form for editing only pallets
-//     *
-//     * @param \App\Models\Order $order
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function editquantity(Order $order)
-//    {
-//        return view('orders.editquantity', compact('order'));
-//    }
-//
-//    /**
-//     * Update the pallet details in storage.
-//     *
-//     * @param \Illuminate\Http\Request $request
-//     * @param \App\Models\Order $order
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function addquantity(Request $request, Order $order)
-//    {
-//        $validatedAtributes = $request->validate([
-//            'add_quantity' => 'required|integer'
-//        ]);
-//        $order->update($validatedAtributes);
-//        return redirect(route('orders.show', $order));
-//    }
-//
+    /**
+     * Show the form for editing only quantity produced
+     *
+     * @param \App\Models\Order $order
+     * @return \Illuminate\Http\Response
+     */
+    public function editquantity(Order $order)
+    {
+//        dd($order);
+
+        return view('orders.editquantity', compact('order'));
+    }
+
+    /**
+     * Update the quantity produced in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Order $order
+     * @return \Illuminate\Http\Response
+     */
+    public function updatequantity(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'add_quantity' => 'required|integer',
+        ]);
+        try
+        {
+            $order->update($validated);
+            $order->addProduced();
+            $order->stopProduced();
+            return redirect(route('orders.show', $order));
+        }
+        catch (\Exception $exception)
+        {
+            return redirect(route('orders.editquantity', $order))->with('error', 'The value is higher than the quantity to be produced');
+
+        }
+
+    }
 
 
 }

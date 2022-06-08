@@ -7,7 +7,7 @@
 
 @section('content')
     <section class="content">
-        <form method="POST" action="{{route('initialCheck.store')}}">
+        <form method="POST" action="{{route('initial.store')}}">
             @csrf
 
             <section class="section">
@@ -15,14 +15,11 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Bovendek
-                            </p>
+                            <h5 class="card bg-gradient-purple">Bovendek</h5>
                         </div>
                     </section>
 
-                    {{--Overvig--}}
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -168,12 +165,11 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Klossen
-                            </p>
+                            <h5 class="card bg-gradient-purple">Klossen</h5>
+
                         </div>
                     </section>
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -291,12 +287,10 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Onderdek
-                            </p>
+                            <h5 class="card bg-gradient-purple">Onderdek</h5>
                         </div>
                     </section>
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -471,13 +465,11 @@
                 <section class="section">
                     <section class="hero">
                         <div class="hero-body">
-                            <p class="title">
-                                Overvig
-                            </p>
+                            <h5 class="card bg-gradient-purple">Overvig</h5>
                         </div>
                     </section>
 
-                    <table>
+                    <table class="table table-bordered table-hover table-secondary">
                         <tr>
                             <th></th>
                             <th>Condition</th>
@@ -644,9 +636,9 @@
                     </table>
                 </section>
                 <section class="section">
-                    <label class='has-text-weight-bold' for='additionalNotes'>Additional Notes:</label>
+                    <label class='' for='additionalNotes'>Additional Notes:</label>
                     <div class="control ">
-                        <input class="input" type="text" name="additionalNotes" id="" placeholder="Optional comments">
+                        <input class="table table-bordered table-hover table-secondary" type="text" name="additionalNotes" id="" placeholder="Optional comments">
                     </div>
                 </section>
                 <section class="section">

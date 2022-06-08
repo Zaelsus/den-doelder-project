@@ -6,397 +6,762 @@
 
 @section('content')
 
-    <div class="column is-9-desktop ">
-        <section class="content" >
-            <div class="control is-pulled-right">
-                <button class="button "
-                        onclick=window.location.href="{{route('production.edit', $production)}}">
-                    Edit
-                </button>
-            </div>
+    @if(Auth::user()->role === 'Production')
+        <div class="column is-9-desktop ">
+            <section class="content" >
+                <div class="has-text-right">
+                    <a href="{{route('production.edit', $production)}}" class="btn btn-info btn-lg float-right">Edit</a>
+                </div>
 
-            {{--Bovendek--}}
-            <section class="section">
-                <section class="hero">
-                    <div class="hero-body">
-                        <p class="title">
-                            Bovendek
-                        </p>
-                        {{--set to danger--}}
-                        <p class="subtitle">
-                            Controle na eerste stapel bovendekken!
-                        </p>
-                    </div>
+                {{--Bovendek--}}
+                <section class="section">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <h5 class="card bg-gradient-purple">Bovendek</h5>
+                            {{--set to danger--}}
+                            <p class="card bg-gradient-red subtitle">
+                                Controle na eerste stapel bovendekken!
+                            </p>
+                        </div>
+                    </section>
+
+                    <table class="table table-bordered table-hover table-secondary ">
+                        <tr>
+                            <th></th>
+                            <th>Condition</th>
+                            <th>Aangepast naar</th>
+                            <th>Correctie</th>
+                        </tr>
+
+
+                        <tr>
+                            <td>Afmeting</td>
+                            <td>
+                                {{$production->afmetingTickB === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->afmetingAangB}}
+                            </td>
+
+                            <td>
+                                {{$production->afmetingCorrectB}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Aantal planken</td>
+                            <td>
+                                {{$production->aantalTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->aantalAang}}
+                            </td>
+
+                            <td>
+                                {{$production->aantalCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Spaties</td>
+                            <td>
+                                {{$production->spatiesTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->spatiesAang}}
+                            </td>
+
+                            <td>
+                                {{$production->spatiesCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Klampen	</td>
+                            <td>
+                                {{$production->klampenTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->klampenAang}}
+                            </td>
+
+                            <td>
+                                {{$production->klampenCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Overstek</td>
+                            <td>
+                                {{$production->overstekTickB === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->overstekAangB}}
+                            </td>
+
+                            <td>
+                                {{$production->overstekCorrectB}}
+                            </td>
+                        </tr>
+
+                    </table>
                 </section>
 
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Condition</th>
-                        <th>Aangepast naar</th>
-                        <th>Correctie</th>
-                    </tr>
+
+                <section class="section">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <h5 class="card bg-gradient-purple">Klossen</h5>
+                        </div>
+                    </section>
+
+                    <table class="table table-bordered table-hover table-secondary ">
+                        <tr>
+                            <th></th>
+                            <th>Condition</th>
+                            <th>Aangepast naar</th>
+                            <th>Correctie</th>
+                        </tr>
 
 
-                    <tr>
-                        <td>Afmeting</td>
-                        <td>
-                            {{$production->afmetingTickB === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Soort (Spaan/ Hout)</td>
+                            <td>
+                                {{$production->soortTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->afmetingAangB}}
-                        </td>
+                            <td>
+                                {{$production->soortAang}}
+                            </td>
 
-                        <td>
-                            {{$production->afmetingCorrectB}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->soortCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Aantal planken</td>
-                        <td>
-                            {{$production->aantalTick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Balk</td>
+                            <td>
+                                {{$production->balkTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->aantalAang}}
-                        </td>
+                            <td>
+                                {{$production->balkAang}}
+                            </td>
 
-                        <td>
-                            {{$production->aantalCorrect}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->balkCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Spaties</td>
-                        <td>
-                            {{$production->spatiesTick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Afmeting 1</td>
+                            <td>
+                                {{$production->afmeting1Tick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->spatiesAang}}
-                        </td>
+                            <td>
+                                {{$production->afmeting1Aang}}
+                            </td>
 
-                        <td>
-                            {{$production->spatiesCorrect}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->afmeting1Correct}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Klampen	</td>
-                        <td>
-                            {{$production->klampenTick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Afmeting 2</td>
+                            <td>
+                                {{$production->afmeting2Tick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->klampenAang}}
-                        </td>
+                            <td>
+                                {{$production->afmeting2Aang}}
+                            </td>
 
-                        <td>
-                            {{$production->klampenCorrect}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->afmeting2Correct}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Overstek</td>
-                        <td>
-                            {{$production->overstekTickB === 1 ? '✔': '✖' }}
-                        </td>
-
-                        <td>
-                            {{$production->overstekAangB}}
-                        </td>
-
-                        <td>
-                            {{$production->overstekCorrectB}}
-                        </td>
-                    </tr>
-
-                </table>
-            </section>
-
-            Klossen
-            <section class="section">
-                <section class="hero">
-                    <div class="hero-body">
-                        <p class="title">
-                            Klossen
-                        </p>
-                    </div>
+                    </table>
                 </section>
 
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Condition</th>
-                        <th>Aangepast naar</th>
-                        <th>Correctie</th>
-                    </tr>
+                <section class="section">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <h5 class="card bg-gradient-purple">Onderdek</h5>
+                        </div>
+                    </section>
+
+                    <table class="table table-bordered table-hover table-secondary ">
+                        <tr>
+                            <th></th>
+                            <th>Condition</th>
+                            <th>Aangepast naar</th>
+                            <th>Correctie</th>
+                        </tr>
 
 
-                    <tr>
-                        <td>Soort (Spaan/ Hout)</td>
-                        <td>
-                            {{$production->soortTick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Brug</td>
+                            <td>
+                                {{$production->brugTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->soortAang}}
-                        </td>
+                            <td>
+                                {{$production->brugAang}}
+                            </td>
 
-                        <td>
-                            {{$production->soortCorrect}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->brugCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Balk</td>
-                        <td>
-                            {{$production->balkTick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Ronddloper</td>
+                            <td>
+                                {{$production->rondTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->balkAang}}
-                        </td>
+                            <td>
+                                {{$production->rondAang}}
+                            </td>
 
-                        <td>
-                            {{$production->balkCorrect}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->rondCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Afmeting 1</td>
-                        <td>
-                            {{$production->afmeting1Tick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Kruisdek</td>
+                            <td>
+                                {{$production->kruisTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->afmeting1Aang}}
-                        </td>
+                            <td>
+                                {{$production->kruisAang}}
+                            </td>
 
-                        <td>
-                            {{$production->afmeting1Correct}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->kruisCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Afmeting 2</td>
-                        <td>
-                            {{$production->afmeting2Tick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Afmetingen</td>
+                            <td>
+                                {{$production->afmetingTickO === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->afmeting2Aang}}
-                        </td>
+                            <td>
+                                {{$production->afmetingAangO}}
+                            </td>
 
-                        <td>
-                            {{$production->afmeting2Correct}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->afmetingCorrectO}}
+                            </td>
+                        </tr>
 
-                </table>
-            </section>
+                        <tr>
+                            <td>Overstek</td>
+                            <td>
+                                {{$production->overstekTickO === 1 ? '✔': '✖' }}
+                            </td>
 
-            Onderdek
-            <section class="section">
-                <section class="hero">
-                    <div class="hero-body">
-                        <p class="title">
-                            Onderdek
-                        </p>
-                    </div>
+                            <td>
+                                {{$production->overstekAangO}}
+                            </td>
+
+                            <td>
+                                {{$production->overstekCorrectO}}
+                            </td>
+                        </tr>
+                    </table>
                 </section>
 
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Condition</th>
-                        <th>Aangepast naar</th>
-                        <th>Correctie</th>
-                    </tr>
+                <section class="section">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <h5 class="card bg-gradient-purple">Overvig</h5>
+                        </div>
+                    </section>
+
+                    <table class="table table-bordered table-hover table-secondary ">
+                        <tr>
+                            <th></th>
+                            <th>Condition</th>
+                            <th>Aangepast naar</th>
+                            <th>Correctie</th>
+                        </tr>
 
 
-                    <tr>
-                        <td>Brug</td>
-                        <td>
-                            {{$production->brugTick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Hoeken zaag</td>
+                            <td>
+                                {{$production->hoekenTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->brugAang}}
-                        </td>
+                            <td>
+                                {{$production->hoekenAang}}
+                            </td>
 
-                        <td>
-                            {{$production->brugCorrect}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->hoekenCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Ronddloper</td>
-                        <td>
-                            {{$production->rondTick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Stempels</td>
+                            <td>
+                                {{$production->stempelsTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->rondAang}}
-                        </td>
+                            <td>
+                                {{$production->stempelsAang}}
+                            </td>
 
-                        <td>
-                            {{$production->rondCorrect}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->stempelsCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Kruisdek</td>
-                        <td>
-                            {{$production->kruisTick === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Stapel hoogte</td>
+                            <td>
+                                {{$production->stapelTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->kruisAang}}
-                        </td>
+                            <td>
+                                {{$production->stapelAang}}
+                            </td>
 
-                        <td>
-                            {{$production->kruisCorrect}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->stapelCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Afmetingen</td>
-                        <td>
-                            {{$production->afmetingTickO === 1 ? '✔': '✖' }}
-                        </td>
+                        <tr>
+                            <td>Strappen/ Markeren</td>
+                            <td>
+                                {{$production->strappenTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->afmetingAangO}}
-                        </td>
+                            <td>
+                                {{$production->strappenAang}}
+                            </td>
 
-                        <td>
-                            {{$production->afmetingCorrectO}}
-                        </td>
-                    </tr>
+                            <td>
+                                {{$production->strappenCorrect}}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Overstek</td>
-                        <td>
-                            {{$production->overstekTickO === 1 ? '✔': '✖' }}
-                        </td>
 
-                        <td>
-                            {{$production->overstekAangO}}
-                        </td>
+                        <tr>
+                            <td>Spijkers (BD,TD,OD)</td>
+                            <td>
+                                {{$production->spijkerTick === 1 ? '✔': '✖' }}
+                            </td>
 
-                        <td>
-                            {{$production->overstekCorrectO}}
-                        </td>
-                    </tr>
-                </table>
-            </section>
+                            <td>
+                                {{$production->spijkerAang}}
+                            </td>
 
-            Overvig
-            <section class="section">
-                <section class="hero">
-                    <div class="hero-body">
-                        <p class="title">
-                            Overvig
-                        </p>
-                    </div>
+                            <td>
+                                {{$production->spijkerCorrect}}
+                            </td>
+                        </tr>
+                    </table>
                 </section>
 
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Condition</th>
-                        <th>Aangepast naar</th>
-                        <th>Correctie</th>
-                    </tr>
+                <section class="section">
+                    <label class='' for=''>Additional Notes:</label>
+                    <p class="table table-bordered table-hover table-secondary">{{$production->additionalNotes}}</p>
+                </section>
 
-
-                    <tr>
-                        <td>Hoeken zaag</td>
-                        <td>
-                            {{$production->hoekenTick === 1 ? '✔': '✖' }}
-                        </td>
-
-                        <td>
-                            {{$production->hoekenAang}}
-                        </td>
-
-                        <td>
-                            {{$production->hoekenCorrect}}
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Stempels</td>
-                        <td>
-                            {{$production->stempelsTick === 1 ? '✔': '✖' }}
-                        </td>
-
-                        <td>
-                            {{$production->stempelsAang}}
-                        </td>
-
-                        <td>
-                            {{$production->stempelsCorrect}}
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Stapel hoogte</td>
-                        <td>
-                            {{$production->stapelTick === 1 ? '✔': '✖' }}
-                        </td>
-
-                        <td>
-                            {{$production->stapelAang}}
-                        </td>
-
-                        <td>
-                            {{$production->stapelCorrect}}
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Strappen/ Markeren</td>
-                        <td>
-                            {{$production->strappenTick === 1 ? '✔': '✖' }}
-                        </td>
-
-                        <td>
-                            {{$production->strappenAang}}
-                        </td>
-
-                        <td>
-                            {{$production->strappenCorrect}}
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>Spijkers (BD,TD,OD)</td>
-                        <td>
-                            {{$production->spijkerTick === 1 ? '✔': '✖' }}
-                        </td>
-
-                        <td>
-                            {{$production->spijkerAang}}
-                        </td>
-
-                        <td>
-                            {{$production->spijkerCorrect}}
-                        </td>
-                    </tr>
-                </table>
             </section>
+        </div>
 
-            <section class="section">
-                <label class='' for=''>Additional Notes:</label>
-                <p>{{$production->additionalNotes}}</p>
+    @elseif(Auth::user()->role === 'Administrator')
+        <div class="column is-9-desktop ">
+            <section class="content" >
+
+                {{--Bovendek--}}
+                <section class="section">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <h5 class="card bg-gradient-purple">Bovendek</h5>
+
+                        </div>
+                    </section>
+
+                    <table class="table table-bordered table-hover table-secondary ">
+                        <tr>
+                            <th></th>
+                            <th>Condition</th>
+                            <th>Aangepast naar</th>
+                            <th>Correctie</th>
+                        </tr>
+
+
+                        <tr>
+                            <td>Afmeting</td>
+                            <td>
+                                {{$production->afmetingTickB === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->afmetingAangB}}
+                            </td>
+
+                            <td>
+                                {{$production->afmetingCorrectB}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Aantal planken</td>
+                            <td>
+                                {{$production->aantalTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->aantalAang}}
+                            </td>
+
+                            <td>
+                                {{$production->aantalCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Spaties</td>
+                            <td>
+                                {{$production->spatiesTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->spatiesAang}}
+                            </td>
+
+                            <td>
+                                {{$production->spatiesCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Klampen	</td>
+                            <td>
+                                {{$production->klampenTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->klampenAang}}
+                            </td>
+
+                            <td>
+                                {{$production->klampenCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Overstek</td>
+                            <td>
+                                {{$production->overstekTickB === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->overstekAangB}}
+                            </td>
+
+                            <td>
+                                {{$production->overstekCorrectB}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </section>
+
+                <section class="section">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <h5 class="card bg-gradient-purple">Klossen</h5>
+                        </div>
+                    </section>
+
+                    <table class="table table-bordered table-hover table-secondary ">
+                        <tr>
+                            <th></th>
+                            <th>Condition</th>
+                            <th>Aangepast naar</th>
+                            <th>Correctie</th>
+                        </tr>
+
+
+                        <tr>
+                            <td>Soort (Spaan/ Hout)</td>
+                            <td>
+                                {{$production->soortTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->soortAang}}
+                            </td>
+
+                            <td>
+                                {{$production->soortCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Balk</td>
+                            <td>
+                                {{$production->balkTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->balkAang}}
+                            </td>
+
+                            <td>
+                                {{$production->balkCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Afmeting 1</td>
+                            <td>
+                                {{$production->afmeting1Tick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->afmeting1Aang}}
+                            </td>
+
+                            <td>
+                                {{$production->afmeting1Correct}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Afmeting 2</td>
+                            <td>
+                                {{$production->afmeting2Tick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->afmeting2Aang}}
+                            </td>
+
+                            <td>
+                                {{$production->afmeting2Correct}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </section>
+
+                <section class="section">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <h5 class="card bg-gradient-purple">Onderdek</h5>
+                        </div>
+                    </section>
+
+                    <table class="table table-bordered table-hover table-secondary ">
+                        <tr>
+                            <th></th>
+                            <th>Condition</th>
+                            <th>Aangepast naar</th>
+                            <th>Correctie</th>
+                        </tr>
+
+
+                        <tr>
+                            <td>Brug</td>
+                            <td>
+                                {{$production->brugTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->brugAang}}
+                            </td>
+
+                            <td>
+                                {{$production->brugCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Ronddloper</td>
+                            <td>
+                                {{$production->rondTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->rondAang}}
+                            </td>
+
+                            <td>
+                                {{$production->rondCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Kruisdek</td>
+                            <td>
+                                {{$production->kruisTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->kruisAang}}
+                            </td>
+
+                            <td>
+                                {{$production->kruisCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Afmetingen</td>
+                            <td>
+                                {{$production->afmetingTickO === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->afmetingAangO}}
+                            </td>
+
+                            <td>
+                                {{$production->afmetingCorrectO}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Overstek</td>
+                            <td>
+                                {{$production->overstekTickO === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->overstekAangO}}
+                            </td>
+
+                            <td>
+                                {{$production->overstekCorrectO}}
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section class="section">
+                    <section class="hero">
+                        <div class="hero-body">
+                            <h5 class="card bg-gradient-purple">Overvig</h5>
+                        </div>
+                    </section>
+
+                    <table class="table table-bordered table-hover table-secondary ">
+                        <tr>
+                            <th></th>
+                            <th>Condition</th>
+                            <th>Aangepast naar</th>
+                            <th>Correctie</th>
+                        </tr>
+
+
+                        <tr>
+                            <td>Hoeken zaag</td>
+                            <td>
+                                {{$production->hoekenTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->hoekenAang}}
+                            </td>
+
+                            <td>
+                                {{$production->hoekenCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Stempels</td>
+                            <td>
+                                {{$production->stempelsTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->stempelsAang}}
+                            </td>
+
+                            <td>
+                                {{$production->stempelsCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Stapel hoogte</td>
+                            <td>
+                                {{$production->stapelTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->stapelAang}}
+                            </td>
+
+                            <td>
+                                {{$production->stapelCorrect}}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Strappen/ Markeren</td>
+                            <td>
+                                {{$production->strappenTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->strappenAang}}
+                            </td>
+
+                            <td>
+                                {{$production->strappenCorrect}}
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Spijkers (BD,TD,OD)</td>
+                            <td>
+                                {{$production->spijkerTick === 1 ? '✔': '✖' }}
+                            </td>
+
+                            <td>
+                                {{$production->spijkerAang}}
+                            </td>
+
+                            <td>
+                                {{$production->spijkerCorrect}}
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section class="section">
+                    <label class='' for=''>Additional Notes:</label>
+                    <p>{{$production->additionalNotes}}</p>
+                </section>
+
             </section>
+        </div>
 
-        </section>
-    </div>
+    @endif
+
 @endsection
 

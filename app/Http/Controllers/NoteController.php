@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -15,15 +16,11 @@ class NoteController extends Controller
      */
     public function index()
     {
-        if(Order::isInProduction() ==='In Production'){
-            $order = Order::where('status','In Production')->first();
-        }elseif(Order::isInProduction() ==='Paused') {
-            $order = Order::where('status','Paused')->first();
-        }
+        $order = $this->findOrderForUser();
 
         $notes = Note::orderBy('created_at', 'desc')->get();
 
-        return view('notes.index', ['notes' => $notes], ['order' => $order]);
+        return view('notes.index', compact('notes', 'order'));
     }
 
     /**
@@ -33,11 +30,8 @@ class NoteController extends Controller
      */
     public function create()
     {
-        if(Order::isInProduction() ==='In Production'){
-            $order = Order::where('status','In Production')->first();
-        }elseif(Order::isInProduction() ==='Paused') {
-            $order = Order::where('status','Paused')->first();
-        }
+        $order = $this->findOrderForUser();
+
         return view('notes.create', compact('order'));
     }
 
@@ -49,13 +43,7 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        if(Order::isInProduction() ==='In Production'){
-            $order = Order::where('status','In Production')->first();
-        }elseif(Order::isInProduction() ==='Paused') {
-            $order = Order::where('status','Paused')->first();
-        }
-
-        $order_id = $order->id;
+        $order_id = $this->findOrderForUser()->id;
 
         $note = Note::create($this->validateNote($request, $order_id));
 
@@ -134,7 +122,28 @@ class NoteController extends Controller
         return view('notes.fixStoppage', compact('order_id', 'note'));
     }
 
-    /**
+    public function getOrder() {
+        $machine = Auth::user()->machine;
+
+        if(Order::isInProduction($machine) ==='In Production'){
+            $order = Order::where('status','In Production')->first();
+        }elseif(Order::isInProduction($machine) ==='Paused') {
+            $order = Order::where('status','Paused')->first();
+        }
+
+        return $order;
+    }
+
+    public function findOrderForUser() {
+        if(Auth::user()->role === 'Administrator') {
+            $order = Order::isSelected();
+        } else
+            $order = $this->getOrder();
+
+        return $order;
+    }
+
+/**
      * this function validates the attributes of a note
      * @param Request $request
      * @return array

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
+use App\Models\Order;
+use App\Models\Product;
 use App\Models\ProductLocation;
 use Illuminate\Http\Request;
 
@@ -44,9 +47,14 @@ class ProductLocationController extends Controller
      * @param  \App\Models\ProductLocation  $productLocation
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductLocation $productLocation)
+    public function show($order)
     {
-        //
+        $productLocationDetails = $this->getProductLocation($order);
+        $orderId = $productLocationDetails['orderId'];
+        $pallet = $productLocationDetails['pallet'];
+        $productLocation = $productLocationDetails['productLocation'];
+
+        return view('productLocations.show', compact('productLocation', 'pallet', 'orderId'));
     }
 
     /**
@@ -55,9 +63,13 @@ class ProductLocationController extends Controller
      * @param  \App\Models\ProductLocation  $productLocation
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductLocation $productLocation)
+    public function edit($order)
     {
-        //
+        $productLocationDetails = $this->getProductLocation($order);
+        $orderId = $productLocationDetails['orderId'];
+        $productLocation = $productLocationDetails['productLocation'];
+
+        return view('productLocations.edit', compact('productLocation', 'orderId'));
     }
 
     /**
@@ -67,9 +79,15 @@ class ProductLocationController extends Controller
      * @param  \App\Models\ProductLocation  $productLocation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductLocation $productLocation)
+    public function update(Request $request, $order)
     {
-        //
+
+        $productLocationDetails = $this->getProductLocation($order);
+        $location = $productLocationDetails['location'];
+
+        $location->update($this->validateLocationChange($request));
+
+        return redirect(route('productLocations.show', $order));
     }
 
     /**
@@ -81,5 +99,25 @@ class ProductLocationController extends Controller
     public function destroy(ProductLocation $productLocation)
     {
         //
+    }
+
+    public function validateLocationChange(Request $request){
+        $validatedAtributes = $request->validate([
+            'name'=>'required',
+        ]);
+
+        return $validatedAtributes;
+    }
+
+    public function getProductLocation($details)
+    {
+        $order = Order::find($details);
+        $orderId = $order->id;
+        $pallet = $order->pallet;
+        $product = Product::find($pallet->product_id);
+        $productLocation = ProductLocation::where('product_id', $product->id)->first();
+        $location = Location::find($productLocation->location_id);
+
+        return ['orderId' => $orderId, 'pallet' => $pallet, 'productLocation' => $productLocation, 'location' => $location];
     }
 }
