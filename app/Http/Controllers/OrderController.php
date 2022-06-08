@@ -66,6 +66,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
        // $order->addProduced();
+//        dd($order->production);
         return view('orders.show', compact('order'));
     }
 

@@ -176,10 +176,12 @@
                 <i class="nav-icon fas fa-draw-polygon"></i>
                 <p>Drawings</p>
             </a>
+            @if($order->production != null)
             <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                 <i class="nav-icon fas fa-tools"></i>
                 <p>Production Check</p>
             </a>
+            @endif
             <a href="{{ route('hourlyReports.index') }}" class="nav-link active bg-gray-dark btn text-left">
                 <i class="nav-icon fas fa-check"></i>
                 <p>Hourly Check</p>
