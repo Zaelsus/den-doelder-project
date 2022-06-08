@@ -9,6 +9,8 @@ class ProductLocation extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * Gets the product related to the productlocation
      */

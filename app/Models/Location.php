@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
     protected $attributes = [
         'available_storage_space' => 0,
     ];
@@ -15,7 +18,7 @@ class Location extends Model
     /**
      *Gets the product-locations related to the location
      */
-    public function productlocations()
+    public function productLocation()
     {
         return $this->hasMany(ProductLocation::class,'location_id');
     }

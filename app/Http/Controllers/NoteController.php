@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -15,9 +16,11 @@ class NoteController extends Controller
      */
     public function index()
     {
+        $order = $this->findOrderForUser();
+
         $notes = Note::orderBy('created_at', 'desc')->get();
 
-        return view('notes.index', ['notes' => $notes]);
+        return view('notes.index', compact('notes', 'order'));
     }
 
     /**
@@ -27,8 +30,9 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $orders = Order::all();
-        return view('notes.create', ['orders' => $orders]);
+        $order = $this->findOrderForUser();
+
+        return view('notes.create', compact('order'));
     }
 
     /**
@@ -39,10 +43,12 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $note = Note::create($this->validateNote($request));
+        $order_id = $this->findOrderForUser()->id;
 
-        // redirecting to show the note
-        return redirect('/notes');
+        $note = Note::create($this->validateNote($request, $order_id));
+
+//      redirecting to show the note
+        return redirect(route('notes.index', $note));
     }
 
     /**
@@ -64,8 +70,8 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        $orders = Order::all();
-        return view('notes.edit', compact('orders', 'note'));
+//        $orders = Order::all();
+//        return view('notes.edit', compact('orders', 'note'));
     }
 
     /**
@@ -77,7 +83,8 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        $note->update($this->validateNote($request));
+        $order_id = $note->order_id;
+        $note->update($this->validateNote($request, $order_id));
 
         return redirect('/notes');
     }
@@ -95,18 +102,64 @@ class NoteController extends Controller
     }
 
     /**
+     * Returns the view of adding a new note for a stoppage
+     *
+     * @param Order $order
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function stoppage(Order $order) {
+        return view('notes.stoppage', compact('order'));
+    }
+
+    /**
+     * Returns the view of adding a fix to a stoppage note
+     *
+     * @param Order $order
+     *
+     */
+    public function fixStoppage(Note $note) {
+        $order_id = $note->order->order_number;
+        return view('notes.fixStoppage', compact('order_id', 'note'));
+    }
+
+    public function getOrder() {
+        $machine = Auth::user()->machine;
+
+        if(Order::isInProduction($machine) ==='In Production'){
+            $order = Order::where('status','In Production')->first();
+        }elseif(Order::isInProduction($machine) ==='Paused') {
+            $order = Order::where('status','Paused')->first();
+        }
+
+        return $order;
+    }
+
+    public function findOrderForUser() {
+        if(Auth::user()->role === 'Administrator') {
+            $order = Order::isSelected();
+        } else
+            $order = $this->getOrder();
+
+        return $order;
+    }
+
+/**
      * this function validates the attributes of a note
      * @param Request $request
      * @return array
      */
-    public function validateNote(Request $request): array
+    public function validateNote(Request $request, $order_id): array
     {
-        $validatedAtributes = $request->validate([
+
+        $validatedAttributes = $request->validate([
             'title'=>'required',
             'content'=>'required',
-            'order_id'=>'required',
+            'label'=>'',
+            'priority'=>'',
+            'fix'=>''
         ]);
+        $validatedAttributes['order_id'] = $order_id;
 
-        return $validatedAtributes;
+        return $validatedAttributes;
     }
 }

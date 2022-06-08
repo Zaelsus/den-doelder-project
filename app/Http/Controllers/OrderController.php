@@ -40,8 +40,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $pallets = Pallet::all();
-        return view('orders.create',compact('pallets'));
+      //
     }
 
     /**
@@ -52,10 +51,46 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($this->validateOrder($request));
-        // redirecting to show a page
-        return redirect(route('orders.index', compact('order')));
+      //
     }
+
+    /**
+     * Show the step One Form for creating a new product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createStepOne(Request $request)
+    {
+        $pallets = Pallet::all();
+        $order = $request->session()->get('order');
+
+        return view('orders.create-step-one',compact('order','pallets'));
+    }
+
+    /**
+     * Post Request to store step1 info in session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postCreateStepOne(Request $request)
+    {
+        $validatedData = $this->validateOrder($request);
+
+        if(empty($request->session()->get('order'))){
+            $order = new Order();
+            $order->fill($validatedData);
+            $request->session()->put('order', $order);
+        }else{
+            $order = $request->session()->get('order');
+            $order->fill($validatedData);
+            $request->session()->put('order', $order);
+        }
+        $order->save();
+
+        return redirect()->route('orders.create.step.two');
+    }
+
 
     /**
      * Display the specified resource.
@@ -65,9 +100,43 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-       // $order->addProduced();
-//        dd($order->production);
         return view('orders.show', compact('order'));
+
+    }
+
+    /**
+     * changes the status of the current order to in production
+     */
+    public static function startProduction(Order $order)
+    {
+        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
+            if ($order->status === 'Production Pending') {
+                $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
+            } else {
+                $order->update(['status' => 'In Production']);
+            }
+            return redirect(route('orders.show', $order));
+        } else {
+            return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
+        }
+    }
+
+    /**
+     * changes the status of the current order to done
+     */
+    public static function stopProduction(Order $order ,Machine $machine)
+    {
+        $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
+        return redirect(route('machines.show',compact('machine')));
+    }
+
+    /**
+     * changes the status of the current order to done
+     */
+    public static function pauseProduction(Order $order)
+    {
+        $order->update(['status' => 'Paused']);
+        return redirect(route('notes.stoppage', $order));
     }
 
     /**
@@ -131,40 +200,7 @@ class OrderController extends Controller
     }
 
 
-    /**
-     * changes the status of the current order to in production
-     */
-    public static function startProduction(Order $order)
-    {
-        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
-            if ($order->status === 'Production Pending') {
-                $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
-            } else {
-                $order->update(['status' => 'In Production']);
-            }
-            return redirect(route('orders.show', $order));
-        } else {
-            return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
-        }
-    }
 
-    /**
-     * changes the status of the current order to done
-     */
-    public static function stopProduction(Order $order ,Machine $machine)
-    {
-        $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
-        return redirect(route('machines.show',compact('machine')));
-    }
-
-    /**
-     * changes the status of the current order to done
-     */
-    public static function pauseProduction(Order $order)
-    {
-        $order->update(['status' => 'Paused']);
-        return redirect(route('orders.show', $order));
-    }
 
     /**
      * changes the status of the current order to Canceled
