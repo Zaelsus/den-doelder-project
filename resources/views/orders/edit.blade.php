@@ -36,13 +36,19 @@
                             <label class="required" for="status">Order Status</label>
                             <div>
                                 <select name="status" class="custom-select @error('status') is-invalid @enderror">
-                                    @if($order->status === 'In Production' || $order->status === 'Done')
+                                    @if($order->status === 'Admin Hold' && (\App\Models\Order::prodCheckExists($order)) && (\App\Models\Order::getOrder($order->machine) === null))
+                                        <option
+                                            value='In Production' {{$order->status === 'In Production' ? 'selected':''}}>
+                                            In Production
+                                        </option>
+                                    @endif
+                                    @if($order->status === 'In Production' || $order->status === 'Done' || $order->status === 'Paused')
                                         <option value='{{$order->status}}' selected>{{$order->status}}
                                         </option>
-                                        @if($order->status === 'Done')
+                                        @if($order->status === 'Done' && (\App\Models\Order::getOrder($order->machine) === null))
                                             <option
-                                                value='Production Pending' {{$order->status === 'Production Pending' ? 'selected':''}}>
-                                                Production Pending
+                                                value='In Production' {{$order->status === 'In Production' ? 'selected':''}}>
+                                                In Production
                                             </option>
                                         @endif
 
@@ -156,18 +162,15 @@
                         <div class="col-md-3 mb-3">
                             <label for="machine">Production machine</label>
                             <div>
-                                <select name="machine" class="custom-select @error('machine') is-invalid @enderror">
+                                <select name="machine_id" class="custom-select @error('machine_id') is-invalid @enderror">
                                     <option value='' >Select Production Machine
-                                    </option>
-                                    <option value='Cape 1' {{$order->machine === 'Cape 1' ? 'selected':''}}>Cape 1
-                                    </option>
-                                    <option value='Cape 2' {{$order->machine === 'Cape 2' ? 'selected':''}}>Cape 2
-                                    </option>
-                                    <option value='Cape 5' {{$order->machine === 'Cape 5' ? 'selected':''}}>Cape 5
-                                    </option>
+                                    @foreach($machines as $machine)
+                                        <option
+                                            value={{$machine->id}} {{$order->machine_id === $machine->id ? 'selected':''}}>{{$machine->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            @error('machine')
+                            @error('machine_id')
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>

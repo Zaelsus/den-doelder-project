@@ -18,13 +18,13 @@ class DatabaseSeeder extends Seeder
             PalletSeeder::class,
             MaterialSeeder::class,
             ProductLocationSeeder::class,
+            MachineSeeder::class,
             OrderSeeder::class,
             OrderMaterialSeeder::class,
             HourlyReportSeeder::class,
             NoteSeeder::class,
             ProductionSeeder::class,
             InitialSeeder::class,
-            MachineSeeder::class,
         ]);
     }
 }

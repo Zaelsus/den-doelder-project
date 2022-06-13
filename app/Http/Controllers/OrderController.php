@@ -27,8 +27,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //looking about adding another order by according to status as well as scheduled production
-        $orders = Order::orderBy('machine', 'desc')->get();
+        //looking about adding another order by accoridng to status as well as scheduled production
+        $orders = Order::orderBy('machine_id', 'desc')->get();
         $previousMachine=null;
         return view('orders.index', compact('orders','previousMachine'));
     }
@@ -62,9 +62,10 @@ class OrderController extends Controller
     public function createStepOne(Request $request)
     {
         $pallets = Pallet::all();
+        $machines = Machine::all();
         $order = $request->session()->get('order');
 
-        return view('orders.create-step-one',compact('order','pallets'));
+        return view('orders.create-step-one',compact('order','pallets','machines'));
     }
 
     /**
@@ -148,7 +149,8 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $pallets = Pallet::all();
-        return view('orders.edit', compact('order','pallets'));
+        $machines = Machine::all();
+        return view('orders.edit', compact('order','pallets','machines'));
     }
 
     /**
@@ -188,7 +190,7 @@ class OrderController extends Controller
             'pallet_id'=>'required',
             'machine'=>'',
             'quantity_production'=>'required|integer|min:1',
-            'start_date'=>'nullable|date|after:today',
+            'start_date'=>'nullable|date|after:yesterday',
             'site_location'=>'required',
             'production_instructions'=>'',
             'client_name' =>'required|string',

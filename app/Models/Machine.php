@@ -10,10 +10,18 @@ class Machine extends Model
     use HasFactory;
 
     /**
-     * returns the hourly reports related to the order
+     * returns the users related to the machine
      */
     public function users()
     {
         return $this->hasMany(User::class, 'machine_id');
+    }
+
+    /**
+     *Gets the orders related to the machine
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class,'machine_id');
     }
 }

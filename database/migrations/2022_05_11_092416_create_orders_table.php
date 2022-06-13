@@ -21,7 +21,11 @@ class CreateOrdersTable extends Migration
                 ->references('product_id')
                 ->on('pallets')
                 ->onDelete('restrict');
-            $table->string('machine')->nullable();
+            $table->unsignedBigInteger('machine_id');
+            $table->foreign('machine_id')
+                ->references('id')
+                ->on('machines')
+                ->onDelete('restrict');
             $table->unsignedInteger('quantity_production');
             $table->unsignedInteger('quantity_produced')->default(0);
             $table->unsignedInteger('add_quantity')->default(0);
@@ -31,6 +35,7 @@ class CreateOrdersTable extends Migration
             $table->string('client_name');
             $table->string('client_address');
             $table->string('status');
+            $table->string('truckDriver_status')->nullable();
             $table->dateTime('start_time')->default(null)->nullable();
             $table->date('end_time')->default(null)->nullable();
             // Temporary until sections for admin nav
