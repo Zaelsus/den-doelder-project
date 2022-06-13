@@ -4,24 +4,29 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header bg-gradient-olive">
-                <h3 class="text-center">Overview Notes</h3>
+                <h3 class="text-center">Overview Notes of Current Order</h3>
             </div>
             <div class="card-body">
+                @if( Auth::user()->role === 'Administrator' )
                 <button id="overviewButton" class="btn btn-lg bg-gradient-olive opacity-70"
                         onclick="changeButton({{$order->order_number}}, '{{ $order->machine }}')">
                     Notes for current machine</button>
                 <br>
                 <br>
+                @endif
                 <table class="table table-bordered table-hover" id="myTable">
                     <thead class="bg-gradient-olive opacity-70">
                     <tr>
-                        <th scope="col" onclick="sortTableNumber(0)">Order Number</th>
+                        <th scope="col" onclick="sortTableNumber(0)">Order</th>
                         <th scope="col">Machine</th>
                         <th scope="col">Title</th>
                         <th scope="col">Content</th>
                         <th scope="col">Labels</th>
                         <th scope="col">Priority</th>
                         <th scope="col">Created At</th>
+{{--                        @if( Auth::user()->role === 'Administrator' )--}}
+                        <th scope="col">Role</th>
+{{--                        @endif--}}
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -35,7 +40,7 @@
                                 {{ $note->order->machine }}
                             </td>
                             <td style="width: 20%">{{ $note->title}}</td>
-                            <td style="width: 30%">
+                            <td style="width: 20%">
                                 <details>
                                     <summary>{{ substr($note->content, 0, 40) }}</summary>
                                     <p>{{ substr($note->content, 40) }} <b>Fix: </b>{{ $note->fix }}</p>
@@ -63,11 +68,23 @@
                                 </span>
                             </td>
                             <td>{{ $note->created_at }}</td>
+                            <td>
+                                {{ $note->creator }}
+                            </td>
+                            @if ( Auth::user()->role === 'Production' )
                             <td @if ($note->label === 'stoppage') style="width: 10%" @endif>
                                 @if ($note->label === 'stoppage')
                                     <button class="btn btn-lg bg-gradient-olive opacity-70" onclick=window.location.href="{{ route('notes.fixStoppage', $note)}}">Log fix</button>
                                 @endif
                             </td>
+                            @elseif (Auth::user()->role === 'Administrator')
+                                <td>
+                                <button class="btn btn-lg bg-gradient-olive opacity-70"
+                                            onclick=window.location.href="{{route('notes.edit', $note)}}">
+                                    Edit
+                                </button>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>

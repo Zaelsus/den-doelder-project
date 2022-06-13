@@ -18,7 +18,13 @@ class NoteController extends Controller
     {
         $order = $this->findOrderForUser();
 
-        $notes = Note::orderBy('created_at', 'desc')->get();
+        if(Auth::user()->role === 'Administrator') {
+            $notes = Note::orderBy('created_at', 'desc')->get();
+        }
+
+        else {
+            $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('created_at', 'desc')->get();
+        }
 
         return view('notes.index', compact('notes', 'order'));
     }
@@ -70,8 +76,8 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-//        $orders = Order::all();
-//        return view('notes.edit', compact('orders', 'note'));
+         $orders = Order::all();
+         return view('notes.edit', compact('orders', 'note'));
     }
 
     /**
@@ -154,11 +160,18 @@ class NoteController extends Controller
         $validatedAttributes = $request->validate([
             'title'=>'required',
             'content'=>'required',
-            'label'=>'',
+            'label'=>'required',
             'priority'=>'',
             'fix'=>''
         ]);
         $validatedAttributes['order_id'] = $order_id;
+        if (Auth::user()->role === 'Administrator') {
+            $validatedAttributes['creator'] = 'Administrator';
+        } else if (Auth::user()->role === 'Production') {
+            $validatedAttributes['creator'] = 'Production';
+        } else {
+            $validatedAttributes['creator'] = 'TruckDriver';
+        }
 
         return $validatedAttributes;
     }

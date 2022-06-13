@@ -25,7 +25,7 @@
                         <div>
                             <textarea type="text" class="form-control @error('fix') is-invalid @enderror"
                                       name="fix"
-                                      placeholder="Content of note" rows="5" required
+                                      placeholder="Please describe the fix for the error occurred." rows="5" required
                             >{{old('content')}}</textarea>
                         </div>
                         @error('fix')

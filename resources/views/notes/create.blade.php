@@ -17,7 +17,7 @@
                                    type="text" placeholder="Title of note" value="{{old('title')}}" required>
                         </div>
                         @error('title')
-                        <p>{{ $message }}</p>
+                        <p class="help is-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
@@ -25,7 +25,7 @@
                         <div>
                             <textarea type="text" class="form-control @error('content') is-invalid @enderror"
                                       name="content"
-                                      placeholder="Content of note" rows="5" required
+                                      placeholder="Please describe the note in more detail." rows="5" required
                             >{{old('content')}}</textarea>
                         </div>
                         @error('content')
@@ -38,54 +38,18 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Error"
-                                       onclick="myFunction()">
+                                <input class="form-check-input" type="radio" name="label" value="Error" required>
                                 <span class="form-check-label badge badge-danger" style="color: white">Error</span>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Fix"
-                                       onclick="myFunction()">
+                                <input class="form-check-input" type="radio" name="label" value="Fix" required>
                                 <span class="form-check-label badge badge-success" style="color: white">Fix</span>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Other"
-                                       onclick="myFunction()">
+                                <input class="form-check-input" type="radio" name="label" value="Other" required>
                                 <span class="form-check-label badge badge-info" style="color: white">Other</span>
                             </div>
                         </div>
-
-                        <div class="col-md-4" id="text" style="display:none">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="priority" value="low">Low priority
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="priority" value="medium">Medium priority
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="priority" value="high">High priority
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-
-                    <script>
-                        function myFunction() {
-                            console.log("function");
-                            let labelElements = Array.from(document.getElementsByName("label"));
-                            let text = document.getElementById("text");
-                            let i = 0;
-                            let checked = false;
-                            while (i < labelElements.length && checked === false) {
-                                if (labelElements[i].checked === true) {
-                                    text.style.display = "block";
-                                    checked = true;
-                                } else {
-                                    text.style.display = "none";
-                                }
-                                i++;
-                            }
-                        }
-                    </script>
                     <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Create Note</button>
                 </form>
             </div>
