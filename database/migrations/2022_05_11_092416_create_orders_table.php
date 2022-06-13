@@ -31,6 +31,7 @@ class CreateOrdersTable extends Migration
             $table->string('client_name');
             $table->string('client_address');
             $table->string('status');
+            $table->string('truckDriver_status')->nullable();
             $table->dateTime('start_time')->default(null)->nullable();
             $table->date('end_time')->default(null)->nullable();
             // Temporary until sections for admin nav

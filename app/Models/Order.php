@@ -90,6 +90,7 @@ class Order extends Model
 
     /**
      * returns if there is an order in production (for production view)
+     * according to the machine
      */
     public static function getOrder(Machine $machine)
     {
