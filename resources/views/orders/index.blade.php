@@ -4,6 +4,13 @@
 {{--    TODO: This overlaps with the change machines button and looks unfinished--}}
     Orders Overview
 @endsection
+@section('custom_css')
+    <style>
+        tr[data-href] {
+            cursor: pointer;
+        }
+    </style>
+@endsection
 
 @section('content')
     <section class="section">
@@ -37,9 +44,10 @@
                                     <tbody>
                                     @foreach($orders as $order)
                                         @if($order->machine === $previousMachine)
-                                            <tr>
-                                                <th scope="row"><a
-                                                        href="{{Route('orders.show',$order)}}">{{ $order->order_number }}</a>
+                                            <tr class="pointer" data-href="{{Route('orders.show',$order)}}">
+                                                <th scope="row">
+{{--                                                    <a href="{{Route('orders.show',$order)}}">{{ $order->order_number }}</a>--}}
+                                                    {{ $order->order_number }}
                                                 </th>
                                                 <td>{{$order->pallet->name}}</td>
                                                 <td>{{$order->pallet->measurements}}</td>
@@ -77,9 +85,10 @@
                             </thead>
                             <tbody>
                             @foreach($orders as $order)
-                                <tr>
-                                    <th scope="row"><a
-                                            href="{{Route('orders.show',$order)}}">{{ $order->order_number }}</a>
+                                <tr data-href="{{Route('orders.show',$order)}}">
+                                    <th scope="row">
+                                        {{--                                                    <a href="{{Route('orders.show',$order)}}">{{ $order->order_number }}</a>--}}
+                                        {{ $order->order_number }}
                                     </th>
                                     <td>{{$order->pallet->name}}</td>
                                     <td>{{$order->pallet->measurements}}</td>
@@ -103,4 +112,18 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('custom_js')
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rows = document.querySelectorAll("tr[data-href]");
+
+            rows.forEach(row => {
+                row.addEventListener("click", () => {
+                    window.location.href = row.dataset.href;
+                })
+            })
+        });
+    </script>
 @endsection
