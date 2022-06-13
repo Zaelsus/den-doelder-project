@@ -43,12 +43,13 @@ class MachineController extends Controller
         $order = Order::getOrder($machine);
         //checks the role and loads the correct view
         if (Auth::user()->role === 'Production') {
-            $orders = Order::where('machine', $machine->name)
+            $orders = Order::where('machine_id', $machine->id)
                 ->where('status', 'Production Pending')
                 ->orderBy('start_date', 'desc')->get();
             // if there isnt any order in production
             if ($order === null) {
-                return view('orders.index', compact('orders'));
+                $previousMachine=null;
+                return view('orders.index', compact('orders','previousMachine'));
             }
             return view('orders.show', compact('order'));
 

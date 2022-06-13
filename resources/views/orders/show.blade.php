@@ -45,6 +45,8 @@
                     @endif
                     @if($order->machine ===null)
                         <span class="badge badge-pill badge-warning">No machine elected</span>
+                    @else
+                        <span class="badge badge-pill badge-success">{{$order->machine->name}}</span>
                     @endif
                     @if(count($order->orderMaterials) === 0)
                         <span class="badge badge-pill badge-warning">No materials chosen</span>

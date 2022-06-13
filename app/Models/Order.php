@@ -14,7 +14,7 @@ class Order extends Model
         'start_date' => null,
         'site_location' => 'Axel',
         'production_instructions' => '',
-        'machine' => '',
+        'machine_id' => null,
         'status' => 'Admin Hold',
         'start_time' => null,
         'end_time' => null,
@@ -30,6 +30,13 @@ class Order extends Model
         return $this->hasMany(OrderMaterial::class, 'order_id');
     }
 
+    /**
+     * Gets the machine related to the order
+     */
+    public function machine()
+    {
+        return $this->belongsTo(Machine::class, 'machine_id', 'id');
+    }
 
     /**
      * Gets the pallet related to the order
@@ -48,7 +55,7 @@ class Order extends Model
     }
 
     /**
-     * Gets the pallet related to the order
+     * Gets the initial check related to the order
      */
     public function initial()
     {
@@ -73,10 +80,11 @@ class Order extends Model
 
     /**
      * returns if there is an order in production (for production view)
+     * according to the machine
      */
     public static function isInProduction(Machine $machine)
     {
-        $orderInProduction = Order::where('machine', $machine->name)->where(function ($query) {
+        $orderInProduction = Order::where('machine_id', $machine->id)->where(function ($query) {
             $query->where('status', 'In Production')->orwhere('status', 'Paused');
         })->first();
         if ($orderInProduction !== null) {
@@ -89,8 +97,7 @@ class Order extends Model
     }
 
     /**
-     * returns if there is an order in production (for production view)
-     * according to the machine
+     * returns the right order if in production according to status or null if there isnt
      */
     public static function getOrder(Machine $machine)
     {
@@ -125,7 +132,7 @@ class Order extends Model
     public static function initialCheckExists(Order $order)
     {
         $initialCheck = $order->initial;
-        if ($initialCheck !== null) {
+        if($initialCheck !== null) {
             return true;
         }
         return false;
@@ -146,6 +153,10 @@ class Order extends Model
         return false;
     }
 
+    /**
+     * Returns the quantity already produced for current order
+     * @return int|mixed
+     */
     public function getQuantityMadeAttribute()
     {
         if ($this->quantity_produced > $this->quantity_production) {

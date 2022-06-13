@@ -15,6 +15,13 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+                <div class="alert alert-default-info alert-dismissible fade show">
+                    How many of which materials are needed for 1 pallet of type {{$order->pallet->name}}
+                    Please choose between 0-13.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <form method="POST" action="{{ route('orders.create.step.two.post') }}">
                     @csrf
                     <table>
