@@ -127,11 +127,11 @@ class InitialController extends Controller
             'waanHtKd'=>'min:0',
 
 //            Klossen
-            'soortTick'=>'min:0',
+            'soort'=>'required_if:balk,null',
             'soortAang'=>'min:0',
             'soortHtKd'=>'min:0',
 
-            'balkTick'=>'min:0',
+            'balk'=>'required_if:soort,null',
             'balkAang'=>'min:0',
             'balkHtKd'=>'min:0',
 

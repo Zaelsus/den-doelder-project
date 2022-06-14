@@ -42,35 +42,38 @@ class CreateProductionsTable extends Migration
             $table->string('overstekCorrectB')->nullable();
 
 //            Klossen
-            $table->string('soortTick')->nullable();
+            $table->string('soort')->nullable();
             $table->string('soortAang')->nullable();
             $table->string('soortHtKd')->nullable();
 
-            $table->string('balkTick')->nullable();
+            $table->string('balk')->nullable();
             $table->string('balkAang')->nullable();
             $table->string('balkHtKd')->nullable();
 
 
 //            Onderdek
-            $table->string('onderdek')->nullable();
+            $table->string('onderdek');
             $table->string('onderdekAang')->nullable();
             $table->string('onderdekHtKd')->nullable();
 
 //            Overig
             $table->boolean('hoekenTick')->default(0);
             $table->string('hoekenAang')->nullable();
-
+            $table->string('hoekenCorrect')->nullable();
 
             $table->boolean('stempelsTick')->default(0);
             $table->string('stempelsAang')->nullable();
+            $table->string('stempelsCorrect')->nullable();
 
             $table->boolean('stapelTick')->default(0);
             $table->string('stapelAang')->nullable();
+            $table->string('stapelCorrect')->nullable();
 
-            $table->string('strappenTick')->nullable();
+            $table->string('strappenTick');
             $table->string('strappenAang')->nullable();
+            $table->string('strappenCorrect')->nullable();
 
-            $table->string('spijkerTick')->nullable();
+            $table->string('spijkerTick');
             $table->string('spijkerAang')->nullable();
             $table->string('spijkerCorrect')->nullable();
 

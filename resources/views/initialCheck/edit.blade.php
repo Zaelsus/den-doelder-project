@@ -31,10 +31,10 @@
                         <tr>
                             <td>Afmeting</td>
                             <td>
-                                <label for="afmetingTickB" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmetingTickB" value="1"  {{$initial->afmetingTickB === 1 ? 'checked': '' }}  >
-                                <label for="afmetingTickB" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmetingTickB" value="0" {{$initial->afmetingTickB === 0 ? 'checked': '' }} >
+                                <label for="afmetingTickB" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickB" value="1"  {{$initial->afmetingTickB === 1 ? 'checked': '' }}  >
+                                <label for="afmetingTickB" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickB" value="0" {{$initial->afmetingTickB === 0 ? 'checked': '' }} >
                             </td>
 
                             <td>
@@ -55,11 +55,11 @@
                             <td>Aantal planken</td>
 
                             <td>
-                                <label for="aantalTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="aantalTick" value="1" {{$initial->aantalTick === 1 ? 'checked': '' }}>
+                                <label for="aantalTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="aantalTick" value="1" {{$initial->aantalTick === 1 ? 'checked': '' }}>
 
-                                <label for="aantalTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="aantalTick" value="0" {{$initial->aantalTick === 0 ? 'checked': '' }}>
+                                <label for="aantalTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="aantalTick" value="0" {{$initial->aantalTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -80,10 +80,10 @@
                             <td>Klampen</td>
 
                             <td>
-                                <label for="klampenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="klampenTick" value="1" {{$initial->klampenTick === 1 ? 'checked': '' }}>
-                                <label for="klampenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="klampenTick" value="0" {{$initial->klampenTick === 0 ? 'checked': '' }}>
+                                <label for="klampenTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="klampenTick" value="1" {{$initial->klampenTick === 1 ? 'checked': '' }}>
+                                <label for="klampenTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="klampenTick" value="0" {{$initial->klampenTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -105,10 +105,10 @@
                             </td>
 
                             <td>
-                                <label for="schimmelTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="schimmelTick" value="1" {{$initial->schimmelTick === 1 ? 'checked': '' }}>
-                                <label for="schimmelTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="schimmelTick" value="0" {{$initial->schimmelTick === 0 ? 'checked': '' }}>
+                                <label for="schimmelTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="schimmelTick" value="1" {{$initial->schimmelTick === 1 ? 'checked': '' }}>
+                                <label for="schimmelTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="schimmelTick" value="0" {{$initial->schimmelTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -129,10 +129,10 @@
                             <td>Waan Ja/Nee</td>
 
                             <td>
-                                <label for="waanTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="waanTick" value="1" {{$initial->waanTick === 1 ? 'checked': '' }}>
-                                <label for="waanTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="waanTick" value="0" {{$initial->waanTick === 0 ? 'checked': '' }}>
+                                <label for="waanTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="waanTick" value="1" {{$initial->waanTick === 1 ? 'checked': '' }}>
+                                <label for="waanTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="waanTick" value="0" {{$initial->waanTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -156,24 +156,32 @@
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
+                        <p class="card bg-gradient-red subtitle">Select at least one </p>
                     </section>
 
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
                             <th></th>
-                            <th>Condition</th>
+                            <th>Type</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
                         </tr>
 
                         <tr>
-                            <td>Soort (Spaan/ Hout)</td>
+                            <td>Soort</td>
 
                             <td>
-                                <label for="soortTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="soortTick" value="1" {{$initial->soortTick === 1 ? 'checked': '' }}>
-                                <label for="soortTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="soortTick" value="0" {{$initial->soortTick === 0 ? 'checked': '' }}>
+                                <div class="control">
+                                    <select name="soort" class="textarea  @error('soort') is-danger @enderror ">
+                                        <option value="">Choose Type</option>
+                                        <option value='Spaan'{{$initial->soort === "Spaan" ? 'selected':''}}>Spaan</option>
+                                        <option value="Hout" {{$initial->soort === "Hout" ? 'selected':''}}>Hout</option>
+                                    </select>
+                                </div>
+                                @error('soort')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                                </div>
                             </td>
 
                             <td>
@@ -194,74 +202,32 @@
                             <td>Balk</td>
 
                             <td>
-                                <label for="balkTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="balkTick" value="1" {{$initial->balkTick === 1 ? 'checked': '' }}>
-                                <label for="balkTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="balkTick" value="0" {{$initial->balkTick === 0 ? 'checked': '' }}>
+                                <div class="control">
+                                    <select name="balk" class="textarea  @error('balk') is-danger @enderror ">
+                                        <option value="">Choose Type</option>
+                                        <option value='Afmeting1'{{$initial->balk === "Afmeting1" ? 'selected':''}}>Afmeting 1</option>
+                                        <option value="Afmeting2" {{$initial->balk === "Afmeting2" ? 'selected':''}}>Afmeting 2</option>
+                                    </select>
+                                </div>
+                                @error('balk')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                                </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkAang" id="" value={{$initial->balkAang}}>
+                                    <input class="input" type="text" name="balkAang" id="" value={{$initial->soortAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkHtKd" id="" value={{$initial->balkHtKd}}>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Afmeting 1</td>
-
-                            <td>
-                                <label for="afmeting1Tick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmeting1Tick" value="1" {{$initial->afmeting1Tick === 1 ? 'checked': '' }}>
-                                <label for="afmeting1Tick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmeting1Tick" value="0" {{$initial->afmeting1Tick === 0 ? 'checked': '' }}>
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="afmeting1Aang" id="" value={{$initial->afmeting1Aang}}>
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="afmeting1HtKd" id="" value={{$initial->afmeting1HtKd}}>
+                                    <input class="input" type="text" name="balkHtKd" id="" value={{$initial->soortHtKd}}>
                                 </div>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>Afmeting 2</td>
-
-                            <td>
-                                <label for="afmeting2Tick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmeting2Tick" value="1" {{$initial->afmeting2Tick === 1 ? 'checked': '' }}>
-                                <label for="afmeting2Tick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmeting2Tick" value="0" {{$initial->afmeting2Tick === 0 ? 'checked': '' }}>
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="afmeting2Aang" id="" value={{$initial->afmeting2Aang}}>
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="afmeting2HtKd" id="" value={{$initial->afmeting2HtKd}}>
-                                </div>
-                            </td>
-                        </tr>
-
                     </table>
                 </section>
 
@@ -275,155 +241,45 @@
 
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
-                            <th></th>
-                            <th>Condition</th>
+                            <th>Type</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
                         </tr>
 
                         <tr>
-                            <td>Brug</td>
 
                             <td>
-                                <label for="brugTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="brugTick" value="1" {{$initial->brugTick === 1 ? 'checked': '' }}>
-                                <label for="brugTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="brugTick" value="0" {{$initial->brugTick === 0 ? 'checked': '' }}>
+                                <div class="control">
+                                    <select name="onderdek" class="textarea  @error('onderdek') is-danger @enderror ">
+                                        <option value="">Choose Type</option>
+                                        <option value='Brug'{{$initial->onderdek === "Brug" ? 'selected':''}}>Brug</option>
+                                        <option value="Ronddloper Afm(2x)" {{$initial->onderdek === "Ronddloper Afm(2x)" ? 'selected':''}}>Ronddloper Afm(2x)</option>
+                                        <option value="Ronddloper Afm(3x)" {{$initial->onderdek === "Ronddloper Afm(3x)" ? 'selected':''}}>Ronddloper Afm(3x)</option>
+                                        <option value='Kruisdek'{{$initial->onderdek === "Kruisdek" ? 'selected':''}}>Kruisdek</option>
+                                        <option value='Elementen'{{$initial->onderdek === "Elementen" ? 'selected':''}}>Elementen</option>
+                                        <option value='Dubbel Dek'{{$initial->onderdek === "Dubbel Dek" ? 'selected':''}}>Dubbel Dek</option>
+                                    </select>
+                                </div>
+                                @error('onderdek')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                                </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="brugAang" id="" value={{$initial->brugAang}}>
+                                    <input class="input" type="text" name="onderdekAang" id="" value={{$initial->brugAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="brugHtKd" id="" value={{$initial->brugHtKd}}>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Ronddloper Afm(2x)</td>
-
-                            <td>
-                                <label for="rond2xTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="rond2xTick" value="1" {{$initial->rond2xTick === 1 ? 'checked': '' }}>
-                                <label for="rond2xTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="rond2xTick" value="0" {{$initial->rond2xTick === 0 ? 'checked': '' }}>
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="rond2xAang" id="" value={{$initial->rond2xAang}}>
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="rond2xHtKd" id="" value={{$initial->rond2xHtKd}}>
+                                    <input class="input" type="text" name="onderdekHtKd" id="" value={{$initial->brugHtKd}}>
                                 </div>
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>Ronddloper Afm(3x)</td>
-
-                            <td>
-                                <label for="rond3xTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="rond3xTick" value="1" {{$initial->rond3xTick === 1 ? 'checked': '' }}>
-                                <label for="rond3xTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="rond3xTick" value="0" {{$initial->rond3xTick === 0 ? 'checked': '' }}>
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="rond3xAang" id="" value={{$initial->rond3xAang}}>
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="rond3xHtKd" id="" value={{$initial->rond3xHtKd}}>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Kruisdek</td>
-
-                            <td>
-                                <label for="kruisTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="kruisTick" value="1" {{$initial->kruisTick === 1 ? 'checked': '' }}>
-                                <label for="kruisTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="kruisTick" value="0" {{$initial->kruisTick === 0 ? 'checked': '' }}>
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="kruisAang" id="" value={{$initial->kruisAang}}>
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="kruisHtKd" id="" value={{$initial->kruisHtKd}}>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Elementen</td>
-
-                            <td>
-                                <label for="elementenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="elementenTick" value="1" {{$initial->elementenTick === 1 ? 'checked': '' }}>
-                                <label for="elementenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="elementenTick" value="0" {{$initial->elementenTick === 0 ? 'checked': '' }}>
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="elementenAang" id="" value={{$initial->elementenAang}}>
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="elementenHtKd" id="" value={{$initial->elementenHtKd}}>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Dubbel Dek</td>
-
-                            <td>
-                                <label for="dubbelTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="dubbelTick" value="1" {{$initial->dubbelTick === 1 ? 'checked': '' }}>
-                                <label for="dubbelTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="dubbelTick" value="0" {{$initial->dubbelTick === 0 ? 'checked': '' }}>
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="dubbelAang" id="" value={{$initial->dubbelAang}}>
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="dubbelHtKd" id="" value={{$initial->dubbelHtKd}}>
-                                </div>
-                            </td>
-                        </tr>
 
                     </table>
                 </section>
@@ -440,18 +296,17 @@
                         <tr>
                             <th></th>
                             <th>Condition</th>
-                            <th>Aangepast naar</th>
-                            <th>Ht/Kd: vocht %</th>
+                            <th>Note</th>
                         </tr>
 
                         <tr>
                             <td>Hoeken zaag</td>
 
                             <td>
-                                <label for="hoekenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="hoekenTick" value="1" {{$initial->hoekenTick === 1 ? 'checked': '' }}>
-                                <label for="hoekenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="hoekenTick" value="0" {{$initial->hoekenTick === 0 ? 'checked': '' }}>
+                                <label for="hoekenTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="hoekenTick" value="1" {{$initial->hoekenTick === 1 ? 'checked': '' }}>
+                                <label for="hoekenTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="hoekenTick" value="0" {{$initial->hoekenTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -460,22 +315,16 @@
                                 </div>
 
                             </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="hoekenHtKd" id="" value={{$initial->hoekenHtKd}}>
-                                </div>
-                            </td>
                         </tr>
 
                         <tr>
                             <td>Extra Stempel</td>
 
                             <td>
-                                <label for="stempelsTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="stempelsTick" value="1" {{$initial->stempelsTick === 1 ? 'checked': '' }}>
-                                <label for="stempelsTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="stempelsTick" value="0" {{$initial->stempelsTick === 0 ? 'checked': '' }}>
+                                <label for="stempelsTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="stempelsTick" value="1" {{$initial->stempelsTick === 1 ? 'checked': '' }}>
+                                <label for="stempelsTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">	&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="stempelsTick" value="0" {{$initial->stempelsTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -484,22 +333,16 @@
                                 </div>
 
                             </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="stempelsHtKd" id="" value={{$initial->stempelsHtKd}}>
-                                </div>
-                            </td>
                         </tr>
 
                         <tr>
                             <td>Stapel hoogte St/M</td>
 
                             <td>
-                                <label for="stapelTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="stapelTick" value="1" {{$initial->stapelTick === 1 ? 'checked': '' }}>
-                                <label for="stapelTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="stapelTick" value="0" {{$initial->stapelTick === 0 ? 'checked': '' }}>
+                                <label for="stapelTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="1" {{$initial->stapelTick === 1 ? 'checked': '' }}>
+                                <label for="stapelTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="0" {{$initial->stapelTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -509,45 +352,49 @@
 
                             </td>
 
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="stapelHtKd" id="" value={{$initial->stapelHtKd}}>
-                                </div>
-                            </td>
                         </tr>
 
                         <tr>
                             <td>Strappen/ Markeren</td>
 
                             <td>
-                                <label for="strappenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="strappenTick" value="1" {{$initial->strappenTick === 1 ? 'checked': '' }}>
-                                <label for="strappenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="strappenTick" value="0" {{$initial->strappenTick === 0 ? 'checked': '' }}>
+                                <div class="control">
+                                    <select name="strappenTick" class="textarea  @error('strappenTick') is-danger @enderror ">
+                                        <option value="">Choose Type</option>
+                                        <option value='Strappen'{{$initial->strappenTick === "Strappen" ? 'selected':''}}>Strappen</option>
+                                        <option value="Markeren" {{$initial->strappenTick === "Markeren" ? 'selected':''}}>Markeren</option>
+                                    </select>
+                                </div>
+                                @error('strappenTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                                </div>
                             </td>
 
                             <td>
                                 <div class="control ">
                                     <input class="input" type="text" name="strappenAang" id="" value={{$initial->strappenAang}}>
                                 </div>
-
                             </td>
 
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="strappenHtKd" id="" value={{$initial->strappenHtKd}}>
-                                </div>
-                            </td>
                         </tr>
 
                         <tr>
                             <td>Q(kamer)/Loods/A</td>
 
                             <td>
-                                <label for="kamerTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="kamerTick" value="1" {{$initial->kamerTick === 1 ? 'checked': '' }}>
-                                <label for="kamerTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="kamerTick" value="0" {{$initial->kamerTick === 0 ? 'checked': '' }}>
+                                <div class="control">
+                                    <select name="kamerTick" class="textarea  @error('kamerTick') is-danger @enderror ">
+                                        <option value="">Choose Type</option>
+                                        <option value='Q(kamer)'{{$initial->kamerTick === "Q(kamer)" ? 'selected':''}}>Q(kamer)</option>
+                                        <option value="Loods" {{$initial->kamerTick === "Loods" ? 'selected':''}}>Loods</option>
+                                        <option value="A" {{$initial->kamerTick === "A" ? 'selected':''}}>A</option>
+                                    </select>
+                                </div>
+                                @error('kamerTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                                </div>
                             </td>
 
                             <td>
@@ -557,35 +404,6 @@
 
                             </td>
 
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="kamerHtKd" id="" value={{$initial->kamerHtKd}}>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Speciale Instructie</td>
-
-                            <td>
-                                <label for="specialeTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="specialeTick" value="1" {{$initial->specialeTick === 1 ? 'checked': '' }}>
-                                <label for="specialeTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="specialeTick" value="0" {{$initial->specialeTick === 0 ? 'checked': '' }}>
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="specialeAang" id="" value={{$initial->specialeAang}}>
-                                </div>
-
-                            </td>
-
-                            <td>
-                                <div class="control ">
-                                    <input class="input" type="text" name="specialeHtKd" id="" value={{$initial->specialeHtKd}}>
-                                </div>
-                            </td>
                         </tr>
 
                     </table>
@@ -596,17 +414,12 @@
                 </div>
 
                 <section class="section">
-                    <div class="field is-grouped">
-                        <div class="control">
-                            <button type="submit" class="button is-primary" id="submitNew">Save</button>
-                        </div>
-
-                        <div class="control">
-                            <button type="reset" class="button is-warning">Reset</button>
-                        </div>
-                        <div class="control">
-                            <a type="button" href="{{route('initial.show', $initial)}}" class="button is-light">Cancel</a>
-                        </div>
+                    <div>
+                        <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" id="submitNew">Save</button>
+                    </div>
+                    <div class="float-left">
+                        <button type="reset" class="btn btn-warning btn-lg">Reset</button>
+                        <a type="button" href="{{route('initial.show', $initial)}}" class="btn btn-light btn-lg">Cancel</a>
                     </div>
                 </section>
 

@@ -42,11 +42,11 @@ class CreateInitialsTable extends Migration
             $table->string('waanHtKd')->nullable();
 
 //            Klossen
-            $table->string('soortTick')->nullable();
+            $table->string('soort')->nullable();
             $table->string('soortAang')->nullable();
             $table->string('soortHtKd')->nullable();
 
-            $table->string('balkTick')->nullable();
+            $table->string('balk')->nullable();
             $table->string('balkAang')->nullable();
             $table->string('balkHtKd')->nullable();
 
