@@ -121,6 +121,8 @@
 
 <script src="{{ mix('js/app.js') }}" defer></script>
 
+@yield('custom_js')
+
 @yield('third_party_scripts')
 
 @stack('page_scripts')
