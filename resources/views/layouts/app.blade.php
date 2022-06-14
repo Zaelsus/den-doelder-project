@@ -35,7 +35,7 @@
                 </a>
                 <ul class="dropdown-menu  bg-transparent text-center">
                     @if(Auth::user()->role === 'Production')
-                        @php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->get();@endphp
+                        @php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->where('name','!=','None')->get();@endphp
                         @foreach($machines as $machine)
                             <li class="align-content-center">
                                 <form method="POST"

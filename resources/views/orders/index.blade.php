@@ -31,7 +31,7 @@
                         @foreach($orders as $order)
                             @if($previousMachine !== $order->machine->name)
                                 <?php $previousMachine =$order->machine->name?>
-                                <table class="table table-bordered table-hover table-secondary">
+                                <table class="table table-bordered table-hover table-secondary text-center">
                                     <thead class="bg-gray">
                                     <tr>
                                         <th colspan="8" class="text-center bg-gradient-purple">{{$previousMachine}}</th>
@@ -40,7 +40,7 @@
                                         <th scope="col">Order Number</th>
                                         <th scope="col">Pallet Name</th>
                                         <th scope="col">Pallet Measurements</th>
-                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">CP / Unique + client</th>
                                         <th scope="col">Production Line</th>
                                         <th scope="col">Scheduled Production Date</th>
                                         <th scope="col">Status</th>
@@ -54,8 +54,8 @@
                                                 <th scope="row"> {{ $order->order_number }} </th>
                                                 <td>{{$order->pallet->name}}</td>
                                                 <td>{{$order->pallet->measurements}}</td>
-                                                <td>{{ $order->client_name }}</td>
-                                                <td>{{$order->machine->name}}</td>
+                                                <td>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</td>
+                                                <td class ="{{$order->machine->name === 'None' ? 'bg-warning':''}}">{{$order->machine->name}}</td>
                                                 <td> {{$order->start_date}}</td>
                                                 <td class = "{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
                                                 {{$order->status === 'Paused' ? 'bg-warning':''}}

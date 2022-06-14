@@ -32,8 +32,8 @@ class CreateOrdersTable extends Migration
             $table->date('start_date')->nullable();
             $table->string('site_location');
             $table->text('production_instructions')->nullable();
-            $table->string('client_name');
-            $table->string('client_address');
+            $table->boolean('type_order');
+            $table->string('client_name')->nullable();
             $table->string('status');
             $table->string('truckDriver_status')->nullable();
             $table->dateTime('start_time')->default(null)->nullable();

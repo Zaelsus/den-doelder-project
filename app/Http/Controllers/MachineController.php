@@ -17,7 +17,7 @@ class MachineController extends Controller
      */
     public function index()
     {
-        $machines = Machine::all();
+        $machines = Machine::where('name','!=','None')->get();
         return view('machines.index', compact('machines'));
     }
 

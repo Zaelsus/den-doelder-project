@@ -62,10 +62,11 @@ class OrderController extends Controller
     public function createStepOne(Request $request)
     {
         $pallets = Pallet::all();
-        $machines = Machine::all();
+        $machines = Machine::where('name','!=','None')->get();
+        $nullMachine = Machine::where('name','None')->first();
         $order = $request->session()->get('order');
 
-        return view('orders.create-step-one',compact('order','pallets','machines'));
+        return view('orders.create-step-one',compact('order','pallets','machines','nullMachine'));
     }
 
     /**
@@ -77,7 +78,6 @@ class OrderController extends Controller
     public function postCreateStepOne(Request $request)
     {
         $validatedData = $this->validateOrder($request);
-
         if(empty($request->session()->get('order'))){
             $order = new Order();
             $order->fill($validatedData);
@@ -88,6 +88,7 @@ class OrderController extends Controller
             $request->session()->put('order', $order);
         }
         $order->save();
+
 
         return redirect()->route('orders.create.step.two');
     }
@@ -188,13 +189,13 @@ class OrderController extends Controller
         $validatedAtributes = $request->validate([
             'order_number'=>'required',
             'pallet_id'=>'required',
-            'machine_id'=>'',
+            'machine_id'=>'required',
             'quantity_production'=>'required|integer|min:1',
             'start_date'=>'nullable|date|after:yesterday',
             'site_location'=>'required',
-            'production_instructions'=>'',
-            'client_name' =>'required|string',
-            'client_address' =>'required|string',
+            'production_instructions'=>'nullable',
+            'type_order'=>'boolean',
+            'client_name' =>'',
             'status'=>'string',
         ]);
 

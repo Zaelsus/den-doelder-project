@@ -43,8 +43,8 @@
                     @if($order->start_date ===null)
                         <span class="badge badge-pill badge-warning">No start date</span>
                     @endif
-                    @if($order->machine ===null)
-                        <span class="badge badge-pill badge-warning">No machine elected</span>
+                    @if($order->machine->name ==='None')
+                        <span class="badge badge-pill badge-warning">No machine selected</span>
                     @else
                         <span class="badge badge-pill badge-success">{{$order->machine->name}}</span>
                     @endif
@@ -79,10 +79,8 @@
             <div class="card-subtitle border-left">
             </div>
 
-            <h5 class="card bg-gradient-purple ">Client and Order Details</h5>
-            <p>Client Name - {{$order->client_name}}</p>
-            <p>Address - {{$order->client_address}}</p>
-
+            <h5 class="card bg-gradient-purple ">{{ $order->type_order === 1 ? 'Client and Order Details' : 'Order Details'}}</h5>
+            <p>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</p>
             <h5 class="card bg-gradient-purple">Materials and Instructions:</h5>
             <table>
                 <tbody>

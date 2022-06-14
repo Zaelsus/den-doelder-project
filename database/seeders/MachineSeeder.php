@@ -14,7 +14,7 @@ class MachineSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0;$i< 3;$i++) {
+        for($i=0;$i< 4;$i++) {
             Machine::factory(1)->create();
         }
     }
