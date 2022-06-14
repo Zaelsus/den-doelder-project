@@ -20,9 +20,7 @@ class NoteController extends Controller
 
         if(Auth::user()->role === 'Administrator') {
             $notes = Note::orderBy('created_at', 'desc')->get();
-        }
-
-        else {
+        } else {
             $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('created_at', 'desc')->get();
         }
 
@@ -170,7 +168,7 @@ class NoteController extends Controller
         } else if (Auth::user()->role === 'Production') {
             $validatedAttributes['creator'] = 'Production';
         } else {
-            $validatedAttributes['creator'] = 'TruckDriver';
+            $validatedAttributes['creator'] = 'Driver';
         }
 
         return $validatedAttributes;
