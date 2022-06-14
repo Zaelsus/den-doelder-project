@@ -43271,3 +43271,6 @@ input:required {
     color: #dc3545;
 }
 
+.pointer {
+    cursor: pointer;
+}
