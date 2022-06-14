@@ -32,7 +32,7 @@
                                     <td>{{ $report->created_at->format('H:i') }}</td>
                                     <td>{{ $report->order->pallet->name}}</td>
                                     <td>{{ $report->order->order_number }}</td>
-                                    <td>{{ $report->def_id}}</td>
+                                    <td style="text-align:center">{{ $report->def_id}}</td>
                                     <td>{{ $report->extra_info }}</td>
                                     <td>{{ $report->action === null ? 'n/a' : $report->action }}</td>
                                     <td>{{$report->abnormality === null ? 'n/a' : $report->abnormality}}</td>
