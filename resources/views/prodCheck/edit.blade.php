@@ -35,10 +35,10 @@
                             <td>Afmeting</td>
 
                             <td>
-                                <label for="afmetingTickB" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmetingTickB" value="1"  {{$production->afmetingTickB === 1 ? 'checked': '' }} >
-                                <label for="afmetingTickB" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmetingTickB" value="0" {{$production->afmetingTickB === 0 ? 'checked': '' }} >
+                                <label for="afmetingTickB" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickB" value="1"  {{$production->afmetingTickB === 1 ? 'checked': '' }} >
+                                <label for="afmetingTickB" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickB" value="0" {{$production->afmetingTickB === 0 ? 'checked': '' }} >
                             </td>
 
                             <td>
@@ -59,11 +59,11 @@
                             <td>Aantal planken</td>
 
                             <td>
-                                <label for="aantalTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="aantalTick" value="1" {{$production->aantalTick === 1 ? 'checked': '' }}>
+                                <label for="aantalTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="aantalTick" value="1" {{$production->aantalTick === 1 ? 'checked': '' }}>
 
-                                <label for="aantalTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="aantalTick" value="0" {{$production->aantalTick === 0 ? 'checked': '' }}>
+                                <label for="aantalTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="aantalTick" value="0" {{$production->aantalTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -84,10 +84,10 @@
                             <td>Spaties</td>
 
                             <td>
-                                <label for="spatiesTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="spatiesTick" value="1" {{$production->spatiesTick === 1 ? 'checked': '' }}>
-                                <label for="spatiesTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="spatiesTick" value="0" {{$production->spatiesTick === 0 ? 'checked': '' }}>
+                                <label for="spatiesTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="spatiesTick" value="1" {{$production->spatiesTick === 1 ? 'checked': '' }}>
+                                <label for="spatiesTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="spatiesTick" value="0" {{$production->spatiesTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -108,10 +108,10 @@
                             <td>Klampen</td>
 
                             <td>
-                                <label for="klampenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="klampenTick" value="1" {{$production->klampenTick === 1 ? 'checked': '' }}>
-                                <label for="klampenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="klampenTick" value="0" {{$production->klampenTick === 0 ? 'checked': '' }}>
+                                <label for="klampenTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="klampenTick" value="1" {{$production->klampenTick === 1 ? 'checked': '' }}>
+                                <label for="klampenTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="klampenTick" value="0" {{$production->klampenTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -132,10 +132,10 @@
                             <td>Overstek</td>
 
                             <td>
-                                <label for="overstekTickB" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="overstekTickB" value="1" {{$production->overstekTickB === 1 ? 'checked': '' }}>
-                                <label for="overstekTickB" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="overstekTickB" value="0" {{$production->overstekTickB === 0 ? 'checked': '' }}>
+                                <label for="overstekTickB" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="overstekTickB" value="1" {{$production->overstekTickB === 1 ? 'checked': '' }}>
+                                <label for="overstekTickB" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="overstekTickB" value="0" {{$production->overstekTickB === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -174,10 +174,10 @@
                             <td>Soort (Spaan/ Hout)</td>
 
                             <td>
-                                <label for="soortTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="soortTick" value="1" {{$production->soortTick === 1 ? 'checked': '' }}>
-                                <label for="soortTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="soortTick" value="0" {{$production->soortTick === 0 ? 'checked': '' }}>
+                                <label for="soortTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="soortTick" value="1" {{$production->soortTick === 1 ? 'checked': '' }}>
+                                <label for="soortTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="soortTick" value="0" {{$production->soortTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -198,10 +198,10 @@
                             <td>Balk</td>
 
                             <td>
-                                <label for="balkTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="balkTick" value="1" {{$production->balkTick === 1 ? 'checked': '' }}>
-                                <label for="balkTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="balkTick" value="0" {{$production->balkTick === 0 ? 'checked': '' }}>
+                                <label for="balkTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="balkTick" value="1" {{$production->balkTick === 1 ? 'checked': '' }}>
+                                <label for="balkTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">	&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="balkTick" value="0" {{$production->balkTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -222,10 +222,10 @@
                             <td>Afmeting 1</td>
 
                             <td>
-                                <label for="afmeting1Tick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmeting1Tick" value="1" {{$production->afmeting1Tick === 1 ? 'checked': '' }}>
-                                <label for="afmeting1Tick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmeting1Tick" value="0" {{$production->afmeting1Tick === 0 ? 'checked': '' }}>
+                                <label for="afmeting1Tick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmeting1Tick" value="1" {{$production->afmeting1Tick === 1 ? 'checked': '' }}>
+                                <label for="afmeting1Tick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmeting1Tick" value="0" {{$production->afmeting1Tick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -246,10 +246,10 @@
                             <td>Afmeting 2</td>
 
                             <td>
-                                <label for="afmeting2Tick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmeting2Tick" value="1" {{$production->afmeting2Tick === 1 ? 'checked': '' }}>
-                                <label for="afmeting2Tick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmeting2Tick" value="0" {{$production->afmeting2Tick === 0 ? 'checked': '' }}>
+                                <label for="afmeting2Tick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmeting2Tick" value="1" {{$production->afmeting2Tick === 1 ? 'checked': '' }}>
+                                <label for="afmeting2Tick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmeting2Tick" value="0" {{$production->afmeting2Tick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -289,10 +289,10 @@
                             <td>Brug</td>
 
                             <td>
-                                <label for="brugTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="brugTick" value="1" {{$production->brugTick === 1 ? 'checked': '' }}>
-                                <label for="brugTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="brugTick" value="0" {{$production->brugTick === 0 ? 'checked': '' }}>
+                                <label for="brugTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="brugTick" value="1" {{$production->brugTick === 1 ? 'checked': '' }}>
+                                <label for="brugTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="brugTick" value="0" {{$production->brugTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -313,10 +313,10 @@
                             <td>Ronddloper</td>
 
                             <td>
-                                <label for="rondTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="rondTick" value="1" {{$production->rondTick === 1 ? 'checked': '' }}>
-                                <label for="rondTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="rondTick" value="0" {{$production->rondTick === 0 ? 'checked': '' }}>
+                                <label for="rondTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="rondTick" value="1" {{$production->rondTick === 1 ? 'checked': '' }}>
+                                <label for="rondTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">	&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="rondTick" value="0" {{$production->rondTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -337,10 +337,10 @@
                             <td>Kruisdek</td>
 
                             <td>
-                                <label for="kruisTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="kruisTick" value="1" {{$production->kruisTick === 1 ? 'checked': '' }}>
-                                <label for="kruisTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="kruisTick" value="0" {{$production->kruisTick === 0 ? 'checked': '' }}>
+                                <label for="kruisTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="kruisTick" value="1" {{$production->kruisTick === 1 ? 'checked': '' }}>
+                                <label for="kruisTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="kruisTick" value="0" {{$production->kruisTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -361,10 +361,10 @@
                             <td>Afmetingen</td>
 
                             <td>
-                                <label for="afmetingTickO" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="afmetingTickO" value="1" {{$production->afmetingTickO === 1 ? 'checked': '' }}>
-                                <label for="afmetingTickO" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="afmetingTickO" value="0" {{$production->afmetingTickO === 0 ? 'checked': '' }}>
+                                <label for="afmetingTickO" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickO" value="1" {{$production->afmetingTickO === 1 ? 'checked': '' }}>
+                                <label for="afmetingTickO" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickO" value="0" {{$production->afmetingTickO === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -385,10 +385,10 @@
                             <td>Overstek</td>
 
                             <td>
-                                <label for="overstekTickO" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="overstekTickO" value="1" {{$production->overstekTickO === 1 ? 'checked': '' }}>
-                                <label for="overstekTickO" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="overstekTickO" value="0" {{$production->overstekTickO === 0 ? 'checked': '' }}>
+                                <label for="overstekTickO" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="overstekTickO" value="1" {{$production->overstekTickO === 1 ? 'checked': '' }}>
+                                <label for="overstekTickO" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="overstekTickO" value="0" {{$production->overstekTickO === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -428,10 +428,10 @@
                             <td>Hoeken zaag</td>
 
                             <td>
-                                <label for="hoekenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="hoekenTick" value="1" {{$production->hoekenTick === 1 ? 'checked': '' }}>
-                                <label for="hoekenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="hoekenTick" value="0" {{$production->hoekenTick === 0 ? 'checked': '' }}>
+                                <label for="hoekenTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="hoekenTick" value="1" {{$production->hoekenTick === 1 ? 'checked': '' }}>
+                                <label for="hoekenTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="hoekenTick" value="0" {{$production->hoekenTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -452,10 +452,10 @@
                             <td>Stempels</td>
 
                             <td>
-                                <label for="stempelsTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="stempelsTick" value="1" {{$production->stempelsTick === 1 ? 'checked': '' }}>
-                                <label for="stempelsTick" class="has-text-danger has-text-weight-bold">	&cross;</label>
-                                <input type="radio" id="" name="stempelsTick" value="0" {{$production->stempelsTick === 0 ? 'checked': '' }}>
+                                <label for="stempelsTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="stempelsTick" value="1" {{$production->stempelsTick === 1 ? 'checked': '' }}>
+                                <label for="stempelsTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">	&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="stempelsTick" value="0" {{$production->stempelsTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -476,10 +476,10 @@
                             <td>Stapel hoogte</td>
 
                             <td>
-                                <label for="stapelTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="stapelTick" value="1" {{$production->stapelTick === 1 ? 'checked': '' }}>
-                                <label for="stapelTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="stapelTick" value="0" {{$production->stapelTick === 0 ? 'checked': '' }}>
+                                <label for="stapelTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="1" {{$production->stapelTick === 1 ? 'checked': '' }}>
+                                <label for="stapelTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="0" {{$production->stapelTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -500,10 +500,10 @@
                             <td>Strappen/ Markeren</td>
 
                             <td>
-                                <label for="strappenTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="strappenTick" value="1" {{$production->strappenTick === 1 ? 'checked': '' }}>
-                                <label for="strappenTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="strappenTick" value="0" {{$production->strappenTick === 0 ? 'checked': '' }}>
+                                <label for="strappenTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="strappenTick" value="1" {{$production->strappenTick === 1 ? 'checked': '' }}>
+                                <label for="strappenTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="strappenTick" value="0" {{$production->strappenTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
@@ -524,10 +524,10 @@
                             <td>Spijkers (BD,TD,OD)</td>
 
                             <td>
-                                <label for="spijkerTick" class="has-text-success has-text-weight-bold">&check;</label>
-                                <input type="radio" id="" name="spijkerTick" value="1" {{$production->spijkerTick === 1 ? 'checked': '' }}>
-                                <label for="spijkerTick" class="has-text-danger has-text-weight-bold">&cross;</label>
-                                <input type="radio" id="" name="spijkerTick" value="0" {{$production->spijkerTick === 0 ? 'checked': '' }}>
+                                <label for="spijkerTick" class="has-text-success has-text-weight-bold" style = "font-size:35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="spijkerTick" value="1" {{$production->spijkerTick === 1 ? 'checked': '' }}>
+                                <label for="spijkerTick" class="has-text-danger has-text-weight-bold" style = "font-size:35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="spijkerTick" value="0" {{$production->spijkerTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>

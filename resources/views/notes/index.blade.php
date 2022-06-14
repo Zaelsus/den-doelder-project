@@ -9,7 +9,7 @@
             <div class="card-body">
                 @if( Auth::user()->role === 'Administrator' )
                 <button id="overviewButton" class="btn btn-lg bg-gradient-olive opacity-70"
-                        onclick="changeButton({{$order->order_number}}, '{{ $order->machine }}')">
+                        onclick="changeButton({{$order->order_number}}, '{{ $order->machine->name }}')">
                     Notes for current machine</button>
                 <br>
                 <br>
@@ -37,7 +37,7 @@
                                 {{ $note->order->order_number}}
                             </td>
                             <td>
-                                {{ $note->order->machine }}
+                                {{ $note->order->machine->name }}
                             </td>
                             <td style="width: 20%">{{ $note->title}}</td>
                             <td style="width: 20%">
