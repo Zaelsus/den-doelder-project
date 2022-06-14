@@ -188,7 +188,7 @@ class OrderController extends Controller
         $validatedAtributes = $request->validate([
             'order_number'=>'required',
             'pallet_id'=>'required',
-            'machine'=>'',
+            'machine_id'=>'',
             'quantity_production'=>'required|integer|min:1',
             'start_date'=>'nullable|date|after:yesterday',
             'site_location'=>'required',

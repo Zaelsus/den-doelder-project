@@ -118,9 +118,9 @@
                                     <option value="">Choose a production machine</option>
                                     @foreach($machines as $machine)
                                         @if (old('machine_id') === $machine->id)
-                                            <option value="{{ $machine->id }}" selected>{{$machine->name}}</option>
+                                            <option value="{{$machine->id}}" selected>{{$machine->name}}</option>
                                         @else
-                                            <option value="{{ $machine->id }}">{{$machine->name}}</option>
+                                            <option value="{{$machine->id}}">{{$machine->name}}</option>
                                         @endif
                                     @endforeach
                                 </select>
