@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Material;
 use App\Models\Order;
 use App\Models\OrderMaterial;
+use App\Models\PalletMaterial;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -53,7 +54,7 @@ class OrderMaterialController extends Controller
         $materials = Material::all();
         $order = $request->session()->get('order');
         $orderMaterial = $request->session()->get('orderMaterial');
-
+//        $pallet=$order->pallet;
         return view('orders.create-step-two', compact('order', 'orderMaterial', 'materials'));
     }
 

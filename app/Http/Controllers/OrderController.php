@@ -31,10 +31,10 @@ class OrderController extends Controller
     {
         //looking about adding another order by accoridng to status as well as scheduled production
         $orders = Order::orderBy('machine_id', 'desc')->get();
-        $previousMachine=null;
+        $previousMachine = null;
         //automatic status change
         self::statusChangeCheck();
-        return view('orders.index', compact('orders','previousMachine'));
+        return view('orders.index', compact('orders', 'previousMachine'));
     }
 
     /**
@@ -44,7 +44,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-      //
+        //
     }
 
     /**
@@ -55,7 +55,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-      //
+        //
     }
 
     /**
@@ -66,33 +66,26 @@ class OrderController extends Controller
     public function createStepOne(Request $request)
     {
         $pallets = Pallet::all();
-        $machines = Machine::where('name','!=','None')->get();
-        $nullMachine = Machine::where('name','None')->first();
+        $machines = Machine::where('name', '!=', 'None')->get();
+        $nullMachine = Machine::where('name', 'None')->first();
         $order = $request->session()->get('order');
 
-        return view('orders.create-step-one',compact('order','pallets','machines','nullMachine'));
+        return view('orders.create-step-one', compact('order', 'pallets', 'machines', 'nullMachine'));
     }
 
     /**
      * Post Request to store step1 info in session
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postCreateStepOne(Request $request)
     {
         $validatedData = $this->validateOrder($request);
-        if(empty($request->session()->get('order'))){
-            $order = new Order();
-            $order->fill($validatedData);
-            $request->session()->put('order', $order);
-        }else{
-            $order = $request->session()->get('order');
-            $order->fill($validatedData);
-            $request->session()->put('order', $order);
-        }
+        $order = new Order();
+        $order->fill($validatedData);
+        $request->session()->put('order', $order);
         $order->save();
-
 
         return redirect()->route('orders.create.step.two');
     }
@@ -109,7 +102,7 @@ class OrderController extends Controller
         //automatic status change
         $orders = Order::orderBy('machine_id', 'desc')->get();
         $user = Auth::user();
-        event(new AutomaticStatusChange($user,$orders));
+        event(new AutomaticStatusChange($user, $orders));
         //regular show
         return view('orders.show', compact('order'));
 
@@ -120,7 +113,7 @@ class OrderController extends Controller
      */
     public static function startProduction(Order $order)
     {
-        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
+        if ($order->machine !== null && $order->start_date !== null && ($order->status === 'Production Pending' || $order->status === 'Paused')) {
             if ($order->status === 'Production Pending') {
                 $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
             } else {
@@ -135,10 +128,10 @@ class OrderController extends Controller
     /**
      * changes the status of the current order to done
      */
-    public static function stopProduction(Order $order ,Machine $machine)
+    public static function stopProduction(Order $order, Machine $machine)
     {
         $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
-        return redirect(route('machines.show',compact('machine')));
+        return redirect(route('machines.show', compact('machine')));
     }
 
     /**
@@ -160,7 +153,7 @@ class OrderController extends Controller
     {
         $pallets = Pallet::all();
         $machines = Machine::all();
-        return view('orders.edit', compact('order','pallets','machines'));
+        return view('orders.edit', compact('order', 'pallets', 'machines'));
     }
 
     /**
@@ -197,22 +190,20 @@ class OrderController extends Controller
     public function validateOrder(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            'order_number'=>'required',
-            'pallet_id'=>'required',
-            'machine_id'=>'required',
-            'quantity_production'=>'required|integer|min:1',
-            'start_date'=>'nullable|date|after:yesterday',
-            'site_location'=>'required',
-            'production_instructions'=>'nullable',
-            'type_order'=>'boolean',
-            'client_name' =>'',
-            'status'=>'string',
+            'order_number' => 'required',
+            'pallet_id' => 'required',
+            'machine_id' => 'required',
+            'quantity_production' => 'required|integer|min:1',
+            'start_date' => 'nullable|date|after:yesterday',
+            'site_location' => 'required',
+            'production_instructions' => 'nullable',
+            'type_order' => 'boolean',
+            'client_name' => '',
+            'status' => 'string',
         ]);
 
         return $validatedAtributes;
     }
-
-
 
 
     /**
@@ -247,10 +238,11 @@ class OrderController extends Controller
      * This function calls the event listener to check if the order should change status
      * @return void
      */
-    public function statusChangeCheck(){
+    public function statusChangeCheck()
+    {
         $orders = Order::orderBy('machine_id', 'desc')->get();
         $user = Auth::user();
-        event(new AutomaticStatusChange($user,$orders));
+        event(new AutomaticStatusChange($user, $orders));
     }
 
     /**
@@ -278,15 +270,12 @@ class OrderController extends Controller
         $validated = $request->validate([
             'add_quantity' => 'required|integer',
         ]);
-        try
-        {
+        try {
             $order->update($validated);
             $order->addProduced();
             $order->stopProduced();
             return redirect(route('orders.show', $order));
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             return redirect(route('orders.editquantity', $order))->with('error', 'The value is higher than the quantity to be produced');
 
         }
