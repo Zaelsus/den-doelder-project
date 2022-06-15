@@ -75,7 +75,7 @@ class OrderMaterialController extends Controller
                     'material_id'=>$request->product[$i]['material_id'],'total_quantity'=>$quantity]);
             }
         }
-
+       (new OrderController)->statusChangeCheck();
         return redirect(route('orders.show', compact('order')));
     }
 

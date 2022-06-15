@@ -50,9 +50,8 @@
              @endphp
         @if($order !== null)
         <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
-              class="nav-link active btn text-left bg-success">
+              class="nav-link active btn">
             @csrf
-
             <button type="submit" class="btn bg-gray-dark">
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p class="brand-text">Enter Administration View</p>

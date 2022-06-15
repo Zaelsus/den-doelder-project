@@ -34,7 +34,7 @@
                                 <table class="table table-bordered table-hover table-secondary text-center">
                                     <thead class="bg-gray">
                                     <tr>
-                                        <th colspan="8" class="text-center bg-gradient-purple">{{$previousMachine}}</th>
+                                        <th colspan="8" class="text-center bg-gradient-purple">{{$previousMachine ==='None' ? 'No set machine':$previousMachine}}</th>
                                     </tr>
                                     <tr>
                                         <th scope="col">Order Number</th>
@@ -63,7 +63,16 @@
                                                 {{$order->status === 'Done' ? 'bg-success':''}}
                                                 {{$order->status === 'In Production' ? 'bg-info':''}}
                                                 {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
-                                                {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}</td>
+                                                {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}
+                                                    <br>
+                                                    @if($order->status === 'Admin Hold')
+                                                        @if($order->start_date ===null)
+                                                            <span class="badge badge-pill">No start date</span>
+                                                        @endif
+                                                        @if(count($order->orderMaterials) === 0)
+                                                            <span class="badge badge-pill ">No materials chosen</span>
+                                                        @endif </td>
+                                                @endif
                                                 <td>{{$order->created_at}}</td>
                                             </tr>
                                         @endif
