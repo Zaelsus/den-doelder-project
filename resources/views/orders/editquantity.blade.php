@@ -5,42 +5,57 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-12"> {{-- These divs are needed for proper layout --}}
-                    <form method="POST" action="{{ route('orders.updatequantity',$order) }}">
+                    <form method="POST" action="{{ route('orderMaterials.update',$order) }}">
                         @csrf
                         @method('PUT')
-                        <div class="card"> {{-- The form is placed inside a Bulma Card component --}}
-                            <header class="card-header bg-secondary">
-                                <p class="card-header-title"> {{-- The Card header content --}}
-                                    Edit the pallet log {{$order->order_number . ' of customer ' . $order->client_name}}
-                                </p>
-                            </header>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Quantity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($materials as $key=>$products)
+                                <?php
+                                $oMaterials = $order->orderMaterials;
+                                $max=count($oMaterials);
+                                $check = false;
+                                $i = 0;
+                                while (!$check && $i < $max) {
+                                    if ($products->product_id === $oMaterials[$i]->material_id) {
+                                        $check = true;
+                                        $orderMaterial = $oMaterials[$i];
+                                    } else {
+                                        $check = false;
+                                    }
+                                    $i++;
+                                }
+                                ?>
+                                <tr>
+                                    <td>
+                                        {{$products->product_id}} {{$products->measurements . ' ' .$products->comments}}
+                                    </td>
+                                    <td>
+                                        <input type="hidden" class="form-control" name="product[{{ $key}}][order_id]"
+                                               value="{{$order->id}}">
+                                        <input type="hidden" class="form-control" name="product[{{ $key}}][material_id]"
+                                               value="{{$products->product_id}}">
 
-                            <div class="card-content table table-bordered table-hover table-light ">
-                                <div>
-                                    Quantity Ordered: {{$order->quantity_production}}
-                                </div>
-                                <div>
-                                    Quantity Produced: {{$order->quantity_produced}}
-                                </div>
-                                <div>
-                                    Add to Produced: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
-                                    @if(session()->has('error'))
-                                        <div class="alert alert-danger">
-                                            {{ session()->get('error') }}
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="field is-grouped">
-                                {{-- Here are the form buttons: save, reset and cancel --}}
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">Save</button>
-
-                                    <a type="button" href="{{ route('orders.show', $order) }}" class="button is-light">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
+                                        @if($check)
+                                            <input type="number" min="0" max="13" class="form-control"
+                                                   name="product[{{ $key}}][total_quantity]"
+                                                   value="{{round((($orderMaterial->total_quantity)/$order->quantity_production),0)}}">
+                                        @else
+                                            <input type="number" min="0" max="13" class="form-control"
+                                                   name="product[{{ $key}}][total_quantity]" value="0">
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-info btn-lg btn-lg btn-block">Submit</button>
                     </form>
                 </div>
             </div>

@@ -54,7 +54,6 @@ class OrderMaterialController extends Controller
         $materials = Material::all();
         $order = $request->session()->get('order');
         $orderMaterial = $request->session()->get('orderMaterial');
-//        $pallet=$order->pallet;
         return view('orders.create-step-two', compact('order', 'orderMaterial', 'materials'));
     }
 
@@ -100,8 +99,8 @@ class OrderMaterialController extends Controller
      */
     public function edit(Order $order)
     {
-        $material = Material::all();
-        return view('orderMaterials.edit', compact('order', 'material'));
+        $materials = Material::all();
+        return view('orders.editquantity', compact('order', 'materials'));
     }
 
     /**
@@ -111,9 +110,33 @@ class OrderMaterialController extends Controller
      * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order, OrderMaterial $orderMaterial)
+    public function update(Request $request, Order $order)
     {
-        $orderMaterial->update($this->validateMaterialOrder($request));
+        $orderMaterials=$order->orderMaterials;
+        $array = $request->product;
+        for ($i = 0; $i < count($array); $i++) {
+            $exists=false;
+            $j=0;
+            while($exists===false && $j<count($orderMaterials)){
+                if($array[$i]['material_id'] == $orderMaterials[$j]->material_id) {
+                    $exists = true;
+                    if($request->product[$i]['total_quantity'] > 0) {
+                        $orderMaterials[$j]->update(['total_quantity' => ($request->product[$i]['total_quantity']*$order->quantity_production)]);
+                    } else {
+                        $orderMaterials[$j]->delete();
+                    }
+
+                }
+                $j++;
+            }
+            if($exists === false){
+                if ($array[$i]['total_quantity'] > 0) {
+                    $quantity=$request->product[$i]['total_quantity']*$order->quantity_production;
+                    OrderMaterial::create(['order_id'=>$request->product[$i]['order_id'],
+                        'material_id'=>$request->product[$i]['material_id'],'total_quantity'=>$quantity]);
+                }
+            }
+        }
 
         return redirect(route('orders.show', $order));
     }
