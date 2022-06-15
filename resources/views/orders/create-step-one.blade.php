@@ -114,14 +114,18 @@
                         <div class="col-md-3 mb-3">
                             <label for="machine">Production machine</label>
                             <div>
-                                <select name="machine" class="custom-select @error('machine') is-invalid @enderror">
+                                <select name="machine_id" class="custom-select @error('machine_id') is-invalid @enderror">
                                     <option value="">Choose a production machine</option>
-                                    <option value='Cape 1'@if(old('machine') === 'Cape 1') {{'selected'}}@endif>Cape 1</option>
-                                    <option value='Cape 2'@if(old('machine') === 'Cape 2') {{'selected'}}@endif>Cape 2</option>
-                                    <option value='Cape 5'@if(old('machine') === 'Cape 5') {{'selected'}}@endif>Cape 5</option>
+                                    @foreach($machines as $machine)
+                                        @if (old('machine_id') === $machine->id)
+                                            <option value="{{$machine->id}}" selected>{{$machine->name}}</option>
+                                        @else
+                                            <option value="{{$machine->id}}">{{$machine->name}}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
-                            @error('machine')
+                            @error('machine_id')
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>
