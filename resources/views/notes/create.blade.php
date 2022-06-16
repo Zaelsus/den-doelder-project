@@ -38,17 +38,23 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Error" required>
-                                <span class="form-check-label badge badge-danger" style="color: white">Error</span>
+                                <input class="form-check-input" type="radio" name="label" value="Regular Note"
+                                       required>Regular Note
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Fix" required>
-                                <span class="form-check-label badge badge-success" style="color: white">Fix</span>
+                                <input class="form-check-input" type="radio" name="label" value="Mechanical Issue"
+                                       required>Mechanical Issue
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Other" required>
-                                <span class="form-check-label badge badge-info" style="color: white">Other</span>
+                                <input class="form-check-input" type="radio" name="label" value="Material Issue"
+                                       required>Material Issue
                             </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="label" value="Technical Issue"
+                                       required>Technical Issue
+                            </div>
+{{--                            Might add a radio "other" with input field, where the input value gets saved--}}
+                            <br>
                         </div>
                     <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Create Note</button>
                 </form>

@@ -17,9 +17,10 @@ class CreateNotesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->string('label')->nullable();
+            $table->string('label');
             $table->string('priority')->nullable();
             $table->text('fix')->nullable();
+            $table->integer('note_rel')->nullable();
             $table->string('creator');
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')

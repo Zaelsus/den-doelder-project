@@ -32,6 +32,30 @@
                         <p class="help is-danger">{{ $message }}</p>
                         @enderror
                     </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="label" value="Mechanical Issue (Error)"
+                                       required>Mechanical Issue
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="label" value="Material Issue (Error)"
+                                       required>Material Issue
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="label" value="Technical Issue (Error)"
+                                       required>Technical Issue
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="label" value="Lunch Break"
+                                       required>Lunch Break
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="label" value="End of Shift"
+                                       required>End of Shift
+                            </div>
+                            <br>
+                        </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="label" value="stoppage" style="display:none"
                                checked>

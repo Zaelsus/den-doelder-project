@@ -1,6 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header colour-purple">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Modal title
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <br>
     <div class="container-fluid">
         <div class="card create-order-card">
@@ -209,8 +232,12 @@
                     </div>
                 </form>
 
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Launch demo modal
+                </button>
                 <form method="POST" action="{{route('orders.cancelOrder', $order)}}">
                     @csrf
+
                     <button onclick="return confirm('Are you sure you want to cancel order {{$order->order_number}}?')"
                             class="btn btn-danger btn-lg float-right"
                             type="submit"> Disable Order

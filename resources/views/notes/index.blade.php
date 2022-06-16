@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+    <!-- Button trigger modal -->
+
     <br>
     <div class="container-fluid">
         <div class="card">
@@ -24,14 +26,15 @@
                         <th scope="col">Labels</th>
                         <th scope="col">Priority</th>
                         <th scope="col">Created At</th>
-{{--                        @if( Auth::user()->role === 'Administrator' )--}}
+                        @if( Auth::user()->role === 'Administrator' )
                         <th scope="col">Role</th>
-{{--                        @endif--}}
+                        @endif
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($notes as $note)
+                        @if($note->label !== 'Lunch Break' && $note->label !== 'End of Shift')
                         <tr>
                             <td>
                                 {{ $note->order->order_number}}
@@ -39,53 +42,52 @@
                             <td>
                                 {{ $note->order->machine->name }}
                             </td>
-                            <td style="width: 20%">{{ $note->title}}</td>
+                            <td style="width: 20%">
+                                @if ($note->label === 'Fix')
+                                Fix for: "{{ $note->title }}"
+                                @else
+                                {{$note->title}}
+                                @endif
+                            </td>
                             <td style="width: 20%">
                                 <details>
                                     <summary>{{ substr($note->content, 0, 40) }}</summary>
-                                    <p>{{ substr($note->content, 40) }} <b>Fix: </b>{{ $note->fix }}</p>
+                                    <p>{{ substr($note->content, 40) }}</p>
                                 </details>
                             </td>
                             <td>
-                                <span @if ($note->label==='Error')
-                                      class="badge badge-danger"
-                                      @elseif ($note->label==='Fix')
-                                      class="badge badge-success"
-                                      @elseif ($note->label === 'Other')
-                                      class="badge badge-info"
-                                      @elseif ($note->label === 'stoppage')
-                                      class="badge badge-danger"
-                                @endif >{{$note->label}}</span>
+                                <span class="badge badge-danger">{{$note->fix}}</span>
+                                <span @if($note->label === 'Fix') class="badge badge-success" @else class="badge badge-info" @endif
+                                >{{ strtok($note->label, '(') }}</span>
                             </td>
                             <td>
-                                <span  @if ($note->priority==='low')
-                                       class="badge bg-yellow"
-                                       @elseif ($note->priority==='medium')
-                                       class="badge bg-orange"
-                                       @elseif ($note->priority === 'high')
+                                <span  @if ($note->prio === 'high')
                                        class="badge bg-red"
-                                @endif >{{ $note->priority }}
+                                        @endif >{{ $note->prio }}
                                 </span>
                             </td>
                             <td>{{ $note->created_at }}</td>
+                            @if ( Auth::user()->role === 'Administrator')
                             <td>
-                                {{ $note->creator }}
+                                {{$note->creator}}
                             </td>
-                            @if ( Auth::user()->role === 'Production' )
-                            <td @if ($note->label === 'stoppage') style="width: 10%" @endif>
-                                @if ($note->label === 'stoppage')
-                                    <button class="btn btn-lg bg-gradient-olive opacity-70" onclick=window.location.href="{{ route('notes.fixStoppage', $note)}}">Log fix</button>
+                                <td>
+                                    <button class="btn btn-lg bg-gradient-olive opacity-70"
+                                            onclick=window.location.href="{{route('notes.edit', $note)}}">
+                                        Edit
+                                    </button>
+                                </td>
+                            @elseif ( Auth::user()->role === 'Production' )
+                            <td style="width: 10%">
+                                @if ($note->fix === 'Error!' && $note->priority === 'high')
+                                    <button class="btn btn-lg bg-gradient-olive opacity-70" style="font-size: 12pt" onclick=window.location.href="{{ route('notes.fixStoppage', $order)}}">Log fix</button>
+                                @elseif($note->fix === 'Error!' && $note->priority === 'low')
+                                    <span class="badge badge-success">fixed</span>
                                 @endif
                             </td>
-                            @elseif (Auth::user()->role === 'Administrator')
-                                <td>
-                                <button class="btn btn-lg bg-gradient-olive opacity-70"
-                                            onclick=window.location.href="{{route('notes.edit', $note)}}">
-                                    Edit
-                                </button>
-                                </td>
                             @endif
                         </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>
@@ -142,6 +144,5 @@
                 }
             }
         }
-
     </script>
 @endsection

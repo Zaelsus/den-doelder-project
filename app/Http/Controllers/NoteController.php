@@ -16,14 +16,41 @@ class NoteController extends Controller
      */
     public function index()
     {
+        //find current order selected
         $order = $this->findOrderForUser();
 
-        if(Auth::user()->role === 'Administrator') {
-            $notes = Note::orderBy('created_at', 'desc')->get();
-        } else {
-            $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('created_at', 'desc')->get();
+        //first get all the notes
+        $notes = Note::all();
+
+        //loop through the notes to see if the priority should be updated.
+        //if there is an error note without a fix note, the priority is high.
+        //if there is an error note with a fixe note, the priority goes to empty again.
+        foreach($notes as $note) {
+            if($note->fix === 'Error!') {
+                $note->update(['priority' => 'high']);
+            }
+            if($note->note_rel !== null) {
+                Note::where('id', $note->note_rel)->update(['priority' => 'low']);
+            }
         }
 
+//        // if it is Lunch Break or End Of Shift, don't save the note to index.
+//        if($label === 'Lunch Break' || $label === 'End of Shift') {
+//            return redirect(route('notes.index'));
+//        }
+
+        //different index pages for different roles; admin sees all notes
+        if(Auth::user()->role === 'Administrator') {
+            $notes = Note::orderBy('created_at', 'desc')->get();
+        } else if(Auth::user()->role === 'Production') {
+            //production sees notes that are made by production and only for this order
+            $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('priority', 'asc')->orderBy('created_at', 'desc')->get();
+        } else {
+            //truck driver sees notes that are made by truck drivers and only for this order
+            $notes = Note::where('order_id', $order->id)->where('creator', 'Driver');
+        }
+
+        //go to index blade and send the notes that came out of the if statement as well as the order
         return view('notes.index', compact('notes', 'order'));
     }
 
@@ -47,9 +74,25 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $order_id = $this->findOrderForUser()->id;
+        //get the checked label
+        $label = $request->input('label');
 
-        $note = Note::create($this->validateNote($request, $order_id));
+        //if it comes from fixStoppage, get the error note related to the fix
+        $note_rel = $request->input('note_rel');
+
+        if($label === 'Material Issue (Error)' || $label === 'Mechanical Issue (Error)' || $label === 'Technical Issue (Error)') {
+            $fix = false;
+        } else {
+            $fix = true;
+        }
+
+        $order = $this->findOrderForUser();
+
+        $note = Note::create($this->validateNote($request, $order->id, $fix, $note_rel));
+
+        if($note->label === 'End of Shift') {
+            return redirect(route('orders.editquantity', $order));
+        }
 
 //      redirecting to show the note
         return redirect(route('notes.index', $note));
@@ -74,8 +117,8 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-         $orders = Order::all();
-         return view('notes.edit', compact('orders', 'note'));
+        $orders = Order::all();
+        return view('notes.edit', compact('orders', 'note'));
     }
 
     /**
@@ -121,9 +164,19 @@ class NoteController extends Controller
      * @param Order $order
      *
      */
-    public function fixStoppage(Note $note) {
-        $order_id = $note->order->order_number;
-        return view('notes.fixStoppage', compact('order_id', 'note'));
+    public function fixStoppage(Order $order) {
+        $note = Note::where('order_id', $order->id)->where('priority', 'high')->first();
+
+        if($note === null) {
+            if(Note::where('order_id', $order->id)->first()->label === 'End of Shift') {
+                dd('change of shift');
+            }
+            return redirect(route('orders.show', $order));
+        } else {
+            return view('notes.fixStoppage', compact('order', 'note'));
+        }
+
+
     }
 
     public function getOrder() {
@@ -147,22 +200,26 @@ class NoteController extends Controller
         return $order;
     }
 
-/**
+    /**
      * this function validates the attributes of a note
      * @param Request $request
      * @return array
      */
-    public function validateNote(Request $request, $order_id): array
+    public function validateNote(Request $request, $order_id, $fix, $note_rel): array
     {
 
         $validatedAttributes = $request->validate([
             'title'=>'required',
             'content'=>'required',
             'label'=>'required',
-            'priority'=>'',
-            'fix'=>''
         ]);
         $validatedAttributes['order_id'] = $order_id;
+        $validatedAttributes['note_rel'] = $note_rel;
+        $validatedAttributes['priority'] = 'low';
+        if($fix === false) {
+            $validatedAttributes['fix'] = 'Error!';
+        }
+
         if (Auth::user()->role === 'Administrator') {
             $validatedAttributes['creator'] = 'Administrator';
         } else if (Auth::user()->role === 'Production') {
@@ -170,6 +227,7 @@ class NoteController extends Controller
         } else {
             $validatedAttributes['creator'] = 'Driver';
         }
+
 
         return $validatedAttributes;
     }

@@ -50,14 +50,21 @@
                     @endif
                     @if($order->status === 'In Production')
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.pauseProduction', $order)}}">
-                                @csrf
-                                <button onclick="return confirm('Are you sure you want to pause the production?')"
-                                        class="far fa-pause-circle btn btn-warning btn-block "
-                                        type="submit"> Pause
-                                </button>
-                            </form>
+                            <div class="flex-item-right" style="margin-bottom: 8px; margin-top: 8px">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="button" class="btn colour-orange" data-toggle="modal"
+                                            data-target="#try">
+                                        Pause
+                                    </button>
+                                </div>
+                            </div>
                         </li>
+                <li>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Launch demo modal
+                            </button>
+                </li>
                         <li class="nav-item">
                             <form method="POST"
                                   action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
@@ -178,7 +185,7 @@
                     <i class="nav-icon fas fa-draw-polygon"></i>
                     <p>Drawings</p>
                 </a>
-                @if($order->production != null)
+                @if($order->production !== null)
                     <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>Production Check</p>

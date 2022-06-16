@@ -113,10 +113,11 @@ class OrderController extends Controller
         if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
             if ($order->status === 'Production Pending') {
                 $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
+                return redirect(route('orders.show', $order));
             } else {
                 $order->update(['status' => 'In Production']);
+                return redirect(route('notes.fixStoppage', $order));
             }
-            return redirect(route('orders.show', $order));
         } else {
             return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
         }
