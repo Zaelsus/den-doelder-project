@@ -24,7 +24,7 @@
                     </div>
                     <form method="POST" action="{{route('orders.cancelOrder', $order)}}">
                         @csrf
-                        <button class="btn btn-danger btn-lg float-right"
+                        <button class="btn btn-danger float-right"
                                 type="submit"> Disable Order
                         </button>
                     </form>
