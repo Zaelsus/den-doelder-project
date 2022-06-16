@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Order;
 use App\Models\TruckDriver;
 use Illuminate\Http\Request;
@@ -101,5 +102,4 @@ class TruckDriverController extends Controller
         $order->update(['active_driver' => 0]);
         return redirect(route('orders.index'));
     }
-
 }
