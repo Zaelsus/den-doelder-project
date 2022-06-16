@@ -88,7 +88,8 @@
                     </a>
 
                     @if(\App\Models\Order::prodCheckExists($order))
-                        <a href="{{route('production.show', $order->id)}}" class="nav-link active bg-gray-dark btn text-left">
+                        <a href="{{route('production.show', $order->id)}}"
+                           class="nav-link active bg-gray-dark btn text-left">
                             <i class="nav-icon fas fa-tools"></i>
                             <p>Production Check</p>
                         </a>
@@ -98,7 +99,8 @@
                             <p> Add Production Check</p>
                         </a>
                     @endif
-                    <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{ route('hourlyReports.list', $order) }}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
                         <p>Hourly Check</p>
                     </a>
@@ -116,7 +118,8 @@
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
                     </a>
-                    <a href="{{route('productLocations.show',$order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('productLocations.show',$order)}}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-compass"></i>
                         <p>Location</p>
                     </a>
@@ -192,11 +195,18 @@
                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Notes</p>
-
                 </a>
             </div>
         </li>
     @endif
-
+@elseif (Auth::user()->role === 'Driver')
+    <li class="nav-item">
+        <div class="nav-item">
+            <a href="{{ route('orders.index') }}" class="nav-link active btn bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Orders</p>
+            </a>
+        </div>
+    </li>
 @endif
 

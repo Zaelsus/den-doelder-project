@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\TruckDriver;
 use Illuminate\Http\Request;
 
@@ -82,4 +83,23 @@ class TruckDriverController extends Controller
     {
         //
     }
+
+    /**
+     * changes the "selected" status of the current order to selected
+     */
+    public static function selectOrder(Order $order)
+    {
+        $order->update(['active_driver' => 1]);
+        return redirect(route('orders.show', $order));
+    }
+
+    /**
+     * changes the "selected" status of the current order to unselected
+     */
+    public static function unselectOrder(Order $order)
+    {
+        $order->update(['active_driver' => 0]);
+        return redirect(route('orders.index'));
+    }
+
 }
