@@ -10,6 +10,39 @@
 @endsection
 
 @section('content')
+    {{--    Modal stuff--}}
+    <div class="modal fade" id="cancelOrder" tabindex="-1" role="dialog"
+         aria-labelledby="cancelOrderTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header colour-purple">
+                    <h5 class="modal-title" id="cancelOrderTitle">
+                        Disable Order
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p> Are you sure you want to cancel order number {{$order->order_number}}?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                    <form method="POST" action="{{route('orders.cancelOrder', $order)}}">
+                        @csrf
+                        <button class="btn btn-danger btn-lg float-right"
+                                type="submit"> Disable Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if(Auth::user()->role ==='Production')
         @if(Auth::user()->machine !== null)
             <div class="alert alert-default-info alert-dismissible fade show">
@@ -21,6 +54,7 @@
         @endif
         <div class="btn-group">
             @foreach($machines as $machine)
+
                 <div class="container-xl">
                     <form method="POST"
                           action="{{route('machines.selectMachine', ['machine'=>$machine, 'user'=>(Auth::user())])}}">
@@ -37,9 +71,7 @@
                                         type="submit"> Enter Machine {{$machine->name}}
                                 </button>
                             </div>
-
                         </div>
-
                     </form>
                 </div>
             @endforeach

@@ -64,9 +64,9 @@
                                 <option value="">Choose a pallet</option>
                                     @foreach($pallets as $pallet)
                                         @if (old('pallet_id') == $pallet->id)
-                                            <option value="{{ $pallet->id }}" selected>{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
+                                            <option value="{{$pallet->id}}" selected>{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
                                         @else
-                                            <option value="{{ $pallet->id }}">{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
+                                            <option value="{{$pallet->id}}">{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
                                         @endif
                                     @endforeach
 
