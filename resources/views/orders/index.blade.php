@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-{{--    TODO: This overlaps with the change machines button and looks unfinished--}}
+    {{--    TODO: This overlaps with the change machines button and looks unfinished--}}
     Orders Overview
 @endsection
 @section('custom_css')
@@ -20,58 +20,75 @@
                     <br>
                     @if(Auth::user()->role === 'Administrator')
                         <div class="has-text-right">
-                            <a href="{{route('orders.create.step.one')}}" class="btn btn-info btn-lg float-right">Add a new
+                            <a href="{{route('orders.create.step.one')}}" class="btn btn-info btn-lg float-right">Add a
+                                new
                                 order</a>
                         </div>
-                        @elseif($orders->isEmpty())
+                    @elseif($orders->isEmpty())
                         <div class="alert alert-default-warning text-center fade show">
                             <h2>No orders for {{Auth::user()->machine->name}} at the moment</h2>
                         </div>
                     @endif
-                        @foreach($orders as $order)
-                            @if($previousMachine !== $order->machine->name)
-                                <?php $previousMachine =$order->machine->name?>
-                                <table class="table table-bordered table-hover table-secondary">
-                                    <thead class="bg-gray">
-                                    <tr>
-                                        <th colspan="8" class="text-center bg-gradient-purple">{{$previousMachine}}</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Order Number</th>
-                                        <th scope="col">Pallet Name</th>
-                                        <th scope="col">Pallet Measurements</th>
-                                        <th scope="col">Customer Name</th>
-                                        <th scope="col">Production Line</th>
-                                        <th scope="col">Scheduled Production Date</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Created at</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($orders as $order)
-                                        @if($order->machine->name === $previousMachine)
-                                            <tr class="pointer" data-href="{{Route('orders.show',$order)}}">
-                                                <th scope="row"> {{ $order->order_number }} </th>
-                                                <td>{{$order->pallet->name}}</td>
-                                                <td>{{$order->pallet->measurements}}</td>
-                                                <td>{{ $order->client_name }}</td>
-                                                <td>{{$order->machine->name}}</td>
-                                                <td> {{$order->start_date}}</td>
-                                                <td class = "{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
+                    @foreach($orders as $order)
+                        @if($previousMachine !== $order->machine->name)
+                            <?php $previousMachine = $order->machine->name?>
+                            <table class="table table-bordered table-hover table-secondary">
+                                <thead class="bg-gray">
+                                <tr>
+                                    <th
+                                        colspan="{{ Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator' ? 9 : 8 }}"
+                                        class="text-center bg-gradient-purple">
+                                        {{$previousMachine}}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Order Number</th>
+                                    <th scope="col">Pallet Name</th>
+                                    <th scope="col">Pallet Measurements</th>
+                                    <th scope="col">Customer Name</th>
+                                    <th scope="col">Production Line</th>
+                                    <th scope="col">Scheduled Production Date</th>
+                                    <th scope="col">Status</th>
+                                    @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
+                                        <th scope="col">Driver Status</th>
+                                    @endif
+                                    <th scope="col">Created at</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($orders as $order)
+                                    @if($order->machine->name === $previousMachine)
+                                        <tr class="pointer" data-href="{{Route('orders.show',$order)}}">
+                                            <th scope="row"> {{ $order->order_number }} </th>
+                                            <td>{{$order->pallet->name}}</td>
+                                            <td>{{$order->pallet->measurements}}</td>
+                                            <td>{{ $order->client_name }}</td>
+                                            <td>{{$order->machine->name}}</td>
+                                            <td> {{$order->start_date}}</td>
+                                            <td class="{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
+                                            {{$order->status === 'Paused' ? 'bg-warning':''}}
+                                            {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
+                                            {{$order->status === 'Done' ? 'bg-success':''}}
+                                            {{$order->status === 'In Production' ? 'bg-info':''}}
+                                            {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
+                                            {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}</td>
+                                            @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
+                                                <td class="{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
                                                 {{$order->status === 'Paused' ? 'bg-warning':''}}
                                                 {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
                                                 {{$order->status === 'Done' ? 'bg-success':''}}
                                                 {{$order->status === 'In Production' ? 'bg-info':''}}
                                                 {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
                                                 {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}</td>
-                                                <td>{{$order->created_at}}</td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            @endif
-                        @endforeach
+                                            @endif
+                                            <td>{{$order->created_at}}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
