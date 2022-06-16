@@ -17,13 +17,10 @@
 
                             <div class="card-content table table-bordered table-hover table-light ">
                                 <div>
-                                    Quantity Ordered: {{$order->quantity_production}}
+                                    Quantity to be produced: {{$order->toproduce}}
                                 </div>
                                 <div>
-                                    Quantity Produced: {{$order->quantity_produced}}
-                                </div>
-                                <div>
-                                    Add to Produced: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
+                                    Log Quantity: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
                                     @if(session()->has('error'))
                                         <div class="alert alert-danger">
                                             {{ session()->get('error') }}

@@ -178,4 +178,13 @@ class Order extends Model
         $this->save();
 
     }
+
+    /**
+     * Function to return how many pallets are left to be produced
+     * @return void
+     */
+    public function getToProduceAttribute()
+    {
+        return $this->quantity_production -$this->quantity_produced;
+    }
 }
