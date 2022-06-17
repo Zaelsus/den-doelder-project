@@ -123,12 +123,7 @@ class HourlyReportController extends Controller
      */
     public function list(Order $order)
     {
-        if (Auth::user()->role === 'Driver') {
-            $hourlyReports = HourlyReport::where('role', 'Driver')->findAll();
-            dd($hourlyReports);
-        } else {
             $hourlyReports = $order->hourlyReports;
-        }
 
         return view('hourlyReports.index', compact('order', 'hourlyReports'));
     }
