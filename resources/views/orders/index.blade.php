@@ -73,13 +73,15 @@
                                             {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
                                             {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}</td>
                                             @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
-                                                <td class="{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
-                                                {{$order->status === 'Paused' ? 'bg-warning':''}}
-                                                {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
-                                                {{$order->status === 'Done' ? 'bg-success':''}}
-                                                {{$order->status === 'In Production' ? 'bg-info':''}}
-                                                {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
-                                                {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}</td>
+                                                <td class="{{$order->truckDriver_status === null ? 'bg-secondary':''}}
+                                                {{$order->truckDriver_status === 'Delivered' ? 'bg-success':''}}
+                                                {{$order->truckDriver_status === 'Driving' ? 'bg-info':''}}">
+                                                    @if($order->truckDriver_status === null)
+                                                        No Driver
+                                                    @else
+                                                        {{$order->truckDriver_status}}
+                                                    @endif
+                                                    </td>
                                             @endif
                                             <td>{{$order->created_at}}</td>
                                         </tr>

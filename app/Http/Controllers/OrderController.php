@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\Machine;
 use App\Models\Order;
 use App\Models\Pallet;
+use App\Models\Product;
+use App\Models\ProductLocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -101,8 +104,47 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('orders.show', compact('order'));
+        $productLocationDetails = $this->getProductLocation($order);
 
+        $driving = $this->testForDriving($order);
+
+        return view('orders.show', compact('order', 'productLocationDetails', 'driving'));
+
+    }
+
+    /**
+     * Function that tests if a driver is driving for an order on the same machine
+     *
+     * @param $order
+     * @return bool
+     */
+    public function testForDriving($order): bool
+    {
+        $orders = $order->machine->orders;
+
+        foreach ($orders as $order) {
+            if($order->truckDriver_status === "Driving") {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Function that finds the locations for the product
+     *
+     * @param $details
+     * @return array
+     */
+    public function getProductLocation($order)
+    {
+        $orderId = $order->id;
+        $pallet = $order->pallet;
+        $product = Product::find($pallet->product_id);
+        $productLocation = ProductLocation::where('product_id', $product->id)->first();
+        $location = Location::find($productLocation->location_id);
+        return ['orderId' => $orderId, 'pallet' => $pallet, 'productLocation' => $productLocation, 'location' => $location];
     }
 
     /**
@@ -116,6 +158,16 @@ class OrderController extends Controller
             } else {
                 $order->update(['status' => 'In Production']);
             }
+            return redirect(route('orders.show', $order));
+        } else {
+            return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
+        }
+    }
+
+    public static function startDriving(Order $order)
+    {
+        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused'|| $order->status === 'In Production')) {
+            $order->update(['truckDriver_status' => 'Driving']);
             return redirect(route('orders.show', $order));
         } else {
             return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
