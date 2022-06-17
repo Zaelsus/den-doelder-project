@@ -20,8 +20,6 @@ class OrderFactory extends Factory
             'pallet_id'=>Pallet::all()->random()->product_id,
             'machine_id'=>Machine::all()->random()->id,
             'quantity_production'=>$this->faker->numberBetween(1000, 3000),
-            'client_name'=>$this->faker->name,
-            'client_address'=>$this->faker->address,
         ];
     }
 }

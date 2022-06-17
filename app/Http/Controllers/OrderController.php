@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Machine;
 use App\Models\Order;
 use App\Models\Pallet;
+use App\Providers\AutomaticStatusChange;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -30,6 +32,8 @@ class OrderController extends Controller
         //looking about adding another order by accoridng to status as well as scheduled production
         $orders = Order::orderBy('machine_id', 'desc')->get();
         $previousMachine=null;
+        //automatic status change
+        $this->statusChangeCheck();
         return view('orders.index', compact('orders','previousMachine'));
     }
 
@@ -62,10 +66,11 @@ class OrderController extends Controller
     public function createStepOne(Request $request)
     {
         $pallets = Pallet::all();
-        $machines = Machine::all();
+        $machines = Machine::where('name','!=','None')->get();
+        $nullMachine = Machine::where('name','None')->first();
         $order = $request->session()->get('order');
 
-        return view('orders.create-step-one',compact('order','pallets','machines'));
+        return view('orders.create-step-one',compact('order','pallets','machines','nullMachine'));
     }
 
     /**
@@ -77,19 +82,40 @@ class OrderController extends Controller
     public function postCreateStepOne(Request $request)
     {
         $validatedData = $this->validateOrder($request);
-
-        if(empty($request->session()->get('order'))){
             $order = new Order();
             $order->fill($validatedData);
             $request->session()->put('order', $order);
-        }else{
-            $order = $request->session()->get('order');
-            $order->fill($validatedData);
-            $request->session()->put('order', $order);
-        }
         $order->save();
-
         return redirect()->route('orders.create.step.two');
+    }
+
+
+    /**
+     * Show the step One Form for editing a product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editStepOne(Request $request,Order $order)
+    {
+        $pallets = Pallet::all();
+        $machines = Machine::all();
+        return view('orders.edit-step-one', compact('order','pallets','machines'));
+
+    }
+
+    /**
+     * Post Request to update step1 info in session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateEditStepOne(Request $request,Order $order)
+    {
+        $order->update($this->validateOrder($request));
+        $request->session()->put('order', $order);
+        $order->save();
+        self::statusChangeCheck();
+        return redirect()->route('orders.edit.step.two', compact('order'));
     }
 
 
@@ -101,6 +127,11 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        //automatic status change
+        $orders = Order::orderBy('machine_id', 'desc')->get();
+        $user = Auth::user();
+        event(new AutomaticStatusChange($user,$orders));
+        //regular show
         return view('orders.show', compact('order'));
 
     }
@@ -148,9 +179,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $pallets = Pallet::all();
-        $machines = Machine::all();
-        return view('orders.edit', compact('order','pallets','machines'));
+        //
     }
 
     /**
@@ -162,8 +191,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $order->update($this->validateOrder($request));
-        return redirect(route('orders.show', $order));
+       //
     }
 
     /**
@@ -188,13 +216,13 @@ class OrderController extends Controller
         $validatedAtributes = $request->validate([
             'order_number'=>'required',
             'pallet_id'=>'required',
-            'machine_id'=>'',
+            'machine_id'=>'required',
             'quantity_production'=>'required|integer|min:1',
             'start_date'=>'nullable|date|after:yesterday',
             'site_location'=>'required',
-            'production_instructions'=>'',
-            'client_name' =>'required|string',
-            'client_address' =>'required|string',
+            'production_instructions'=>'nullable',
+            'type_order'=>'boolean',
+            'client_name' =>'',
             'status'=>'string',
         ]);
 
@@ -230,6 +258,16 @@ class OrderController extends Controller
     {
         $order->update(['selected' => 0]);
         return redirect(route('orders.index'));
+    }
+
+    /**
+     * This function calls the event listener to check if the order should change status
+     * @return void
+     */
+    public function statusChangeCheck(){
+        $orders = Order::orderBy('machine_id', 'desc')->get();
+        $user = Auth::user();
+        event(new AutomaticStatusChange($user,$orders));
     }
 
     /**

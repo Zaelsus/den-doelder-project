@@ -18,6 +18,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        AutomaticStatusChange::class => [
+            ReadyForProductionPending::class,
+            InitialCheckPending::class,
+            AdminHold::class,
+        ]
     ];
 
     /**

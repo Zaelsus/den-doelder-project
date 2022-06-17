@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             NoteSeeder::class,
             ProductionSeeder::class,
             InitialSeeder::class,
+            PalletMaterialSeeder::class,
         ]);
     }
 }
