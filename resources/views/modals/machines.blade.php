@@ -1,5 +1,12 @@
 {{--Machines when user already choose a machine --}}
-@php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->where('name','!=','None')->get();@endphp
+@php
+    if(Auth::user()->machine !== null) {
+     $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->where('name','!=','None')->get();
+} else {
+    $machines=\App\Models\Machine::all();
+}
+
+@endphp
 @foreach($machines as $machine)
 <div class="modal fade" id={{"machineChoice2" . $machine->id}} tabindex="-1" role="dialog"
      aria-labelledby={{"machineChoice2" . $machine->id . "Title"}} aria-hidden="true">

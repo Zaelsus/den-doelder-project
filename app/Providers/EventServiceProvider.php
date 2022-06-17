@@ -21,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
         AutomaticStatusChange::class => [
             ReadyForProductionPending::class,
             InitialCheckPending::class,
+            AdminHold::class,
         ]
     ];
 
