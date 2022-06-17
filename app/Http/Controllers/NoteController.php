@@ -125,7 +125,7 @@ class NoteController extends Controller
 
     public function getOrder() {
         $machine = Auth::user()->machine;
-        if(Auth::user()->role='Driver') {
+        if(Auth::user()->role === 'Driver') {
             $order = TruckDriver::findDriverOrder();
         } else {
             if (Order::isInProduction($machine) === 'In Production') {
