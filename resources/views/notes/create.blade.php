@@ -1,13 +1,16 @@
-@extends('layouts.app')
-
-@section('content')
-    <br>
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header bg-gradient-olive">
-                <h3 class="text-center">Add a new note for Order #{{$order->order_number}}</h3>
+<div class="modal fade" id="createNote" tabindex="-1" role="dialog"
+     aria-labelledby="createNoteTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createNoteTitle">
+                    Add a new note for Order #{{$order->order_number}}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
+                </button>
             </div>
-            <div class="card-body">
+            <div class="modal-body">
                 <form class="was-validated" method="POST" action="{{ route('notes.store') }}">
                     @csrf
                     <div class="mb-3">
@@ -53,13 +56,18 @@
                                 <input class="form-check-input" type="radio" name="label" value="Technical Issue"
                                        required>Technical Issue
                             </div>
-{{--                            Might add a radio "other" with input field, where the input value gets saved--}}
                             <br>
                         </div>
+                    </div>
                     <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Create Note</button>
                 </form>
             </div>
+            <div class="modal-footer">
+                <div>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-@endsection
-
+</div>
