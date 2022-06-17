@@ -66,7 +66,7 @@
                                 type="submit"> Start
                         </button>
                     </form>
-                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null)
+                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && $driving === false)
                     <form method="POST" action="{{route('orders.startDriving', $order)}}">
                         @csrf
                         <button onclick="return confirm('Start driving for order {{$order->order_number}}?')"
@@ -128,7 +128,7 @@
                         <th> Quantity Needed:</th>
                         <td> {{$orderMaterial->total_quantity}}</td>
                     </tr>
-                    <tr>
+                    <tr style="border-bottom: solid">
                         <th> Location:</th>
                         <td> {{$productLocationDetails['location']->name}}</td>
                     </tr>
