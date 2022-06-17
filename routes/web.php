@@ -95,3 +95,5 @@ Route::post('/create-step-two', [OrderMaterialController::class,'postCreateStepT
 // Locations
 Route::resource('/productLocations', ProductLocationController::class);
 
+// Truck Driver
+

@@ -191,11 +191,48 @@
                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Notes</p>
-
                 </a>
             </div>
         </li>
     @endif
+@elseif (Auth::user()->role === 'Driver')
+    @if($order === null)
+    <li class="nav-item">
+        <div class="nav-item">
+            <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}" class="nav-link active btn bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Orders</p>
+            </a>
+        </div>
+    </li>
+    @else
+        <div class="nav-item">
+            <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
+                  class="nav-link active btn text-left bg-success">
+                @csrf
+                <button type="submit" class="button-without-style">
+                    <i class="nav-icon fas fa-arrow-alt-circle-up text-left"></i>
+                    <p class="brand-text">Back to All Orders</p>
+                </button>
+            </form>
+
+            <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Order Details</p>
+            </a>
+
+            <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-check"></i>
+                <p>Hourly Check</p>
+            </a>
+
+            <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-book"></i>
+                <p>Notes</p>
+            </a>
+        </div>
+    @endif
+
 
 @endif
 

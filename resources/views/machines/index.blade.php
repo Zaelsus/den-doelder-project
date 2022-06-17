@@ -37,9 +37,7 @@
                                         type="submit"> Enter Machine {{$machine->name}}
                                 </button>
                             </div>
-
                         </div>
-
                     </form>
                 </div>
             @endforeach
