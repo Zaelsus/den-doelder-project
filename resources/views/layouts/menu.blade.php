@@ -200,29 +200,7 @@
         </li>
     @endif
 @elseif (Auth::user()->role === 'Driver')
-{{--    {{dd($order)}}--}}
-{{--    <div class="info-box shade brand-text">--}}
-{{--        <div class="info-box-content">--}}
-{{--            <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>--}}
-{{--            <h4>--}}
-{{--                    <span class="align-content-lg-stretch d-flex justify-content-center badge--}}
-{{--                @if($order->status === 'Production Pending')--}}
-{{--                        badge-secondary--}}
-{{--                @elseif($order->status === 'In Production')--}}
-{{--                        badge-info--}}
-{{--                @elseif(($order->status === 'Paused') || ($order->status === 'Admin Hold'))--}}
-{{--                        badge-warning--}}
-{{--                @elseif($order->status === 'Done')--}}
-{{--                        badge-success--}}
-{{--                @elseif($order->status === 'Quality Check Pending')--}}
-{{--                        bg-lightblue--}}
-{{--                @elseif($order->status === 'Canceled')--}}
-{{--                        badge-dark--}}
-{{--                @endif--}}
-{{--                        ">{{$order->status}}</span>--}}
-{{--            </h4>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    @if($order === null)
     <li class="nav-item">
         <div class="nav-item">
             <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}" class="nav-link active btn bg-gray-dark">
@@ -231,5 +209,34 @@
             </a>
         </div>
     </li>
+    @else
+        <div class="nav-item">
+            <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
+                  class="nav-link active btn text-left bg-success">
+                @csrf
+                <button type="submit" class="button-without-style">
+                    <i class="nav-icon fas fa-arrow-alt-circle-up text-left"></i>
+                    <p class="brand-text">Back to All Orders</p>
+                </button>
+            </form>
+
+            <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Order Details</p>
+            </a>
+
+            <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-check"></i>
+                <p>Hourly Check</p>
+            </a>
+
+            <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
+                <i class="nav-icon fas fa-book"></i>
+                <p>Notes</p>
+            </a>
+        </div>
+    @endif
+
+
 @endif
 
