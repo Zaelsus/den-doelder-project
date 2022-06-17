@@ -50,6 +50,14 @@ Route::post('/orders/stop/{order}/{machine}', [OrderController::class, 'stopProd
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
+//Truck Driver Routes
+//start production route
+Route::post('/orders/startDriving/{order}', [OrderController::class, 'startDriving'])->name('orders.startDriving');
+//stop production route
+Route::post('/orders/stopDriving/{order}/{machine}', [OrderController::class, 'stopDriving'])->name('orders.stopDriving');
+//stop production route
+Route::post('/orders/pauseDriving/{order}', [OrderController::class, 'pauseDriving'])->name('orders.pauseDriving');
+
 //Admin View
 //select
 Route::post('/orders/select/{order}', [OrderController::class, 'selectOrder'])->name('orders.selectOrder');

@@ -54,6 +54,7 @@
                 </div>
             </div>
             <div class="icon">
+                {{--                {{dd($order->machine->orders)}}--}}
                 <i class="fas fa-pallet"></i>
             </div>
             <div>
@@ -63,6 +64,14 @@
                         <button onclick="return confirm('Start production for order {{$order->order_number}}?')"
                                 class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
                                 type="submit"> Start
+                        </button>
+                    </form>
+                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null)
+                    <form method="POST" action="{{route('orders.startDriving', $order)}}">
+                        @csrf
+                        <button onclick="return confirm('Start driving for order {{$order->order_number}}?')"
+                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
+                                type="submit"> Start Driving
                         </button>
                     </form>
                 @elseif(Auth::user()->role === 'Administrator' && $order->selected === 0)
@@ -78,39 +87,50 @@
         <div class="card-body">
             <div class="card-subtitle border-left">
             </div>
+            @if(Auth::user()->role !== "Driver")
+                <h5 class="card bg-gradient-purple" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Client and Order Details</h5>
+                <p>Client Name - {{$order->client_name}}</p>
+                <p>Address - {{$order->client_address}}</p>
+            @endif
 
-            <h5 class="card bg-gradient-purple ">Client and Order Details</h5>
-            <p>Client Name - {{$order->client_name}}</p>
-            <p>Address - {{$order->client_address}}</p>
-
-            <h5 class="card bg-gradient-purple">Materials and Instructions:</h5>
+            <h5 class="card bg-gradient-purple" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Materials and Instructions:</h5>
             <table>
                 <tbody>
                 <tr>
-                    <th>Pallet Type</th>
+                    <th>Pallet Type:</th>
                     <td>{{$order->pallet->name}}</td>
                 </tr>
                 <tr>
-                    <th> Quantity to Produce -</th>
+                    <th> Quantity to Produce:</th>
                     <td> {{$order->quantity_production}}</td>
                 </tr>
                 <tr>
-                    <td> Quantity Produced-</td>
+                    <th> Quantity Produced:</th>
                     <td> {{$order->quantity_produced}}</td>
                 </tr>
                 </tbody>
             </table>
-            <h6 class="card bg-gray">Materials:</h6>
+            <h6 class="card bg-gray" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Materials:</h6>
             <table>
                 <tbody>
                 @foreach($order->orderMaterials as $orderMaterial)
                     <tr>
                         <th>Measurements:</th>
                         <td> {{$orderMaterial->material->measurements}}</td>
+                    </tr>
+                    @if($orderMaterial->material->comments !== "")
+                    <tr>
                         <th>Comments:</th>
                         <td> {{$orderMaterial->material->comments}}</td>
+                    </tr>
+                    @endif
+                    <tr>
                         <th> Quantity Needed:</th>
-                        <td>{{$orderMaterial->total_quantity}}</td>
+                        <td> {{$orderMaterial->total_quantity}}</td>
+                    </tr>
+                    <tr>
+                        <th> Location:</th>
+                        <td> {{$productLocationDetails['location']->name}}</td>
                     </tr>
                 @endforeach
                 </tbody>
