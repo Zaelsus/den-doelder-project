@@ -164,20 +164,7 @@ class Order extends Model
         $this->save();
     }
 
-    /**
-     * Function to complete order when all pallets are produced
-     * @return void
-     */
-    public function stopProduced()
-    {
-        if($this->quantity_produced === $this->quantity_production )
-        {
-            $this->status = 'Done';
-            $this->end_time = date('Y-m-d H:i:s');
-        }
-        $this->save();
 
-    }
 
     /**
      * Function to return how many pallets are left to be produced
