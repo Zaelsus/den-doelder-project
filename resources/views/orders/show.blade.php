@@ -14,7 +14,7 @@
         <div class="card-header small-box bg-gradient-purple">
             <div class="inner">
                 <h3 class="">Order {{$order->order_number}}</h3>
-                <h2 class="float-right">
+                <h2 class="float-right" style="margin-left: 10px">
                     <span class=" badge badge-pill
                 @if($order->status === 'Production Pending')
                         badge-secondary
@@ -29,6 +29,22 @@
                 @elseif($order->status === 'Canceled')
                         badge-dark
                 @endif  ">{{$order->status}}</span></h2>
+                <h2 class="float-right">
+                    <span class=" badge badge-pill
+                @if($order->truckDriver_status === null)
+                        badge-secondary
+                @elseif($order->truckDriver_status === 'Driving')
+                        badge-info
+                @elseif($order->truckDriver_status === 'Delivered')
+                        badge-success
+                @endif  ">
+                        @if($order->truckDriver_status === null)
+                            No Driver
+                        @else
+                            {{$order->truckDriver_status}}
+                        @endif
+                    </span>
+                </h2>
                 <p>{{$order->site_location}}</p>
                 <div class="text-center">
                     <span class="badge badge-pill badge-primary">Created At - {{$order->created_at}}</span>

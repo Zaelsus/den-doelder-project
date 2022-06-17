@@ -200,6 +200,29 @@
         </li>
     @endif
 @elseif (Auth::user()->role === 'Driver')
+{{--    {{dd($order)}}--}}
+{{--    <div class="info-box shade brand-text">--}}
+{{--        <div class="info-box-content">--}}
+{{--            <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>--}}
+{{--            <h4>--}}
+{{--                    <span class="align-content-lg-stretch d-flex justify-content-center badge--}}
+{{--                @if($order->status === 'Production Pending')--}}
+{{--                        badge-secondary--}}
+{{--                @elseif($order->status === 'In Production')--}}
+{{--                        badge-info--}}
+{{--                @elseif(($order->status === 'Paused') || ($order->status === 'Admin Hold'))--}}
+{{--                        badge-warning--}}
+{{--                @elseif($order->status === 'Done')--}}
+{{--                        badge-success--}}
+{{--                @elseif($order->status === 'Quality Check Pending')--}}
+{{--                        bg-lightblue--}}
+{{--                @elseif($order->status === 'Canceled')--}}
+{{--                        badge-dark--}}
+{{--                @endif--}}
+{{--                        ">{{$order->status}}</span>--}}
+{{--            </h4>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <li class="nav-item">
         <div class="nav-item">
             <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}" class="nav-link active btn bg-gray-dark">
