@@ -16,6 +16,8 @@
     @stack('page_css')
 </head>
 
+@include('layouts.modals')
+
 <body class="hold-transition sidebar-mini layout-fixed">
 @extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
 <div class="wrapper">

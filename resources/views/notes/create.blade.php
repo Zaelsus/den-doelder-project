@@ -1,13 +1,16 @@
-@extends('layouts.app')
-
-@section('content')
-    <br>
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header bg-gradient-olive">
-                <h3 class="text-center">Add a new note for Order #{{$order->order_number}}</h3>
+<div class="modal fade" id="createNote" tabindex="-1" role="dialog"
+     aria-labelledby="createNoteTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createNoteTitle">
+                    Add a new note for Order #{{$order->order_number}}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
+                </button>
             </div>
-            <div class="card-body">
+            <div class="modal-body">
                 <form class="was-validated" method="POST" action="{{ route('notes.store') }}">
                     @csrf
                     <div class="mb-3">
@@ -17,7 +20,7 @@
                                    type="text" placeholder="Title of note" value="{{old('title')}}" required>
                         </div>
                         @error('title')
-                        <p>{{ $message }}</p>
+                        <p class="help is-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
@@ -25,7 +28,7 @@
                         <div>
                             <textarea type="text" class="form-control @error('content') is-invalid @enderror"
                                       name="content"
-                                      placeholder="Content of note" rows="5" required
+                                      placeholder="Please describe the note in more detail." rows="5" required
                             >{{old('content')}}</textarea>
                         </div>
                         @error('content')
@@ -38,58 +41,33 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Error"
-                                       onclick="myFunction()">
-                                <span class="form-check-label badge badge-danger" style="color: white">Error</span>
+                                <input class="form-check-input" type="radio" name="label" value="Regular Note"
+                                       required>Regular Note
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Fix"
-                                       onclick="myFunction()">
-                                <span class="form-check-label badge badge-success" style="color: white">Fix</span>
+                                <input class="form-check-input" type="radio" name="label" value="Mechanical Issue"
+                                       required>Mechanical Issue
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Other"
-                                       onclick="myFunction()">
-                                <span class="form-check-label badge badge-info" style="color: white">Other</span>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4" id="text" style="display:none">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="priority" value="low">Low priority
+                                <input class="form-check-input" type="radio" name="label" value="Material Issue"
+                                       required>Material Issue
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="priority" value="medium">Medium priority
+                                <input class="form-check-input" type="radio" name="label" value="Technical Issue"
+                                       required>Technical Issue
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="priority" value="high">High priority
-                            </div>
+                            <br>
                         </div>
                     </div>
-                    <br>
-
-                    <script>
-                        function myFunction() {
-                            console.log("function");
-                            let labelElements = Array.from(document.getElementsByName("label"));
-                            let text = document.getElementById("text");
-                            let i = 0;
-                            let checked = false;
-                            while (i < labelElements.length && checked === false) {
-                                if (labelElements[i].checked === true) {
-                                    text.style.display = "block";
-                                    checked = true;
-                                } else {
-                                    text.style.display = "none";
-                                }
-                                i++;
-                            }
-                        }
-                    </script>
                     <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Create Note</button>
                 </form>
             </div>
+            <div class="modal-footer">
+                <div>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-@endsection
-
+</div>

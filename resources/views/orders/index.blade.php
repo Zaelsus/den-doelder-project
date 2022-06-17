@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('header')
-{{--    TODO: This overlaps with the change machines button and looks unfinished--}}
+    {{--    TODO: This overlaps with the change machines button and looks unfinished--}}
     Orders Overview
 @endsection
 @section('custom_css')
@@ -20,10 +20,11 @@
                     <br>
                     @if(Auth::user()->role === 'Administrator')
                         <div class="has-text-right">
-                            <a href="{{route('orders.create.step.one')}}" class="btn btn-info btn-lg float-right">Add a new
+                            <a href="{{route('orders.create.step.one')}}" class="btn btn-info btn-lg float-right">Add a
+                                new
                                 order</a>
                         </div>
-                        @elseif($orders->isEmpty())
+                    @elseif($orders->isEmpty())
                         <div class="alert alert-default-warning text-center fade show">
                             <h2>No orders for {{Auth::user()->machine->name}} at the moment</h2>
                         </div>

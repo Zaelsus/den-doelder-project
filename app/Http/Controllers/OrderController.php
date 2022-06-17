@@ -144,10 +144,11 @@ class OrderController extends Controller
         if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
             if ($order->status === 'Production Pending') {
                 $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
+                return redirect(route('orders.show', $order));
             } else {
                 $order->update(['status' => 'In Production']);
+                return redirect(route('notes.fixStoppage', $order));
             }
-            return redirect(route('orders.show', $order));
         } else {
             return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
         }
@@ -241,7 +242,6 @@ class OrderController extends Controller
         return redirect(route('orders.show', $order));
     }
 
-
     /**
      * changes the "selected" status of the current order to selected
      */
@@ -310,5 +310,18 @@ class OrderController extends Controller
 
     }
 
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listOrders()
+    {
+        //looking about adding another order by accoridng to status as well as scheduled production
+//        $orders = Order::where('status', 'Production Pending', 'In Production')->orderBy('machine_id', 'desc')->get();
+        $orders = 1;
+        dd($orders);
+        $previousMachine=null;
+        return view('orders.index', compact('orders','previousMachine'));
+    }
 }
