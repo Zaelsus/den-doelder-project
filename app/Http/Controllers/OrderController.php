@@ -105,8 +105,11 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $productLocationDetails = $this->getProductLocation($order);
+//        dd($productLocationDetails);
 
         $driving = $this->testForDriving($order);
+
+
 
         return view('orders.show', compact('order', 'productLocationDetails', 'driving'));
 

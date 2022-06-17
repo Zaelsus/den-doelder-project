@@ -99,7 +99,11 @@
     </nav>
 
     <!-- Left side column. contains the logo and sidebar -->
-@include('layouts.sidebar')
+@if(isset($order))
+    @include('layouts.sidebar',['order'=>$order])
+@else
+    @include('layouts.sidebar')
+@endif
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

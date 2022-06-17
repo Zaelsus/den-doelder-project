@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app',['order'=>$order])
 
 @section('content')
     <br>
@@ -144,10 +144,13 @@
                         <th> Quantity Needed:</th>
                         <td> {{$orderMaterial->total_quantity}}</td>
                     </tr>
-                    <tr style="border-bottom: solid">
+                    @if(Auth::user()->role === 'Driver')
+                    <tr>
                         <th> Location:</th>
                         <td> {{$productLocationDetails['location']->name}}</td>
                     </tr>
+                    @endif
+                    <tr style="border-bottom: solid"></tr>
                 @endforeach
                 </tbody>
             </table>
