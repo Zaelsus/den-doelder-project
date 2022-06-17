@@ -21,41 +21,7 @@
         @endif
         <div class="btn-group">
             @foreach($machines as $machine)
-                {{--    Modal stuff--}}
-                <div class="modal fade" id={{"machineChoice" . $machine->id}} tabindex="-1" role="dialog"
-                     aria-labelledby={{"machineChoice" . $machine->id . "Title"}} aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header colour-purple">
-                                <h5 class="modal-title" id={{"machineChoice" . $machine->id . "Title"}}>
-                                  Choose Machine
-                                </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true"
-                                          class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <p> Enter to machine {{$machine->name}}?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <div>
-                                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel
-                                    </button>
-                                </div>
-                                <form method="POST"
-                                      action="{{route('machines.selectMachine', ['machine'=>$machine, 'user'=>(Auth::user())])}}">
-                                    @csrf
-                                    <button class="btn  {{$machine->id === 1 ? 'btn-success mr-10':''}}
-                                    {{$machine->id === 2 ? 'btn-info':''}} {{$machine->id === 3 ? 'btn-warning':''}} float-right"
-                                            type="submit"> Enter Machine {{$machine->name}}
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
                 <div class="container-xl">
                     <div class="container-lg ">
                         <div class="text-center ">
@@ -64,7 +30,7 @@
                         </div>
                         <div>
                             <button type="button"
-                                    class="far fas fa-arrow-alt-circle-up btn btn-lg  {{$machine->id === 1 ? 'btn-success mr-10':''}}
+                                    class="far fas fa-arrow-alt-circle-up btn btn-lg  {{$machine->id === 1 ? 'btn-success':''}}
                                     {{$machine->id === 2 ? 'btn-info':''}} {{$machine->id === 3 ? 'btn-warning':''}}"
                                     data-toggle="modal"
                                     data-target={{"#machineChoice" . $machine->id}}>
@@ -75,6 +41,7 @@
                 </div>
             @endforeach
         </div>
+
     @elseif(Auth::user()->role ==='Administrator')
         @php
             $order = App\Models\Order::isSelected();
