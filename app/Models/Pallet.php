@@ -40,11 +40,18 @@ class Pallet extends Model
     }
 
     /**
-     *Getts the orders related to the pallet
+     *Gets the orders related to the pallet
      */
     public function orders()
     {
-        return $this->hasMany(Order::class,'pallet_id');
+        return $this->hasMany(Order::class,'pallet_id','product_id');
     }
 
+    /**
+     *Gets the orderMaterials related to the order
+     */
+    public function palletMaterials()
+    {
+        return $this->hasMany(PalletMaterial::class, 'pallet_id');
+    }
 }

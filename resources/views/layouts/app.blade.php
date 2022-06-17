@@ -16,7 +16,10 @@
     @stack('page_css')
 </head>
 
+@include('layouts.modals')
+
 <body class="hold-transition sidebar-mini layout-fixed">
+@extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
 <div class="wrapper">
     <!-- Main Header -->
     <nav class="main-header navbar navbar-expand navbar-light colour-purple">
@@ -35,25 +38,20 @@
                 </a>
                 <ul class="dropdown-menu  bg-transparent text-center">
                     @if(Auth::user()->role === 'Production')
-                        @php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->get();@endphp
+                        @php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->where('name','!=','None')->get();@endphp
                         @foreach($machines as $machine)
                             <li class="align-content-center">
-                                <form method="POST"
-                                      action="{{route('machines.selectMachine', ['machine'=>$machine, 'user'=>(Auth::user())])}}">
-                                    @csrf
-                                    <div class="container-lg ">
-                                        <div>
-                                            <button
-                                                onclick="return confirm('Choose production line {{$machine->name}}?')"
-                                                class=" text-center btn  {{$machine->id === 1 ? 'btn-success mr-10':''}}
+                                <div class="container-lg ">
+                                    <div>
+                                        <button type="button"
+                                                class="far fas fa-arrow-alt-circle-up btn  {{$machine->id === 1 ? 'btn-success':''}}
                                                 {{$machine->id === 2 ? 'btn-info':''}} {{$machine->id === 3 ? 'btn-warning':''}}"
-                                                type="submit"> Enter Machine {{$machine->name}}
-                                            </button>
-                                        </div>
-
+                                                data-toggle="modal"
+                                                data-target={{"#machineChoice2" . $machine->id}}>
+                                            Enter Machine {{$machine->name}}
+                                        </button>
                                     </div>
-
-                                </form>
+                                </div>
                             </li>
                         @endforeach
                     @else

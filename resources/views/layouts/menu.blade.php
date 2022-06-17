@@ -39,32 +39,21 @@
                 <ul class="nav nav-treeview" style="display: none;">
                     @if($order->status === 'Paused')
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.startProduction', $order)}}">
-                                @csrf
-                                <button onclick="return confirm('Are you sure you want to restart?')"
-                                        class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
-                                        type="submit"> Restart
-                                </button>
-                            </form>
+                            <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                                    data-toggle="modal"
+                                    data-target="#restartProd">
+                                Restart
+                            </button>
                         </li>
                     @endif
                     @if($order->status === 'In Production')
                         <li class="nav-item">
-                            <div class="flex-item-right" style="margin-bottom: 8px; margin-top: 8px">
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button type="button" class="btn colour-orange" data-toggle="modal"
-                                            data-target="#try">
-                                        Pause
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                <li>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                Launch demo modal
+                            <button type="button" class="far fa-pause-circle btn btn-warning btn-block"
+                                    data-toggle="modal"
+                                    data-target="#pauseProd">
+                                Pause
                             </button>
-                </li>
+                        </li>
                         <li class="nav-item">
                             <form method="POST"
                                   action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
@@ -78,6 +67,7 @@
                     @endif
                 </ul>
             </div>
+
             <div class="nav-item">
                 <a href="{{ route('orders.show', $order) }}" class="nav-link active btn text-left bg-gray-dark">
                     <i class="nav-icon fas fa-clipboard-list"></i>
@@ -114,7 +104,6 @@
                 @endif
             </div>
             <div class="nav-item">
-
                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Notes</p>

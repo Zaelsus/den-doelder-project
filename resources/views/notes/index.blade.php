@@ -1,3 +1,5 @@
+@extends('layouts.modals')
+@extends('notes.create')
 @extends('layouts.app')
 @section('content')
     <!-- Button trigger modal -->
@@ -94,10 +96,11 @@
                 <br>
                 <div class="row">
                     <div class="col-md-9">
-                        <button class="btn btn-lg bg-gradient-olive opacity-70"
-                                onclick=window.location.href="{{route('notes.create')}}">
-                            Create Note
-                        </button>
+                            <button type="button" class="btn btn-lg bg-gradient-olive opacity-70"
+                                    data-toggle="modal"
+                                    data-target="#createNote">
+                                Create Note
+                            </button>
                     </div>
                     <div id="buttonAllNotes" class="col-md-3">
 

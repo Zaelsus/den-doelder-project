@@ -84,12 +84,19 @@ Route::get('/notes/fixStoppage/{order}', [NoteController::class, 'fixStoppage'])
 
 
 
-//Double Form
+//Double Form Create
 Route::get('/create-step-one', [OrderController::Class,'createStepOne'])->name('orders.create.step.one');
 Route::post('/create-step-one', [OrderController::class,'postCreateStepOne'])->name('orders.create.step.one.post');
 
 Route::get('/create-step-two', [OrderMaterialController::class,'createStepTwo'])->name('orders.create.step.two');
 Route::post('/create-step-two', [OrderMaterialController::class,'postCreateStepTwo'])->name('orders.create.step.two.post');
+
+//Double Form Create
+Route::get('/edit-step-one/{order}', [OrderController::Class,'editStepOne'])->name('orders.edit.step.one');
+Route::put('/edit-step-one/{order}', [OrderController::class,'updateEditStepOne'])->name('orders.update.step.one.post');
+
+Route::get('/edit-step-two/{order}', [OrderMaterialController::class,'editStepTwo'])->name('orders.edit.step.two');
+Route::put('/edit-step-two/{order}', [OrderMaterialController::class,'updateEditStepTwo'])->name('orders.update.step.two.post');
 
 
 // Locations

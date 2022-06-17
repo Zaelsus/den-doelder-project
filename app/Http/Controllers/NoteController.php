@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class NoteController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display an overview of a selection of notes, depending on the role
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,9 +22,9 @@ class NoteController extends Controller
         //first get all the notes
         $notes = Note::all();
 
-        //loop through the notes to see if the priority should be updated.
-        //if there is an error note without a fix note, the priority is high.
-        //if there is an error note with a fixe note, the priority goes to empty again.
+        /** loop through the notes to see if the priority should be updated.
+            if there is an error note without a fix note, the priority is high.
+            if there is an error note with a fixe note, the priority goes to low again.*/
         foreach($notes as $note) {
             if($note->fix === 'Error!') {
                 $note->update(['priority' => 'high']);
@@ -33,11 +33,6 @@ class NoteController extends Controller
                 Note::where('id', $note->note_rel)->update(['priority' => 'low']);
             }
         }
-
-//        // if it is Lunch Break or End Of Shift, don't save the note to index.
-//        if($label === 'Lunch Break' || $label === 'End of Shift') {
-//            return redirect(route('notes.index'));
-//        }
 
         //different index pages for different roles; admin sees all notes
         if(Auth::user()->role === 'Administrator') {
@@ -50,21 +45,21 @@ class NoteController extends Controller
             $notes = Note::where('order_id', $order->id)->where('creator', 'Driver');
         }
 
-        //go to index blade and send the notes that came out of the if statement as well as the order
+        //go to index blade and send the notes that came out of the if-statement as well as the order found earlier
         return view('notes.index', compact('notes', 'order'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $order = $this->findOrderForUser();
-
-        return view('notes.create', compact('order'));
-    }
+//    /**
+//     * Show the form for creating a new note.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function create()
+//    {
+//        $order = $this->findOrderForUser();
+//
+//        return view('notes.create', compact('order'));
+//    }
 
     /**
      * Store a newly created resource in storage.
@@ -89,6 +84,13 @@ class NoteController extends Controller
         $order = $this->findOrderForUser();
 
         $note = Note::create($this->validateNote($request, $order->id, $fix, $note_rel));
+
+        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)')) {
+            $order->update(['status' => 'Paused']);
+        } else if(($order->status === 'Paused') && ($note->label === 'Fix')) {
+            dd('no hello');
+        }
+
 
         if($note->label === 'End of Shift') {
             return redirect(route('orders.editquantity', $order));
