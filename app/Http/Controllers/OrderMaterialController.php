@@ -45,7 +45,7 @@ class OrderMaterialController extends Controller
     }
 
     /**
-     * Show the step One Form for creating a new product.
+     * Show the step Two Form for creating a new order.
      *
      * @return \Illuminate\Http\Response
      */
@@ -58,7 +58,7 @@ class OrderMaterialController extends Controller
     }
 
     /**
-     * Show the step One Form for creating a new product.
+     * Post Request to create step1 info in session
      *
      * @return \Illuminate\Http\Response
      */
@@ -80,38 +80,26 @@ class OrderMaterialController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show the step Two Form for updateing an order.
      *
-     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
-    {
-        //
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Order $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
+    public function editStepTwo(Request $request)
     {
         $materials = Material::all();
-        return view('orders.editquantity', compact('order', 'materials'));
+        $order = $request->session()->get('order');
+        return view('orders.edit-step-two', compact('order', 'materials'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Post Request to update step2 info in session
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function updateEditStepTwo(Request $request)
     {
+        $order = $request->session()->get('order');
+        $request->session()->forget('order');
         $orderMaterials=$order->orderMaterials;
         $array = $request->product;
         for ($i = 0; $i < count($array); $i++) {
@@ -137,8 +125,44 @@ class OrderMaterialController extends Controller
                 }
             }
         }
-
+        (new OrderController)->statusChangeCheck();
         return redirect(route('orders.show', $order));
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param \App\Models\Order $order
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Order $order)
+    {
+        //
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param \App\Models\Order $order
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Order $order)
+    {
+       //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Order $order
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Order $order)
+    {
+       //
     }
 
     /**

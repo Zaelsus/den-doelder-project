@@ -91,6 +91,35 @@ class OrderController extends Controller
 
 
     /**
+     * Show the step One Form for editing a product.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editStepOne(Request $request,Order $order)
+    {
+        $pallets = Pallet::all();
+        $machines = Machine::all();
+        return view('orders.edit-step-one', compact('order','pallets','machines'));
+
+    }
+
+    /**
+     * Post Request to update step1 info in session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateEditStepOne(Request $request,Order $order)
+    {
+        $order->update($this->validateOrder($request));
+        $request->session()->put('order', $order);
+        $order->save();
+        self::statusChangeCheck();
+        return redirect()->route('orders.edit.step.two', compact('order'));
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param \App\Models\Order $order
@@ -150,9 +179,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        $pallets = Pallet::all();
-        $machines = Machine::all();
-        return view('orders.edit', compact('order','pallets','machines'));
+        //
     }
 
     /**
@@ -164,9 +191,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $order->update($this->validateOrder($request));
-        self::statusChangeCheck();
-        return redirect(route('orders.show', $order));
+       //
     }
 
     /**

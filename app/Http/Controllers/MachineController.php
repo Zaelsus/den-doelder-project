@@ -45,6 +45,7 @@ class MachineController extends Controller
         if (Auth::user()->role === 'Production') {
             $orders = Order::where('machine_id', $machine->id)
                 ->where('status', 'Production Pending')
+//                ->where('truckDriver_status','Driving')
                 ->orderBy('start_date', 'desc')->get();
             // if there isnt any order in production
             if ($order === null) {

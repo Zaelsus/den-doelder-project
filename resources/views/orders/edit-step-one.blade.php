@@ -17,7 +17,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form class="was-validated" method="POST" action="{{ route('orders.update',$order) }}">
+                <form class="was-validated" method="POST" action="{{ route('orders.update.step.one.post',$order) }}">
                     @csrf
                     @method('PUT')
                     <div class="form-row">

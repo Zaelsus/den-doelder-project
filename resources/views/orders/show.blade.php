@@ -120,7 +120,7 @@
             @if(Auth::user()->role === 'Administrator')
                 <div class="control">
                     <button class="btn btn-info btn-lg float-right"
-                            onclick=window.location.href="{{route('orders.edit', $order)}}">
+                            onclick=window.location.href="{{route('orders.edit.step.one', $order)}}">
                         Edit Order Details
                     </button>
                 </div>
