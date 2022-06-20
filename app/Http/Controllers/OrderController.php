@@ -343,8 +343,18 @@ class OrderController extends Controller
 
     public function pauseDriving(Order $order) {
 //        dd($order);
-        dd($order->machine);
+//        dd($order->machine);
         $order->update(['truckDriver_status' => null]);
-        return redirect(route('machines.show', ['machine' =>Auth::user()->machine]));
+        return redirect(route('machines.show', ['machine' => $order->machine]));
+    }
+
+    /**
+     * changes the status of the current order to done
+     */
+    public static function stopDriving(Order $order)
+    {
+        $machine = $order->machine;
+        $order->update(['truckDriver_status' => 'Delivered']);
+        return redirect(route('machines.show', compact('machine')));
     }
 }

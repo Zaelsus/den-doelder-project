@@ -232,7 +232,7 @@
 {{--                        </form>--}}
                     </li>
                     <li class="nav-item">
-                        <form method="POST" action="{{route('orders.stopDriving', ['order'=>$order,'machine'=>Auth::user()->machine])}}"
+                        <form method="POST" action="{{route('orders.stopDriving', $order)}}"
                               class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
                             @csrf
 

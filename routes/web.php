@@ -54,7 +54,7 @@ Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction']
 //start production route
 Route::post('/orders/startDriving/{order}', [OrderController::class, 'startDriving'])->name('orders.startDriving');
 //stop production route
-Route::post('/orders/stopDriving/{order}/{machine}', [OrderController::class, 'stopDriving'])->name('orders.stopDriving');
+Route::post('/orders/stopDriving/{order}', [OrderController::class, 'stopDriving'])->name('orders.stopDriving');
 //stop production route
 Route::post('/orders/pauseDriving/{order}', [OrderController::class, 'pauseDriving'])->name('orders.pauseDriving');
 
