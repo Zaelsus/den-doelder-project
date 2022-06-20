@@ -1,18 +1,29 @@
-@extends('layouts.app')
+<?php
 
-@section('content')
-    <br>
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header bg-gradient-olive">
-                <h3 class="text-center">Log the fix to pausing Order #{{$order->order_number}}</h3>
+use App\Models\Note;
+
+
+?>
+
+{{--    Modal for logging Fix --}}
+<div class="modal fade" id="logFix" tabindex="-1" role="dialog"
+     aria-labelledby="logFixTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logFixTitle">
+                    Log the fix of stoppage for Order #{{$order->order_number}} before restarting
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
+                </button>
             </div>
-            <div class="card-body">
+            <div class="modal-body">
                 <form class="was-validated" method="POST" action="{{ route('notes.store') }}">
                     @csrf
                     <div class="mb-3">
                         <div class="mb-3">
-                            <label for="title">Title of Note</label>
+                            <label for="title">Title of Error Note</label>
                             <div>
                                 <input class="form-control" type="text" name="title" value="{{$note->title}}">
                             </div>
@@ -31,10 +42,6 @@
                         <p class="help is-danger">{{ $message }}</p>
                         @enderror
                     </div>
-{{--                    <div>--}}
-{{--                        <input class="form-control" type="text" name="title" value="{{$note->title}}" style="display:none"--}}
-{{--                               >--}}
-{{--                    </div>--}}
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="label" value="Fix" style="display:none"
                                checked>
@@ -46,8 +53,12 @@
                     <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Log fix for stoppage</button>
                 </form>
             </div>
+            <div class="modal-footer">
+                <div>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-@endsection
-
-
+</div>

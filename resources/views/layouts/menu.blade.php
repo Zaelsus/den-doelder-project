@@ -39,24 +39,20 @@
                 <ul class="nav nav-treeview" style="display: none;">
                     @if($order->status === 'Paused')
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.startProduction', $order)}}">
-                                @csrf
-                                <button onclick="return confirm('Are you sure you want to restart?')"
-                                        class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
-                                        type="submit"> Restart
-                                </button>
-                            </form>
+                            <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                                    data-toggle="modal"
+                                    data-target="#restartProd">
+                                Restart
+                            </button>
                         </li>
                     @endif
                     @if($order->status === 'In Production')
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.pauseProduction', $order)}}">
-                                @csrf
-                                <button onclick="return confirm('Are you sure you want to pause the production?')"
-                                        class="far fa-pause-circle btn btn-warning btn-block "
-                                        type="submit"> Pause
-                                </button>
-                            </form>
+                            <button type="button" class="far fa-pause-circle btn btn-warning btn-block"
+                                    data-toggle="modal"
+                                    data-target="#pauseProd">
+                                Pause
+                            </button>
                         </li>
                         <li class="nav-item">
                             <form method="POST"
@@ -71,6 +67,7 @@
                     @endif
                 </ul>
             </div>
+
             <div class="nav-item">
                 <a href="{{ route('orders.show', $order) }}" class="nav-link active btn text-left bg-gray-dark">
                     <i class="nav-icon fas fa-clipboard-list"></i>
@@ -107,7 +104,6 @@
                 @endif
             </div>
             <div class="nav-item">
-
                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Notes</p>
@@ -181,7 +177,7 @@
                     <i class="nav-icon fas fa-draw-polygon"></i>
                     <p>Drawings</p>
                 </a>
-                @if($order->production != null)
+                @if($order->production !== null)
                     <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>Production Check</p>

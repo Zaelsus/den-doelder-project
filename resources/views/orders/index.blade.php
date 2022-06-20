@@ -81,7 +81,7 @@
                                                             <span class="badge badge-pill ">No materials chosen</span>
                                                         @endif </td>
                                                 @endif
-                                            @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
+                                    @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
                                                 <td class="{{$order->truckDriver_status === null ? 'bg-secondary':''}}
                                                 {{$order->truckDriver_status === 'Delivered' ? 'bg-success':''}}
                                                 {{$order->truckDriver_status === 'Driving' ? 'bg-info':''}}">
