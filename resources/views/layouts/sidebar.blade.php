@@ -26,7 +26,6 @@
                         $order = Order::isSelected();
                         } elseif(Auth::user()->role === 'Driver') {
                         $order = TruckDriver::getDrivingOrder(Auth::user()->machine);
-
                         }
                 @endphp
                     @include('layouts.menu',['order'=> $order])
