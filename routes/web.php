@@ -58,6 +58,7 @@ Route::post('/orders/stopDriving/{order}/{machine}', [OrderController::class, 's
 //stop production route
 Route::post('/orders/pauseDriving/{order}', [OrderController::class, 'pauseDriving'])->name('orders.pauseDriving');
 
+
 //Admin View
 //select
 Route::post('/orders/select/{order}', [OrderController::class, 'selectOrder'])->name('orders.selectOrder');

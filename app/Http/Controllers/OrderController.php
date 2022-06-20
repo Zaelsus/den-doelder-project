@@ -340,4 +340,11 @@ class OrderController extends Controller
         $previousMachine=null;
         return view('orders.index', compact('orders','previousMachine'));
     }
+
+    public function pauseDriving(Order $order) {
+//        dd($order);
+        dd($order->machine);
+        $order->update(['truckDriver_status' => null]);
+        return redirect(route('machines.show', ['machine' =>Auth::user()->machine]));
+    }
 }

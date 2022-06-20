@@ -212,23 +212,45 @@
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                        <form method="POST" action="{{route('orders.pauseDriving', $order)}}">
+                        <form method="POST" action="{{route('orders.pauseDriving', $order)}}"
+                              class="nav-link active btn text-left bg-warning" style="margin-top: .2rem">
                             @csrf
+
                             <button onclick="return confirm('Are you sure you want to pause driving?')"
-                                    class="far fa-pause-circle btn btn-warning btn-block "
-                                    type="submit"> Pause Driving
+                                    type="submit"
+                                    class="button-without-style">
+                                <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
+                                <p class="brand-text" style="color: white"> Pause Driving</p>
                             </button>
                         </form>
+{{--                        <form method="POST" action="{{route('orders.pauseDriving', $order)}}">--}}
+{{--                            @csrf--}}
+{{--                            <button onclick="return confirm('Are you sure you want to pause driving?')"--}}
+{{--                                    class="far fa-pause-circle btn btn-warning btn-block "--}}
+{{--                                    type="submit"> Pause Driving--}}
+{{--                            </button>--}}
+{{--                        </form>--}}
                     </li>
                     <li class="nav-item">
-                        <form method="POST"
-                              action="{{route('orders.stopDriving', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
+                        <form method="POST" action="{{route('orders.stopDriving', ['order'=>$order,'machine'=>Auth::user()->machine])}}"
+                              class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
                             @csrf
+
                             <button onclick="return confirm('Is this order fully delivered?')"
-                                    class="far fa-stop-circle btn btn-danger btn-block "
-                                    type="submit"> Finish Driving
+                                    type="submit"
+                                    class="button-without-style">
+                                <i class="nav-icon fas fa-stop-circle text-left"></i>
+                                <p class="brand-text"> Finish Driving</p>
                             </button>
                         </form>
+{{--                        <form method="POST"--}}
+{{--                              action="{{route('orders.stopDriving', ['order'=>$order,'machine'=>Auth::user()->machine])}}">--}}
+{{--                            @csrf--}}
+{{--                            <button onclick="return confirm('Is this order fully delivered?')"--}}
+{{--                                    class="far fa-stop-circle btn btn-danger btn-block "--}}
+{{--                                    type="submit"> Finish Driving--}}
+{{--                            </button>--}}
+{{--                        </form>--}}
                     </li>
                 </ul>
             </div>
