@@ -299,8 +299,7 @@ class OrderController extends Controller
         {
             $order->update($validated);
             $order->addProduced();
-            $order->stopProduced();
-            return redirect(route('orders.show', $order));
+            return redirect(route('orders.editquantity', $order));
         }
         catch (\Exception $exception)
         {

@@ -17,13 +17,13 @@
 
                             <div class="card-content table table-bordered table-hover table-light ">
                                 <div>
-                                    Quantity Ordered: {{$order->quantity_production}}
+                                    Quantity produced: {{$order->quantity_produced}}
                                 </div>
                                 <div>
-                                    Quantity Produced: {{$order->quantity_produced}}
+                                    Quantity to be produced: {{$order->toproduce}}
                                 </div>
                                 <div>
-                                    Add to Produced: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
+                                    Log Quantity: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
                                     @if(session()->has('error'))
                                         <div class="alert alert-danger">
                                             {{ session()->get('error') }}
@@ -33,15 +33,26 @@
                             </div>
 
                             <div class="field is-grouped">
-                                {{-- Here are the form buttons: save, reset and cancel --}}
-                                <div class="control">
-                                    <button type="submit" class="button is-primary">Save</button>
-
-                                    <a type="button" href="{{ route('orders.show', $order) }}" class="button is-light">Cancel</a>
-                                </div>
+                                    <div>
+                                        <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" id="submitNew">Save</button>
+                                    </div>
                             </div>
                         </div>
                     </form>
+                    <div class="control">
+                        @if($order->quantity_produced >= $order->quantity_production)
+                            <form method="POST"
+                                  action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
+                                @csrf
+                                <button onclick="return confirm('Is this order completed?')"
+                                        class="far fa-stop-circle btn btn-danger btn-block "
+                                        type="submit"> Stop Production
+                                </button>
+                            </form>
+                        @endif
+
+                        <a type="button" href="{{ route('orders.show', $order) }}" class="btn btn-light btn-lg">Cancel</a>
+                    </div>
                 </div>
             </div>
         </div>
