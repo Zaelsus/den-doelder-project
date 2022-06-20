@@ -8,8 +8,6 @@
                 <h3 class="  text-center ">Add a new hourly quality report
                     for {{ now('Europe/Amsterdam')->format('H:i') }}</h3>
                 <div class="card-tools">
-                    <!-- Buttons, labels, and many other things can be placed here! -->
-                    <!-- Here is a label for example -->
 
                 </div>
                 <!-- /.card-tools -->
@@ -26,31 +24,31 @@
                         <div class="col-md-6 mb-3" style="width:100%;">
                             <label class="required" for="def_id">Def #</label>
                             <div>
-                                <select name="def_id"
+                                <select name="def_id" id="def_id" onchange="addExtraInfo()"
                                         class="custom-select @error('def_id') is-invalid @enderror"
                                         required>
                                     <option value="">Select one</option>
                                     <option
-                                        value='1. Stable Stacked Pallets' {{ old('def_id') ? 'selected' : ''}}>
+                                        value=1 {{ old('def_id') ? 'selected' : ''}}>
                                         1. Stable Stacked Pallets
                                     </option>
                                     <option
-                                        value='2. Dust, Fungi & Quality Planks' {{ old('def_id') ? 'selected' : ''}}>
+                                        value='2' {{ old('def_id') ? 'selected' : ''}}>
                                         2. Dust, Fungi & Quality Planks
                                     </option>
                                     <option
-                                        value='3. Measurement Pallet & Parts' {{ old('def_id') ? 'selected' : ''}}>
+                                        value='3' {{ old('def_id') ? 'selected' : ''}}>
                                         3. Measurement Pallet & Parts
                                     </option>
-                                    <option value='4. Position Nails' {{ old('def_id') ? 'selected' : ''}}>4.
-                                        Position Nails
+                                    <option value='4' {{ old('def_id') ? 'selected' : ''}}>
+                                        4. Position Nails
                                     </option>
-                                    <option value='5. Corners/Stamps<' {{ old('def_id') ? 'selected' : ''}}>5.
-                                        Corners/Stamps
+                                    <option value='5' {{ old('def_id') ? 'selected' : ''}}>
+                                        5. Corners/Stamps
                                     </option>
                                     <option
-                                        value='6. Abnormality Material' {{ old('def_id') ? 'selected' : ''}}>6.
-                                        Abnormality Material
+                                        value='6' {{ old('def_id') ? 'selected' : ''}}>
+                                        6. Abnormality Material
                                     </option>
                                 </select>
                             </div>
@@ -62,35 +60,7 @@
                         <div class="col-md-6 mb-3">
                             <label class="required">Extra Information:</label>
                             <div class="control">
-                                <select name="extra_info"
-                                        class="custom-select @error('extra_info') is-danger @enderror"
-                                        required>
-                                    <option value="">Select one</option>
-                                    <option
-                                        value='1. No Shaky Pallets' {{ old('extra_info') ? 'selected' : ''}}>1.
-                                        No Shaky Pallets
-                                    </option>
-                                    <option
-                                        value='2. Per Pallet and Customer Dependent' {{ old('extra_info') ? 'selected' : ''}}>
-                                        2. Per Pallet and Customer Dependent
-                                    </option>
-                                    <option
-                                        value='3. Clear and Easy to Read' {{ old('extra_info') ? 'selected' : ''}}>
-                                        3. Clear and Easy to Read
-                                    </option>
-                                    <option
-                                        value='4. Length, Width & Height' {{ old('extra_info') ? 'selected' : ''}}>
-                                        4. Length, Width & Height
-                                    </option>
-                                    <option
-                                        value='5. No Protruding Nails' {{ old('extra_info') ? 'selected' : ''}}>
-                                        5. No Protruding Nails
-                                    </option>
-                                    <option
-                                        value='6. All Corners & Stamps Correct' {{ old('extra_info') ? 'selected' : ''}}>
-                                        6. All Corners & Stamps Correct
-                                    </option>
-                                </select>
+                                <input name="extra_info" id="extra_info" class="form-control" readonly>
                             </div>
                             @error('extra_info')
                             <p class="help is-danger">{{ $message }}</p>
@@ -145,7 +115,9 @@
                     <div class="field is-grouped">
                         {{-- Here are the form buttons: save, reset and cancel --}}
                         <div class="control">
-                            <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" style="width: 100%;">Save</button>
+                            <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" style="width: 100%;">
+                                Save
+                            </button>
                         </div>
                         <br>
                         <div class="float-left">
@@ -158,4 +130,30 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('custom_js')
+    <script>
+
+        // Function to automatically populate the "Extra Info" field with set data based off the Def ID selection
+        function addExtraInfo() {
+            let options = document.getElementById("def_id")
+            let selected = options.value;
+            let extraInfo = document.getElementById("extra_info");
+
+            if (selected == 1) {
+                extraInfo.value = 'No Shaky Pallets';
+            } else if (selected == 2) {
+                extraInfo.value = 'Per Pallet and Customer Dependent';
+            } else if (selected == 3) {
+                extraInfo.value = 'Clear and Easy to Read';
+            } else if (selected == 4) {
+                extraInfo.value = 'Length, Width & Height';
+            } else if (selected == 5) {
+                extraInfo.value = 'No Protruding Nails';
+            } else if (selected == 6) {
+                extraInfo.value = 'All Corners & Stamps Correct';
+            }
+        }
+    </script>
 @endsection
