@@ -76,7 +76,6 @@
             </div>
             <div>
                 @if($order->status === 'Production Pending' && Auth::user()->role === 'Production')
-
                     <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
                             data-toggle="modal"
                             data-target="#startProduction">
