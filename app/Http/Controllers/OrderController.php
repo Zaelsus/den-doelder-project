@@ -118,7 +118,7 @@ class OrderController extends Controller
         $order->update($this->validateOrder($request));
         $request->session()->put('order', $order);
         $order->save();
-        self::statusChangeCheck();
+        $this->statusChangeCheck();
         return redirect()->route('orders.edit.step.two', compact('order'));
     }
 
@@ -132,15 +132,9 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $productLocationDetails = $this->getProductLocation($order);
-
         //automatic status change
-        $orders = Order::orderBy('machine_id', 'desc')->get();
-        $user = Auth::user();
-        event(new AutomaticStatusChange($user,$orders));
-
+        $this->statusChangeCheck();
         $driving = $this->testForDriving($order);
-
-
 
         return view('orders.show', compact('order', 'productLocationDetails', 'driving'));
 

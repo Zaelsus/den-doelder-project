@@ -110,7 +110,6 @@ class Order extends Model
         } else{
             return null;
         }
-
         return $order;
 
     }

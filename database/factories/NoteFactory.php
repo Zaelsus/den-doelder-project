@@ -20,7 +20,7 @@ class NoteFactory extends Factory
             'label'=>$this->faker->randomElement(['Mechanical Issue', 'Material Issue', 'Technical Issue', 'Lunch Break',
                                                     'End of shift']),
             'priority'=>$this->faker->randomElement(['low']),
-            'creator' =>$this->faker->randomElement(['Administrator', 'Production', 'TruckDriver']),
+            'creator' =>$this->faker->randomElement(['Administrator', 'Production', 'Driver']),
             'order_id' => Order::all()->random()->id,
         ];
     }

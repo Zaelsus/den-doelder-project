@@ -81,7 +81,7 @@
                             data-target="#startProduction">
                         Start
                     </button>
-                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && App\Models\TruckDriver::findDriverOrder() === null)
+                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && App\Models\TruckDriver::getDrivingOrder( Auth::user()->machine) === null)
                     <form method="POST" action="{{route('orders.startDriving', $order)}}">
                         @csrf
                         <button onclick="return confirm('Start driving for order {{$order->order_number}}?')"
