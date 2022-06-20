@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use App\Models\Order;
+use App\Models\TruckDriver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -124,11 +125,14 @@ class NoteController extends Controller
 
     public function getOrder() {
         $machine = Auth::user()->machine;
-
-        if(Order::isInProduction($machine) ==='In Production'){
-            $order = Order::where('status','In Production')->first();
-        }elseif(Order::isInProduction($machine) ==='Paused') {
-            $order = Order::where('status','Paused')->first();
+        if(Auth::user()->role === 'Driver') {
+            $order = TruckDriver::findDriverOrder();
+        } else {
+            if (Order::isInProduction($machine) === 'In Production') {
+                $order = Order::where('status', 'In Production')->first();
+            } elseif (Order::isInProduction($machine) === 'Paused') {
+                $order = Order::where('status', 'Paused')->first();
+            }
         }
 
         return $order;

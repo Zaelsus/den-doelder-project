@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app',['order'=>$order])
 
 @section('content')
    @extends('modals.orders')
@@ -15,7 +15,7 @@
         <div class="card-header small-box bg-gradient-purple">
             <div class="inner">
                 <h3 class="">Order {{$order->order_number}}</h3>
-                <h2 class="float-right">
+                <h2 class="float-right" style="margin-left: 10px">
                     <span class=" badge badge-pill
                 @if($order->status === 'Production Pending')
                         badge-secondary
@@ -30,6 +30,22 @@
                 @elseif($order->status === 'Canceled')
                         badge-dark
                 @endif  ">{{$order->status}}</span></h2>
+                <h2 class="float-right">
+                    <span class=" badge badge-pill
+                @if($order->truckDriver_status === null)
+                        badge-secondary
+                @elseif($order->truckDriver_status === 'Driving')
+                        badge-info
+                @elseif($order->truckDriver_status === 'Delivered')
+                        badge-success
+                @endif  ">
+                        @if($order->truckDriver_status === null)
+                            No Driver
+                        @else
+                            {{$order->truckDriver_status}}
+                        @endif
+                    </span>
+                </h2>
                 <p>{{$order->site_location}}</p>
                 <div class="text-center">
                     <span class="badge badge-pill badge-primary">Created At - {{$order->created_at}}</span>
@@ -55,15 +71,26 @@
                 </div>
             </div>
             <div class="icon">
+                {{--                {{dd($order->machine->orders)}}--}}
                 <i class="fas fa-pallet"></i>
             </div>
             <div>
                 @if($order->status === 'Production Pending' && Auth::user()->role === 'Production')
+
                     <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
                             data-toggle="modal"
                             data-target="#startProduction">
                         Start
                     </button>
+                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && $driving === false)
+                    <form method="POST" action="{{route('orders.startDriving', $order)}}">
+                        @csrf
+                        <button onclick="return confirm('Start driving for order {{$order->order_number}}?')"
+                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
+                                type="submit"> Start Driving
+                        </button>
+                    </form>
+
                 @elseif(Auth::user()->role === 'Administrator' && $order->selected === 0)
                     <form class="text-center" method="POST" action="{{route('orders.selectOrder', $order)}}">
                         @csrf
@@ -77,6 +104,12 @@
         <div class="card-body">
             <div class="card-subtitle border-left">
             </div>
+            @if(Auth::user()->role !== "Driver")
+                <h5 class="card bg-gradient-purple" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Client and Order Details</h5>
+                <p>Client Name - {{$order->client_name}}</p>
+                <p>Address - {{$order->client_address}}</p>
+            @endif
+
 
             <h5 class="card bg-gradient-purple ">{{ $order->type_order === 1 ? 'Client and Order Details' : 'Order Details'}}</h5>
             <p>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</p>
@@ -84,31 +117,44 @@
             <table>
                 <tbody>
                 <tr>
-                    <th>Pallet Type</th>
+                    <th>Pallet Type:</th>
                     <td>{{$order->pallet->name}}</td>
                 </tr>
                 <tr>
-                    <th> Quantity to Produce -</th>
+                    <th> Quantity to Produce:</th>
                     <td> {{$order->quantity_production}}</td>
                 </tr>
                 <tr>
-                    <td> Quantity Produced-</td>
+                    <th> Quantity Produced:</th>
                     <td> {{$order->quantity_produced}}</td>
                 </tr>
                 </tbody>
             </table>
-            <h6 class="card bg-gray">Materials:</h6>
+            <h6 class="card bg-gray" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Materials:</h6>
             <table>
                 <tbody>
                 @foreach($order->orderMaterials as $orderMaterial)
                     <tr>
                         <th>Measurements:</th>
                         <td> {{$orderMaterial->material->measurements}}</td>
+                    </tr>
+                    @if($orderMaterial->material->comments !== "")
+                    <tr>
                         <th>Comments:</th>
                         <td> {{$orderMaterial->material->comments}}</td>
-                        <th> Quantity Needed:</th>
-                        <td>{{$orderMaterial->total_quantity}}</td>
                     </tr>
+                    @endif
+                    <tr>
+                        <th> Quantity Needed:</th>
+                        <td> {{$orderMaterial->total_quantity}}</td>
+                    </tr>
+                    @if(Auth::user()->role === 'Driver')
+                    <tr>
+                        <th> Location:</th>
+                        <td> {{$productLocationDetails['location']->name}}</td>
+                    </tr>
+                    @endif
+                    <tr style="border-bottom: solid"></tr>
                 @endforeach
                 </tbody>
             </table>
