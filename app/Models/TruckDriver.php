@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class TruckDriver extends Model
 {
@@ -19,5 +20,16 @@ class TruckDriver extends Model
             return $orderSelected;
         }
         return null;
+    }
+
+    public static function findDriverOrder()
+    {
+        $machine = Auth::user()->machine;
+        $order = $machine->orders->where('truckDriver_status', 'Driving')->first();
+
+        if($order === null){
+            return null;
+        }
+        return $order;
     }
 }

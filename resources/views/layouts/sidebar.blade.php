@@ -25,10 +25,17 @@
                         } elseif(Auth::user()->role === 'Administrator') {
                         $order = Order::isSelected();
                         } elseif(Auth::user()->role === 'Driver') {
-                        $order = TruckDriver::isSelected();
+                        //$order = TruckDriver::isDriving();
+                        //$order = TruckDriver::isSelected();
+
                         }
                 @endphp
-                    @include('layouts.menu',['order'=> $order])
+                @if(isset($order))
+                    @include('layouts.menu',['order'=>$order])
+                @else
+                    @include('layouts.menu')
+                @endif
+{{--                    @include('layouts.menu',['order'=> $order])--}}
 
             </ul>
         </nav>

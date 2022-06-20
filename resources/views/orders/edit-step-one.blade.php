@@ -211,25 +211,11 @@
                     </div>
                 </form>
 
-<<<<<<< HEAD:resources/views/orders/edit-step-one.blade.php
                 <button type="button" class="btn btn-danger btn-lg float-right"
                         data-toggle="modal"
                         data-target="#cancelOrder">
                     Disable Order
                 </button>
-=======
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Launch demo modal
-                </button>
-                <form method="POST" action="{{route('orders.cancelOrder', $order)}}">
-                    @csrf
-
-                    <button onclick="return confirm('Are you sure you want to cancel order {{$order->order_number}}?')"
-                            class="btn btn-danger btn-lg float-right"
-                            type="submit"> Disable Order
-                    </button>
-                </form>
->>>>>>> notes:resources/views/orders/edit.blade.php
             </div>
         </div>
     </div>

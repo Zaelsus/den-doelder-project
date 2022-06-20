@@ -196,41 +196,92 @@
         </li>
     @endif
 @elseif (Auth::user()->role === 'Driver')
-    @if($order === null)
+    @if(isset($order))
+    @if($order->truckDriver_status === 'Driving')
+        <li class="nav-item">
+            <div class="card bg-gray-dark" style="margin-bottom: .2rem">
+                <a href="#" class="nav-link bg-black">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Quick Actions
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                        <form method="POST" action="{{route('orders.pauseDriving', $order)}}"
+                              class="nav-link active btn text-left bg-warning" style="margin-top: .2rem">
+                            @csrf
+
+                            <button onclick="return confirm('Are you sure you want to pause driving?')"
+                                    type="submit"
+                                    class="button-without-style">
+                                <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
+                                <p class="brand-text" style="color: white"> Pause Driving</p>
+                            </button>
+                        </form>
+{{--                        <form method="POST" action="{{route('orders.pauseDriving', $order)}}">--}}
+{{--                            @csrf--}}
+{{--                            <button onclick="return confirm('Are you sure you want to pause driving?')"--}}
+{{--                                    class="far fa-pause-circle btn btn-warning btn-block "--}}
+{{--                                    type="submit"> Pause Driving--}}
+{{--                            </button>--}}
+{{--                        </form>--}}
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="{{route('orders.stopDriving', $order)}}"
+                              class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
+                            @csrf
+
+                            <button onclick="return confirm('Is this order fully delivered?')"
+                                    type="submit"
+                                    class="button-without-style">
+                                <i class="nav-icon fas fa-stop-circle text-left"></i>
+                                <p class="brand-text"> Finish Driving</p>
+                            </button>
+                        </form>
+{{--                        <form method="POST"--}}
+{{--                              action="{{route('orders.stopDriving', ['order'=>$order,'machine'=>Auth::user()->machine])}}">--}}
+{{--                            @csrf--}}
+{{--                            <button onclick="return confirm('Is this order fully delivered?')"--}}
+{{--                                    class="far fa-stop-circle btn btn-danger btn-block "--}}
+{{--                                    type="submit"> Finish Driving--}}
+{{--                            </button>--}}
+{{--                        </form>--}}
+                    </li>
+                </ul>
+            </div>
+        </li>
+    @endif
+    @endif
     <li class="nav-item">
         <div class="nav-item">
-            <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}" class="nav-link active btn bg-gray-dark">
+            <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+               class="nav-link active btn bg-gray-dark text-left">
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>Orders</p>
             </a>
         </div>
     </li>
-    @else
-        <div class="nav-item">
-            <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
-                  class="nav-link active btn text-left bg-success">
-                @csrf
-                <button type="submit" class="button-without-style">
-                    <i class="nav-icon fas fa-arrow-alt-circle-up text-left"></i>
-                    <p class="brand-text">Back to All Orders</p>
-                </button>
-            </form>
+    @if(App\Models\TruckDriver::findDriverOrder() !== null)
+        <li class="nav-item">
+            <div class="nav-item">
+                <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <p>Order Details</p>
+                </a>
 
-            <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>Order Details</p>
-            </a>
+                <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                    <i class="nav-icon fas fa-check"></i>
+                    <p>Hourly Check</p>
+                </a>
 
-            <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
-                <i class="nav-icon fas fa-check"></i>
-                <p>Hourly Check</p>
-            </a>
-
-            <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
-                <i class="nav-icon fas fa-book"></i>
-                <p>Notes</p>
-            </a>
-        </div>
+                <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>Notes</p>
+                </a>
+            </div>
+        </li>
     @endif
 
 
