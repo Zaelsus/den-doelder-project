@@ -21,34 +21,46 @@
         @endif
         <div class="btn-group">
             @foreach($machines as $machine)
+                @extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
                 <div class="container-xl">
-                    <form method="POST"
-                          action="{{route('machines.selectMachine', ['machine'=>$machine, 'user'=>(Auth::user())])}}">
-                        @csrf
-                        <div class="container-lg ">
-                            <div class="text-center ">
-                                <img src="/img/pallets150.jpg"
-                                     class="img-circle elevation-3" alt="Goose">
-                            </div>
-                            <div>
-                                <button onclick="return confirm('Choose production line {{$machine->name}}?')"
-                                        class="far fas fa-arrow-alt-circle-up btn btn-lg  {{$machine->id === 1 ? 'btn-success mr-10':''}}
-                                        {{$machine->id === 2 ? 'btn-info':''}} {{$machine->id === 3 ? 'btn-warning':''}}"
-                                        type="submit"> Enter Machine {{$machine->name}}
-                                </button>
-                            </div>
-
+                    <div class="container-lg ">
+                        <div class="text-center ">
+                            <img src="/img/pallets150.jpg"
+                                 class="img-circle elevation-3" alt="Goose">
                         </div>
-
-                    </form>
+                        <div>
+                            <button type="button"
+                                    class="far fas fa-arrow-alt-circle-up btn btn-lg  {{$machine->id === 1 ? 'btn-success':''}}
+                                    {{$machine->id === 2 ? 'btn-info':''}} {{$machine->id === 3 ? 'btn-warning':''}}"
+                                    data-toggle="modal"
+                                    data-target={{"#machineChoice" . $machine->id}}>
+                                Enter Machine {{$machine->name}}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             @endforeach
         </div>
+
     @elseif(Auth::user()->role ==='Administrator')
-        <a href="{{ route('orders.index') }}" class="btn bg-gray-dark">
-            <i class="nav-icon fas fa-clipboard-list"></i>
-            <p>Enter Administration View</p>
-        </a>
-        @endif
-        </section>
+        @php
+            $order = App\Models\Order::isSelected();
+        @endphp
+        @if($order !== null)
+            <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
+                  class="nav-link active btn">
+                @csrf
+                <button type="submit" class="btn bg-gray-dark">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <p class="brand-text">Enter Administration View</p>
+                </button>
+            </form>
+        @else
+            <a href="{{ route('orders.index') }}" class="btn bg-gray-dark">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Enter Administration View</p>
+            </a>
+            @endif
+            @endif
+            </section>
 @endsection

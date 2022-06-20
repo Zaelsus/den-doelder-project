@@ -40,11 +40,9 @@ class InitialController extends Controller
     public function store(Request $request, Initial $initial)
     {
         $order = Order::isSelected();
-
-//        dd($initial);
         $initial = Initial::create($this->validateInitial($request));
         $initial->assignorderid($order->id);
-//        dd($initial);
+        (new OrderController)->statusChangeCheck();
         // redirecting to show a page
         return redirect(route('initial.show',$initial))->with('success','an item has been created successfully');
     }

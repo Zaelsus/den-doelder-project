@@ -33,26 +33,24 @@
                     <h5 class="card create-order-card-titles text-center">Client and Order Details</h5>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label class="required" for="client_name">Client Name</label>
-                            <div>
-                            <input type="text" class="form-control is-invalid"
-                                   name="client_name"
-                                   placeholder="client name" value="{{old('client_name')}}"
-                            required>
+                            <div class="custom-control custom-checkbox">
+                                <input onclick=isChecked() type="checkbox" class="custom-control-input" id="type_checkbox" name="order_type">
+                                <label class="custom-control-label" for="type_checkbox">Check this box if this is a special order and not CP</label>
                             </div>
-                                @error('client_name')
+                            @error('type_order')
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="required" for="client_address">Client Address</label>
+                        <div id="clientName-box" style="display:none" class="col-md-6 mb-3">
+                            <label class="required" for="client_name">Client Name for this order</label>
                             <div>
-                            <input type="text" class="form-control is-invalid @error('client_address') is-invalid @enderror"
-                                   name="client_address"
-                                   placeholder="client address" value="{{old('client_address')}}" required>
+                            <input type="text" class="form-control is-invalid"
+                                   id="clientName"
+                                   name="client_name"
+                                   placeholder="client name" value="{{old('client_name')}}">
                             </div>
-                            @error('client_address')
+                                @error('client_name')
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>
@@ -66,9 +64,9 @@
                                 <option value="">Choose a pallet</option>
                                     @foreach($pallets as $pallet)
                                         @if (old('pallet_id') == $pallet->id)
-                                            <option value="{{ $pallet->id }}" selected>{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
+                                            <option value="{{$pallet->id}}" selected>{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
                                         @else
-                                            <option value="{{ $pallet->id }}">{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
+                                            <option value="{{$pallet->id}}">{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
                                         @endif
                                     @endforeach
 
@@ -114,14 +112,18 @@
                         <div class="col-md-3 mb-3">
                             <label for="machine">Production machine</label>
                             <div>
-                                <select name="machine" class="custom-select @error('machine') is-invalid @enderror">
-                                    <option value="">Choose a production machine</option>
-                                    <option value='Cape 1'@if(old('machine') === 'Cape 1') {{'selected'}}@endif>Cape 1</option>
-                                    <option value='Cape 2'@if(old('machine') === 'Cape 2') {{'selected'}}@endif>Cape 2</option>
-                                    <option value='Cape 5'@if(old('machine') === 'Cape 5') {{'selected'}}@endif>Cape 5</option>
+                                <select name="machine_id" class="custom-select @error('machine_id') is-invalid @enderror">
+                                    <option value="{{$nullMachine->id}}">Choose a machine</option>
+                                    @foreach($machines as $machine)
+                                        @if (old('machine_id') === $machine->id)
+                                            <option value="{{$machine->id}}" selected>{{$machine->name}}</option>
+                                        @else
+                                            <option value="{{$machine->id}}">{{$machine->name}}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
-                            @error('machine')
+                            @error('machine_id')
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>
@@ -154,15 +156,27 @@
                     <button type="submit" class="btn btn-info btn-lg btn-lg btn-block">Create Order</button>
                 </form>
             </div>
-            <!-- /.card-body -->
-        {{--        <div class="card-footer">--}}
-        {{--            The footer of the card--}}
-        {{--        </div>--}}
-        <!-- /.card-footer -->
         </div>
-        <!-- /.card -->
-
     </div>
+
+    <script>
+        const checkbox = document.getElementById('type_checkbox');
+
+        const box = document.getElementById('clientName-box');
+        const input = document.getElementById('clientName');
+
+        function isChecked() {
+            if (checkbox.checked) {
+                box.style.display = 'block';
+                checkbox.value=1;
+                input.setAttribute('required', '');
+            } else {
+                box.style.display = 'none';
+                checkbox.value=0;
+                input.removeAttribute('required');
+            }
+        }
+    </script>
 
 @endsection
 

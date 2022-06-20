@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@extends('modals.orders')
     <br>
     <div class="container-fluid">
         <div class="card create-order-card">
@@ -16,7 +17,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form class="was-validated" method="POST" action="{{ route('orders.update',$order) }}">
+                <form class="was-validated" method="POST" action="{{ route('orders.update.step.one.post',$order) }}">
                     @csrf
                     @method('PUT')
                     <div class="form-row">
@@ -36,22 +37,29 @@
                             <label class="required" for="status">Order Status</label>
                             <div>
                                 <select name="status" class="custom-select @error('status') is-invalid @enderror">
-                                    @if($order->status === 'In Production' || $order->status === 'Done')
+                                    @if($order->status === 'Admin Hold' && ($order->start_time !== null) && (\App\Models\Order::getOrder($order->machine) === null))
+                                        <option
+                                            value='In Production' {{$order->status === 'In Production' ? 'selected':''}}>
+                                            In Production
+                                        </option>
+                                    @endif
+                                    @if($order->status === 'In Production' || $order->status === 'Done' || $order->status === 'Paused')
                                         <option value='{{$order->status}}' selected>{{$order->status}}
                                         </option>
-                                        @if($order->status === 'Done')
+                                        @if($order->status === 'Done' && (\App\Models\Order::getOrder($order->machine) === null))
                                             <option
-                                                value='Production Pending' {{$order->status === 'Production Pending' ? 'selected':''}}>
-                                                Production Pending
+                                                value='In Production' {{$order->status === 'In Production' ? 'selected':''}}>
+                                                In Production
                                             </option>
                                         @endif
 
                                     @else
+                                        @if(!(\App\Models\Order::initialCheckExists($order)))
                                         <option
                                             value='Quality Check Pending' {{$order->status === 'Quality Check Pending' ? 'selected':''}}>
                                             Quality Check Pending
                                         </option>
-                                        @if(\App\Models\Order::initialCheckExists($order) && $order->start_date !==null && $order->machine !==null && count($order->orderMaterials) >0)
+                                        @elseif($order->start_date !==null && $order->machine->name !=='None' && count($order->orderMaterials) >0)
                                             <option
                                                 value='Production Pending' {{$order->status === 'Production Pending' ? 'selected':''}}>
                                                 Production Pending
@@ -71,27 +79,29 @@
                     <h5 class="card create-order-card-titles text-center">Client and Order Details</h5>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label class="required" for="client_name">Client Name</label>
+                            <label for="type_order">Is this a special order (not CP)?</label>
                             <div>
-                                <input type="text" class="form-control is-invalid"
-                                       name="client_name"
-                                       placeholder="client name" value="{{$order->client_name}}"
-                                       required>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input onclick=isChecked() type="radio" id="t1" name="type_order" class="custom-control-input" value=1 {{$order->type_order===1 ? 'checked='.'"'.'checked'.'"' : '' }} required>
+                                    <label class="custom-control-label" for="t1">Yes</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input onclick=isChecked() type="radio" id="t2" name="type_order" class="custom-control-input" value=0 {{$order->type_order===0 ? 'checked='.'"'.'checked'.'"' : '' }}required>
+                                    <label class="custom-control-label" for="t2">No</label>
+                                </div>
                             </div>
-                            @error('client_name')
+                            @error('type_order')
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="required" for="client_address">Client Address</label>
+                        <div id="clientName-box" @if($order->type_order ===0) style="display:none" @endif class="col-md-6 mb-3">
+                            <label class="required" for="client_name">Client Name for this order</label>
                             <div>
-                                <input type="text"
-                                       class="form-control is-invalid @error('client_address') is-invalid @enderror"
-                                       name="client_address"
-                                       placeholder="client address" value="{{$order->client_address}}" required>
+                                <input  id="clientName" type="text" class="form-control is-invalid"
+                                       name="client_name"
+                                       placeholder="client name" value="{{$order->client_name}}">
                             </div>
-                            @error('client_address')
+                            @error('client_name')
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>
@@ -103,7 +113,6 @@
                             <div>
                                 <select name="pallet_id" class="custom-select @error('pallet_id') is-invalid @enderror"
                                         required>
-                                    <option value="">choose a pallet</option>
                                     @foreach($pallets as $pallet)
                                         <option
                                             value={{$pallet->id}} {{$order->pallet_id === $pallet->id ? 'selected':''}}>{{$pallet->pallet_number . '. ' . $pallet->name . '. ' .$pallet->measurements}}</option>
@@ -156,18 +165,14 @@
                         <div class="col-md-3 mb-3">
                             <label for="machine">Production machine</label>
                             <div>
-                                <select name="machine" class="custom-select @error('machine') is-invalid @enderror">
-                                    <option value='' >Select Production Machine
-                                    </option>
-                                    <option value='Cape 1' {{$order->machine === 'Cape 1' ? 'selected':''}}>Cape 1
-                                    </option>
-                                    <option value='Cape 2' {{$order->machine === 'Cape 2' ? 'selected':''}}>Cape 2
-                                    </option>
-                                    <option value='Cape 5' {{$order->machine === 'Cape 5' ? 'selected':''}}>Cape 5
-                                    </option>
+                                <select name="machine_id" class="custom-select @error('machine_id') is-invalid @enderror">
+                                    @foreach($machines as $machine)
+                                        <option
+                                            value={{$machine->id}} {{$order->machine_id === $machine->id ? 'selected':''}}>{{$machine->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            @error('machine')
+                            @error('machine_id')
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>
@@ -206,22 +211,32 @@
                     </div>
                 </form>
 
-                <form method="POST" action="{{route('orders.cancelOrder', $order)}}">
-                    @csrf
-                    <button onclick="return confirm('Are you sure you want to cancel order {{$order->order_number}}?')"
-                            class="btn btn-danger btn-lg float-right"
-                            type="submit"> Disable Order
-                    </button>
-                </form>
+                <button type="button" class="btn btn-danger btn-lg float-right"
+                        data-toggle="modal"
+                        data-target="#cancelOrder">
+                    Disable Order
+                </button>
             </div>
-            <!-- /.card-body -->
-        {{--        <div class="card-footer">--}}
-        {{--            The footer of the card--}}
-        {{--        </div>--}}
-        <!-- /.card-footer -->
         </div>
-        <!-- /.card -->
-
     </div>
+
+    <script>
+        const yes = document.getElementById('t1');
+        const no = document.getElementById('t2');
+
+        const box = document.getElementById('clientName-box');
+        const input = document.getElementById('clientName');
+
+        function isChecked() {
+            if (yes.checked) {
+                box.style.display = 'block';
+                input.setAttribute('required', '');
+            } else {
+                box.style.display = 'none';
+                input.removeAttribute('required');
+                input.value=null;
+            }
+        }
+    </script>
 
 @endsection
