@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['orders'=>$orders])
 
 @section('header')
     {{--    TODO: This overlaps with the change machines button and looks unfinished--}}

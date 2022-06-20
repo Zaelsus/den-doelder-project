@@ -200,6 +200,7 @@
         </li>
     @endif
 @elseif (Auth::user()->role === 'Driver')
+    @if(isset($order))
     @if($order->truckDriver_status === 'Driving')
         <li class="nav-item">
             <div class="card bg-gray-dark" style="margin-bottom: .2rem">
@@ -255,6 +256,7 @@
                 </ul>
             </div>
         </li>
+    @endif
     @endif
     <li class="nav-item">
         <div class="nav-item">
