@@ -8,8 +8,6 @@
                 <h3 class="  text-center ">Add a new hourly quality report
                     for {{ now('Europe/Amsterdam')->format('H:i') }}</h3>
                 <div class="card-tools">
-                    <!-- Buttons, labels, and many other things can be placed here! -->
-                    <!-- Here is a label for example -->
 
                 </div>
                 <!-- /.card-tools -->
@@ -63,35 +61,6 @@
                             <label class="required">Extra Information:</label>
                             <div class="control">
                                 <input name="extra_info" id="extra_info" class="form-control" readonly>
-{{--                                <select name="extra_info"--}}
-{{--                                        class="custom-select @error('extra_info') is-danger @enderror"--}}
-{{--                                        required>--}}
-{{--                                    <option value="">Select one</option>--}}
-{{--                                    <option--}}
-{{--                                        value='1. No Shaky Pallets' {{ old('extra_info') ? 'selected' : ''}}>1.--}}
-{{--                                        1. No Shaky Pallets--}}
-{{--                                    </option>--}}
-{{--                                    <option--}}
-{{--                                        value='2. Per Pallet and Customer Dependent' {{ old('extra_info') ? 'selected' : ''}}>--}}
-{{--                                        2. Per Pallet and Customer Dependent--}}
-{{--                                    </option>--}}
-{{--                                    <option--}}
-{{--                                        value='3. Clear and Easy to Read' {{ old('extra_info') ? 'selected' : ''}}>--}}
-{{--                                        3. Clear and Easy to Read--}}
-{{--                                    </option>--}}
-{{--                                    <option--}}
-{{--                                        value='4. Length, Width & Height' {{ old('extra_info') ? 'selected' : ''}}>--}}
-{{--                                        4. Length, Width & Height--}}
-{{--                                    </option>--}}
-{{--                                    <option--}}
-{{--                                        value='5. No Protruding Nails' {{ old('extra_info') ? 'selected' : ''}}>--}}
-{{--                                        5. No Protruding Nails--}}
-{{--                                    </option>--}}
-{{--                                    <option--}}
-{{--                                        value='6. All Corners & Stamps Correct' {{ old('extra_info') ? 'selected' : ''}}>--}}
-{{--                                        6. All Corners & Stamps Correct--}}
-{{--                                    </option>--}}
-{{--                                </select>--}}
                             </div>
                             @error('extra_info')
                             <p class="help is-danger">{{ $message }}</p>
@@ -146,7 +115,9 @@
                     <div class="field is-grouped">
                         {{-- Here are the form buttons: save, reset and cancel --}}
                         <div class="control">
-                            <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" style="width: 100%;">Save</button>
+                            <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" style="width: 100%;">
+                                Save
+                            </button>
                         </div>
                         <br>
                         <div class="float-left">
@@ -163,7 +134,9 @@
 
 @section('custom_js')
     <script>
-        function addExtraInfo(){
+
+        // Function to automatically populate the "Extra Info" field with set data based off the Def ID selection
+        function addExtraInfo() {
             let options = document.getElementById("def_id")
             let selected = options.value;
             let extraInfo = document.getElementById("extra_info");

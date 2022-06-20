@@ -195,7 +195,6 @@
                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Notes</p>
-
                 </a>
             </div>
         </li>
