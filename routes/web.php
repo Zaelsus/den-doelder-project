@@ -76,13 +76,10 @@ Route::resource('/hourlyReports', HourlyReportController::class);
 Route::get('/hourlyReports/list/{order}', [HourlyReportController::class, 'list'])->name('hourlyReports.list');
 Route::get('/hourlyReports/add/{order}', [HourlyReportController::class, 'add'])->name('hourlyReports.add');
 
-
 // Notes
 Route::resource('/notes', NoteController::class);
 Route::get('/notes/stoppage/{order}', [NoteController::class, 'stoppage'])->name('notes.stoppage');
 Route::get('notes/fixStoppage/{note}', [NoteController::class, 'fixStoppage'])->name('notes.fixStoppage');
-
-
 
 //Double Form Create
 Route::get('/create-step-one', [OrderController::Class,'createStepOne'])->name('orders.create.step.one');
@@ -97,7 +94,6 @@ Route::put('/edit-step-one/{order}', [OrderController::class,'updateEditStepOne'
 
 Route::get('/edit-step-two/{order}', [OrderMaterialController::class,'editStepTwo'])->name('orders.edit.step.two');
 Route::put('/edit-step-two/{order}', [OrderMaterialController::class,'updateEditStepTwo'])->name('orders.update.step.two.post');
-
 
 // Locations
 Route::resource('/productLocations', ProductLocationController::class);
