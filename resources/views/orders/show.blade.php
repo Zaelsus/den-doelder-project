@@ -105,14 +105,10 @@
             <div class="card-subtitle border-left">
             </div>
             @if(Auth::user()->role !== "Driver")
-                <h5 class="card bg-gradient-purple" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Client and Order Details</h5>
-                <p>Client Name - {{$order->client_name}}</p>
-                <p>Address - {{$order->client_address}}</p>
+                <h5 class="card bg-gradient-purple ">{{ $order->type_order === 1 ? 'Client and Order Details' : 'Order Details'}}</h5>
+                <p>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</p>
             @endif
 
-
-            <h5 class="card bg-gradient-purple ">{{ $order->type_order === 1 ? 'Client and Order Details' : 'Order Details'}}</h5>
-            <p>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</p>
             <h5 class="card bg-gradient-purple">Materials and Instructions:</h5>
             <table>
                 <tbody>
