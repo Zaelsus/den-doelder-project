@@ -127,11 +127,11 @@ class InitialController extends Controller
             'waanHtKd'=>'min:0',
 
 //            Klossen
-            'soort'=>'required_if:balk,null',
+            'soort'=>['required_if:balk,null','prohibited_unless:balk,null'],
             'soortAang'=>'min:0',
             'soortHtKd'=>'min:0',
 
-            'balk'=>'required_if:soort,null',
+            'balk'=>['required_if:soort,null','prohibited_unless:soort,null'],
             'balkAang'=>'min:0',
             'balkHtKd'=>'min:0',
 

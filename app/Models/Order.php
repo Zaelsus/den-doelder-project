@@ -153,17 +153,10 @@ class Order extends Model
     public function addProduced()
     {
         $total = $this->quantity_produced +  $this->add_quantity;
-        if($total> $this->quantity_production){
-            $this->quantity_produced = "string";
-        }
-        else
-        {
-            $this->quantity_produced +=  $this->add_quantity;
-            $this->add_quantity = 0;
-        }
+        $this->quantity_produced +=  $this->add_quantity;
+        $this->add_quantity = 0;
         $this->save();
     }
-
 
 
     /**
@@ -172,6 +165,15 @@ class Order extends Model
      */
     public function getToProduceAttribute()
     {
-        return $this->quantity_production -$this->quantity_produced;
+        if($this->quantity_production - $this->quantity_produced > 0)
+        {
+            return $this->quantity_production -$this->quantity_produced;
+        }
+        else
+        {
+            return 0;
+
+        }
+
     }
 }

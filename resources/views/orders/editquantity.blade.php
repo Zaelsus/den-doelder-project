@@ -17,6 +17,9 @@
 
                             <div class="card-content table table-bordered table-hover table-light ">
                                 <div>
+                                    Quantity produced: {{$order->quantity_produced}}
+                                </div>
+                                <div>
                                     Quantity to be produced: {{$order->toproduce}}
                                 </div>
                                 <div>
@@ -30,18 +33,14 @@
                             </div>
 
                             <div class="field is-grouped">
-                                {{-- Here are the form buttons: save, reset and cancel --}}
-                                @if($order->quantity_produced < $order->quantity_production)
                                     <div>
                                         <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" id="submitNew">Save</button>
                                     </div>
-                                @endif
-
                             </div>
                         </div>
                     </form>
                     <div class="control">
-                        @if($order->quantity_produced == $order->quantity_production)
+                        @if($order->quantity_produced >= $order->quantity_production)
                             <form method="POST"
                                   action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
                                 @csrf
