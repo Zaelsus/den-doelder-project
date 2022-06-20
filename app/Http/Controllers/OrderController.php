@@ -137,8 +137,6 @@ class OrderController extends Controller
         $orders = Order::orderBy('machine_id', 'desc')->get();
         $user = Auth::user();
         event(new AutomaticStatusChange($user,$orders));
-        //regular show
-        return view('orders.show', compact('order'));
 
         $driving = $this->testForDriving($order);
 
