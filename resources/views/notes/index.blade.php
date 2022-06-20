@@ -1,5 +1,5 @@
-@extends('layouts.modals')
-@extends('notes.create')
+{{--@extends('modals.orders')--}}
+@extends(isset($note) ? 'modals.notes':'blank')
 @extends('layouts.app')
 @section('content')
     <!-- Button trigger modal -->
@@ -26,7 +26,6 @@
                         <th scope="col">Title</th>
                         <th scope="col">Content</th>
                         <th scope="col">Labels</th>
-                        <th scope="col">Priority</th>
                         <th scope="col">Created At</th>
                         @if( Auth::user()->role === 'Administrator' )
                         <th scope="col">Role</th>
@@ -62,12 +61,6 @@
                                 <span @if($note->label === 'Fix') class="badge badge-success" @else class="badge badge-info" @endif
                                 >{{ strtok($note->label, '(') }}</span>
                             </td>
-                            <td>
-                                <span  @if ($note->prio === 'high')
-                                       class="badge bg-red"
-                                        @endif >{{ $note->prio }}
-                                </span>
-                            </td>
                             <td>{{ $note->created_at }}</td>
                             @if ( Auth::user()->role === 'Administrator')
                             <td>
@@ -75,16 +68,17 @@
                             </td>
                                 <td>
                                     <button class="btn btn-lg bg-gradient-olive opacity-70"
+                                            style="font-size: 12pt"
                                             onclick=window.location.href="{{route('notes.edit', $note)}}">
                                         Edit
                                     </button>
                                 </td>
                             @elseif ( Auth::user()->role === 'Production' )
                             <td style="width: 10%">
-                                @if ($note->fix === 'Error!' && $note->priority === 'high')
-                                    <button class="btn btn-lg bg-gradient-olive opacity-70" style="font-size: 12pt" onclick=window.location.href="{{ route('notes.fixStoppage', $order)}}">Log fix</button>
-                                @elseif($note->fix === 'Error!' && $note->priority === 'low')
+                                @if($note->fix === 'Error!' && $note->priority === 'low')
                                     <span class="badge badge-success">fixed</span>
+                                @elseif($note->fix === 'Error!' && $note->priority === 'high')
+                                    <span class="badge badge-danger">log fix when restart</span>
                                 @endif
                             </td>
                             @endif

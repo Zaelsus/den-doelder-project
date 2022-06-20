@@ -147,7 +147,7 @@ class OrderController extends Controller
                 return redirect(route('orders.show', $order));
             } else {
                 $order->update(['status' => 'In Production']);
-                return redirect(route('notes.fixStoppage', $order));
+                return redirect(route('orders.show', $order));
             }
         } else {
             return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');

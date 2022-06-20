@@ -22,44 +22,30 @@ class NoteController extends Controller
         //first get all the notes
         $notes = Note::all();
 
-        /** loop through the notes to see if the priority should be updated.
-            if there is an error note without a fix note, the priority is high.
-            if there is an error note with a fixe note, the priority goes to low again.*/
+        //update priority of note, loop through the notes
+        //to see if the priority should be updated
         foreach($notes as $note) {
-            if($note->fix === 'Error!') {
-                $note->update(['priority' => 'high']);
-            }
-            if($note->note_rel !== null) {
-                Note::where('id', $note->note_rel)->update(['priority' => 'low']);
-            }
+            $note->updatePriority();
         }
 
-        //different index pages for different roles; admin sees all notes
-        if(Auth::user()->role === 'Administrator') {
-            $notes = Note::orderBy('created_at', 'desc')->get();
-        } else if(Auth::user()->role === 'Production') {
-            //production sees notes that are made by production and only for this order
-            $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('priority', 'asc')->orderBy('created_at', 'desc')->get();
-        } else {
-            //truck driver sees notes that are made by truck drivers and only for this order
-            $notes = Note::where('order_id', $order->id)->where('creator', 'Driver');
-        }
+        //different note collections for different roles, get the
+        //right notes for the index page
+        $notes = $this->getNotes($order);
 
         //go to index blade and send the notes that came out of the if-statement as well as the order found earlier
         return view('notes.index', compact('notes', 'order'));
     }
 
-//    /**
-//     * Show the form for creating a new note.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function create()
-//    {
-//        $order = $this->findOrderForUser();
-//
-//        return view('notes.create', compact('order'));
-//    }
+    /**
+     * Show the form for creating a new note.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+//        The create function is not needed anymore, because we are using modals. The create note modal
+//          goes directly to the store() method below
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -72,43 +58,32 @@ class NoteController extends Controller
         //get the checked label
         $label = $request->input('label');
 
+        //set the fix
+        $fix = $this->setFix($label);
+
         //if it comes from fixStoppage, get the error note related to the fix
         $note_rel = $request->input('note_rel');
 
-        if($label === 'Material Issue (Error)' || $label === 'Mechanical Issue (Error)' || $label === 'Technical Issue (Error)') {
-            $fix = false;
-        } else {
-            $fix = true;
-        }
-
+        //find the order for the note
         $order = $this->findOrderForUser();
 
+        //store the note with the attributes of the request, together with the set fix, note related and order id
         $note = Note::create($this->validateNote($request, $order->id, $fix, $note_rel));
 
-        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)')) {
+        //Update the status of the order. If the status is in production and an error note is set in, the status is
+        //updated to paused. If the status is paused and the note is a fix note, update the status to in production.
+        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)' || $note->label === 'Lunch Break' || $note->label === 'End of Shift')) {
             $order->update(['status' => 'Paused']);
         } else if(($order->status === 'Paused') && ($note->label === 'Fix')) {
-            dd('no hello');
+            $order->update(['status' => 'In Production']);
         }
 
-
+        //if the label is 'End of Shift', redirect to edit quantity, otherwise redirect to the index page of the note
         if($note->label === 'End of Shift') {
             return redirect(route('orders.editquantity', $order));
         }
 
-//      redirecting to show the note
         return redirect(route('notes.index', $note));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Note $note)
-    {
-        //
     }
 
     /**
@@ -176,6 +151,7 @@ class NoteController extends Controller
             return redirect(route('orders.show', $order));
         } else {
             return view('notes.fixStoppage', compact('order', 'note'));
+//            return view('modals.logFix', compact('order', 'note'));
         }
 
 
@@ -193,6 +169,21 @@ class NoteController extends Controller
         return $order;
     }
 
+    public function getNotes($order) {
+        if(Auth::user()->role === 'Administrator') {
+            //admin sees all notes
+            $notes = Note::orderBy('created_at', 'desc')->get();
+        } else if(Auth::user()->role === 'Production') {
+            //production sees notes that are made by production and only for this order
+            $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('priority', 'asc')->orderBy('created_at', 'desc')->get();
+        } else {
+            //truck driver sees notes that are made by truck drivers and only for this order
+            $notes = Note::where('order_id', $order->id)->where('creator', 'Driver');
+        }
+
+        return $notes;
+    }
+
     public function findOrderForUser() {
         if(Auth::user()->role === 'Administrator') {
             $order = Order::isSelected();
@@ -200,6 +191,23 @@ class NoteController extends Controller
             $order = $this->getOrder();
 
         return $order;
+    }
+
+    /**
+     * Set the fix attribute of the note, if it is an error note, set the fix to false
+     * If it is not an error note, set the fix to true
+     *
+     * @param $label
+     * @return bool
+     */
+    public function setFix($label): bool {
+        if($label === 'Material Issue (Error)' || $label === 'Mechanical Issue (Error)' || $label === 'Technical Issue (Error)') {
+            $fix = false;
+        } else {
+            $fix = true;
+        }
+
+        return $fix;
     }
 
     /**
