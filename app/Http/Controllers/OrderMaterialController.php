@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Material;
 use App\Models\Order;
 use App\Models\OrderMaterial;
+use App\Models\PalletMaterial;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -44,7 +45,7 @@ class OrderMaterialController extends Controller
     }
 
     /**
-     * Show the step One Form for creating a new product.
+     * Show the step Two Form for creating a new order.
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,12 +54,11 @@ class OrderMaterialController extends Controller
         $materials = Material::all();
         $order = $request->session()->get('order');
         $orderMaterial = $request->session()->get('orderMaterial');
-
         return view('orders.create-step-two', compact('order', 'orderMaterial', 'materials'));
     }
 
     /**
-     * Show the step One Form for creating a new product.
+     * Post Request to create step1 info in session
      *
      * @return \Illuminate\Http\Response
      */
@@ -75,9 +75,60 @@ class OrderMaterialController extends Controller
                     'material_id'=>$request->product[$i]['material_id'],'total_quantity'=>$quantity]);
             }
         }
-
+       (new OrderController)->statusChangeCheck();
         return redirect(route('orders.show', compact('order')));
     }
+
+    /**
+     * Show the step Two Form for updateing an order.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editStepTwo(Request $request)
+    {
+        $materials = Material::all();
+        $order = $request->session()->get('order');
+        return view('orders.edit-step-two', compact('order', 'materials'));
+    }
+
+    /**
+     * Post Request to update step2 info in session
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateEditStepTwo(Request $request)
+    {
+        $order = $request->session()->get('order');
+        $request->session()->forget('order');
+        $orderMaterials=$order->orderMaterials;
+        $array = $request->product;
+        for ($i = 0; $i < count($array); $i++) {
+            $exists=false;
+            $j=0;
+            while($exists===false && $j<count($orderMaterials)){
+                if($array[$i]['material_id'] == $orderMaterials[$j]->material_id) {
+                    $exists = true;
+                    if($request->product[$i]['total_quantity'] > 0) {
+                        $orderMaterials[$j]->update(['total_quantity' => ($request->product[$i]['total_quantity']*$order->quantity_production)]);
+                    } else {
+                        $orderMaterials[$j]->delete();
+                    }
+
+                }
+                $j++;
+            }
+            if($exists === false){
+                if ($array[$i]['total_quantity'] > 0) {
+                    $quantity=$request->product[$i]['total_quantity']*$order->quantity_production;
+                    OrderMaterial::create(['order_id'=>$request->product[$i]['order_id'],
+                        'material_id'=>$request->product[$i]['material_id'],'total_quantity'=>$quantity]);
+                }
+            }
+        }
+        (new OrderController)->statusChangeCheck();
+        return redirect(route('orders.show', $order));
+    }
+
 
     /**
      * Display the specified resource.
@@ -99,8 +150,7 @@ class OrderMaterialController extends Controller
      */
     public function edit(Order $order)
     {
-        $material = Material::all();
-        return view('orderMaterials.edit', compact('order', 'material'));
+       //
     }
 
     /**
@@ -110,11 +160,9 @@ class OrderMaterialController extends Controller
      * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order, OrderMaterial $orderMaterial)
+    public function update(Request $request, Order $order)
     {
-        $orderMaterial->update($this->validateMaterialOrder($request));
-
-        return redirect(route('orders.show', $order));
+       //
     }
 
     /**

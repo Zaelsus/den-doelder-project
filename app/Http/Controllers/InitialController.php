@@ -40,11 +40,9 @@ class InitialController extends Controller
     public function store(Request $request, Initial $initial)
     {
         $order = Order::isSelected();
-
-//        dd($initial);
         $initial = Initial::create($this->validateInitial($request));
         $initial->assignorderid($order->id);
-//        dd($initial);
+        (new OrderController)->statusChangeCheck();
         // redirecting to show a page
         return redirect(route('initial.show',$initial))->with('success','an item has been created successfully');
     }
@@ -127,71 +125,36 @@ class InitialController extends Controller
             'waanHtKd'=>'min:0',
 
 //            Klossen
-            'soortTick'=>'required|boolean',
+            'soort'=>['required_if:balk,null','prohibited_unless:balk,null'],
             'soortAang'=>'min:0',
             'soortHtKd'=>'min:0',
 
-            'balkTick'=>'required|boolean',
+            'balk'=>['required_if:soort,null','prohibited_unless:soort,null'],
             'balkAang'=>'min:0',
             'balkHtKd'=>'min:0',
 
-            'afmeting1Tick'=>'required|boolean',
-            'afmeting1Aang'=>'min:0',
-            'afmeting1HtKd'=>'min:0',
-
-            'afmeting2Tick'=>'required|boolean',
-            'afmeting2Aang'=>'min:0',
-            'afmeting2HtKd'=>'min:0',
-
 //            Onderdek
-            'brugTick'=>'required|boolean',
-            'brugAang'=>'min:0',
-            'brugHtKd'=>'min:0',
+            'onderdek'=>'required',
+            'onderdekAang'=>'min:0',
+            'onderdekHtKd'=>'min:0',
 
-            'rond2xTick'=>'required|boolean',
-            'rond2xAang'=>'min:0',
-            'rond2xHtKd'=>'min:0',
-
-            'rond3xTick'=>'required|boolean',
-            'rond3xAang'=>'min:0',
-            'rond3xHtKd'=>'min:0',
-
-            'kruisTick'=>'required|boolean',
-            'kruisAang'=>'min:0',
-            'kruisHtKd'=>'min:0',
-
-            'elementenTick'=>'required|boolean',
-            'elementenAang'=>'min:0',
-            'elementenHtKd'=>'min:0',
-
-            'dubbelTick'=>'required|boolean',
-            'dubbelAang'=>'min:0',
-            'dubbelHtKd'=>'min:0',
 
 //            Overig
             'hoekenTick'=>'required|boolean',
             'hoekenAang'=>'min:0',
-            'hoekenHtKd'=>'min:0',
 
             'stempelsTick'=>'required|boolean',
             'stempelsAang'=>'min:0',
-            'stempelsHtKd'=>'min:0',
 
             'stapelTick'=>'required|boolean',
             'stapelAang'=>'min:0',
-            'stapelHtKd'=>'min:0',
 
-            'strappenTick'=>'required|boolean',
+            'strappenTick'=>'required',
             'strappenAang'=>'min:0',
-            'strappenHtKd'=>'min:0',
 
-            'kamerTick'=>'required|boolean',
+            'kamerTick'=>'required',
             'kamerAang'=>'min:0',
-            'kamerHtKd'=>'min:0',
 
-            'specialeTick'=>'required|boolean',
-            'specialeAang'=>'min:0',
-            'specialeHtKd'=>'min:0',
 
             'additionalNotes'=> 'min:0'
         ]);

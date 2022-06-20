@@ -62,16 +62,25 @@
                                             <th scope="row"> {{ $order->order_number }} </th>
                                             <td>{{$order->pallet->name}}</td>
                                             <td>{{$order->pallet->measurements}}</td>
-                                            <td>{{ $order->client_name }}</td>
-                                            <td>{{$order->machine->name}}</td>
+                                            <td>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</td>
+                                            <td class ="{{$order->machine->name === 'None' ? 'bg-warning':''}}">{{$order->machine->name}}</td>
                                             <td> {{$order->start_date}}</td>
-                                            <td class="{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
-                                            {{$order->status === 'Paused' ? 'bg-warning':''}}
-                                            {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
-                                            {{$order->status === 'Done' ? 'bg-success':''}}
-                                            {{$order->status === 'In Production' ? 'bg-info':''}}
-                                            {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
-                                            {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}</td>
+                                            <td class = "{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
+                                                {{$order->status === 'Paused' ? 'bg-warning':''}}
+                                                {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
+                                                {{$order->status === 'Done' ? 'bg-success':''}}
+                                                {{$order->status === 'In Production' ? 'bg-info':''}}
+                                                {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
+                                                {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}
+                                                    <br>
+                                                    @if($order->status === 'Admin Hold')
+                                                        @if($order->start_date ===null)
+                                                            <span class="badge badge-pill">No start date</span>
+                                                        @endif
+                                                        @if(count($order->orderMaterials) === 0)
+                                                            <span class="badge badge-pill ">No materials chosen</span>
+                                                        @endif </td>
+                                                @endif
                                             @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
                                                 <td class="{{$order->truckDriver_status === null ? 'bg-secondary':''}}
                                                 {{$order->truckDriver_status === 'Delivered' ? 'bg-success':''}}
