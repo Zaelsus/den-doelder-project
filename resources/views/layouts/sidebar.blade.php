@@ -19,10 +19,13 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @php
                     use App\Models\Order;
+                    use App\Models\TruckDriver;
                     if(Auth::user()->role === 'Production') {
                         $order=Order::getOrder(Auth::user()->machine);
                         } elseif(Auth::user()->role === 'Administrator') {
                         $order = Order::isSelected();
+                        } elseif(Auth::user()->role === 'Driver') {
+                        $order = TruckDriver::getDrivingOrder(Auth::user()->machine);
                         }
                 @endphp
                     @include('layouts.menu',['order'=> $order])

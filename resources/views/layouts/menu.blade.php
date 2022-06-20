@@ -1,9 +1,9 @@
 @if(((Auth::user()->role === 'Production') && (\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production'))
-|| ((Auth::user()->role === 'Administrator') && ($order !== null)))
+|| ((Auth::user()->role === 'Administrator'||Auth::user()->role === 'Driver') && ($order !== null)))
     <div class="info-box shade brand-text">
         <div class="info-box-content">
             <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
-            <h4>
+            <h5>
                     <span class="align-content-lg-stretch d-flex justify-content-center badge
                 @if($order->status === 'Production Pending')
                         badge-secondary
@@ -18,8 +18,23 @@
                 @elseif($order->status === 'Canceled')
                         badge-dark
                 @endif
-                        ">{{$order->status}}</span>
-            </h4>
+                        ">{{Auth::user()->role !== 'Production' ? 'Prod status - ' . $order->status :$order->status}}</span>
+            </h5>
+            @if(Auth::user()->role !== 'Production')
+            <h5>
+                    <span class="align-content-lg-stretch d-flex justify-content-center badge
+                @if($order->truckDriver_status === 'Production Pending')
+                        badge-secondary
+                @elseif($order->truckDriver_status === 'Driving')
+                        badge-info
+                @elseif($order->truckDriver_status === 'Paused')
+                        badge-warning
+                @elseif($order->truckDriver_status === 'Done')
+                        badge-success
+                @endif
+                        ">Driver status - {{$order->truckDriver_status}}</span>
+            </h5>
+            @endif
         </div>
     </div>
 @endif
@@ -39,24 +54,20 @@
                 <ul class="nav nav-treeview" style="display: none;">
                     @if($order->status === 'Paused')
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.startProduction', $order)}}">
-                                @csrf
-                                <button onclick="return confirm('Are you sure you want to restart?')"
-                                        class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
-                                        type="submit"> Restart
-                                </button>
-                            </form>
+                            <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                                    data-toggle="modal"
+                                    data-target="#restartProd">
+                                Restart
+                            </button>
                         </li>
                     @endif
                     @if($order->status === 'In Production')
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.pauseProduction', $order)}}">
-                                @csrf
-                                <button onclick="return confirm('Are you sure you want to pause the production?')"
-                                        class="far fa-pause-circle btn btn-warning btn-block "
-                                        type="submit"> Pause
-                                </button>
-                            </form>
+                            <button type="button" class="far fa-pause-circle btn btn-warning btn-block"
+                                    data-toggle="modal"
+                                    data-target="#pauseProd">
+                                Pause
+                            </button>
                         </li>
                         <li class="nav-item">
                             <form method="POST"
@@ -71,6 +82,7 @@
                     @endif
                 </ul>
             </div>
+
             <div class="nav-item">
                 <a href="{{ route('orders.show', $order) }}" class="nav-link active btn text-left bg-gray-dark">
                     <i class="nav-icon fas fa-clipboard-list"></i>
@@ -88,7 +100,8 @@
                     </a>
 
                     @if(\App\Models\Order::prodCheckExists($order))
-                        <a href="{{route('production.show', $order->id)}}" class="nav-link active bg-gray-dark btn text-left">
+                        <a href="{{route('production.show', $order->id)}}"
+                           class="nav-link active bg-gray-dark btn text-left">
                             <i class="nav-icon fas fa-tools"></i>
                             <p>Production Check</p>
                         </a>
@@ -98,14 +111,14 @@
                             <p> Add Production Check</p>
                         </a>
                     @endif
-                    <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{ route('hourlyReports.list', $order) }}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
                         <p>Hourly Check</p>
                     </a>
                 @endif
             </div>
             <div class="nav-item">
-
                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Notes</p>
@@ -116,7 +129,8 @@
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
                     </a>
-                    <a href="{{route('productLocations.show',$order)}}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{route('productLocations.show',$order)}}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-compass"></i>
                         <p>Location</p>
                     </a>
@@ -178,7 +192,7 @@
                     <i class="nav-icon fas fa-draw-polygon"></i>
                     <p>Drawings</p>
                 </a>
-                @if($order->production != null)
+                @if($order->production !== null)
                     <a href="{{route('production.show', $order)}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>Production Check</p>
@@ -192,11 +206,81 @@
                 <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Notes</p>
-
                 </a>
             </div>
         </li>
     @endif
+@elseif (Auth::user()->role === 'Driver')
+    @if(isset($order))
+        @if($order->truckDriver_status === 'Driving')
+            <li class="nav-item">
+                <div class="card bg-gray-dark" style="margin-bottom: .2rem">
+                    <a href="#" class="nav-link bg-black">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Quick Actions
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <form method="POST" action="{{route('orders.pauseDriving', $order)}}"
+                                  class="nav-link active btn text-left bg-warning" style="margin-top: .2rem">
+                                @csrf
 
+                                <button onclick="return confirm('Are you sure you want to pause driving?')"
+                                        type="submit"
+                                        class="button-without-style">
+                                    <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
+                                    <p class="brand-text" style="color: white"> Pause Driving</p>
+                                </button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{{route('orders.stopDriving', $order)}}"
+                                  class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
+                                @csrf
+
+                                <button onclick="return confirm('Is this order fully delivered?')"
+                                        type="submit"
+                                        class="button-without-style">
+                                    <i class="nav-icon fas fa-stop-circle text-left"></i>
+                                    <p class="brand-text"> Finish Driving</p>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item">
+                    <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>Order Details</p>
+                    </a>
+
+                    <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-check"></i>
+                        <p>Hourly Check</p>
+                    </a>
+
+                    <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>Notes</p>
+                    </a>
+                </div>
+            </li>
+        @endif
+        @else
+        <li class="nav-item">
+            <div class="nav-item">
+                <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+                   class="nav-link active btn bg-gray-dark text-left">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <p>Orders</p>
+                </a>
+            </div>
+        </li>
+    @endif
 @endif
 
