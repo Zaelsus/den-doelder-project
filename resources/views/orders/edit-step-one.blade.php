@@ -43,10 +43,10 @@
                                             In Production
                                         </option>
                                     @endif
-                                    @if($order->status === 'In Production' || $order->status === 'Done' || $order->status === 'Paused')
+                                    @if($order->status === 'In Production' || $order->status === 'Done' || $order->status === 'Paused'||$order->status === 'Canceled')
                                         <option value='{{$order->status}}' selected>{{$order->status}}
                                         </option>
-                                        @if($order->status === 'Done' && (\App\Models\Order::getOrder($order->machine) === null))
+                                        @if(($order->status === 'Done' ||($order->status === 'Canceled' && $order->start_time !== null)) && (\App\Models\Order::getOrder($order->machine) === null))
                                             <option
                                                 value='In Production' {{$order->status === 'In Production' ? 'selected':''}}>
                                                 In Production
@@ -66,9 +66,6 @@
                                             </option>
                                         @endif
                                     @endif
-                                    <option value='Admin Hold' {{$order->status === 'Admin Hold' ? 'selected':''}}>Admin
-                                        Hold
-                                    </option>
                                 </select>
                             </div>
                             @error('status')
