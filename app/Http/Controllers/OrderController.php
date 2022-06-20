@@ -247,8 +247,12 @@ class OrderController extends Controller
      */
     public static function selectOrder(Order $order)
     {
-        $order->update(['selected' => 1]);
-        return redirect(route('orders.show', $order));
+        if(Order::isSelected()===null) {
+            $order->update(['selected' => 1]);
+            return redirect(route('orders.show', $order));
+        } else {
+            return redirect(route('orders.index'));
+        }
     }
 
     /**
@@ -256,7 +260,10 @@ class OrderController extends Controller
      */
     public static function unselectOrder(Order $order)
     {
-        $order->update(['selected' => 0]);
+        // need to check == because of storage allocation being different object is the same
+        if(Order::isSelected() == $order) {
+            $order->update(['selected' => 0]);
+        }
         return redirect(route('orders.index'));
     }
 

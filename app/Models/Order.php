@@ -147,9 +147,6 @@ class Order extends Model
     {
         $prodCheck = $order->production;
         if ($prodCheck !== null) {
-            if ($order->start_date !== null && $order->machine !== null && $order->status === 'Quality Check Pending') {
-                $order->status = 'Production Pending';
-            }
             return true;
         }
         return false;
