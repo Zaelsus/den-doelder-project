@@ -89,10 +89,10 @@
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel
                     </button>
                 </div>
-                    <a class="btn btn-danger btn-lg float-right" data-dismiss="modal"
-                       data-toggle="modal" href="#stoppage">
-                        Pause
-                    </a>
+                <a class="btn btn-danger btn-lg float-right" data-dismiss="modal"
+                   data-toggle="modal" href="#stoppage">
+                    Pause
+                </a>
             </div>
         </div>
     </div>
@@ -122,7 +122,7 @@
                     </button>
                 </div>
                 <?php use App\Models\Note;$note = Note::where('order_id', $order->id)->where('priority', 'high')->first();?>
-                                @if($note === null)
+                @if($note === null)
                     <form method="POST" action="{{route('orders.startProduction', $order)}}">
                         @csrf
                         <div class="btn-group">
@@ -161,58 +161,65 @@
             <div class="modal-body">
                 <form class="was-validated" method="POST" action="{{ route('notes.store') }}">
                     @csrf
-                    <div class="mb-3">
-                        <label class="requirednote" for="title">Title</label>
-                        <div>
-                            <input class="form-control" name="title"
-                                   type="text" placeholder="Title of note" value="{{old('title')}}" required>
-                        </div>
-                        @error('title')
-                        <p>{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="requirednote" for="content">Content</label>
-                        <div>
-                            <textarea type="text" class="form-control @error('content') is-invalid @enderror"
-                                      name="content"
-                                      placeholder="Please describe the error occurred in more detail." rows="5" required
-                            >{{old('content')}}</textarea>
-                        </div>
-                        @error('content')
-                        <p class="help is-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Mechanical Issue (Error)"
+                    <div>
+                        <div class="form-check">
+                            <div>
+                                <input onclick=isChecked() class="form-check-input" type="radio" name="label"
+                                       value="Mechanical Issue (Error)"
                                        required>Mechanical Issue
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Material Issue (Error)"
+                            <div>
+                                <input onclick=isChecked() class="form-check-input" type="radio" name="label" value="Material Issue (Error)"
                                        required>Material Issue
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Technical Issue (Error)"
+                            <div>
+                                <input onclick=isChecked() class="form-check-input" type="radio" name="label"
+                                       value="Technical Issue (Error)"
                                        required>Technical Issue
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Lunch Break"
+                            <div>
+                                <input onclick=isChecked() class="form-check-input" type="radio" name="label" value="Lunch Break" id="lb"
                                        required>Lunch Break
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="End of Shift"
+                            <div>
+                                <input onclick=isChecked() class="form-check-input" type="radio" name="label" value="End of Shift" id="eos"
                                        required>End of Shift
                             </div>
-                            <br>
+                        </div>
+                        <br>
+                    </div>
+                    <div>
+                        <div id="box" style="display:none">
+                            <div class="mb-3">
+                                <label class="requirednote" for="title">Title</label>
+                                <div>
+                                    <input class="form-control" name="title" id="title"
+                                           type="text" placeholder="Title of note" value="{{old('title')}}">
+                                </div>
+                                @error('title')
+                                <p>{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="requirednote" for="content">Content</label>
+                                <div>
+                            <textarea type="text" class="form-control @error('content') is-invalid @enderror"
+                                      name="content" id="content"
+                                      placeholder="Please describe the error occurred in more detail." rows="5"
+                            >{{old('content')}}</textarea>
+                                </div>
+                                @error('content')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="label" value="stoppage" style="display:none"
+                            <input class="form-check-input" type="radio" name="label" value="stoppage"
+                                   style="display:none"
                                    checked>
                         </div>
-
-                        <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Log reason of stoppage</button>
+                        <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Log reason of stoppage
+                        </button>
                     </div>
                 </form>
             </div>
@@ -225,3 +232,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    const lunch_break = document.getElementById('lb');
+    const shift_change = document.getElementById('eos');
+
+    const box = document.getElementById('box');
+    const tInput = document.getElementById('title');
+    const cInput = document.getElementById('content');
+
+    function isChecked() {
+        if (lunch_break.checked || shift_change.checked) {
+            box.style.display = 'none';
+            cInput.removeAttribute('required');
+            tInput.removeAttribute('required');
+            cInput.value=null;
+            tInput.value=null;
+        } else {
+            box.style.display = 'block';
+            cInput.setAttribute('required', '');
+            tInput.setAttribute('required', '');
+        }
+        }
+</script>

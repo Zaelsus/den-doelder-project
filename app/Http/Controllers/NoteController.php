@@ -108,8 +108,12 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
+        $fix = $this->setFix($note->label);
+
+        //if it comes from fixStoppage, get the error note related to the fix
+        $note_rel = $request->input('note_rel');
         $order_id = $note->order_id;
-        $note->update($this->validateNote($request, $order_id));
+        $note->update($this->validateNote($request, $order_id, $fix, $note_rel));
 
         return redirect('/notes');
     }
@@ -218,8 +222,8 @@ class NoteController extends Controller
     {
 
         $validatedAttributes = $request->validate([
-            'title'=>'required',
-            'content'=>'required',
+            'title'=>'',
+            'content'=>'',
             'label'=>'required',
         ]);
         $validatedAttributes['order_id'] = $order_id;
@@ -236,7 +240,6 @@ class NoteController extends Controller
         } else {
             $validatedAttributes['creator'] = 'Driver';
         }
-
 
         return $validatedAttributes;
     }

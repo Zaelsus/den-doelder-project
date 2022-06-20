@@ -1,7 +1,8 @@
-{{--@extends('modals.orders')--}}
-@extends('modals.notes')
+
+@extends('modals.createNote')
 @extends('layouts.app')
 @section('content')
+@extends(isset($note) ? 'modals.editNote' : 'blank')
     <!-- Button trigger modal -->
 
     <br>
@@ -67,9 +68,11 @@
                                 {{$note->creator}}
                             </td>
                                 <td>
-                                    <button class="btn btn-lg bg-gradient-olive opacity-70"
-                                            style="font-size: 12pt"
-                                            onclick=window.location.href="{{route('notes.edit', $note)}}">
+                                    <button type="button" class="btn btn-lg bg-gradient-olive opacity-70"
+                                            data-toggle="modal"
+
+                                            data-target=" {{"#editNote" . $note->id}}"
+                                            style="font-size: 12pt">
                                         Edit
                                     </button>
                                 </td>
