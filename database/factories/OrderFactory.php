@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Machine;
 use App\Models\Pallet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,10 +18,8 @@ class OrderFactory extends Factory
         return [
             'order_number'=>$this->faker->numberBetween(1000, 3000),
             'pallet_id'=>Pallet::all()->random()->product_id,
-            'machine'=>$this->faker->randomElement(['Cape 1', 'Cape 2', 'Cape 5']),
+            'machine_id'=>Machine::all()->random()->id,
             'quantity_production'=>$this->faker->numberBetween(1000, 3000),
-            'client_name'=>$this->faker->name,
-            'client_address'=>$this->faker->address,
         ];
     }
 }

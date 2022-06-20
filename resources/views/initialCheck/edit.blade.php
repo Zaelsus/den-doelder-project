@@ -182,6 +182,7 @@
                                 <p class="help is-danger">{{ $message }}</p>
                                 @enderror
                                 </div>
+
                             </td>
 
                             <td>
@@ -208,12 +209,14 @@
                                         <option value='Afmeting1'{{$initial->balk === "Afmeting1" ? 'selected':''}}>Afmeting 1</option>
                                         <option value="Afmeting2" {{$initial->balk === "Afmeting2" ? 'selected':''}}>Afmeting 2</option>
                                     </select>
+
                                 </div>
                                 @error('balk')
                                 <p class="help is-danger">{{ $message }}</p>
                                 @enderror
                                 </div>
                             </td>
+
 
                             <td>
                                 <div class="control ">
@@ -228,6 +231,7 @@
                                 </div>
                             </td>
                         </tr>
+
                     </table>
                 </section>
 
@@ -265,6 +269,7 @@
                                 @enderror
                                 </div>
                             </td>
+
 
                             <td>
                                 <div class="control ">
@@ -369,6 +374,7 @@
                                 <p class="help is-danger">{{ $message }}</p>
                                 @enderror
                                 </div>
+
                             </td>
 
                             <td>

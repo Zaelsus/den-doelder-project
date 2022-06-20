@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Machine;
+use App\Models\PalletMaterial;
 use Illuminate\Database\Seeder;
 
-class MachineSeeder extends Seeder
+class PalletMaterialSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class MachineSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0;$i< 4;$i++) {
-            Machine::factory(1)->create();
+        for($i=0;$i< 9;$i++) {
+           PalletMaterial::factory(1)->create();
         }
     }
 }

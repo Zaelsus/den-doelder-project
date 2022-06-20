@@ -1,16 +1,14 @@
 @extends('layouts.app')
+
 @section('content')
+
     <br>
     <div class="container-fluid">
         <div class="card create-order-card">
             <div class="card-header bg-gradient-info">
-                <h3 class=" text-center ">Add Material to the new Order {{$order->order_number}}:</h3>
+                <h3 class=" text-center ">Change material to order {{$order->order_number}}:</h3>
                 <div class="card-tools">
-                    <!-- Buttons, labels, and many other things can be placed here! -->
-                    <!-- Here is a label for example -->
-
                 </div>
-                <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -21,8 +19,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('orders.create.step.two.post') }}">
+                <form method="POST" action="{{ route('orders.update.step.two.post',$order) }}">
                     @csrf
+                    @method('PUT')
                     <table>
                         <thead>
                         <tr>
@@ -31,16 +30,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $max = count($materials); ?>
                         @foreach($materials as $key=>$products)
                             <?php
-                            $pMaterials = $order->pallet->palletMaterials;
+                            $oMaterials = $order->orderMaterials;
+                            $max=count($oMaterials);
                             $check = false;
                             $i = 0;
                             while (!$check && $i < $max) {
-                                if ($products->product_id === $pMaterials[$i]->material_id) {
+                                if ($products->product_id === $oMaterials[$i]->material_id) {
                                     $check = true;
-                                    $palletMaterial = $pMaterials[$i];
+                                    $orderMaterial = $oMaterials[$i];
                                 } else {
                                     $check = false;
                                 }
@@ -60,7 +59,7 @@
                                     @if($check)
                                         <input type="number" min="0" max="13" class="form-control"
                                                name="product[{{ $key}}][total_quantity]"
-                                               value="{{$palletMaterial->total_quantity}}">
+                                               value="{{round((($orderMaterial->total_quantity)/$order->quantity_production),0)}}">
                                     @else
                                         <input type="number" min="0" max="13" class="form-control"
                                                name="product[{{ $key}}][total_quantity]" value="0">
@@ -75,5 +74,4 @@
             </div>
         </div>
     </div>
-
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+   @extends('modals.orders')
     <br>
     @if(session()->has('error'))
         <div class="alert alert-danger alert-dismissible fade show">
@@ -43,8 +44,10 @@
                     @if($order->start_date ===null)
                         <span class="badge badge-pill badge-warning">No start date</span>
                     @endif
-                    @if($order->machine ===null)
-                        <span class="badge badge-pill badge-warning">No machine elected</span>
+                    @if($order->machine->name ==='None')
+                        <span class="badge badge-pill badge-warning">No machine selected</span>
+                    @else
+                        <span class="badge badge-pill badge-success">{{$order->machine->name}}</span>
                     @endif
                     @if(count($order->orderMaterials) === 0)
                         <span class="badge badge-pill badge-warning">No materials chosen</span>
@@ -56,13 +59,11 @@
             </div>
             <div>
                 @if($order->status === 'Production Pending' && Auth::user()->role === 'Production')
-                    <form method="POST" action="{{route('orders.startProduction', $order)}}">
-                        @csrf
-                        <button onclick="return confirm('Start production for order {{$order->order_number}}?')"
-                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
-                                type="submit"> Start
-                        </button>
-                    </form>
+                    <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                            data-toggle="modal"
+                            data-target="#startProduction">
+                        Start
+                    </button>
                 @elseif(Auth::user()->role === 'Administrator' && $order->selected === 0)
                     <form class="text-center" method="POST" action="{{route('orders.selectOrder', $order)}}">
                         @csrf
@@ -77,10 +78,8 @@
             <div class="card-subtitle border-left">
             </div>
 
-            <h5 class="card bg-gradient-purple ">Client and Order Details</h5>
-            <p>Client Name - {{$order->client_name}}</p>
-            <p>Address - {{$order->client_address}}</p>
-
+            <h5 class="card bg-gradient-purple ">{{ $order->type_order === 1 ? 'Client and Order Details' : 'Order Details'}}</h5>
+            <p>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</p>
             <h5 class="card bg-gradient-purple">Materials and Instructions:</h5>
             <table>
                 <tbody>
@@ -121,7 +120,7 @@
             @if(Auth::user()->role === 'Administrator')
                 <div class="control">
                     <button class="btn btn-info btn-lg float-right"
-                            onclick=window.location.href="{{route('orders.edit', $order)}}">
+                            onclick=window.location.href="{{route('orders.edit.step.one', $order)}}">
                         Edit Order Details
                     </button>
                 </div>

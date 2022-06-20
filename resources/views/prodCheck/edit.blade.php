@@ -38,6 +38,7 @@
                                 <label for="afmetingTickB" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
                                 <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickB" value="1"  {{$production->afmetingTickB === 1 ? 'checked': '' }} >
                                 <label for="afmetingTickB" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+
                                 <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickB" value="0" {{$production->afmetingTickB === 0 ? 'checked': '' }} >
                             </td>
 
@@ -63,6 +64,7 @@
                                 <input type="radio" style = "width:40px; height:40px" id="" name="aantalTick" value="1" {{$production->aantalTick === 1 ? 'checked': '' }}>
 
                                 <label for="aantalTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+
                                 <input type="radio" style = "width:40px; height:40px" id="" name="aantalTick" value="0" {{$production->aantalTick === 0 ? 'checked': '' }}>
                             </td>
 
@@ -87,6 +89,7 @@
                                 <label for="spatiesTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
                                 <input type="radio" style = "width:40px; height:40px" id="" name="spatiesTick" value="1" {{$production->spatiesTick === 1 ? 'checked': '' }}>
                                 <label for="spatiesTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+
                                 <input type="radio" style = "width:40px; height:40px" id="" name="spatiesTick" value="0" {{$production->spatiesTick === 0 ? 'checked': '' }}>
                             </td>
 
@@ -111,6 +114,7 @@
                                 <label for="klampenTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
                                 <input type="radio" style = "width:40px; height:40px" id="" name="klampenTick" value="1" {{$production->klampenTick === 1 ? 'checked': '' }}>
                                 <label for="klampenTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+
                                 <input type="radio" style = "width:40px; height:40px" id="" name="klampenTick" value="0" {{$production->klampenTick === 0 ? 'checked': '' }}>
                             </td>
 
@@ -135,6 +139,7 @@
                                 <label for="overstekTickB" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
                                 <input type="radio" style = "width:40px; height:40px" id="" name="overstekTickB" value="1" {{$production->overstekTickB === 1 ? 'checked': '' }}>
                                 <label for="overstekTickB" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+
                                 <input type="radio" style = "width:40px; height:40px" id="" name="overstekTickB" value="0" {{$production->overstekTickB === 0 ? 'checked': '' }}>
                             </td>
 
@@ -174,6 +179,7 @@
                         <tr>
                             <td>Soort</td>
 
+
                             <td>
                                 <div class="control">
                                     <select name="soort" class="textarea  @error('soort') is-danger @enderror ">
@@ -205,6 +211,7 @@
                         <tr>
                             <td>Balk</td>
 
+
                             <td>
                                 <div class="control">
                                     <select name="balk" class="textarea  @error('balk') is-danger @enderror ">
@@ -218,6 +225,7 @@
                                 @enderror
                                 </div>
                             </td>
+
 
                             <td>
                                 <div class="control ">
@@ -248,6 +256,7 @@
                             <th>Type</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
+
                         </tr>
 
                         <tr>
@@ -262,12 +271,14 @@
                                         <option value='Afmetingen'{{$production->onderdek === "Afmetingen" ? 'selected':''}}>Afmetingen</option>
                                         <option value='Overstek'{{$production->onderdek === "Overstek" ? 'selected':''}}>Overstek</option>
                                     </select>
+
                                 </div>
                                 @error('onderdek')
                                 <p class="help is-danger">{{ $message }}</p>
                                 @enderror
                                 </div>
                             </td>
+
 
                             <td>
                                 <div class="control ">
@@ -282,7 +293,6 @@
                                 </div>
                             </td>
                         </tr>
-
 
                     </table>
                 </section>
@@ -310,6 +320,7 @@
                                 <label for="hoekenTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
                                 <input type="radio" style = "width:40px; height:40px" id="" name="hoekenTick" value="1" {{$production->hoekenTick === 1 ? 'checked': '' }}>
                                 <label for="hoekenTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+
                                 <input type="radio" style = "width:40px; height:40px" id="" name="hoekenTick" value="0" {{$production->hoekenTick === 0 ? 'checked': '' }}>
                             </td>
 
@@ -334,6 +345,7 @@
                                 <label for="stempelsTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
                                 <input type="radio" style = "width:40px; height:40px" id="" name="stempelsTick" value="1" {{$production->stempelsTick === 1 ? 'checked': '' }}>
                                 <label for="stempelsTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">	&cross;</label>
+
                                 <input type="radio" style = "width:40px; height:40px" id="" name="stempelsTick" value="0" {{$production->stempelsTick === 0 ? 'checked': '' }}>
                             </td>
 
@@ -358,6 +370,7 @@
                                 <label for="stapelTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
                                 <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="1" {{$production->stapelTick === 1 ? 'checked': '' }}>
                                 <label for="stapelTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+
                                 <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="0" {{$production->stapelTick === 0 ? 'checked': '' }}>
                             </td>
 
@@ -390,6 +403,7 @@
                                 <p class="help is-danger">{{ $message }}</p>
                                 @enderror
                                 </div>
+
                             </td>
 
                             <td>
@@ -408,7 +422,6 @@
 
                         <tr>
                             <td>Spijkers (BD,TD,OD)</td>
-
                             <td>
                                 <div class="control">
                                     <select name="spijkerTick" class="textarea  @error('spijkerTick') is-danger @enderror ">
@@ -422,6 +435,7 @@
                                 <p class="help is-danger">{{ $message }}</p>
                                 @enderror
                                 </div>
+
                             </td>
 
                             <td>
