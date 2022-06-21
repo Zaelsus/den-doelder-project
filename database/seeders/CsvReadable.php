@@ -57,7 +57,7 @@ trait CsvReadable
         $contents = collect(explode("\n", Storage::get($this->path)));
         // Removes any \r
         $contents = $contents->map(function ($item) {
-            return str_replace("\r", "", $item);
+            return str_replace("\r", "", preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $item));
         });
 
         // Set the keyset when no header row is specified

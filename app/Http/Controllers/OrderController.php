@@ -131,12 +131,14 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $productLocationDetails = $this->getProductLocation($order);
+        $productLocationsDetails = $this->getMaterialsLocation($order);
+        $materialLocationsList=$productLocationsDetails['materialLocationsList'];
+        $materialsLocations=$productLocationsDetails['materialsLocations'];
         //automatic status change
         $this->statusChangeCheck();
         $driving = $this->testForDriving($order);
 
-        return view('orders.show', compact('order', 'productLocationDetails', 'driving'));
+        return view('orders.show', compact('order', 'materialLocationsList','materialsLocations', 'driving'));
 
     }
 
@@ -150,7 +152,7 @@ class OrderController extends Controller
     {
         $orders = $order->machine->orders;
 
-        foreach ($orders as $order) {
+        foreach($orders as $order) {
             if($order->truckDriver_status === "Driving") {
                 return true;
             }
@@ -159,20 +161,48 @@ class OrderController extends Controller
         return false;
     }
 
+
     /**
-     * Function that finds the locations for the product
+     * Function that finds the locations for the materials
+     *
+     * @param $details
+     * @return $materialsLocations
+     */
+    public function getMaterialsLocation(Order $order)
+    {
+        $materials = $order->orderMaterials;
+        $materialsLocations =[];
+        $materialLocationsList=[];
+        foreach($materials as $material) {
+            $materialId = $material->material_id;
+            $productlocations = productLocation::where('product_id', $materialId)->get();
+            $materialLocationsList[$materialId]=$productlocations;
+            foreach ($productlocations as $productlocation) {
+                //location name for each location for each material
+                $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'name'] = $productlocation->location->name;
+                //quantity in storage for each material in each location
+                $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'quantity'] = $productlocation->Quantity;
+            }
+        }
+        return ['materialsLocations' => $materialsLocations,'materialLocationsList'=>$materialLocationsList];
+    }
+
+
+    /**
+     * Function that finds the locations for the pallets
      *
      * @param $details
      * @return array
      */
-    public function getProductLocation($order)
+    public function getPalletLocation(Order $order)
     {
-        $orderId = $order->id;
-        $pallet = $order->pallet;
-        $product = Product::find($pallet->product_id);
-        $productLocation = ProductLocation::where('product_id', $product->id)->first();
-        $location = Location::find($productLocation->location_id);
-        return ['orderId' => $orderId, 'pallet' => $pallet, 'productLocation' => $productLocation, 'location' => $location];
+        $productId = $order->pallet->product_id;
+        $productLocations = ProductLocation::where('product_id',$productId)->get();
+        $locationsAvailability=[];
+        foreach($productLocations as $productLocation){
+            $locationsAvailability[$productLocation->location_id]=$productLocation->location->available_storage_space;
+        }
+        return ['locationsAvailability'=>$locationsAvailability,'productLocations'=>$productLocations];
     }
 
     /**
@@ -294,12 +324,8 @@ class OrderController extends Controller
      */
     public static function selectOrder(Order $order)
     {
-        if(Order::isSelected()===null) {
-            $order->update(['selected' => 1]);
-            return redirect(route('orders.show', $order));
-        } else {
-            return redirect(route('orders.index'));
-        }
+        $order->update(['selected' => 1]);
+        return redirect(route('orders.show', $order));
     }
 
     /**
@@ -307,10 +333,7 @@ class OrderController extends Controller
      */
     public static function unselectOrder(Order $order)
     {
-        // need to check == because of storage allocation being different object is the same
-        if(Order::isSelected() == $order) {
-            $order->update(['selected' => 0]);
-        }
+        $order->update(['selected' => 0]);
         return redirect(route('orders.index'));
     }
 
