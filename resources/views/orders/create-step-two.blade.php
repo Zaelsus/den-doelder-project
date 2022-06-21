@@ -23,48 +23,59 @@
                 </div>
                 <form method="POST" action="{{ route('orders.create.step.two.post') }}">
                     @csrf
-                    <table>
+                    <h5 class="card create-order-card-titles text-center">Already set for the chosen pallet</h5>
+                    <table class="table">
                         <thead>
                         <tr>
-                            <th>Material</th>
-                            <th>Quantity</th>
+                            <th scope="col" >Material</th>
+                            <th scope="col">Quantity</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $max = count($materials); ?>
-                        @foreach($materials as $key=>$products)
-                            <?php
-                            $pMaterials = $order->pallet->palletMaterials;
-                            $check = false;
-                            $i = 0;
-                            while (!$check && $i < $max) {
-                                if ($products->product_id === $pMaterials[$i]->material_id) {
-                                    $check = true;
-                                    $palletMaterial = $pMaterials[$i];
-                                } else {
-                                    $check = false;
-                                }
-                                $i++;
-                            }
-                            ?>
+                        @foreach($palletMaterials as $key=>$existMaterials)
                             <tr>
+                                <td width="200">
+                                    {{$existMaterials->material_id.' '.$existMaterials->material->measurements}}
+                                </td>
                                 <td>
-                                    {{$products->product_id}} {{$products->measurements . ' ' .$products->comments}}
+                                    <input type="hidden" class="form-control" name="existMaterial[{{ $key}}][order_id]"
+                                           value="{{$order->id}}">
+                                    <input type="hidden" class="form-control" name="existMaterial[{{ $key}}][material_id]"
+                                           value="{{$existMaterials->material_id}}">
+                                    <input type="number" min="0" max="13" class="form-control"
+                                           name="existMaterial[{{ $key}}][total_quantity]" value="{{$existMaterials->total_quantity}}">
+
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                    <button type="submit" class="btn btn-info btn-lg btn-lg btn-block">Submit</button>
+                    <br>
+
+                    <h5 class="card create-order-card-titles text-center">Add new materials</h5>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Material</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($materials as $key=>$products)
+                            <tr>
+                                <td width="200">
+                                    {{$products->product_id.' '.$products->measurements}}
                                 </td>
                                 <td>
                                     <input type="hidden" class="form-control" name="product[{{ $key}}][order_id]"
                                            value="{{$order->id}}">
                                     <input type="hidden" class="form-control" name="product[{{ $key}}][material_id]"
                                            value="{{$products->product_id}}">
+                                    <input size="2" type="number" min="0" max="13" class="form-control"
+                                           name="product[{{ $key}}][total_quantity]" value="0">
 
-                                    @if($check)
-                                        <input type="number" min="0" max="13" class="form-control"
-                                               name="product[{{ $key}}][total_quantity]"
-                                               value="{{$palletMaterial->total_quantity}}">
-                                    @else
-                                        <input type="number" min="0" max="13" class="form-control"
-                                               name="product[{{ $key}}][total_quantity]" value="0">
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -31,19 +31,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($orderMaterials as $key=>$products)
+                        @foreach($orderMaterials as $key=>$existMaterials)
                             <tr>
                                 <td width="200">
-                                    {{$products->material_id.' '.$products->material->measurements}}
+                                    {{$existMaterials->material_id.' '.$existMaterials->material->measurements}}
                                 </td>
                                 <td>
-                                    <input type="hidden" class="form-control" name="product[{{ $key}}][order_id]"
+                                    <input type="hidden" class="form-control" name="existMaterial[{{ $key}}][order_id]"
                                            value="{{$order->id}}">
-                                    <input type="hidden" class="form-control" name="product[{{ $key}}][material_id]"
-                                           value="{{$products->product_id}}">
+                                    <input type="hidden" class="form-control" name="existMaterial[{{ $key}}][material_id]"
+                                           value="{{$existMaterials->material_id}}">
                                     <input type="number" min="0" max="13" class="form-control"
-                                           name="product[{{ $key}}][total_quantity]"
-                                           value="{{round((($products->total_quantity)/$order->quantity_production),0)}}">
+                                           name="existMaterial[{{ $key}}][total_quantity]"
+                                           value="{{round((($existMaterials->total_quantity)/$order->quantity_production),0)}}">
 
                                 </td>
                             </tr>
