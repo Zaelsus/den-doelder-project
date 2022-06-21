@@ -1,5 +1,5 @@
 {{--@extends('modals.orders')--}}
-@extends(isset($note) ? 'modals.notes':'blank')
+@extends('modals.notes')
 @extends('layouts.app')
 @section('content')
     <!-- Button trigger modal -->

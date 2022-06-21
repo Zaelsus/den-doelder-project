@@ -57,7 +57,8 @@ class MachineController extends Controller
             $orders = Order::where('machine_id', $machine->id)
                 ->where(function($query) {
                     $query->where('status', 'Production Pending')
-                        ->orWhere('status', 'In Production');
+                        ->orWhere('status', 'In Production')
+                    ->orWhere('status', 'Paused');
                 })
                 ->orderBy('status', 'asc')
                 ->orderBy('start_date', 'desc')->get();

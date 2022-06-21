@@ -1,7 +1,7 @@
-@extends('layouts.app',['order'=>$order])
+@extends('layouts.app')
 
 @section('content')
-   @extends('modals.orders')
+    @extends('modals.orders')
     <br>
     @if(session()->has('error'))
         <div class="alert alert-danger alert-dismissible fade show">
@@ -76,13 +76,12 @@
             </div>
             <div>
                 @if($order->status === 'Production Pending' && Auth::user()->role === 'Production')
-
                     <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
                             data-toggle="modal"
                             data-target="#startProduction">
                         Start
                     </button>
-                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && App\Models\TruckDriver::findDriverOrder() === null)
+                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && App\Models\TruckDriver::getDrivingOrder( Auth::user()->machine) === null)
                     <form method="POST" action="{{route('orders.startDriving', $order)}}">
                         @csrf
                         <button onclick="return confirm('Start driving for order {{$order->order_number}}?')"
@@ -105,14 +104,10 @@
             <div class="card-subtitle border-left">
             </div>
             @if(Auth::user()->role !== "Driver")
-                <h5 class="card bg-gradient-purple" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Client and Order Details</h5>
-                <p>Client Name - {{$order->client_name}}</p>
-                <p>Address - {{$order->client_address}}</p>
+                <h5 class="card bg-gradient-purple ">{{ $order->type_order === 1 ? 'Client and Order Details' : 'Order Details'}}</h5>
+                <p>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</p>
             @endif
 
-
-            <h5 class="card bg-gradient-purple ">{{ $order->type_order === 1 ? 'Client and Order Details' : 'Order Details'}}</h5>
-            <p>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</p>
             <h5 class="card bg-gradient-purple">Materials and Instructions:</h5>
             <table>
                 <tbody>
@@ -139,20 +134,36 @@
                         <td> {{$orderMaterial->material->measurements}}</td>
                     </tr>
                     @if($orderMaterial->material->comments !== "")
-                    <tr>
-                        <th>Comments:</th>
-                        <td> {{$orderMaterial->material->comments}}</td>
-                    </tr>
+                        <tr>
+                            <th>Comments:</th>
+                            <td> {{$orderMaterial->material->comments}}</td>
+                        </tr>
                     @endif
                     <tr>
                         <th> Quantity Needed:</th>
                         <td> {{$orderMaterial->total_quantity}}</td>
                     </tr>
                     @if(Auth::user()->role === 'Driver')
-                    <tr>
-                        <th> Location:</th>
-                        <td> {{$productLocationDetails['location']->name}}</td>
-                    </tr>
+                        <tr>
+                            <th> Locations:</th>
+                            <td>
+                                <ul>
+                                    @if($materialLocationsList!==null)
+                                        @if(!($materialLocationsList[$orderMaterial->material_id]->isempty()))
+                                            @for($i = 0; $i < count($materialLocationsList[$orderMaterial->material_id]);$i++)
+                                                <li> Location
+                                                    - {{ $materialsLocations[$orderMaterial->material_id.'_'.$materialLocationsList[$orderMaterial->material_id][$i]->location_id.'_'.'name']}}
+                                                    Existing Stock
+                                                    - {{$materialsLocations[$orderMaterial->material_id.'_'.$materialLocationsList[$orderMaterial->material_id][$i]->location_id.'_'.'quantity']}}</li>
+                                            @endfor
+                                        @else
+                                            No locations for this material yet
+                                        @endif
+                                    @endif
+                                </ul>
+
+                            </td>
+                        </tr>
                     @endif
                     <tr style="border-bottom: solid"></tr>
                 @endforeach
