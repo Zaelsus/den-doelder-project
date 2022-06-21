@@ -161,15 +161,10 @@ class NoteController extends Controller
     public function getOrder() {
         $machine = Auth::user()->machine;
         if(Auth::user()->role === 'Driver') {
-            $order = TruckDriver::findDriverOrder();
+            $order = TruckDriver::getDrivingOrder($machine);
         } else {
-            if (Order::isInProduction($machine) === 'In Production') {
-                $order = Order::where('status', 'In Production')->first();
-            } elseif (Order::isInProduction($machine) === 'Paused') {
-                $order = Order::where('status', 'Paused')->first();
-            }
+           $order=Order::getOrder($machine);
         }
-
         return $order;
     }
 
@@ -182,7 +177,7 @@ class NoteController extends Controller
             $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('priority', 'asc')->orderBy('created_at', 'desc')->get();
         } else {
             //truck driver sees notes that are made by truck drivers and only for this order
-            $notes = Note::where('order_id', $order->id)->where('creator', 'Driver');
+            $notes = Note::where('order_id', $order->id)->where('creator', 'Driver')->orderBy('created_at', 'desc')->get();
         }
 
         return $notes;

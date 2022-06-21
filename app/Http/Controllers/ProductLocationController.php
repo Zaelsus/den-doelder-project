@@ -54,7 +54,16 @@ class ProductLocationController extends Controller
         $pallet = $productLocationDetails['pallet'];
         $productLocation = $productLocationDetails['productLocation'];
 
-        return view('productLocations.show', compact('productLocation', 'pallet', 'orderId'));
+        if (location === null) {
+            $locationName="no location";
+            $locationQ=0;
+        }
+        else{
+            $locationName=Location::find('id',$productLocation->location_id);
+            $locationQ=$productLocationDetails->pa;
+    }
+
+        return view('productLocations.show', compact('locationName','locationQ', 'pallet', 'orderId'));
     }
 
     /**
@@ -109,15 +118,10 @@ class ProductLocationController extends Controller
         return $validatedAtributes;
     }
 
-    public function getProductLocation($details)
+    public function getProductLocation(Order $order)
     {
-        $order = Order::find($details);
-        $orderId = $order->id;
-        $pallet = $order->pallet;
-        $product = Product::find($pallet->product_id);
-        $productLocation = ProductLocation::where('product_id', $product->id)->first();
-        $location = Location::find($productLocation->location_id);
+        $productLocation = ProductLocation::where('product_id', $order->pallet->product_id)->first();
 
-        return ['orderId' => $orderId, 'pallet' => $pallet, 'productLocation' => $productLocation, 'location' => $location];
+        return $productLocation;
     }
 }
