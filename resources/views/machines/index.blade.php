@@ -56,9 +56,13 @@
                 </button>
             </form>
         @else
-            <a href="{{ route('orders.index') }}" class="btn bg-gray-dark">
+            <a href="{{ route('orders.index') }}" class="btn bg-gray-dark" style="width:40rem">
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>Enter Administration View</p>
+            </a>
+            <a href="{{ route('reports.index') }}" class="btn bg-gray-dark" style="width:40rem">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>View Reports</p>
             </a>
             @endif
             @endif

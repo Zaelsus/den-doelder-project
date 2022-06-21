@@ -8,7 +8,8 @@ use App\Http\Controllers\{InitialController,
     ProductionController,
     PalletController,
     ProductLocationController,
-    MachineController};
+    MachineController,
+    ReportController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,9 @@ Route::resource('/orders', OrderController::class);
 
 // Pallets
 Route::resource('/pallets', PalletController::class);
+
+// Reports
+Route::resource('/reports', ReportController::class);
 
 //Production View
 //start production route
