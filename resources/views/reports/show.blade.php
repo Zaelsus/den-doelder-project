@@ -42,7 +42,29 @@
                     <p><strong>Elapsed Time: {{$orderTime[$order->id]->format('%h:%I:%S')}}</strong></p>
                     <p>Number of Stoppages: {{$stoppageNumber[$order->id]}}</p>
                     <p>Total Stoppages: {{$stoppageTotalTime[$order->id]->format('%h:%I:%S')}}</p>
-                    <p>Average Stoppage Length: {{($stoppageTotalTime[$order->id]->format('%h:%I:%S')/2)}}</p>
+                    <?php
+                    $seconds = (int)$stoppageTotalTime[$order->id]->format('%S') / $stoppageNumber[$order->id];
+                    $minutes = 0;
+                    $hours = 0;
+                    if ($seconds >= 60) {
+                        $minutes = $seconds / 60;
+                        $seconds = $seconds - ($minutes * 60);
+                        if ($minutes >= 60) {
+                            $hours = $minutes / 60;
+                            $minutes = $minutes - ($hours * 60);
+                        }
+                    }
+                    $average = '';
+                    if ($hours !== 0) {
+                        $average = $hours . 'hours, ';
+                    }
+                    if ($minutes !== 0) {
+                        $average = $average . $minutes . 'minutes, ';
+                    }
+                    $average = $average . $seconds . ' seconds';
+                    ?>
+                    <p>Average Stoppage
+                        Length: {{$average}}</p>
                 </div>
             @endforeach
         @else
