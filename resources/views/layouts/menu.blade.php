@@ -1,9 +1,9 @@
 @if(((Auth::user()->role === 'Production') && (\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production'))
-|| ((Auth::user()->role === 'Administrator' && !(Request::is('reports*'))) && ($order !== null)))
+|| ((Auth::user()->role === 'Administrator'||Auth::user()->role === 'Driver') && ($order !== null)))
     <div class="info-box shade brand-text">
         <div class="info-box-content">
             <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
-            <h4>
+            <h5>
                     <span class="align-content-lg-stretch d-flex justify-content-center badge
                 @if($order->status === 'Production Pending')
                         badge-secondary
@@ -18,8 +18,23 @@
                 @elseif($order->status === 'Canceled')
                         badge-dark
                 @endif
-                        ">{{$order->status}}</span>
-            </h4>
+                        ">{{Auth::user()->role !== 'Production' ? 'Prod status - ' . $order->status :$order->status}}</span>
+            </h5>
+            @if(Auth::user()->role !== 'Production')
+                <h5>
+                    <span class="align-content-lg-stretch d-flex justify-content-center badge
+                @if($order->truckDriver_status === 'Production Pending')
+                        badge-secondary
+                @elseif($order->truckDriver_status === 'Driving')
+                        badge-info
+                @elseif($order->truckDriver_status === 'Paused')
+                        badge-warning
+                @elseif($order->truckDriver_status === 'Done')
+                        badge-success
+                @endif
+                        ">Driver status - {{$order->truckDriver_status}}</span>
+                </h5>
+            @endif
         </div>
     </div>
 @endif
@@ -251,13 +266,6 @@
                                     <p class="brand-text" style="color: white"> Pause Driving</p>
                                 </button>
                             </form>
-                            {{--                        <form method="POST" action="{{route('orders.pauseDriving', $order)}}">--}}
-                            {{--                            @csrf--}}
-                            {{--                            <button onclick="return confirm('Are you sure you want to pause driving?')"--}}
-                            {{--                                    class="far fa-pause-circle btn btn-warning btn-block "--}}
-                            {{--                                    type="submit"> Pause Driving--}}
-                            {{--                            </button>--}}
-                            {{--                        </form>--}}
                         </li>
                         <li class="nav-item">
                             <form method="POST" action="{{route('orders.stopDriving', $order)}}"
@@ -271,14 +279,6 @@
                                     <p class="brand-text"> Finish Driving</p>
                                 </button>
                             </form>
-                            {{--                        <form method="POST"--}}
-                            {{--                              action="{{route('orders.stopDriving', ['order'=>$order,'machine'=>Auth::user()->machine])}}">--}}
-                            {{--                            @csrf--}}
-                            {{--                            <button onclick="return confirm('Is this order fully delivered?')"--}}
-                            {{--                                    class="far fa-stop-circle btn btn-danger btn-block "--}}
-                            {{--                                    type="submit"> Finish Driving--}}
-                            {{--                            </button>--}}
-                            {{--                        </form>--}}
                         </li>
                     </ul>
                 </div>
@@ -314,7 +314,16 @@
             </div>
         </li>
     @endif
-
-
+@else
+    <li class="nav-item">
+        <div class="nav-item">
+            <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+               class="nav-link active btn bg-gray-dark text-left">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>Orders</p>
+            </a>
+        </div>
+    </li>
+@endif
 @endif
 
