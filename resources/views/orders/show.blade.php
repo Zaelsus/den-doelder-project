@@ -133,12 +133,6 @@
                         <th>Measurements:</th>
                         <td> {{$orderMaterial->material->measurements}}</td>
                     </tr>
-                    @if($orderMaterial->material->comments !== "")
-                        <tr>
-                            <th>Comments:</th>
-                            <td> {{$orderMaterial->material->comments}}</td>
-                        </tr>
-                    @endif
                     <tr>
                         <th> Quantity Needed:</th>
                         <td> {{$orderMaterial->total_quantity}}</td>

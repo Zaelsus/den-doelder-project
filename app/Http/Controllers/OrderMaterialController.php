@@ -86,9 +86,18 @@ class OrderMaterialController extends Controller
      */
     public function editStepTwo(Request $request)
     {
-        $materials = Material::all();
         $order = $request->session()->get('order');
-        return view('orders.edit-step-two', compact('order', 'materials'));
+        $orderMaterials=OrderMaterial::where('order_id',$order->id)->get();
+        $collections = Material::all();
+        $materials=collect();
+        foreach($collections as $collection){
+            if(!($orderMaterials->contains('material_id',$collection->product_id))){
+                $materials->push($collection);
+
+            }
+        }
+//        dd($materials);
+        return view('orders.edit-step-two', compact('order', 'materials','orderMaterials'));
     }
 
     /**
