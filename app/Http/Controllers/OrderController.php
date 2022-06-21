@@ -380,7 +380,7 @@ class OrderController extends Controller
     public function pauseDriving(Order $order) {
 //        dd($order);
 //        dd($order->machine);
-        $order->update(['truckDriver_status' => null]);
+        $order->update(['truckDriver_status' => 'Paused']);
         return redirect(route('machines.show', ['machine' => $order->machine]));
     }
 

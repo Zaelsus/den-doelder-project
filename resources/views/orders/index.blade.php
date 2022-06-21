@@ -84,7 +84,8 @@
                                     @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
                                                 <td class="{{$order->truckDriver_status === null ? 'bg-secondary':''}}
                                                 {{$order->truckDriver_status === 'Delivered' ? 'bg-success':''}}
-                                                {{$order->truckDriver_status === 'Driving' ? 'bg-info':''}}">
+                                                {{$order->truckDriver_status === 'Driving' ? 'bg-info':''}}
+                                                {{$order->truckDriver_status === 'Paused' ? 'bg-warning':''}}">
                                                     @if($order->truckDriver_status === null)
                                                         No Driver
                                                     @else

@@ -258,8 +258,8 @@
         <div class="nav-item">
             <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
                class="nav-link active btn bg-gray-dark text-left">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>Orders</p>
+                <i class="nav-icon fas fa-bookmark"></i>
+                <p>Order List</p>
             </a>
         </div>
     </li>
