@@ -27,7 +27,7 @@
                     <span @if($note->label === 'Fix') class="badge badge-success" @else class="badge badge-info" @endif
                                 >{{ strtok($note->label, '(') }}</span>
                     <p><strong>Solved at: {{$note->updated_at}}</strong></p>
-                    <p><strong>Elapsed time (minutes): {{$waitTime[$note->id]}}</strong></p>
+                    <p><strong>Elapsed Time: {{$waitTime[$note->id]->format('%h:%I:%S')}}</strong></p>
                     <p>{{$note->content}}</p>
                 </div>
 
@@ -37,7 +37,13 @@
     <div id="productionTimes" class="invisibleSelection">
         @if($orderTime !== [])
             @foreach($orders as $order)
-                <p>Elapsed Time: {{$orderTime[$order->id]}}</p>
+                <h2><span class="badge badge-pill badge-warning">Order {{$order->order_number}}</h2>
+                <div style="padding-left: 1rem">
+                    <p><strong>Elapsed Time: {{$orderTime[$order->id]->format('%h:%I:%S')}}</strong></p>
+                    <p>Number of Stoppages: {{$stoppageNumber[$order->id]}}</p>
+                    <p>Total Stoppages: {{$stoppageTotalTime[$order->id]->format('%h:%I:%S')}}</p>
+                    <p>Average Stoppage Length: {{($stoppageTotalTime[$order->id]->format('%h:%I:%S')/2)}}</p>
+                </div>
             @endforeach
         @else
             <h2><span class="badge badge-pill badge-warning">No Info to Display!</span></h2>

@@ -60,7 +60,7 @@
                 </div>
                 <div class="flex-item-right">
                     <a href="{{ route('reports.index') }}" class="btn bg-gray-dark align-top" style="width:40rem; margin-top: .5rem">
-                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <i class="nav-icon fas fa-bookmark"></i>
                         <p>View Reports</p>
                     </a>
                 </div>

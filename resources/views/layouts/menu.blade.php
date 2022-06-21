@@ -161,7 +161,7 @@
         <li class="nav-item">
             <div class="nav-item">
                 <a href="{{ route('reports.show', 1) }}" class="nav-link active btn bg-gray-dark text-left">
-                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <i class="nav-icon fas fa-dice-one"></i>
                     <p>Cape 1</p>
                 </a>
             </div>
@@ -169,7 +169,7 @@
         <li class="nav-item">
             <div class="nav-item">
                 <a href="{{ route('reports.show', 2) }}" class="nav-link active btn bg-gray-dark text-left">
-                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <i class="nav-icon fas fa-dice-two"></i>
                     <p>Cape 2</p>
                 </a>
             </div>
@@ -177,7 +177,7 @@
         <li class="nav-item">
             <div class="nav-item">
                 <a href="{{ route('reports.show', 5) }}" class="nav-link active btn bg-gray-dark text-left">
-                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <i class="nav-icon fas fa-dice-five"></i>
                     <p>Cape 5</p>
                 </a>
             </div>
