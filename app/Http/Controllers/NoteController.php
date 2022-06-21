@@ -220,12 +220,13 @@ class NoteController extends Controller
      */
     public function validateNote(Request $request, $order_id, $fix, $note_rel): array
     {
-
         $validatedAttributes = $request->validate([
             'title'=>'',
             'content'=>'',
-            'label'=>'required',
+            'fixContent'=>'',
+            'label'=>'',
         ]);
+
         $validatedAttributes['order_id'] = $order_id;
         $validatedAttributes['note_rel'] = $note_rel;
         $validatedAttributes['priority'] = 'low';

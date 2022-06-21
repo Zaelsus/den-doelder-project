@@ -3,6 +3,7 @@
 @extends('layouts.app')
 @section('content')
 @extends(isset($note) ? 'modals.editNote' : 'blank')
+@extends('modals.noteFix')
     <!-- Button trigger modal -->
 
     <br>
@@ -54,7 +55,8 @@
                             <td style="width: 20%">
                                 <details>
                                     <summary>{{ substr($note->content, 0, 40) }}</summary>
-                                    <p>{{ substr($note->content, 40) }}</p>
+                                    <p>{{ substr($note->content, 40) }}
+                                    {{$note->fixContent !== null ? 'Fix : ' . $note->fixContent : ''}}</p>
                                 </details>
                             </td>
                             <td>
@@ -70,7 +72,6 @@
                                 <td>
                                     <button type="button" class="btn btn-lg bg-gradient-olive opacity-70"
                                             data-toggle="modal"
-
                                             data-target=" {{"#editNote" . $note->id}}"
                                             style="font-size: 12pt">
                                         Edit
@@ -82,6 +83,17 @@
                                     <span class="badge badge-success">fixed</span>
                                 @elseif($note->fix === 'Error!' && $note->priority === 'high')
                                     <span class="badge badge-danger">log fix when restart</span>
+                                @elseif($note->label === 'Mechanical Issue' || $note->label === 'Material Issue' || $note->label === 'Technical Issue')
+                                    @if($note->fixContent === null)
+                                    <button type="button" class="btn btn-lg bg-gradient-olive opacity-70"
+                                             data-toggle="modal"
+                                             data-target=" {{"#noteFix" . $note->id}}"
+                                             style="font-size: 12pt">
+                                        Note fix
+                                    </button>
+                                    @else
+                                        <span class="badge badge-success">fixed</span>
+                                    @endif
                                 @endif
                             </td>
                             @endif

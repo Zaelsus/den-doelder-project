@@ -1,10 +1,3 @@
-<?php
-
-use App\Models\Note;
-
-
-?>
-
 {{--    Modal for logging Fix --}}
 <div class="modal fade" id="logFix" tabindex="-1" role="dialog"
      aria-labelledby="logFixTitle" aria-hidden="true">
