@@ -18,12 +18,12 @@
                 @elseif($order->status === 'Canceled')
                         badge-dark
                 @endif
-                        ">{{Auth::user()->role !== 'Production' ? 'Prod status - ' . $order->status :$order->status}}</span>
+                        ">{{Auth::user()->role !== 'Production' ? '' . $order->status :$order->status}}</span>
             </h5>
             @if(Auth::user()->role !== 'Production')
                 <h5>
                     <span class="align-content-lg-stretch d-flex justify-content-center badge
-                @if($order->truckDriver_status === 'Production Pending')
+                @if($order->truckDriver_status === 'Production Pending' || $order->truckDriver_status === null)
                         badge-secondary
                 @elseif($order->truckDriver_status === 'Driving')
                         badge-info
@@ -32,7 +32,13 @@
                 @elseif($order->truckDriver_status === 'Done')
                         badge-success
                 @endif
-                        ">Driver status - {{$order->truckDriver_status}}</span>
+                        ">
+                        @if($order->truckDriver_status === null)
+                            No Driver
+                        @else
+                            {{$order->truckDriver_status}}
+                        @endif
+                    </span>
                 </h5>
             @endif
         </div>
@@ -324,6 +330,5 @@
             </a>
         </div>
     </li>
-@endif
 @endif
 
