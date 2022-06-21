@@ -289,46 +289,34 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <div class="nav-item">
+                    <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>Order Details</p>
+                    </a>
+
+                    <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-check"></i>
+                        <p>Hourly Check</p>
+                    </a>
+
+                    <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>Notes</p>
+                    </a>
+                </div>
+            </li>
         @endif
-    @endif
-    <li class="nav-item">
-        <div class="nav-item">
-            <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
-               class="nav-link active btn bg-gray-dark text-left">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>Orders</p>
-            </a>
-        </div>
-    </li>
-    @if(App\Models\TruckDriver::findDriverOrder() !== null)
+    @else
         <li class="nav-item">
             <div class="nav-item">
-                <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
+                <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+                   class="nav-link active btn bg-gray-dark text-left">
                     <i class="nav-icon fas fa-clipboard-list"></i>
-                    <p>Order Details</p>
-                </a>
-
-                <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
-                    <i class="nav-icon fas fa-check"></i>
-                    <p>Hourly Check</p>
-                </a>
-
-                <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>Notes</p>
+                    <p>Orders</p>
                 </a>
             </div>
         </li>
     @endif
-@else
-    <li class="nav-item">
-        <div class="nav-item">
-            <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
-               class="nav-link active btn bg-gray-dark text-left">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p>Orders</p>
-            </a>
-        </div>
-    </li>
 @endif
-
