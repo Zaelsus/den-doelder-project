@@ -43,7 +43,7 @@
                                             In Production
                                         </option>
                                     @endif
-                                    @if($order->status === 'In Production' || $order->status === 'Done' || $order->status === 'Paused'||$order->status === 'Canceled')
+                                    @if($order->status === 'In Production' || $order->status === 'Done' || $order->status === 'Paused'||$order->status === 'Canceled'||$order->status === 'Admin Hold')
                                         <option value='{{$order->status}}' selected>{{$order->status}}
                                         </option>
                                         @if(($order->status === 'Done' ||($order->status === 'Canceled' && $order->start_time !== null)) && (\App\Models\Order::getOrder($order->machine) === null))

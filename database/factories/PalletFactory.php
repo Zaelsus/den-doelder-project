@@ -19,7 +19,6 @@ class PalletFactory extends Factory
         $product = Pallet::addProduct();
         return [
             'product_id'=>$product->id,
-            'name'=>$this->faker->name,
             'pallet_number'=>$this->faker->numberBetween(0, 99999),
             'measurements'=>$this->faker->randomElement(['1200 X 1000', '1000 X 1000']),
             'classification'=>$this->faker->randomElement(['Klos Klasse', 'Dubbeldek niel-omkeerbaar']),
