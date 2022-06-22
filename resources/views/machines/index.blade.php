@@ -47,18 +47,32 @@
             $order = App\Models\Order::isSelected();
         @endphp
         @if($order !== null)
-            <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
-                  class="nav-link active btn">
-                @csrf
-                <button type="submit" class="btn bg-gray-dark">
-                    <i class="nav-icon fas fa-clipboard-list"></i>
-                    <p class="brand-text">Enter Administration View</p>
-                </button>
-            </form>
+            <div class="flex-container">
+                <div class="flex-item-left align-top">
+                    <form method="POST" action="{{route('orders.unselectOrder', $order)}}"
+                          class="nav-link active btn align-top">
+                        @csrf
+                        <button type="submit" class="btn bg-gray-dark" style="width:40rem">
+                            <i class="nav-icon fas fa-clipboard-list"></i>
+                            <p class="brand-text">Enter Administration View</p>
+                        </button>
+                    </form>
+                </div>
+                <div class="flex-item-right">
+                    <a href="{{ route('reports.index') }}" class="btn bg-gray-dark align-top" style="width:40rem; margin-top: .5rem">
+                        <i class="nav-icon fas fa-bookmark"></i>
+                        <p>View Reports</p>
+                    </a>
+                </div>
+            </div>
         @else
-            <a href="{{ route('orders.index') }}" class="btn bg-gray-dark">
+            <a href="{{ route('orders.index') }}" class="btn bg-gray-dark" style="width:40rem">
                 <i class="nav-icon fas fa-clipboard-list"></i>
                 <p>Enter Administration View</p>
+            </a>
+            <a href="{{ route('reports.index') }}" class="btn bg-gray-dark" style="width:40rem">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>View Reports</p>
             </a>
             @endif
             @endif
