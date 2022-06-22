@@ -37,14 +37,14 @@
         <div class="modal-content">
             <div class="modal-header colour-purple">
                 <h5 class="modal-title" id="cancelOrderTitle">
-                    Finish Driving
+                    Pause Driving
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p> Are you sure you want to finish driving this order?</p>
+                <p> Are you sure you want to pause driving this order?</p>
             </div>
             <div class="modal-footer">
                 <div>
