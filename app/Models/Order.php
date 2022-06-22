@@ -110,7 +110,6 @@ class Order extends Model
         } else{
             return null;
         }
-
         return $order;
 
     }
@@ -147,9 +146,6 @@ class Order extends Model
     {
         $prodCheck = $order->production;
         if ($prodCheck !== null) {
-            if ($order->start_date !== null && $order->machine !== null && $order->status === 'Quality Check Pending') {
-                $order->status = 'Production Pending';
-            }
             return true;
         }
         return false;
@@ -163,29 +159,27 @@ class Order extends Model
     public function addProduced()
     {
         $total = $this->quantity_produced +  $this->add_quantity;
-        if($total> $this->quantity_production){
-            $this->quantity_produced = "string";
-        }
-        else
-        {
-            $this->quantity_produced +=  $this->add_quantity;
-            $this->add_quantity = 0;
-        }
+        $this->quantity_produced +=  $this->add_quantity;
+        $this->add_quantity = 0;
         $this->save();
     }
 
+
     /**
-     * Function to complete order when all pallets are produced
+     * Function to return how many pallets are left to be produced
      * @return void
      */
-    public function stopProduced()
+    public function getToProduceAttribute()
     {
-        if($this->quantity_produced === $this->quantity_production )
+        if($this->quantity_production - $this->quantity_produced > 0)
         {
-            $this->status = 'Done';
-            $this->end_time = date('Y-m-d H:i:s');
+            return $this->quantity_production -$this->quantity_produced;
         }
-        $this->save();
+        else
+        {
+            return 0;
+
+        }
 
     }
 }

@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    @if(Auth::user()->role ==='Production')
+    @if(Auth::user()->role ==='Production' || Auth::user()->role ==='Driver')
         @if(Auth::user()->machine !== null)
             <div class="alert alert-default-info alert-dismissible fade show">
                 Last Session You were in {{ Auth::user()->machine->name }}
@@ -21,7 +21,7 @@
         @endif
         <div class="btn-group">
             @foreach($machines as $machine)
-                @extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
+                @extends(Auth::user()->role ==='Production' || Auth::user()->role ==='Driver' ? 'modals.machines':'blank')
                 <div class="container-xl">
                     <div class="container-lg ">
                         <div class="text-center ">

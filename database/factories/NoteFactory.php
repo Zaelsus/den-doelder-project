@@ -17,8 +17,10 @@ class NoteFactory extends Factory
         return [
             'title'=>$this->faker->sentence,
             'content'=>$this->faker->realTextBetween(100),
-            'label'=>$this->faker->randomElement(['Error', 'Fix', 'Other']),
-            'priority'=>$this->faker->randomElement(['low', 'medium', 'high']),
+            'label'=>$this->faker->randomElement(['Mechanical Issue', 'Material Issue', 'Technical Issue', 'Lunch Break',
+                                                    'End of shift']),
+            'priority'=>$this->faker->randomElement(['low']),
+            'creator' =>$this->faker->randomElement(['Administrator', 'Production', 'Driver']),
             'order_id' => Order::all()->random()->id,
         ];
     }

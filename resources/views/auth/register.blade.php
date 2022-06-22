@@ -50,6 +50,7 @@
                         <option value="">Choose a Role</option>
                         <option value='Administrator'@if(old('role') === 'Administrator') {{'selected'}}@endif>Administrator</option>
                         <option value='Production'@if(old('role') === 'Production') {{'selected'}}@endif>Production</option>
+                        <option value='Driver'@if(old('role') === 'Driver') {{'selected'}}@endif>Truck Driver</option>
                     </select>
                     @error('role')
                     <span class="invalid-feedback" role="alert">
