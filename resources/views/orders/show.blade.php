@@ -155,9 +155,9 @@
                     </tr>
                     @if(Auth::user()->role === 'Driver')
                         <tr>
-                            <th> Locations:</th>
+                            <th style="margin-bottom: 4px;"> Locations:</th>
                             <td>
-                                <ul>
+                                <ul style="margin-bottom: 4px; padding-left: 0px">
                                     @if($materialLocationsList!==null)
                                         @if(!($materialLocationsList[$orderMaterial->material_id]->isempty()))
                                             @for($i = 0; $i < count($materialLocationsList[$orderMaterial->material_id]);$i++)
