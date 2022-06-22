@@ -19,7 +19,7 @@
                             <div>
                                 <label class="form-check-label"><b>Label</b></label><br>
                             </div>
-                            <select onchange="titleInfo()" name="labelCreate" id="labelCreate" class="custom-select @error('label') is-invalid @enderror" required>
+                            <select onchange="titleInfo()" name="label" id="labelCreate" class="custom-select @error('label') is-invalid @enderror" required>
                                 <option value="">Choose a label</option>
                                 <option value="Regular Note">Regular Note</option>
                                 <option value="Mechanical Issue">Mechanical Issue</option>
