@@ -285,7 +285,7 @@
     @endif
     <li class="nav-item">
         <div class="nav-item">
-            <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+            <a href="{{ route('truckDrivers.list', ['machine' =>Auth::user()->machine]) }}"
                class="nav-link active btn bg-gray-dark text-left">
                 <i class="nav-icon fas fa-bookmark"></i>
                 <p>Order List</p>
