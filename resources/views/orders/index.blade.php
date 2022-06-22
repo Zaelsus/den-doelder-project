@@ -1,4 +1,4 @@
-@extends('layouts.app', ['orders'=>$orders])
+@extends('layouts.app')
 
 @section('header')
     {{--    TODO: This overlaps with the change machines button and looks unfinished--}}
@@ -20,9 +20,8 @@
                     <br>
                     @if(Auth::user()->role === 'Administrator')
                         <div class="has-text-right">
-                            <a href="{{route('orders.create.step.one')}}" class="btn btn-info btn-lg float-right">Add a
-                                new
-                                order</a>
+                            <a href="{{route('orders.create.step.one')}}" class="btn btn-info btn-lg float-right">
+                                Add a new order</a>
                         </div>
                     @elseif($orders->isEmpty())
                         <div class="alert alert-default-warning text-center fade show">
@@ -63,25 +62,25 @@
                                             <td>{{$order->pallet->name}}</td>
                                             <td>{{$order->pallet->measurements}}</td>
                                             <td>{{ $order->type_order === 1  ? 'Unique order for ' . $order->client_name: 'CP Common' }}</td>
-                                            <td class ="{{$order->machine->name === 'None' ? 'bg-warning':''}}">{{$order->machine->name}}</td>
+                                            <td class="{{$order->machine->name === 'None' ? 'bg-warning':''}}">{{$order->machine->name}}</td>
                                             <td> {{$order->start_date}}</td>
-                                            <td class = "{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
-                                                {{$order->status === 'Paused' ? 'bg-warning':''}}
-                                                {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
-                                                {{$order->status === 'Done' ? 'bg-success':''}}
-                                                {{$order->status === 'In Production' ? 'bg-info':''}}
-                                                {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
-                                                {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}
-                                                    <br>
-                                                    @if($order->status === 'Admin Hold')
-                                                        @if($order->start_date ===null)
-                                                            <span class="badge badge-pill">No start date</span>
-                                                        @endif
-                                                        @if(count($order->orderMaterials) === 0)
-                                                            <span class="badge badge-pill ">No materials chosen</span>
-                                                        @endif </td>
+                                            <td class="{{$order->status === 'Production Pending' ? 'bg-secondary':''}}
+                                            {{$order->status === 'Paused' ? 'bg-warning':''}}
+                                            {{$order->status === 'Admin Hold' ? 'bg-warning':''}}
+                                            {{$order->status === 'Done' ? 'bg-success':''}}
+                                            {{$order->status === 'In Production' ? 'bg-info':''}}
+                                            {{$order->status === 'Quality Check Pending' ? 'bg-lightblue':''}}
+                                            {{$order->status === 'Canceled' ? 'bg-dark':''}}">{{$order->status}}
+                                                <br>
+                                                @if($order->status === 'Admin Hold')
+                                                    @if($order->start_date ===null)
+                                                        <span class="badge badge-pill">No start date</span>
+                                                    @endif
+                                                    @if(count($order->orderMaterials) === 0)
+                                                        <span class="badge badge-pill ">No materials chosen</span>
+                                                    @endif </td>
                                                 @endif
-                                    @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
+                                            @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
                                                 <td class="{{$order->truckDriver_status === null ? 'bg-secondary':''}}
                                                 {{$order->truckDriver_status === 'Delivered' ? 'bg-success':''}}
                                                 {{$order->truckDriver_status === 'Driving' ? 'bg-info':''}}
@@ -91,7 +90,7 @@
                                                     @else
                                                         {{$order->truckDriver_status}}
                                                     @endif
-                                                    </td>
+                                                </td>
                                             @endif
                                             <td>{{$order->created_at}}</td>
                                         </tr>

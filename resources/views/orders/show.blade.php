@@ -1,4 +1,4 @@
-@extends('layouts.app',['order'=>$order])
+@extends('layouts.app')
 
 @section('content')
     @extends('modals.orders')
@@ -155,8 +155,24 @@
                     </tr>
                     @if(Auth::user()->role === 'Driver')
                         <tr>
-                            <th> Location:</th>
-                            <td> {{$productLocationDetails['location']->name}}</td>
+                            <th> Locations:</th>
+                            <td>
+                                <ul>
+                                    @if($materialLocationsList!==null)
+                                        @if(!($materialLocationsList[$orderMaterial->material_id]->isempty()))
+                                            @for($i = 0; $i < count($materialLocationsList[$orderMaterial->material_id]);$i++)
+                                                <li> Location
+                                                    - {{ $materialsLocations[$orderMaterial->material_id.'_'.$materialLocationsList[$orderMaterial->material_id][$i]->location_id.'_'.'name']}}
+                                                    Existing Stock
+                                                    - {{$materialsLocations[$orderMaterial->material_id.'_'.$materialLocationsList[$orderMaterial->material_id][$i]->location_id.'_'.'quantity']}}</li>
+                                            @endfor
+                                        @else
+                                            No locations for this material yet
+                                        @endif
+                                    @endif
+                                </ul>
+
+                            </td>
                         </tr>
                     @endif
                     <tr style="border-bottom: solid"></tr>
