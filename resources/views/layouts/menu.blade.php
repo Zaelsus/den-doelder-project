@@ -21,7 +21,7 @@
                         ">{{Auth::user()->role !== 'Production' ? 'Prod status - ' . $order->status :$order->status}}</span>
             </h5>
             @if(Auth::user()->role !== 'Production')
-            <h5>
+                <h5>
                     <span class="align-content-lg-stretch d-flex justify-content-center badge
                 @if($order->truckDriver_status === 'Production Pending')
                         badge-secondary
@@ -33,7 +33,7 @@
                         badge-success
                 @endif
                         ">Driver status - {{$order->truckDriver_status}}</span>
-            </h5>
+                </h5>
             @endif
         </div>
     </div>
@@ -41,35 +41,27 @@
 {{--checking role if production worker--}}
 @if(Auth::user()->role === 'Production')
     {{--    Production Status (either 1 is in production or Paused --}}
-    @if(\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production')
+    @if($order !== null)
         <li class="nav-item">
             <div class="card bg-gray-dark" style="margin-bottom: .2rem">
-                <a href="#" class="nav-link bg-black">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Quick Actions
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview" style="display: none;">
                     @if($order->status === 'Paused')
-                        <li class="nav-item">
+                        <a class="nav-item">
                             <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
                                     data-toggle="modal"
                                     data-target="#restartProd">
                                 Restart
                             </button>
-                        </li>
+                        </a>
                     @endif
                     @if($order->status === 'In Production')
-                        <li class="nav-item">
+                        <a class="nav-item">
                             <button type="button" class="far fa-pause-circle btn btn-warning btn-block"
                                     data-toggle="modal"
                                     data-target="#pauseProd">
                                 Pause
                             </button>
-                        </li>
-                        <li class="nav-item">
+                        </a>
+                        <a class="nav-item">
                             <form method="POST"
                                   action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
                                 @csrf
@@ -78,9 +70,9 @@
                                         type="submit"> Finish Order
                                 </button>
                             </form>
-                        </li>
+                        </a>
                     @endif
-                </ul>
+
             </div>
 
             <div class="nav-item">
@@ -215,15 +207,7 @@
         @if($order->truckDriver_status === 'Driving')
             <li class="nav-item">
                 <div class="card bg-gray-dark" style="margin-bottom: .2rem">
-                    <a href="#" class="nav-link bg-black">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Quick Actions
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview" style="display: none;">
-                        <li class="nav-item">
+                        <a class="nav-item">
                             <form method="POST" action="{{route('orders.pauseDriving', $order)}}"
                                   class="nav-link active btn text-left bg-warning" style="margin-top: .2rem">
                                 @csrf
@@ -235,8 +219,8 @@
                                     <p class="brand-text" style="color: white"> Pause Driving</p>
                                 </button>
                             </form>
-                        </li>
-                        <li class="nav-item">
+                        </a>
+                        <a class="nav-item">
                             <form method="POST" action="{{route('orders.stopDriving', $order)}}"
                                   class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
                                 @csrf
@@ -248,8 +232,7 @@
                                     <p class="brand-text"> Finish Driving</p>
                                 </button>
                             </form>
-                        </li>
-                    </ul>
+                        </a>
                 </div>
             </li>
             <li class="nav-item">
@@ -259,7 +242,8 @@
                         <p>Order Details</p>
                     </a>
 
-                    <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{ route('hourlyReports.list', $order) }}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
                         <p>Hourly Check</p>
                     </a>
@@ -271,7 +255,7 @@
                 </div>
             </li>
         @endif
-        @else
+    @else
         <li class="nav-item">
             <div class="nav-item">
                 <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"

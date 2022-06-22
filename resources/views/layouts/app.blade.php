@@ -36,7 +36,7 @@
                     <span class="d-none d-md-inline btn colour-orange">Change Production Line</span>
                 </a>
                 <ul class="dropdown-menu  bg-transparent text-center">
-                    @if(Auth::user()->role === 'Production')
+                    @if(Auth::user()->role !== 'Administrator')
                         @php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->where('name','!=','None')->get();@endphp
                         @foreach($machines as $machine)
                             <li class="align-content-center">
