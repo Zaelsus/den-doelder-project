@@ -71,9 +71,11 @@ class NoteController extends Controller
         //store the note with the attributes of the request, together with the set fix, note related and order id
         $note = Note::create($this->validateNote($request, $order->id, $fix, $note_rel));
 
+
         //Update the status of the order. If the status is in production and an error note is set in, the status is
         //updated to paused. If the status is paused and the note is a fix note, update the status to in production.
-        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)' || $note->label === 'Lunch Break' || $note->label === 'End of Shift')) {
+        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)'
+                || $note->label === 'Lunch Break' || $note->label === 'End of Shift' || $note->label === 'Cleaning')) {
             $order->update(['status' => 'Paused']);
         } else if(($order->status === 'Paused') && ($note->label === 'Fix')) {
             $order->update(['status' => 'In Production']);

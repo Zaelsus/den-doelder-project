@@ -162,38 +162,26 @@
                 <form class="was-validated" method="POST" action="{{ route('notes.store') }}">
                     @csrf
                     <div>
-                        <div class="form-check">
-                            <div>
-                                <input onclick=isChecked() class="form-check-input" type="radio" name="label"
-                                       value="Mechanical Issue (Error)"
-                                       required>Mechanical Issue
-                            </div>
-                            <div>
-                                <input onclick=isChecked() class="form-check-input" type="radio" name="label" value="Material Issue (Error)"
-                                       required>Material Issue
-                            </div>
-                            <div>
-                                <input onclick=isChecked() class="form-check-input" type="radio" name="label"
-                                       value="Technical Issue (Error)"
-                                       required>Technical Issue
-                            </div>
-                            <div>
-                                <input onclick=isChecked() class="form-check-input" type="radio" name="label" value="Lunch Break" id="lb"
-                                       required>Lunch Break
-                            </div>
-                            <div>
-                                <input onclick=isChecked() class="form-check-input" type="radio" name="label" value="End of Shift" id="eos"
-                                       required>End of Shift
-                            </div>
-                        </div>
-                        <br>
+                        <label class="form-check-label"><b>Label</b></label><br>
                     </div>
+                    <div>
+                    <select onchange="isChecked()" name="label" id="labelStoppage" class="custom-select @error('label') is-invalid @enderror" required>
+                        <option value="">Choose a label</option>
+                        <option value="Mechanical Issue (Error)">Mechanical Issue</option>
+                        <option value="Material Issue (Error)">Material Issue</option>
+                        <option value="Technical Issue (Error)">Technical Issue</option>
+                        <option value="Lunch Break" id="lb">Lunch Break</option>
+                        <option value="End of Shift" id="eos">End of Shift</option>
+                        <option value="Cleaning" id="cl">Cleaning</option>
+                    </select>
+                    </div>
+                    <br>
                     <div>
                         <div id="box" style="display:none">
                             <div class="mb-3">
                                 <label class="requirednote" for="title">Title</label>
                                 <div>
-                                    <input class="form-control" name="title" id="title"
+                                    <input class="form-control" name="title" id="titleSt"
                                            type="text" placeholder="Title of note" value="{{old('title')}}">
                                 </div>
                                 @error('title')
@@ -213,11 +201,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="label" value="stoppage"
-                                   style="display:none"
-                                   checked>
-                        </div>
                         <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Log reason of stoppage
                         </button>
                     </div>
@@ -234,15 +217,14 @@
 </div>
 
 <script>
-    const lunch_break = document.getElementById('lb');
-    const shift_change = document.getElementById('eos');
-
-    const box = document.getElementById('box');
-    const tInput = document.getElementById('title');
-    const cInput = document.getElementById('content');
 
     function isChecked() {
-        if (lunch_break.checked || shift_change.checked) {
+        const labels = document.getElementById('labelStoppage');
+        const box = document.getElementById('box');
+        const tInput = document.getElementById('titleSt');
+        const cInput = document.getElementById('content');
+
+        if (labels.value === "Lunch Break" || labels.value === "End of Shift" || labels.value === "Cleaning") {
             box.style.display = 'none';
             cInput.removeAttribute('required');
             tInput.removeAttribute('required');
@@ -252,6 +234,8 @@
             box.style.display = 'block';
             cInput.setAttribute('required', '');
             tInput.setAttribute('required', '');
+            tInput.value = labels.value.substring(0, labels.value.indexOf('('));
         }
-        }
+    }
+
 </script>

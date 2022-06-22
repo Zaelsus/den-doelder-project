@@ -47,19 +47,19 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Regular Note"
+                                <input class="form-check-input" type="radio" name="labelEdit" value="Regular Note"
                                        {{$note->label === 'Regular Note' ? 'checked' : ''}} required>Regular Note
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Mechanical Issue"
+                                <input class="form-check-input" type="radio" name="labelEdit" value="Mechanical Issue"
                                        {{$note->label === 'Mechanical Issue' ? 'checked' : ''}}required>Mechanical Issue
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Material Issue"
+                                <input class="form-check-input" type="radio" name="labelEdit" value="Material Issue"
                                        {{$note->label === 'Material Issue' ? 'checked' : ''}} required>Material Issue
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="label" value="Technical Issue"
+                                <input class="form-check-input" type="radio" name="labelEdit" value="Technical Issue"
                                        {{$note->label === 'Technical Issue' ? 'checked' : ''}} required>Technical Issue
                             </div>
                             <br>
