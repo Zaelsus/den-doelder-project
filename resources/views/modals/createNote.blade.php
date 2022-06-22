@@ -70,8 +70,8 @@
     function titleInfo() {
         let title = document.getElementById('title');
         let labels = document.getElementById('labelCreate');
+        console.log(labels.value);
         title.value = labels.value;
-        console.log(title);
     }
 </script>
 

@@ -25,7 +25,7 @@
                             <div>
                                 <label class="form-check-label"><b>Label</b></label><br>
                             </div>
-                            <select name="label" id="labelCreate" class="custom-select @error('label') is-invalid @enderror" required>
+                            <select name="label" id="labelEdit" class="custom-select @error('label') is-invalid @enderror" required>
                                 <option value="" >Choose a label</option>
                                 <option value="Regular Note"
                                     {{$note->label === 'Regular Note' ? 'selected':''}}>
