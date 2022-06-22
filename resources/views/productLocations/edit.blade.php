@@ -34,6 +34,18 @@
                                 <p class="text-red">{{ $message }}</p>
                                 @enderror
                             </div>
+                            <div class="mb-3">
+                                <label for="Quantity">Quantity: </label>
+                                <div>
+                                    <input type="text" class="form-control "
+                                           name="Quantity"
+                                           placeholder="{{$productLocation->Quantity}}"  value="" required>
+                                </div>
+
+                                @error('Quantity')
+                                <p class="text-red">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-info btn-lg btn-block">Submit</button>

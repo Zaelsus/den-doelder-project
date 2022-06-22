@@ -159,3 +159,28 @@
         </div>
     </div>
 @endsection
+
+@section('custom_js')
+    <script>
+        // Function to automatically populate the "Extra Info" field with set data based off the Def ID selection
+        function addExtraInfo() {
+            let options = document.getElementById("def_id")
+            let selected = options.value;
+            let extraInfo = document.getElementById("extra_info");
+
+            if (selected == 1) {
+                extraInfo.value = 'No Shaky Pallets';
+            } else if (selected == 2) {
+                extraInfo.value = 'Per Pallet and Customer Dependent';
+            } else if (selected == 3) {
+                extraInfo.value = 'Clear and Easy to Read';
+            } else if (selected == 4) {
+                extraInfo.value = 'Length, Width & Height';
+            } else if (selected == 5) {
+                extraInfo.value = 'No Protruding Nails';
+            } else if (selected == 6) {
+                extraInfo.value = 'All Corners & Stamps Correct';
+            }
+        }
+    </script>
+@endsection

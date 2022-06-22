@@ -125,6 +125,7 @@ class HourlyReportController extends Controller
      */
     public function list(Order $order)
     {
+
 //        $reports = $this->getReportDetails($order)
 //
 //        $orderId = $reports['orderId'];

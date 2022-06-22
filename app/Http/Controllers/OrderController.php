@@ -134,6 +134,30 @@ class OrderController extends Controller
         //regular show
         return view('orders.show', compact('order'));
 
+    /**
+     * Function that finds the locations for the materials
+     *
+     * @param $details
+     * @return $materialsLocations
+     */
+    public function getMaterialsLocation(Order $order)
+    {
+        $materials = $order->orderMaterials;
+        $materialsLocations =[];
+        $materialLocationsList=[];
+        foreach($materials as $material) {
+            $materialId = $material->material_id;
+            $productlocations = productLocation::where('product_id', $materialId)->get();
+            $materialLocationsList[$materialId]=$productlocations;
+            foreach ($productlocations as $productlocation) {
+                //location name for each location for each material
+                $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'name'] = $productlocation->location->name;
+                //quantity in storage for each material in each location
+                $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'quantity'] = $productlocation->Quantity;
+            }
+        }
+
+        return ['materialsLocations' => $materialsLocations,'materialLocationsList'=>$materialLocationsList];
     }
 
     /**

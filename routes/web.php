@@ -101,4 +101,5 @@ Route::put('/edit-step-two/{order}', [OrderMaterialController::class,'updateEdit
 
 // Locations
 Route::resource('/productLocations', ProductLocationController::class);
+Route::get('/productLocations/list/{order}', [ProductLocationController::class, 'list'])->name('productLocations.list');
 

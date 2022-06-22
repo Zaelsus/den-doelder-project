@@ -115,11 +115,6 @@
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
                     </a>
-                    <a href="{{route('productLocations.show',$order)}}"
-                       class="nav-link active bg-gray-dark btn text-left">
-                        <i class="nav-icon fas fa-compass"></i>
-                        <p>Location</p>
-                    </a>
                 @endif
             </div>
         </li>
@@ -193,6 +188,61 @@
                     <i class="nav-icon fas fa-book"></i>
                     <p>Notes</p>
 
+                                <button onclick="return confirm('Are you sure you want to pause driving?')"
+                                        type="submit"
+                                        class="button-without-style">
+                                    <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
+                                    <p class="brand-text" style="color: white"> Pause Driving</p>
+                                </button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{{route('orders.stopDriving', $order)}}"
+                                  class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
+                                @csrf
+
+                                <button onclick="return confirm('Is this order fully delivered?')"
+                                        type="submit"
+                                        class="button-without-style">
+                                    <i class="nav-icon fas fa-stop-circle text-left"></i>
+                                    <p class="brand-text"> Finish Driving</p>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-item">
+                    <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>Order Details</p>
+                    </a>
+
+                    <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-check"></i>
+                        <p>Hourly Check</p>
+                    </a>
+
+                    <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>Notes</p>
+                    </a>
+                    <a href="{{route('productLocations.list',$order)}}"
+                       class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-compass"></i>
+                        <p>Location</p>
+                    </a>
+                </div>
+            </li>
+        @endif
+        @else
+        <li class="nav-item">
+            <div class="nav-item">
+                <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+                   class="nav-link active btn bg-gray-dark text-left">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <p>Orders</p>
                 </a>
             </div>
         </li>
