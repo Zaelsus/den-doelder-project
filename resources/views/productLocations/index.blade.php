@@ -9,66 +9,41 @@
         <div class="container">
             <div class="columns">
                 <div class="column is-full">
-                    {{--                    <div class="card">--}}
-                    {{--                        <h3>Pallet: {{$pallet->name}}</h3>--}}
-                    {{--                        <p>--}}
-                    {{--                            <div>--}}
-                    {{--                                <strong>Location: </strong>--}}
-                    {{--                                {{$productLocation->location->name}}--}}
-                    {{--                            </div>--}}
-                    {{--                            <div>--}}
-                    {{--                                <strong>Quantity: </strong> {{$productLocation->Quantity}}--}}
-                    {{--                            </div>--}}
-                    {{--                        </p>--}}
-                    {{--                            <form method="get" action="{{ route('productLocations.edit', $productLocation, $pallet) }}">--}}
-                    {{--                                @csrf--}}
-                    {{--                                <button type="submit" class="btn btn-primary">Edit</button>--}}
-                    {{--                            </form>--}}
-                    {{--                    </div>--}}
-
-                    <table class="table table-bordered table-hover table-secondary">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Pallet</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if ($productLocations !== null)
-                            @for($i = 0; $i < count($productLocations); $i++)
-                                <tr>
-                                    <td>{{$order->pallet->name}}</td>
-                                    <td>{{$locationsQuantity['location'.'_'.$productLocations[$i]->location_id.'_'.'name']}}</td>
-                                    <td>{{$locationsQuantity['location'.'_'.$productLocations[$i]->location_id.'_'.'quantity']}}</td>
-{{--                                    <td>pallet</td>--}}
-{{--                                    <td>location</td>--}}
-{{--                                    <td>quantity</td>--}}
-                                    <td>
-                                        <form method="get" action="{{ route('productLocations.edit', $order) }}">
-                                            @csrf
-                                            <button type="submit" class="btn btn-primary">Edit</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endfor
-
-                        @endif
-{{--                        <tr>--}}
-{{--                            <td>{{$order->pallet->name}}</td>--}}
-{{--                            <td>{{$productLocation->location->name}}</td>--}}
-{{--                            <td>{{$productLocation->Quantity}}</td>--}}
-{{--                            <td>--}}
-{{--                                <form method="get" action="{{ route('productLocations.edit', $orderId) }}">--}}
-{{--                                    @csrf--}}
-{{--                                    <button type="submit" class="btn btn-primary">Edit</button>--}}
-{{--                                </form>--}}
-{{--                            </td>--}}
-
-{{--                        </tr>--}}
-                        </tbody>
-                    </table>
+                    <div class="has-text-right">
+                        <a href="{{route('productLocations.addLocation', $order )}}" class="btn btn-info btn-lg float-right">
+                            Add to new location
+                        </a>
+                    </div>
+                    <div class="content">
+                        <table class="table table-bordered table-hover table-secondary">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Pallet</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if ($productLocations !== null)
+                                @for($i = 0; $i < count($productLocations); $i++)
+                                    <tr>
+                                        <td>{{$order->pallet->name}}</td>
+                                        <td>{{$locationsQuantity['location'.'_'.$productLocations[$i]->location_id.'_'.'name']}}</td>
+                                        <td>{{$locationsQuantity['location'.'_'.$productLocations[$i]->location_id.'_'.'quantity']}}</td>
+                                        <td>
+                                            <form method="get"
+                                                  action="{{ route('productLocations.editLocation', ['order' => $order, 'locationId' =>  $productLocations[$i]->location_id ]) }}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endfor
+                            @endif
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

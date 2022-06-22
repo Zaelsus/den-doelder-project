@@ -17,7 +17,6 @@ class LocationFactory extends Factory
             'name'=>$this->faker->randomLetter,
             'available_storage_space'=>$this->faker->numberBetween(0,100),
             'type'=>$this->faker->randomElement(['Pallets', 'Materials']),
-
         ];
     }
 }

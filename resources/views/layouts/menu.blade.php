@@ -70,14 +70,11 @@
                             </button>
                         </li>
                         <li class="nav-item">
-                            <form method="POST"
-                                  action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
-                                @csrf
-                                <button onclick="return confirm('Is this order completed?')"
-                                        class="far fa-stop-circle btn btn-danger btn-block "
-                                        type="submit"> Finish Order
+                                <button type="button" class="far fa-stop-circle btn btn-danger btn-block "
+                                        data-toggle="modal"
+                                        data-target="#finishOrder">
+                                    Finish Order
                                 </button>
-                            </form>
                         </li>
                     @endif
                 </ul>

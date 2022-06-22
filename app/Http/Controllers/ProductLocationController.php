@@ -49,22 +49,18 @@ class ProductLocationController extends Controller
      */
     public function show(Order $order)
     {
-        dd($order);
-        $productLocationDetails = $this->getPallettLocation($order);
-//        $orderId = $productLocationDetails['orderId'];
-//        $pallet = $productLocationDetails['pallet'];
-//        $productLocation = $productLocationDetails['productLocation'];
-
-        if (location === null) {
-            $locationName="no location";
-            $locationQ=0;
-        }
-        else{
-            $locationName=Location::find('id',$productLocation->location_id);
-            $locationQ=$productLocationDetails->pa;
-    }
-
-        return view('productLocations.show', compact('locationName','locationQ', 'pallet', 'orderId'));
+//        $productLocationDetails = $this->getPallettLocation($order);
+//
+////        if (location === null) {
+////            $locationName="no location";
+////            $locationQ=0;
+////        }
+////        else{
+////            $locationName=Location::find('id',$productLocation->location_id);
+////            $locationQ=$productLocationDetails->pa;
+////    }
+//
+//        return view('productLocations.show', compact('locationName','locationQ', 'pallet', 'orderId'));
     }
 
     /**
@@ -73,11 +69,11 @@ class ProductLocationController extends Controller
      * @param  \App\Models\ProductLocation  $productLocation
      * @return \Illuminate\Http\Response
      */
-    public function edit($order)
+    public function edit(Order $order)
     {
+//        dd($order);
         $productLocationDetails = $this->getPallettLocation($order);
-        $orderId = $productLocationDetails['orderId'];
-        $productLocation = $productLocationDetails['productLocation'];
+
 
         return view('productLocations.edit', compact('productLocation', 'orderId'));
     }
@@ -113,7 +109,8 @@ class ProductLocationController extends Controller
 
     public function validateLocationChange(Request $request){
         $validatedAtributes = $request->validate([
-            'name'=>'required',
+            ''
+            'Quantity'=>'required',
         ]);
 
         return $validatedAtributes;
@@ -133,9 +130,9 @@ class ProductLocationController extends Controller
     }
 
     /**
-     * Function to list all Hourly Check logs for a specific order
+     * Function to list all pallet locations
      *
-     * @param $details - the order's slug
+     * @param $order - the order
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function list(Order $order)
@@ -143,9 +140,70 @@ class ProductLocationController extends Controller
         $productLocationDetails = $this->getPallettLocation($order);
         $locationsQuantity = $productLocationDetails['locationsQuantity'];
         $productLocations = $productLocationDetails['productLocations'];
-//        dd($productLocation[0]->location_id);
 
         return view('productLocations.index', compact('order','locationsQuantity', 'productLocations' ));
+    }
+
+    /**
+     * Function to add a new location and quantity of a pallet
+     *
+     * @param $order - the order
+     * @param $locationId - the pallet's location
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function addLocation(Order $order)
+    {
+        $locations = Location::where('type', 'Pallets')->get();
+//        dd($locations);
+//        $palletQuantity = ProductLocation::where('product_id', $order->pallet_id)->where('location_id', $locationId)->first();
+
+        return view('productLocations.create', compact('locations', 'order' ));
+    }
+
+    /**
+     * Function to store the new location and quantity of a pallet
+     *
+     * @param $order - the order
+     * @param $locationId - the pallet's location
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function storeLocation(Request $request, Order $order)
+    {
+        $palletQuantity = ProductLocation::all();
+        $palletQuantity->create($this->validateLocationChange($request));
+
+        return redirect(route('productLocations.list', $order));
+
+    }
+
+    /**
+     * Function to edit the location and quantity of a pallet
+     *
+     * @param $order - the order
+     * @param $locationId - the pallet's location
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function editLocation(Order $order, $locationId)
+    {
+        $palletLocation = Location::where('id', $locationId)->first();
+        $palletQuantity = ProductLocation::where('product_id', $order->pallet_id)->where('location_id', $locationId)->first();
+
+        return view('productLocations.edit', compact('palletLocation', 'palletQuantity', 'order' ));
+    }
+
+    /**
+     * Function to update the location and quantity of a pallet
+     *
+     * @param $order - the order
+     * @param $locationId - the pallet's location
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function updateLocation(Request $request, Order $order, $locationId)
+    {
+        $palletQuantity = ProductLocation::where('product_id', $order->pallet_id)->where('location_id', $locationId)->first();
+        $palletQuantity->update($this->validateLocationChange($request));
+
+        return redirect(route('productLocations.list', $order));
 
     }
 }

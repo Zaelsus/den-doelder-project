@@ -10,7 +10,7 @@
             <div class="columns">
                 <div class="column is-full">
                     <div class="card">
-                    <form class="was-validated" method="POST" action="{{ route('productLocations.update',$orderId) }}">
+                    <form class="was-validated" method="POST" action="{{ route('productLocations.updateLocation',['order' =>$order, 'locationId'=>$palletLocation]) }}">
                         @csrf
                         @method('PUT')
 
@@ -19,27 +19,15 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label>Current Location:</label>
-                                <div>{{$productLocation->location->name}}</div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name">New Location: </label>
-                                <div>
-                                    <input type="text" class="form-control "
-                                           name="name"
-                                           placeholder="{{$productLocation->location->name}}"  value="" required>
-                                </div>
-
-                                @error('name')
-                                <p class="text-red">{{ $message }}</p>
-                                @enderror
+                                <label>Location:</label>
+                                <div>{{$palletLocation->name}}</div>
                             </div>
                             <div class="mb-3">
                                 <label for="Quantity">Quantity: </label>
                                 <div>
                                     <input type="text" class="form-control "
                                            name="Quantity"
-                                           placeholder="{{$productLocation->Quantity}}"  value="" required>
+                                           placeholder="{{$palletQuantity->Quantity}}"  value="" required>
                                 </div>
 
                                 @error('Quantity')
@@ -52,7 +40,7 @@
                             <br>
                             <div class="float-left">
                                 <button type="reset" class="btn btn-warning btn-lg">Reset</button>
-                                <a type="button" href="{{ route('productLocations.show', $orderId) }}" class="btn btn-light btn-lg">Cancel</a>
+                                <a type="button" href="{{ route('productLocations.show', $order) }}" class="btn btn-light btn-lg">Cancel</a>
                             </div>
                         </div>
                     </form>
