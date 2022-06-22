@@ -35,10 +35,9 @@
                             <td>
                                 <div @error('afmetingTickB') is-danger @enderror" >
                                 <label for="afmetingTickB" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickB" value="1" @if(old('afmetingTickB') ==  '1') checked @endif>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="afmetingTickB" value="1" @if(old('afmetingTickB') ==  '1') checked @endif>
                                 <label for="afmetingTickB" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">	&cross;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="afmetingTickB" value="0" @if(old('afmetingTickB') ==  '0') checked @endif>
-
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="afmetingTickB" value="0" @if(old('afmetingTickB') ==  '0') checked @endif>
                                 </div>
                                 @error('afmetingTickB')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -61,10 +60,9 @@
                             <td>
                                 <div @error('aantalTick') is-danger @enderror" >
                                 <label for="aantalTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="aantalTick" value="1" @if(old('aantalTick') ==  '1') checked @endif>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="aantalTick" value="1" @if(old('aantalTick') ==  '1') checked @endif>
                                 <label for="aantalTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="aantalTick" value="0" @if(old('aantalTick') ==  '0') checked @endif>
-
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="aantalTick" value="0" @if(old('aantalTick') ==  '0') checked @endif>
                                 </div>
                                 @error('aantalTick')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -89,10 +87,9 @@
                             <td>
                                 <div @error('klampenTick') is-danger @enderror" >
                                 <label for="klampenTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="klampenTick" value="1" @if(old('klampenTick') ==  '1') checked @endif>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="klampenTick" value="1" @if(old('klampenTick') ==  '1') checked @endif>
                                 <label for="klampenTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="klampenTick" value="0" @if(old('klampenTick') ==  '0') checked @endif>
-
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="klampenTick" value="0" @if(old('klampenTick') ==  '0') checked @endif>
                                 </div>
                                 @error('klampenTick')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -118,10 +115,9 @@
                             <td>
                                 <div @error('schimmelTick') is-danger @enderror" >
                                 <label for="schimmelTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="schimmelTick" value="1" @if(old('schimmelTick') ==  '1') checked @endif>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="schimmelTick" value="1" @if(old('schimmelTick') ==  '1') checked @endif>
                                 <label for="schimmelTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="schimmelTick" value="0" @if(old('schimmelTick') ==  '0') checked @endif>
-
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="schimmelTick" value="0" @if(old('schimmelTick') ==  '0') checked @endif>
                                 </div>
                                 @error('schimmelTick')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -145,10 +141,9 @@
                             <td>
                                 <div @error('waanTick') is-danger @enderror" >
                                 <label for="waanTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="waanTick" value="1" @if(old('waanTick') ==  '1') checked @endif>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="waanTick" value="1" @if(old('waanTick') ==  '1') checked @endif>
                                 <label for="waanTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="waanTick" value="0" @if(old('waanTick') ==  '0') checked @endif>
-
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="waanTick" value="0" @if(old('waanTick') ==  '0') checked @endif>
                                 </div>
                                 @error('waanTick')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -173,34 +168,28 @@
                     <section class="hero">
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Klossen</h5>
-                        </div>
-                        <p class="card bg-gradient-red subtitle">Select at least one </p>
-                    </section>
 
+                        </div>
+                    </section>
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
                             <th></th>
-                            <th>Type</th>
+                            <th>Condition</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
                         </tr>
-
                         <tr>
-                            <td>Soort</td>
+                            <td>Soort (Spaan/ Hout)</td>
                             <td>
-                                <div>
-                                    <div class="control">
-                                        <select name="soort" class="textarea  @error ('soort') is-danger @enderror ">
-                                            <option value="">Choose Type</option>
-                                            <option value='Spaan' @if(old('soort') ==  'Spaan') selected @endif>Spaan</option>
-                                            <option value="Hout" @if(old('soort') ==  'Hout') selected @endif>Hout</option>
-                                        </select>
-                                    </div>
-                                    @error('soort')
-                                    <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-
+                                <div @error('soortTick') is-danger @enderror" >
+                                <label for="soortTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="soortTick" value="1" @if(old('soortTick') ==  '1') checked @endif>
+                                <label for="soortTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="soortTick" value="0" @if(old('soortTick') ==  '0') checked @endif>
                                 </div>
+                                @error('soortTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
                             </td>
 
                             <td>
@@ -220,31 +209,76 @@
                             <td>Balk</td>
 
                             <td>
-                                <div>
-                                    <div class="control">
-                                        <select name="balk" class="textarea   @error ('balk') is-danger @enderror ">
-                                            <option value="">Choose Measurement</option>
-                                            <option value="Afmeting1">Afmeting 1</option>
-                                            <option value="Afmeting2">Afmeting 2</option>
-                                        </select>
-                                    </div>
-                                    @error('balk')
-                                    <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-
+                                <div @error('balkTick') is-danger @enderror" >
+                                <label for="balkTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="balkTick" value="1" @if(old('balkTick') ==  '1') checked @endif>
+                                <label for="balkTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="balkTick" value="0" @if(old('balkTick') ==  '0') checked @endif>
                                 </div>
+                                @error('balkTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
                             </td>
-
                             <td>
                                 <div class="control ">
                                     <input class="input" type="text" name="balkAang" id="">
                                 </div>
                             </td>
-
                             <td>
-
                                 <div class="control ">
                                     <input class="input " type="text" name="balkHtKd" id="" >
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Afmeting 1</td>
+                            <td>
+                                <div @error('afmeting1Tick') is-danger @enderror" >
+                                <label for="afmeting1Tick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="afmeting1Tick" value="1" @if(old('afmeting1Tick') ==  '1') checked @endif>
+                                <label for="afmeting1Tick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="afmeting1Tick" value="0" @if(old('afmeting1Tick') ==  '0') checked @endif>
+                                </div>
+                                @error('afmeting1Tick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="afmeting1Aang" id=" ">
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="afmeting1HtKd" id="">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Afmeting 2</td>
+
+                            <td>
+                                <div @error('afmeting2Tick') is-danger @enderror" >
+                                <label for="afmeting2Tick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="afmeting2Tick" value="1" @if(old('afmeting2Tick') ==  '1') checked @endif>
+                                <label for="afmeting2Tick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="afmeting2Tick" value="0" @if(old('afmeting2Tick') ==  '0') checked @endif>
+                                </div>
+                                @error('afmeting2Tick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input" type="text" name="afmeting2Aang" id=" ">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="afmeting2HtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -260,42 +294,168 @@
                     </section>
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
-
-                            <th>Type</th>
+                            <th></th>
+                            <th>Condition</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
                         </tr>
+                        <tr>
+                            <td>Brug</td>
+                            <td>
+                                <div @error('brugTick') is-danger @enderror" >
+                                <label for="brugTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="brugTick" value="1" @if(old('brugTick') ==  '1') checked @endif>
+                                <label for="brugTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="brugTick" value="0" @if(old('brugTick') ==  '0') checked @endif>
+                                </div>
+                                @error('brugTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+
+                            </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="brugAang" id="" >
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="brugHtKd" id="">
+                                </div>
+                            </td>
+                        </tr>
 
                         <tr>
-                        <td>
-                                <div>
-                                    <div class="control">
-                                        <select name="onderdek" class="textarea  @error('onderdek') is-danger @enderror">
-                                            <option value="">Choose Type</option>
-                                            <option value='Brug'>Brug</option>
-                                            <option value="Ronddloper Afm(2x)">Ronddloper Afm(2x)</option>
-                                            <option value="Ronddloper Afm(3x)">Ronddloper Afm(3x)</option>
-                                            <option value="Kruisdek">Kruisdek</option>
-                                            <option value="Elementen">Elementen</option>
-                                            <option value="Dubbel Dek">Dubbel Dek</option>
-                                        </select>
-                                    </div>
-                                    @error('onderdek')
-                                    <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
+                            <td>Ronddloper Afm(2x)</td>
+
+                            <td>
+                                <div @error('rond2xTick') is-danger @enderror" >
+                                <label for="rond2xTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="rond2xTick" value="1" @if(old('rond2xTick') ==  '1') checked @endif>
+                                <label for="rond2xTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="rond2xTick" value="0" @if(old('rond2xTick') ==  '0') checked @endif>
+                                </div>
+                                @error('rond2xTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="rond2xAang" id="" >
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="rond2xHtKd" id="" >
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Ronddloper Afm(3x)</td>
+
+                            <td>
+                                <div @error('rond3xTick') is-danger @enderror" >
+                                <label for="rond3xTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="rond3xTick" value="1" @if(old('rond3xTick') ==  '1') checked @endif>
+                                <label for="rond3xTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="rond3xTick" value="0" @if(old('rond3xTick') ==  '0') checked @endif>
+                                </div>
+                                @error('rond3xTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="rond3xAang" id="" >
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="rond3xHtKd" id="" >
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Kruisdek</td>
+                            <td>
+                                <div @error('kruisTick') is-danger @enderror" >
+                                <label for="kruisTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="kruisTick" value="1" @if(old('kruisTick') ==  '1') checked @endif>
+                                <label for="kruisTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="kruisTick" value="0" @if(old('kruisTick') ==  '0') checked @endif>
+                                </div>
+                                @error('kruisTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+
+                            </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input" type="text" name="kruisAang" id=" ">
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="onderdekAang" id="" >
+                                    <input class="input " type="text" name="kruisHtKd" id="">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Elementen</td>
+
+                            <td>
+                                <div @error('elementenTick') is-danger @enderror" >
+                                <label for="elementenTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="elementenTick" value="1" @if(old('elementenTick') ==  '1') checked @endif>
+                                <label for="elementenTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="elementenTick" value="0" @if(old('elementenTick') ==  '0') checked @endif>
+                                </div>
+                                @error('elementenTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="elementenAang" id=" ">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="elementenHtKd" id="">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Dubbel Dek</td>
+                            <td>
+                                <div @error('dubbelTick') is-danger @enderror" >
+                                <label for="dubbelTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="dubbelTick" value="1" @if(old('dubbelTick') ==  '1') checked @endif>
+                                <label for="dubbelTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="dubbelTick" value="0" @if(old('dubbelTick') ==  '0') checked @endif>
+                                </div>
+                                @error('dubbelTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="dubbelAang" id=" ">
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="onderdekHtKd" id="">
-
+                                    <input class="input" type="text" name="dubbelHtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -315,7 +475,8 @@
                         <tr>
                             <th></th>
                             <th>Condition</th>
-                            <th>Note</th>
+                            <th></th>
+                            <th></th>
                         </tr>
 
                         <tr>
@@ -324,10 +485,9 @@
                             <td>
                                 <div @error('hoekenTick') is-danger @enderror" >
                                 <label for="hoekenTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="hoekenTick" value="1" @if(old('hoekenTick') ==  '1') checked @endif>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="hoekenTick" value="1" @if(old('hoekenTick') ==  '1') checked @endif>
                                 <label for="hoekenTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="hoekenTick" value="0" @if(old('hoekenTick') ==  '0') checked @endif>
-
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="hoekenTick" value="0" @if(old('hoekenTick') ==  '0') checked @endif>
                                 </div>
                                 @error('hoekenTick')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -338,17 +498,20 @@
                                     <input class="input " type="text" name="hoekenAang" id="" >
                                 </div>
                             </td>
-
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="hoekenHtKd" id="">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>Extra Stempels</td>
                             <td>
                                 <div @error('stempelsTick') is-danger @enderror" >
                                 <label for="stempelsTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="stempelsTick" value="1" @if(old('stempelsTick') ==  '1') checked @endif>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="stempelsTick" value="1" @if(old('stempelsTick') ==  '1') checked @endif>
                                 <label for="stempelsTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="stempelsTick" value="0" @if(old('stempelsTick') ==  '0') checked @endif>
-
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="stempelsTick" value="0" @if(old('stempelsTick') ==  '0') checked @endif>
                                 </div>
                                 @error('stempelsTick')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -360,6 +523,12 @@
                                     <input class="input " type="text" name="stempelsAang" id="" >
                                 </div>
                             </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="stempelsHtKd" id="" >
+                                </div>
+                            </td>
                         </tr>
 
                         <tr>
@@ -368,10 +537,9 @@
                             <td>
                                 <div @error('stapelTick') is-danger @enderror" >
                                 <label for="stapelTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="1" @if(old('stapelTick') ==  '1') checked @endif>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="stapelTick" value="1" @if(old('stapelTick') ==  '1') checked @endif>
                                 <label for="stapelTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
-                                <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="0" @if(old('stapelTick') ==  '0') checked @endif>
-
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="stapelTick" value="0" @if(old('stapelTick') ==  '0') checked @endif>
                                 </div>
                                 @error('stapelTick')
                                 <p class="help is-danger">{{ $message }}</p>
@@ -382,23 +550,25 @@
                                     <input class="input " type="text" name="stapelAang" id=" ">
                                 </div>
                             </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input" type="text" name="stapelHtKd" id="">
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>Strappen/ Markeren</td>
                             <td>
-                                <div >
-                                    <div class="control">
-                                        <select name="strappenTick" class="textarea  @error('strappenTick') is-danger @enderror">
-                                            <option value="">Choose Type</option>
-                                            <option value='Strappen'>Strappen</option>
-                                            <option value="Markeren">Markeren</option>
-                                        </select>
-                                    </div>
-                                    @error('strappenTick')
-                                    <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-
+                                <div @error('strappenTick') is-danger @enderror" >
+                                <label for="strappenTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="strappenTick" value="1" @if(old('strappenTick') ==  '1') checked @endif>
+                                <label for="strappenTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="strappenTick" value="0" @if(old('strappenTick') ==  '0') checked @endif>
                                 </div>
+                                @error('strappenTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+
                             </td>
 
                             <td>
@@ -407,54 +577,84 @@
                                 </div>
                             </td>
 
-
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="strappenHtKd" id="">
+                                </div>
+                            </td>
                         </tr>
 
                         <tr>
                             <td>Q(kamer)/Loods/A</td>
 
                             <td>
-                                <div >
-                                    <div class="control">
-                                        <select name="kamerTick" class="textarea  @error('kamerTick') is-danger @enderror">
-                                            <option value="">Choose Type</option>
-                                            <option value='Q(kamer)'>Q(kamer)</option>
-                                            <option value="Loods">Loods</option>
-                                            <option value="A">A</option>
-                                        </select>
-                                    </div>
-                                    @error('kamerTick')
-                                    <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
-
+                                <div @error('kamerTick') is-danger @enderror" >
+                                <label for="kamerTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="kamerTick" value="1" @if(old('kamerTick') ==  '1') checked @endif>
+                                <label for="kamerTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="kamerTick" value="0" @if(old('kamerTick') ==  '0') checked @endif>
                                 </div>
+                                @error('kamerTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
                             </td>
                             <td>
                                 <div class="control ">
                                     <input class="input " type="text" name="kamerAang" id=" ">
                                 </div>
                             </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="kamerHtKd" id="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Speciale Instructie</td>
+
+                            <td>
+                                <div @error('specialeTick') is-danger @enderror" >
+                                <label for="specialeTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="specialeTick" value="1" @if(old('specialeTick') ==  '1') checked @endif>
+                                <label for="specialeTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px"    id="" name="specialeTick" value="0" @if(old('specialeTick') ==  '0') checked @endif>
+                                </div>
+                                @error('specialeTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="specialeAang" id=" ">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control ">
+                                    <input class="input " type="text" name="specialeHtKd" id="">
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </section>
-
                 <section class="section">
                     <label class='' for='additionalNotes'>Additional Notes:</label>
                     <div class="control ">
                         <input class="table table-bordered table-hover table-secondary" type="text" name="additionalNotes" id="" placeholder="Optional comments">
                     </div>
                 </section>
-
                 <section class="section">
-                        <section class="section">
-                            <div>
-                                <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" id="submitNew">Save</button>
-                            </div>
-                            <div class="float-left">
-                                <button type="reset" class="btn btn-warning btn-lg">Reset</button>
-                                <a type="button" href="/home" class="btn btn-light btn-lg">Cancel</a>
-                            </div>
-                        </section>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button type="submit" class="button is-primary" id="submitNew">Save</button>
+                        </div>
+                        <div class="control">
+                            <button type="reset" class="button is-warning">Reset</button>
+                        </div>
+                        <div class="control">
+                            <a type="button" href="/home" class="button is-light">Cancel</a>
+                        </div>
+                    </div>
                 </section>
             </section>
         </form>

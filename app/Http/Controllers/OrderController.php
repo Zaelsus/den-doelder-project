@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Location;
 use App\Models\Machine;
 use App\Models\Order;
 use App\Models\Pallet;
-use App\Models\Product;
-use App\Models\ProductLocation;
 use App\Providers\AutomaticStatusChange;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -118,7 +114,7 @@ class OrderController extends Controller
         $order->update($this->validateOrder($request));
         $request->session()->put('order', $order);
         $order->save();
-        $this->statusChangeCheck();
+        self::statusChangeCheck();
         return redirect()->route('orders.edit.step.two', compact('order'));
     }
 
@@ -131,78 +127,13 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $productLocationsDetails = $this->getMaterialsLocation($order);
-        $materialLocationsList=$productLocationsDetails['materialLocationsList'];
-        $materialsLocations=$productLocationsDetails['materialsLocations'];
         //automatic status change
-        $this->statusChangeCheck();
-        $driving = $this->testForDriving($order);
+        $orders = Order::orderBy('machine_id', 'desc')->get();
+        $user = Auth::user();
+        event(new AutomaticStatusChange($user,$orders));
+        //regular show
+        return view('orders.show', compact('order'));
 
-        return view('orders.show', compact('order', 'materialLocationsList','materialsLocations', 'driving'));
-
-    }
-
-    /**
-     * Function that tests if a driver is driving for an order on the same machine
-     *
-     * @param $order
-     * @return bool
-     */
-    public function testForDriving($order): bool
-    {
-        $orders = $order->machine->orders;
-
-        foreach($orders as $order) {
-            if($order->truckDriver_status === "Driving") {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    /**
-     * Function that finds the locations for the materials
-     *
-     * @param $details
-     * @return $materialsLocations
-     */
-    public function getMaterialsLocation(Order $order)
-    {
-        $materials = $order->orderMaterials;
-        $materialsLocations =[];
-        $materialLocationsList=[];
-        foreach($materials as $material) {
-            $materialId = $material->material_id;
-            $productlocations = productLocation::where('product_id', $materialId)->get();
-            $materialLocationsList[$materialId]=$productlocations;
-            foreach ($productlocations as $productlocation) {
-                //location name for each location for each material
-                $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'name'] = $productlocation->location->name;
-                //quantity in storage for each material in each location
-                $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'quantity'] = $productlocation->Quantity;
-            }
-        }
-        return ['materialsLocations' => $materialsLocations,'materialLocationsList'=>$materialLocationsList];
-    }
-
-
-    /**
-     * Function that finds the locations for the pallets
-     *
-     * @param $details
-     * @return array
-     */
-    public function getPalletLocation(Order $order)
-    {
-        $productId = $order->pallet->product_id;
-        $productLocations = ProductLocation::where('product_id',$productId)->get();
-        $locationsAvailability=[];
-        foreach($productLocations as $productLocation){
-            $locationsAvailability[$productLocation->location_id]=$productLocation->location->available_storage_space;
-        }
-        return ['locationsAvailability'=>$locationsAvailability,'productLocations'=>$productLocations];
     }
 
     /**
@@ -213,22 +144,13 @@ class OrderController extends Controller
         if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
             if ($order->status === 'Production Pending') {
                 $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
-                return redirect(route('orders.show', $order));
             } else {
                 $order->update(['status' => 'In Production']);
-                return redirect(route('orders.show', $order));
             }
+            return redirect(route('orders.show', $order));
         } else {
             return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
         }
-    }
-
-    public static function startDriving(Order $order)
-    {
-        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused'|| $order->status === 'In Production')) {
-            $order->update(['truckDriver_status' => 'Driving']);
-        }
-            return redirect(route('orders.show', $order));
     }
 
     /**
@@ -319,6 +241,7 @@ class OrderController extends Controller
         return redirect(route('orders.show', $order));
     }
 
+
     /**
      * changes the "selected" status of the current order to selected
      */
@@ -376,7 +299,8 @@ class OrderController extends Controller
         {
             $order->update($validated);
             $order->addProduced();
-            return redirect(route('orders.editquantity', $order));
+            $order->stopProduced();
+            return redirect(route('orders.show', $order));
         }
         catch (\Exception $exception)
         {
@@ -386,35 +310,5 @@ class OrderController extends Controller
 
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listOrders()
-    {
-        //looking about adding another order by accoridng to status as well as scheduled production
-//        $orders = Order::where('status', 'Production Pending', 'In Production')->orderBy('machine_id', 'desc')->get();
-        $orders = 1;
-        dd($orders);
-        $previousMachine=null;
-        return view('orders.index', compact('orders','previousMachine'));
-    }
 
-    public function pauseDriving(Order $order) {
-//        dd($order);
-//        dd($order->machine);
-        $order->update(['truckDriver_status' => null]);
-        return redirect(route('machines.show', ['machine' => $order->machine]));
-    }
-
-    /**
-     * changes the status of the current order to done
-     */
-    public static function stopDriving(Order $order)
-    {
-        $machine = $order->machine;
-        $order->update(['truckDriver_status' => 'Delivered']);
-        return redirect(route('machines.show', compact('machine')));
-    }
 }

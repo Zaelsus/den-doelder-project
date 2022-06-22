@@ -42,19 +42,42 @@ class CreateProductionsTable extends Migration
             $table->string('overstekCorrectB')->nullable();
 
 //            Klossen
-            $table->string('soort')->nullable();
+            $table->boolean('soortTick')->default(0);
             $table->string('soortAang')->nullable();
-            $table->string('soortHtKd')->nullable();
+            $table->string('soortCorrect')->nullable();
 
-            $table->string('balk')->nullable();
+            $table->boolean('balkTick')->default(0);
             $table->string('balkAang')->nullable();
-            $table->string('balkHtKd')->nullable();
+            $table->string('balkCorrect')->nullable();
 
+            $table->boolean('afmeting1Tick')->default(0);
+            $table->string('afmeting1Aang')->nullable();
+            $table->string('afmeting1Correct')->nullable();
+
+            $table->boolean('afmeting2Tick')->default(0);
+            $table->string('afmeting2Aang')->nullable();
+            $table->string('afmeting2Correct')->nullable();
 
 //            Onderdek
-            $table->string('onderdek');
-            $table->string('onderdekAang')->nullable();
-            $table->string('onderdekHtKd')->nullable();
+            $table->boolean('brugTick')->default(0);
+            $table->string('brugAang')->nullable();
+            $table->string('brugCorrect')->nullable();
+
+            $table->boolean('rondTick')->default(0);
+            $table->string('rondAang')->nullable();
+            $table->string('rondCorrect')->nullable();
+
+            $table->boolean('kruisTick')->default(0);
+            $table->string('kruisAang')->nullable();
+            $table->string('kruisCorrect')->nullable();
+
+            $table->boolean('afmetingTickO')->default(0);
+            $table->string('afmetingAangO')->nullable();
+            $table->string('afmetingCorrectO')->nullable();
+
+            $table->boolean('overstekTickO')->default(0);
+            $table->string('overstekAangO')->nullable();
+            $table->string('overstekCorrectO')->nullable();
 
 //            Overig
             $table->boolean('hoekenTick')->default(0);
@@ -69,11 +92,11 @@ class CreateProductionsTable extends Migration
             $table->string('stapelAang')->nullable();
             $table->string('stapelCorrect')->nullable();
 
-            $table->string('strappenTick');
+            $table->boolean('strappenTick')->default(0);
             $table->string('strappenAang')->nullable();
             $table->string('strappenCorrect')->nullable();
 
-            $table->string('spijkerTick');
+            $table->boolean('spijkerTick')->default(0);
             $table->string('spijkerAang')->nullable();
             $table->string('spijkerCorrect')->nullable();
 

@@ -126,19 +126,42 @@ class ProductionController extends Controller
             'overstekCorrectB'=>'min:0',
 
 //            Klossen
-            'soort'=>['required_if:balk,null','prohibited_unless:balk,null'],
+            'soortTick'=>'required|boolean',
             'soortAang'=>'min:0',
-            'soortHtKd'=>'min:0',
+            'soortCorrect'=>'min:0',
 
-            'balk'=>['required_if:soort,null','prohibited_unless:soort,null'],
+            'balkTick'=>'required|boolean',
             'balkAang'=>'min:0',
-            'balkHtKd'=>'min:0',
+            'balkCorrect'=>'min:0',
+
+            'afmeting1Tick'=>'required|boolean',
+            'afmeting1Aang'=>'min:0',
+            'afmeting1Correct'=>'min:0',
+
+            'afmeting2Tick'=>'required|boolean',
+            'afmeting2Aang'=>'min:0',
+            'afmeting2Correct'=>'min:0',
 
 //            Onderdek
-            'onderdek'=>'required',
-            'onderdekAang'=>'min:0',
-            'onderdekHtKd'=>'min:0',
+            'brugTick'=>'required|boolean',
+            'brugAang'=>'min:0',
+            'brugCorrect'=>'min:0',
 
+            'rondTick'=>'required|boolean',
+            'rondAang'=>'min:0',
+            'rondCorrect'=>'min:0',
+
+            'kruisTick'=>'required|boolean',
+            'kruisAang'=>'min:0',
+            'kruisCorrect'=>'min:0',
+
+            'afmetingTickO'=>'required|boolean',
+            'afmetingAangO'=>'min:0',
+            'afmetingCorrectO'=>'min:0',
+
+            'overstekTickO'=>'required|boolean',
+            'overstekAangO'=>'min:0',
+            'overstekCorrectO'=>'min:0',
 //            Overig
             'hoekenTick'=>'required|boolean',
             'hoekenAang'=>'min:0',
@@ -148,15 +171,15 @@ class ProductionController extends Controller
             'stempelsAang'=>'min:0',
             'stempelsCorrect'=>'min:0',
 
-            'stapelTick'=>'required',
+            'stapelTick'=>'required|boolean',
             'stapelAang'=>'min:0',
             'stapelCorrect'=>'min:0',
 
-            'strappenTick'=>'required',
+            'strappenTick'=>'required|boolean',
             'strappenAang'=>'min:0',
             'strappenCorrect'=>'min:0',
 
-            'spijkerTick'=>'required',
+            'spijkerTick'=>'required|boolean',
             'spijkerAang'=>'min:0',
             'spijkerCorrect'=>'min:0',
 
