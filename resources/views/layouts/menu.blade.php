@@ -18,10 +18,10 @@
                 @elseif($order->status === 'Canceled')
                         badge-dark
                 @endif
-                        ">{{Auth::user()->role !== 'Production' ? 'Prod status - ' . $order->status :$order->status}}</span>
+                        ">{{Auth::user()->role !== 'Production' ? '' . $order->status :$order->status}}</span>
             </h5>
             @if(Auth::user()->role !== 'Production')
-            <h5>
+                <h5>
                     <span class="align-content-lg-stretch d-flex justify-content-center badge
                 @if($order->truckDriver_status === 'Production Pending')
                         badge-secondary
@@ -32,8 +32,8 @@
                 @elseif($order->truckDriver_status === 'Done')
                         badge-success
                 @endif
-                        ">Driver status - {{$order->truckDriver_status}}</span>
-            </h5>
+                        ">{{$order->truckDriver_status}}</span>
+                </h5>
             @endif
         </div>
     </div>
@@ -224,34 +224,45 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: none;">
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.pauseDriving', $order)}}"
-                                  class="nav-link active btn text-left bg-warning" style="margin-top: .2rem">
-                                @csrf
-
-                                <button onclick="return confirm('Are you sure you want to pause driving?')"
-                                        type="submit"
-                                        class="button-without-style">
-                                    <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
-                                    <p class="brand-text" style="color: white"> Pause Driving</p>
-                                </button>
-                            </form>
+                            <button type="button" class="nav-link active btn text-left bg-warning"
+                                    data-toggle="modal"
+                                    data-target="#pauseDriving">
+                                <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
+                                <p class="brand-text" style="color: white"> Pause Driving</p>
+                            </button>
                         </li>
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.stopDriving', $order)}}"
-                                  class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
-                                @csrf
-                            <button onclick="return confirm('Is this order fully delivered?')"
-                                    type="submit"
-                                    class="button-without-style">
+                            <button type="button" class="nav-link active btn text-left bg-danger"
+                                    data-toggle="modal"
+                                    data-target="#finishDriving">
                                 <i class="nav-icon fas fa-stop-circle text-left"></i>
                                 <p class="brand-text"> Finish Driving</p>
                             </button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    @endif
+                        </li>
+
+                    </ul>
+                </div>
+            <li class="nav-item">
+                <div class="nav-item">
+                    <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>Order Details</p>
+                    </a>
+
+                    <a href="{{ route('hourlyReports.list', $order) }}"
+                       class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-check"></i>
+                        <p>Hourly Check</p>
+                    </a>
+
+                    <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>Notes</p>
+                    </a>
+                </div>
+            </li>
+            </li>
+        @endif
     @endif
     <li class="nav-item">
         <div class="nav-item">
