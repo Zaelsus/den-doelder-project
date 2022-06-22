@@ -261,34 +261,24 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: none;">
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.pauseDriving', $order)}}"
-                                  class="nav-link active btn text-left bg-warning" style="margin-top: .2rem">
-                                @csrf
-
-                                <button onclick="return confirm('Are you sure you want to pause driving?')"
-                                        type="submit"
-                                        class="button-without-style">
-                                    <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
-                                    <p class="brand-text" style="color: white"> Pause Driving</p>
-                                </button>
-                            </form>
+                            <button type="button" class="nav-link active btn text-left bg-warning"
+                                    data-toggle="modal"
+                                    data-target="#pauseDriving">
+                                <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
+                                <p class="brand-text" style="color: white"> Pause Driving</p>
+                            </button>
                         </li>
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.stopDriving', $order)}}"
-                                  class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
-                                @csrf
-
-                                <button onclick="return confirm('Is this order fully delivered?')"
-                                        type="submit"
-                                        class="button-without-style">
-                                    <i class="nav-icon fas fa-stop-circle text-left"></i>
-                                    <p class="brand-text"> Finish Driving</p>
-                                </button>
-                            </form>
+                            <button type="button" class="nav-link active btn text-left bg-danger"
+                                    data-toggle="modal"
+                                    data-target="#finishDriving">
+                                <i class="nav-icon fas fa-stop-circle text-left"></i>
+                                <p class="brand-text"> Finish Driving</p>
+                            </button>
                         </li>
+
                     </ul>
                 </div>
-            </li>
             <li class="nav-item">
                 <div class="nav-item">
                     <a href="{{ route('orders.show',$order) }}" class="nav-link active btn text-left bg-gray-dark">
@@ -296,7 +286,8 @@
                         <p>Order Details</p>
                     </a>
 
-                    <a href="{{ route('hourlyReports.list', $order) }}" class="nav-link active bg-gray-dark btn text-left">
+                    <a href="{{ route('hourlyReports.list', $order) }}"
+                       class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-check"></i>
                         <p>Hourly Check</p>
                     </a>
@@ -306,6 +297,7 @@
                         <p>Notes</p>
                     </a>
                 </div>
+            </li>
             </li>
         @endif
     @else
@@ -319,4 +311,13 @@
             </div>
         </li>
     @endif
+    <li class="nav-item">
+        <div class="nav-item">
+            <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
+               class="nav-link active btn bg-gray-dark text-left">
+                <i class="nav-icon fas fa-bookmark"></i>
+                <p>Order List</p>
+            </a>
+        </div>
+    </li>
 @endif
