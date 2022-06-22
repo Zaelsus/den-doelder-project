@@ -18,10 +18,10 @@
                 @elseif($order->status === 'Canceled')
                         badge-dark
                 @endif
-                        ">{{Auth::user()->role !== 'Production' ? 'Prod status - ' . $order->status :$order->status}}</span>
+                        ">{{Auth::user()->role !== 'Production' ? '' . $order->status :$order->status}}</span>
             </h5>
             @if(Auth::user()->role !== 'Production')
-            <h5>
+                <h5>
                     <span class="align-content-lg-stretch d-flex justify-content-center badge
                 @if($order->truckDriver_status === 'Production Pending')
                         badge-secondary
@@ -32,8 +32,8 @@
                 @elseif($order->truckDriver_status === 'Done')
                         badge-success
                 @endif
-                        ">Driver status - {{$order->truckDriver_status}}</span>
-            </h5>
+                        ">{{$order->truckDriver_status}}</span>
+                </h5>
             @endif
         </div>
     </div>
@@ -237,21 +237,27 @@
                             </form>
                         </li>
                         <li class="nav-item">
-                            <form method="POST" action="{{route('orders.stopDriving', $order)}}"
-                                  class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">
-                                @csrf
-                            <button onclick="return confirm('Is this order fully delivered?')"
-                                    type="submit"
-                                    class="button-without-style">
-                                <i class="nav-icon fas fa-stop-circle text-left"></i>
-                                <p class="brand-text"> Finish Driving</p>
+{{--                            <form method="POST" action="{{route('orders.stopDriving', $order)}}"--}}
+{{--                                  class="nav-link active btn text-left bg-danger" style="margin-bottom: 0px">--}}
+{{--                                @csrf--}}
+{{--                                <button onclick="return confirm('Is this order fully delivered?')"--}}
+{{--                                        type="submit"--}}
+{{--                                        class="button-without-style">--}}
+{{--                                    <i class="nav-icon fas fa-stop-circle text-left"></i>--}}
+{{--                                    <p class="brand-text"> Finish Driving</p>--}}
+{{--                                </button>--}}
+{{--                            </form>--}}
+                            <button type="button" class="far fa-stop-circle btn btn-danger btn-block text-left"
+                                    data-toggle="modal"
+                                    data-target="#finishOrder">
+                                Finish Order
                             </button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    @endif
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+        @endif
     @endif
     <li class="nav-item">
         <div class="nav-item">
