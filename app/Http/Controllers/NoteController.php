@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Order;
 use App\Models\TruckDriver;
+use App\Providers\NotePriorityChange;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,9 +25,9 @@ class NoteController extends Controller
         $notes = Note::all();
 
         //update priority of note, loop through the notes
-        //to see if the priority should be updated
+        //and let an eventlistener look if priority should be changed
         foreach($notes as $note) {
-            $note->updatePriority();
+            event(new NotePriorityChange($note));
         }
 
         //different note collections for different roles, get the

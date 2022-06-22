@@ -24,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
             AdminHold::class,
             InProduction::class,
         ],
+        NotePriorityChange::class => [
+            PriorityErrorNote::class,
+        ]
     ];
 
     /**
