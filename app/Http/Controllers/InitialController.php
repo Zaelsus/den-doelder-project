@@ -53,7 +53,7 @@ class InitialController extends Controller
      * @param  \App\Models\Initial  $initial
      * @return \Illuminate\Http\Response
      */
-    public function show(initial $initial)
+    public function show(Initial $initial)
     {
         $order = $initial->order;
         return view('initialCheck.show', compact('order','initial'));
