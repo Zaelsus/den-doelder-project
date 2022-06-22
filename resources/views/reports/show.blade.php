@@ -37,42 +37,69 @@
     <div id="productionTimes" class="invisibleSelection">
         @if($orderTime !== [])
             @foreach($orders as $order)
-                <h2><span class="badge badge-pill badge-warning">Order {{$order->order_number}}</h2>
-                <div style="padding-left: 1rem">
-                    <p><strong>Elapsed Time: {{$orderTime[$order->id]->format('%h:%I:%S')}}</strong></p>
-                    <p>Number of Stoppages: {{$stoppageNumber[$order->id]}}</p>
-                    <p>Total Stoppages: {{$stoppageTotalTime[$order->id]->format('%h:%I:%S')}}</p>
-                    <?php
-                    $seconds = (int)$stoppageTotalTime[$order->id]->format('%S') / $stoppageNumber[$order->id];
-                    $minutes = 0;
-                    $hours = 0;
-                    if ($seconds >= 60) {
-                        $minutes = $seconds / 60;
-                        $seconds = $seconds - ($minutes * 60);
-                        if ($minutes >= 60) {
-                            $hours = $minutes / 60;
-                            $minutes = $minutes - ($hours * 60);
+                @if($order->end_time !== null)
+                    <h2><span class="badge badge-pill badge-warning">Order {{$order->order_number}}</h2>
+                    <div style="padding-left: 1rem">
+                        <p><strong>Elapsed Time: {{$orderTime[$order->id]->format('%h:%I:%S')}}</strong></p>
+                        <p>Number of Stoppages: {{$stoppageNumber[$order->id]}}</p>
+                        <p>Total Stoppages: {{$stoppageTotalTime[$order->id]->format('%h:%I:%S')}}</p>
+                        {{--                        {{dd($stoppageTotalTime[$order->id]->format('%S'))}}--}}
+                        <?php
+
+                        if (((int)$stoppageTotalTime[$order->id]->format('%S')) !== 0) {
+
+
+                            $seconds = (int)$stoppageTotalTime[$order->id]->format('%S') / $stoppageNumber[$order->id];
+                            $minutes = 0;
+                            $hours = 0;
+                            if ($seconds >= 60) {
+                                $minutes = $seconds / 60;
+                                $seconds = $seconds - ($minutes * 60);
+                                if ($minutes >= 60) {
+                                    $hours = $minutes / 60;
+                                    $minutes = $minutes - ($hours * 60);
+                                }
+                            }
+                            $average = '';
+                            if ($hours !== 0) {
+                                $average = $hours . 'hours, ';
+                            }
+                            if ($minutes !== 0) {
+                                $average = $average . $minutes . 'minutes, ';
+                            }
+                            $average = $average . $seconds . ' seconds';
                         }
-                    }
-                    $average = '';
-                    if ($hours !== 0) {
-                        $average = $hours . 'hours, ';
-                    }
-                    if ($minutes !== 0) {
-                        $average = $average . $minutes . 'minutes, ';
-                    }
-                    $average = $average . $seconds . ' seconds';
-                    ?>
-                    <p>Average Stoppage
-                        Length: {{$average}}</p>
-                </div>
+                        ?>
+                        @if(isset($average))
+                            <p>Average Stoppage
+                                Length: {{$average}}</p>
+                        @else
+                            <p>Average Stoppage
+                                Length: 0</p>
+                        @endif
+                    </div>
+                @endif
             @endforeach
         @else
             <h2><span class="badge badge-pill badge-warning">No Info to Display!</span></h2>
         @endif
     </div>
     <div id="transitionTimes" class="invisibleSelection">
-        <p>Transition Times</p>
+        @if($transitionTime === null)
+            <h2><span class="badge badge-pill badge-warning">No Transition Times to Display!</span></h2>
+        @else
+            @for($x = 0; $x < (sizeof($orders) - 1); $x += 1)
+                @if($orders[$x]->end_time !== null)
+                    <h2><span class="badge badge-pill badge-warning">Transition at {{$order->end_time}}</h2>
+                    <div style="padding-left: 1rem">
+                        <p><strong></strong>From <strong>Order {{$orders[$x]->order_number}}</strong> to
+                            <strong>Order {{$orders[$x+1]->order_number}}</strong></p>
+                        <p><strong></strong>Transition Time: {{$transitionTime[$orders[$x]->id]->format('%h:%I:%S')}}
+                        </p>
+                    </div>
+                @endif
+            @endfor
+        @endif
     </div>
     <div id="hourlyReports" class="invisibleSelection">
         <section class="section">

@@ -60,11 +60,12 @@ class ReportController extends Controller
         $orderTime = $this->calculateOrderTime($orders);
         $hourlyReports = $this->findHourlyReports($machine);
         $stoppageNumber = $this->findStoppageNumber($orders);
-        $stoppageTotalTime = null;
+//        $stoppageTotalTime = null;
         foreach($orders as $order) {
-            $totalStoppageTime = $order->calculateTotalStoppageTime();
-            $stoppageTotalTime[$order->id] = $totalStoppageTime;
+            $stoppageTotalTime[$order->id] = $order->calculateTotalStoppageTime();
+//             = $totalStoppageTime;
         }
+        $transitionTime = $this->calculateTransitionTime($orders);
 //        dd($stoppageTotalTime);
         return view('reports.show', compact(
             'machine',
@@ -75,6 +76,7 @@ class ReportController extends Controller
             'orderTime',
             'stoppageNumber',
             'stoppageTotalTime',
+            'transitionTime'
         ));
     }
 
@@ -206,24 +208,48 @@ class ReportController extends Controller
         return $stoppages;
     }
 
-    private function calculateTotalStoppageTime($orders, $waitTimes)
-    {
-        $stoppageTotalTime = [];
-        $interval = new \DateTime();
-        $gato = new \DateTime();
-        foreach($orders as $order) {
-            $notes = $order->notes;
+//    /**
+//     * Calculates the stoppage time per order
+//     * @param $orders
+//     * @param $waitTimes
+//     * @return array
+//     */
+//    private function calculateTotalStoppageTime($orders, $waitTimes): array
+//    {
+//        $stoppageTotalTime = [];
+//        $interval = new \DateTime();
+//        $gato = new \DateTime();
+//        foreach($orders as $order) {
+//            $notes = $order->notes;
 //            dd($waitTimes);
-            $immutable = CarbonImmutable::now();
-            $timeCollector = new DateInterval('P0S');
-            foreach($notes as $note) {
-                if($note->label === "Fix") {
-                    $timeCollector += $waitTimes[$note->id];
-                }
+//            $immutable = CarbonImmutable::now();
+//            $timeCollector = new DateInterval('P0S');
+//            foreach($notes as $note) {
+//                if($note->label === "Fix") {
+//                    $timeCollector += $waitTimes[$note->id];
+//                }
+//            }
+//            $stoppageTotalTime[$order->id] = $timeCollector;
+//        }
+//        dd($stoppageTotalTime);
+//        return $stoppageTotalTime;
+//    }
+
+    private function calculateTransitionTime($orders)
+    {
+        $transitionTime = [];
+        if(sizeof($orders) > 1) {
+            for($x = 0; $x < (sizeof($orders) - 1); $x += 1) {
+                $time1 = new \DateTime($orders[$x]->end_time);
+                $time2 = new \DateTime($orders[$x + 1]->start_time);
+                $time = $time1->diff($time2);
+                $transitionTime[$orders[$x]->id] = $time;
+                // Calculate the difference between order 0 and order 1
+                // Save that to the array in index order[0]->id
             }
-            $stoppageTotalTime[$order->id] = $timeCollector;
+        } else {
+            return null;
         }
-        dd($stoppageTotalTime);
-        return $stoppageTotalTime;
+        return $transitionTime;
     }
 }
