@@ -301,15 +301,6 @@
             </li>
         @endif
     @else
-        <li class="nav-item">
-            <div class="nav-item">
-                <a href="{{ route('machines.show', ['machine' =>Auth::user()->machine]) }}"
-                   class="nav-link active btn bg-gray-dark text-left">
-                    <i class="nav-icon fas fa-clipboard-list"></i>
-                    <p>Orders</p>
-                </a>
-            </div>
-        </li>
     @endif
     <li class="nav-item">
         <div class="nav-item">

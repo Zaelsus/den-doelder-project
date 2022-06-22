@@ -83,7 +83,7 @@
                             data-target="#startProduction">
                         Start
                     </button>
-                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production' || $order->status === 'Done') && Auth::user()->role === 'Driver' && ($order->truckDriver_status === null || $order->truckDriver_status === 'Paused') && App\Models\TruckDriver::getDrivingOrder($order->machine) === null)
+                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production' || $order->status === 'Done') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && App\Models\TruckDriver::getDrivingOrder($order->machine) === null)
                     <form method="POST" action="{{route('orders.startDriving', $order)}}">
                         @csrf
                         <button onclick="return confirm('Start driving for order {{$order->order_number}}?')"
@@ -91,10 +91,11 @@
                                 type="submit"> Start Driving
                         </button>
                     </form>
-                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production' || $order->status === 'Delivered') && Auth::user()->role === 'Driver' && $order->truckDriver_status === 'Paused' && App\Models\TruckDriver::findDriverOrder() === null)
+                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production' || $order->status === 'Done') && Auth::user()->role === 'Driver' && $order->truckDriver_status === 'Paused' && App\Models\TruckDriver::getDrivingOrder($order->machine) === null)
                     <form method="POST" action="{{route('orders.startDriving', $order)}}">
                         @csrf
                         <button onclick="return confirm('Restart driving for order {{$order->order_number}}?')"
+                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
                                 class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
                                 type="submit"> Restart Driving
                         </button>
