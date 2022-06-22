@@ -24,6 +24,7 @@
                                 <th scope="col">Action</th>
                                 <th scope="col">Abnormality</th>
                                 <th scope="col">Approved</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -32,12 +33,18 @@
                                     <td>{{ $report->created_at->format('H:i') }}</td>
                                     <td>{{ $report->order->pallet->name}}</td>
                                     <td>{{ $report->order->order_number }}</td>
-                                    <td style="text-align:center">{{ $report->def_id}}</td>
+                                    <td>{{ $report->def_id}}</td>
                                     <td>{{ $report->extra_info }}</td>
                                     <td>{{ $report->action === null ? 'n/a' : $report->action }}</td>
                                     <td>{{$report->abnormality === null ? 'n/a' : $report->abnormality}}</td>
                                     <td>
                                         <i class="icon fas {{ $report->approved === 1 ? 'fa-check fa-2x has-text-success' : 'fa-xmark fa-2x has-text-danger' }}"></i>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-info btn-lg float-right"
+                                                onclick=window.location.href="{{route('hourlyReports.edit', $report)}}">
+                                            Edit
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

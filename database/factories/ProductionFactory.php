@@ -38,10 +38,7 @@ class ProductionFactory extends Factory
             $i++;
             if($check) {
                 return [
-                    'onderdek'=>$this->faker->randomElement(['brug', 'rondloper', 'kruisdek', 'afmetingen', 'overstek']),
-                    'order_id' => $order_id,
-                    'strappenTick'=>$this->faker->randomElement(['strappen', 'markeren']),
-                    'spijkerTick'=>$this->faker->randomElement(['BD', 'TD','OD']),
+                    'order_id' => $order_id
                 ];
             }
         }

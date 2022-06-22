@@ -25,7 +25,6 @@ class CreateHourlyReportsTable extends Migration
             $table->text('action')->nullable();
             $table->text('abnormality')->nullable();
             $table->boolean('approved')->default(false);
-            $table->string('role')->nullable();
             $table->timestamps();
         });
     }

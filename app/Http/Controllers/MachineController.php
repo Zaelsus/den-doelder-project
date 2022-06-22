@@ -42,10 +42,10 @@ class MachineController extends Controller
         //will get the current order in production (or paused) or null if there isnt
         $order = Order::getOrder($machine);
         //checks the role and loads the correct view
-        if (Auth::user()->role === 'Production' ) {
+        if (Auth::user()->role === 'Production') {
             $orders = Order::where('machine_id', $machine->id)
                 ->where('status', 'Production Pending')
-                ->where('truckDriver_status','Driving')
+//                ->where('truckDriver_status','Driving')
                 ->orderBy('start_date', 'desc')->get();
             // if there isnt any order in production
             if ($order === null) {
@@ -53,21 +53,7 @@ class MachineController extends Controller
                 return view('orders.index', compact('orders','previousMachine'));
             }
             return view('orders.show', compact('order'));
-        } else if (Auth::user()->role === 'Driver' ) {
-            $orders = Order::where('machine_id', $machine->id)
-                ->where(function($query) {
-                    $query->where('status', 'Production Pending')
-                        ->orWhere('status', 'In Production')
-                    ->orWhere('status', 'Paused');
-                })
-                ->orderBy('status', 'asc')
-                ->orderBy('start_date', 'desc')->get();
-            $previousMachine=null;
-            // if there isnt any order in production
-            if ($order === null) {
-                return view('orders.index', compact('orders','previousMachine'));
-            }
-            return view('orders.index', compact('orders','previousMachine'));
+
         }
         //can add here for truck drivers as well according to their conditions
     }

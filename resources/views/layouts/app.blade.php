@@ -17,7 +17,6 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-@extends(isset($order) ? 'modals.orders':'blank')
 @extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
 <div class="wrapper">
     <!-- Main Header -->
@@ -96,9 +95,7 @@
     </nav>
 
     <!-- Left side column. contains the logo and sidebar -->
-    @include('layouts.sidebar')
-
-
+@include('layouts.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

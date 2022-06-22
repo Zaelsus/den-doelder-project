@@ -1,41 +1,32 @@
-{{--@extends('modals.orders')--}}
-@extends('modals.notes')
 @extends('layouts.app')
 @section('content')
-    <!-- Button trigger modal -->
-
     <br>
     <div class="container-fluid">
         <div class="card">
             <div class="card-header bg-gradient-olive">
-                <h3 class="text-center">Overview Notes of Current Order</h3>
+                <h3 class="text-center">Overview Notes</h3>
             </div>
             <div class="card-body">
-                @if( Auth::user()->role === 'Administrator' )
                 <button id="overviewButton" class="btn btn-lg bg-gradient-olive opacity-70"
                         onclick="changeButton({{$order->order_number}}, '{{ $order->machine->name }}')">
                     Notes for current machine</button>
                 <br>
                 <br>
-                @endif
                 <table class="table table-bordered table-hover" id="myTable">
                     <thead class="bg-gradient-olive opacity-70">
                     <tr>
-                        <th scope="col" onclick="sortTableNumber(0)">Order</th>
+                        <th scope="col" onclick="sortTableNumber(0)">Order Number</th>
                         <th scope="col">Machine</th>
                         <th scope="col">Title</th>
                         <th scope="col">Content</th>
                         <th scope="col">Labels</th>
+                        <th scope="col">Priority</th>
                         <th scope="col">Created At</th>
-                        @if( Auth::user()->role === 'Administrator' )
-                        <th scope="col">Role</th>
-                        @endif
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($notes as $note)
-                        @if($note->label !== 'Lunch Break' && $note->label !== 'End of Shift')
                         <tr>
                             <td>
                                 {{ $note->order->order_number}}
@@ -43,58 +34,51 @@
                             <td>
                                 {{ $note->order->machine->name }}
                             </td>
-                            <td style="width: 20%">
-                                @if ($note->label === 'Fix')
-                                Fix for: "{{ $note->title }}"
-                                @else
-                                {{$note->title}}
-                                @endif
-                            </td>
-                            <td style="width: 20%">
+                            <td style="width: 20%">{{ $note->title}}</td>
+                            <td style="width: 30%">
                                 <details>
                                     <summary>{{ substr($note->content, 0, 40) }}</summary>
-                                    <p>{{ substr($note->content, 40) }}</p>
+                                    <p>{{ substr($note->content, 40) }} <b>Fix: </b>{{ $note->fix }}</p>
                                 </details>
                             </td>
                             <td>
-                                <span class="badge badge-danger">{{$note->fix}}</span>
-                                <span @if($note->label === 'Fix') class="badge badge-success" @else class="badge badge-info" @endif
-                                >{{ strtok($note->label, '(') }}</span>
+                                <span @if ($note->label==='Error')
+                                      class="badge badge-danger"
+                                      @elseif ($note->label==='Fix')
+                                      class="badge badge-success"
+                                      @elseif ($note->label === 'Other')
+                                      class="badge badge-info"
+                                      @elseif ($note->label === 'stoppage')
+                                      class="badge badge-danger"
+                                @endif >{{$note->label}}</span>
+                            </td>
+                            <td>
+                                <span  @if ($note->priority==='low')
+                                       class="badge bg-yellow"
+                                       @elseif ($note->priority==='medium')
+                                       class="badge bg-orange"
+                                       @elseif ($note->priority === 'high')
+                                       class="badge bg-red"
+                                @endif >{{ $note->priority }}
+                                </span>
                             </td>
                             <td>{{ $note->created_at }}</td>
-                            @if ( Auth::user()->role === 'Administrator')
-                            <td>
-                                {{$note->creator}}
-                            </td>
-                                <td>
-                                    <button class="btn btn-lg bg-gradient-olive opacity-70"
-                                            style="font-size: 12pt"
-                                            onclick=window.location.href="{{route('notes.edit', $note)}}">
-                                        Edit
-                                    </button>
-                                </td>
-                            @elseif ( Auth::user()->role === 'Production' )
-                            <td style="width: 10%">
-                                @if($note->fix === 'Error!' && $note->priority === 'low')
-                                    <span class="badge badge-success">fixed</span>
-                                @elseif($note->fix === 'Error!' && $note->priority === 'high')
-                                    <span class="badge badge-danger">log fix when restart</span>
+                            <td @if ($note->label === 'stoppage') style="width: 10%" @endif>
+                                @if ($note->label === 'stoppage')
+                                    <button class="btn btn-lg bg-gradient-olive opacity-70" onclick=window.location.href="{{ route('notes.fixStoppage', $note)}}">Log fix</button>
                                 @endif
                             </td>
-                            @endif
                         </tr>
-                        @endif
                     @endforeach
                     </tbody>
                 </table>
                 <br>
                 <div class="row">
                     <div class="col-md-9">
-                            <button type="button" class="btn btn-lg bg-gradient-olive opacity-70"
-                                    data-toggle="modal"
-                                    data-target="#createNote">
-                                Create Note
-                            </button>
+                        <button class="btn btn-lg bg-gradient-olive opacity-70"
+                                onclick=window.location.href="{{route('notes.create')}}">
+                            Create Note
+                        </button>
                     </div>
                     <div id="buttonAllNotes" class="col-md-3">
 
@@ -141,5 +125,6 @@
                 }
             }
         }
+
     </script>
 @endsection
