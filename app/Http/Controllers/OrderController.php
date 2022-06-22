@@ -350,16 +350,6 @@ class OrderController extends Controller
     }
 
     /**
-     * This function calls the event listener to check if the order should change status
-     * @return void
-     */
-    public function orderEdited(Order $order)
-    {
-        $user = Auth::user();
-        event(new AlertOrderChange($user, $order));
-    }
-
-    /**
      * Show the form for editing only quantity produced
      *
      * @param \App\Models\Order $order

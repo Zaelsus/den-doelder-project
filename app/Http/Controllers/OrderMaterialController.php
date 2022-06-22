@@ -169,7 +169,6 @@ class OrderMaterialController extends Controller
         }
 
         (new OrderController)->statusChangeCheck();
-        (new OrderController)->orderEdited($order);
         return redirect(route('orders.show', $order));
     }
 

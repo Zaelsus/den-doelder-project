@@ -24,9 +24,6 @@ class EventServiceProvider extends ServiceProvider
             AdminHold::class,
             InProduction::class,
         ],
-        AlertOrderChange::class => [
-            OrderEdited::class,
-        ]
     ];
 
     /**
