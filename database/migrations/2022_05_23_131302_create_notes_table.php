@@ -15,11 +15,12 @@ class CreateNotesTable extends Migration
     {
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
+            $table->string('title')->nullable();
+            $table->text('content')->nullable();
             $table->string('label');
             $table->string('priority')->nullable();
             $table->text('fix')->nullable();
+            $table->text('fixContent')->nullable();
             $table->integer('note_rel')->nullable();
             $table->string('creator');
             $table->unsignedBigInteger('order_id');
