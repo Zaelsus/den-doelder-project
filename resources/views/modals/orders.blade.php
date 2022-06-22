@@ -30,7 +30,7 @@
     </div>
 </div>
 
-{{--Modal to start an order--}}
+{{--Modal to start production of an order--}}
 <div class="modal fade" id="startProduction" tabindex="-1" role="dialog"
      aria-labelledby="startProductionTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -62,6 +62,39 @@
                             </button>
                         </div>
                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{--Modal to start driving an order--}}
+<div class="modal fade" id="startDriving" tabindex="-1" role="dialog"
+     aria-labelledby="startDrivingTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header colour-purple">
+                <h5 class="modal-title" id="startDrivingTitle">
+                    Start Driving
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Are you sure you want to start driving the order number {{$order->order_number}}?</p>
+
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel
+                    </button>
+                </div>
+                <form method="POST" action="{{route('orders.startDriving', $order)}}">
+                    @csrf
+                    <button class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
+                            type="submit"> Start Driving
+                    </button>
                 </form>
             </div>
         </div>

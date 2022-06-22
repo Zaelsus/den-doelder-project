@@ -47,35 +47,27 @@
 {{--checking role if production worker--}}
 @if(Auth::user()->role === 'Production')
     {{--    Production Status (either 1 is in production or Paused --}}
-    @if(\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production')
+    @if($order !== null)
         <li class="nav-item">
             <div class="card bg-gray-dark" style="margin-bottom: .2rem">
-                <a href="#" class="nav-link bg-black">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Quick Actions
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview" style="display: none;">
                     @if($order->status === 'Paused')
-                        <li class="nav-item">
+                        <a class="nav-item">
                             <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
                                     data-toggle="modal"
                                     data-target="#restartProd">
                                 Restart
                             </button>
-                        </li>
+                        </a>
                     @endif
                     @if($order->status === 'In Production')
-                        <li class="nav-item">
+                        <a class="nav-item">
                             <button type="button" class="far fa-pause-circle btn btn-warning btn-block"
                                     data-toggle="modal"
                                     data-target="#pauseProd">
                                 Pause
                             </button>
-                        </li>
-                        <li class="nav-item">
+                        </a>
+                        <a class="nav-item">
                             <form method="POST"
                                   action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
                                 @csrf
@@ -84,9 +76,9 @@
                                         type="submit"> Finish Order
                                 </button>
                             </form>
-                        </li>
+                        </a>
                     @endif
-                </ul>
+
             </div>
 
             <div class="nav-item">
@@ -252,32 +244,22 @@
         @if($order->truckDriver_status === 'Driving')
             <li class="nav-item">
                 <div class="card bg-gray-dark" style="margin-bottom: .2rem">
-                    <a href="#" class="nav-link bg-black">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Quick Actions
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview" style="display: none;">
-                        <li class="nav-item">
-                            <button type="button" class="nav-link active btn text-left bg-warning"
+                        <a class="nav-item">
+                             <button type="button" class="nav-link active btn text-left bg-warning"
                                     data-toggle="modal"
                                     data-target="#pauseDriving">
                                 <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
                                 <p class="brand-text" style="color: white"> Pause Driving</p>
                             </button>
-                        </li>
-                        <li class="nav-item">
-                            <button type="button" class="nav-link active btn text-left bg-danger"
+                        </a>
+                        <a class="nav-item">
+                             <button type="button" class="nav-link active btn text-left bg-danger"
                                     data-toggle="modal"
                                     data-target="#finishDriving">
                                 <i class="nav-icon fas fa-stop-circle text-left"></i>
                                 <p class="brand-text"> Finish Driving</p>
                             </button>
-                        </li>
-
-                    </ul>
+                        </a>
                 </div>
             <li class="nav-item">
                 <div class="nav-item">
@@ -300,7 +282,6 @@
             </li>
             </li>
         @endif
-    @else
     @endif
     <li class="nav-item">
         <div class="nav-item">

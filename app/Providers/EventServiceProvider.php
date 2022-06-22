@@ -22,6 +22,10 @@ class EventServiceProvider extends ServiceProvider
             ReadyForProductionPending::class,
             InitialCheckPending::class,
             AdminHold::class,
+            InProduction::class,
+        ],
+        AlertOrderChange::class => [
+            OrderEdited::class,
         ]
     ];
 

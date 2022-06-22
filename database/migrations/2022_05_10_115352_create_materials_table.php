@@ -21,7 +21,6 @@ class CreateMaterialsTable extends Migration
                     ->on('products')
                     ->onDelete('cascade');
                 $table->string('measurements');
-                $table->string('comments')->nullable;
                 $table->timestamps();
         });
     }

@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Pallet;
 use App\Models\Product;
 use App\Models\ProductLocation;
+use App\Providers\AlertOrderChange;
 use App\Providers\AutomaticStatusChange;
 
 use Illuminate\Http\Request;
@@ -35,10 +36,10 @@ class OrderController extends Controller
     {
         //looking about adding another order by accoridng to status as well as scheduled production
         $orders = Order::orderBy('machine_id', 'desc')->get();
-        $previousMachine=null;
+        $previousMachine = null;
         //automatic status change
         $this->statusChangeCheck();
-        return view('orders.index', compact('orders','previousMachine'));
+        return view('orders.index', compact('orders', 'previousMachine'));
     }
 
     /**
@@ -48,7 +49,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-      //
+        //
     }
 
     /**
@@ -59,7 +60,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-      //
+        //
     }
 
     /**
@@ -70,25 +71,25 @@ class OrderController extends Controller
     public function createStepOne(Request $request)
     {
         $pallets = Pallet::all();
-        $machines = Machine::where('name','!=','None')->get();
-        $nullMachine = Machine::where('name','None')->first();
+        $machines = Machine::where('name', '!=', 'None')->get();
+        $nullMachine = Machine::where('name', 'None')->first();
         $order = $request->session()->get('order');
 
-        return view('orders.create-step-one',compact('order','pallets','machines','nullMachine'));
+        return view('orders.create-step-one', compact('order', 'pallets', 'machines', 'nullMachine'));
     }
 
     /**
      * Post Request to store step1 info in session
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function postCreateStepOne(Request $request)
     {
         $validatedData = $this->validateOrder($request);
-            $order = new Order();
-            $order->fill($validatedData);
-            $request->session()->put('order', $order);
+        $order = new Order();
+        $order->fill($validatedData);
+        $request->session()->put('order', $order);
         $order->save();
         return redirect()->route('orders.create.step.two');
     }
@@ -99,21 +100,21 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function editStepOne(Request $request,Order $order)
+    public function editStepOne(Request $request, Order $order)
     {
         $pallets = Pallet::all();
         $machines = Machine::all();
-        return view('orders.edit-step-one', compact('order','pallets','machines'));
+        return view('orders.edit-step-one', compact('order', 'pallets', 'machines'));
 
     }
 
     /**
      * Post Request to update step1 info in session
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function updateEditStepOne(Request $request,Order $order)
+    public function updateEditStepOne(Request $request, Order $order)
     {
         $order->update($this->validateOrder($request));
         $request->session()->put('order', $order);
@@ -132,34 +133,33 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $productLocationsDetails = $this->getMaterialsLocation($order);
-        $materialLocationsList=$productLocationsDetails['materialLocationsList'];
-        $materialsLocations=$productLocationsDetails['materialsLocations'];
+        $materialLocationsList = $productLocationsDetails['materialLocationsList'];
+        $materialsLocations = $productLocationsDetails['materialsLocations'];
         //automatic status change
         $this->statusChangeCheck();
-        $driving = $this->testForDriving($order);
-
-        return view('orders.show', compact('order', 'materialLocationsList','materialsLocations', 'driving'));
+//        $driving = $this->testForDriving($order);
+        return view('orders.show', compact('order', 'materialLocationsList', 'materialsLocations'));
 
     }
 
-    /**
-     * Function that tests if a driver is driving for an order on the same machine
-     *
-     * @param $order
-     * @return bool
-     */
-    public function testForDriving($order): bool
-    {
-        $orders = $order->machine->orders;
-
-        foreach($orders as $order) {
-            if($order->truckDriver_status === "Driving") {
-                return true;
-            }
-        }
-
-        return false;
-    }
+//    /**
+//     * Function that tests if a driver is driving for an order on the same machine
+//     *
+//     * @param $order
+//     * @return bool
+//     */
+//    public function testForDriving($order): bool
+//    {
+//        $orders = $order->machine->orders;
+//
+//        foreach ($orders as $order) {
+//            if ($order->truckDriver_status === "Driving") {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
 
     /**
@@ -171,20 +171,20 @@ class OrderController extends Controller
     public function getMaterialsLocation(Order $order)
     {
         $materials = $order->orderMaterials;
-        $materialsLocations =[];
-        $materialLocationsList=[];
-        foreach($materials as $material) {
+        $materialsLocations = [];
+        $materialLocationsList = [];
+        foreach ($materials as $material) {
             $materialId = $material->material_id;
             $productlocations = productLocation::where('product_id', $materialId)->get();
-            $materialLocationsList[$materialId]=$productlocations;
+            $materialLocationsList[$materialId] = $productlocations;
             foreach ($productlocations as $productlocation) {
                 //location name for each location for each material
-                $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'name'] = $productlocation->location->name;
+                $materialsLocations[$materialId . '_' . $productlocation->location_id . '_' . 'name'] = $productlocation->location->name;
                 //quantity in storage for each material in each location
-                $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'quantity'] = $productlocation->Quantity;
+                $materialsLocations[$materialId . '_' . $productlocation->location_id . '_' . 'quantity'] = $productlocation->Quantity;
             }
         }
-        return ['materialsLocations' => $materialsLocations,'materialLocationsList'=>$materialLocationsList];
+        return ['materialsLocations' => $materialsLocations, 'materialLocationsList' => $materialLocationsList];
     }
 
 
@@ -197,12 +197,12 @@ class OrderController extends Controller
     public function getPalletLocation(Order $order)
     {
         $productId = $order->pallet->product_id;
-        $productLocations = ProductLocation::where('product_id',$productId)->get();
-        $locationsAvailability=[];
-        foreach($productLocations as $productLocation){
-            $locationsAvailability[$productLocation->location_id]=$productLocation->location->available_storage_space;
+        $productLocations = ProductLocation::where('product_id', $productId)->get();
+        $locationsAvailability = [];
+        foreach ($productLocations as $productLocation) {
+            $locationsAvailability[$productLocation->location_id] = $productLocation->location->available_storage_space;
         }
-        return ['locationsAvailability'=>$locationsAvailability,'productLocations'=>$productLocations];
+        return ['locationsAvailability' => $locationsAvailability, 'productLocations' => $productLocations];
     }
 
     /**
@@ -210,7 +210,7 @@ class OrderController extends Controller
      */
     public static function startProduction(Order $order)
     {
-        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused')) {
+        if ($order->machine !== null && $order->start_date !== null && ($order->status === 'Production Pending' || $order->status === 'Paused')) {
             if ($order->status === 'Production Pending') {
                 $order->update(['status' => 'In Production', 'start_time' => date('Y-m-d H:i:s')]);
                 return redirect(route('orders.show', $order));
@@ -222,22 +222,25 @@ class OrderController extends Controller
             return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
         }
     }
-
+    /**
+     * changes the truck driver status of the current order to driving
+     */
     public static function startDriving(Order $order)
     {
-        if($order->machine !== null && $order->start_date !== null && ($order->status==='Production Pending'||$order->status==='Paused'|| $order->status === 'In Production')) {
+        if ($order->machine !== null && $order->start_date !== null && ($order->status !== 'Admin Hold'))
+        {
             $order->update(['truckDriver_status' => 'Driving']);
         }
-            return redirect(route('orders.show', $order));
+        return redirect(route('orders.show', $order));
     }
 
     /**
      * changes the status of the current order to done
      */
-    public static function stopProduction(Order $order ,Machine $machine)
+    public static function stopProduction(Order $order, Machine $machine)
     {
         $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
-        return redirect(route('machines.show',compact('machine')));
+        return redirect(route('machines.show', compact('machine')));
     }
 
     /**
@@ -269,7 +272,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-       //
+        //
     }
 
     /**
@@ -292,22 +295,20 @@ class OrderController extends Controller
     public function validateOrder(Request $request): array
     {
         $validatedAtributes = $request->validate([
-            'order_number'=>'required',
-            'pallet_id'=>'required',
-            'machine_id'=>'required',
-            'quantity_production'=>'required|integer|min:1',
-            'start_date'=>'nullable|date|after:yesterday',
-            'site_location'=>'required',
-            'production_instructions'=>'nullable',
-            'type_order'=>'boolean',
-            'client_name' =>'',
-            'status'=>'string',
+            'order_number' => 'required',
+            'pallet_id' => 'required',
+            'machine_id' => 'required',
+            'quantity_production' => 'required|integer|min:1',
+            'start_date' => 'nullable|date|after:yesterday',
+            'site_location' => 'required',
+            'production_instructions' => 'nullable',
+            'type_order' => 'boolean',
+            'client_name' => '',
+            'status' => 'string',
         ]);
 
         return $validatedAtributes;
     }
-
-
 
 
     /**
@@ -341,10 +342,21 @@ class OrderController extends Controller
      * This function calls the event listener to check if the order should change status
      * @return void
      */
-    public function statusChangeCheck(){
+    public function statusChangeCheck()
+    {
         $orders = Order::orderBy('machine_id', 'desc')->get();
         $user = Auth::user();
-        event(new AutomaticStatusChange($user,$orders));
+        event(new AutomaticStatusChange($user, $orders));
+    }
+
+    /**
+     * This function calls the event listener to check if the order should change status
+     * @return void
+     */
+    public function orderEdited(Order $order)
+    {
+        $user = Auth::user();
+        event(new AlertOrderChange($user, $order));
     }
 
     /**
@@ -372,14 +384,11 @@ class OrderController extends Controller
         $validated = $request->validate([
             'add_quantity' => 'required|integer',
         ]);
-        try
-        {
+        try {
             $order->update($validated);
             $order->addProduced();
             return redirect(route('orders.editquantity', $order));
-        }
-        catch (\Exception $exception)
-        {
+        } catch (\Exception $exception) {
             return redirect(route('orders.editquantity', $order))->with('error', 'The value is higher than the quantity to be produced');
 
         }
@@ -397,11 +406,12 @@ class OrderController extends Controller
 //        $orders = Order::where('status', 'Production Pending', 'In Production')->orderBy('machine_id', 'desc')->get();
         $orders = 1;
         dd($orders);
-        $previousMachine=null;
-        return view('orders.index', compact('orders','previousMachine'));
+        $previousMachine = null;
+        return view('orders.index', compact('orders', 'previousMachine'));
     }
 
-    public function pauseDriving(Order $order) {
+    public function pauseDriving(Order $order)
+    {
 //        dd($order);
 //        dd($order->machine);
         $order->update(['truckDriver_status' => 'Paused']);

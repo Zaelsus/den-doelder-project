@@ -18,8 +18,6 @@ class MaterialFactory extends Factory
         $product = Material::addProduct();
         return [
             'product_id'=>$product->id,
-            'measurements'=>$this->faker->randomElement(['1000 X 48 X 98', '1000 X 100 X 22']),
-            'comments'=>$this->faker->randomElement(['BC', 'INC', 'met poortjes','']),
         ];
     }
 }

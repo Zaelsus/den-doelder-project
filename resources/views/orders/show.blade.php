@@ -73,7 +73,6 @@
                 </div>
             </div>
             <div class="icon">
-                {{--                {{dd($order->machine->orders)}}--}}
                 <i class="fas fa-pallet"></i>
             </div>
             <div>
@@ -81,16 +80,16 @@
                     <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
                             data-toggle="modal"
                             data-target="#startProduction">
-                        Start
+                        Start Production
                     </button>
-                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production' || $order->status === 'Done') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && App\Models\TruckDriver::getDrivingOrder($order->machine) === null)
-                    <form method="POST" action="{{route('orders.startDriving', $order)}}">
-                        @csrf
-                        <button onclick="return confirm('Start driving for order {{$order->order_number}}?')"
-                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
-                                type="submit"> Start Driving
-                        </button>
-                    </form>
+                @elseif(($order->status !== 'Admin Hold') && Auth::user()->role === 'Driver' && ($order->truckDriver_status === null ||
+                          $order->truckDriver_status === 'Paused') &&
+                           App\Models\TruckDriver::getDrivingOrder(Auth::user()->machine) === null)
+                    <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                            data-toggle="modal"
+                            data-target="#startDriving">
+                        Start Driving
+                    </button>
                 @elseif(($order->status === 'Production Pending' || $order->status === 'In Production' || $order->status === 'Done') && Auth::user()->role === 'Driver' && $order->truckDriver_status === 'Paused' && App\Models\TruckDriver::getDrivingOrder($order->machine) === null)
                     <form method="POST" action="{{route('orders.startDriving', $order)}}">
                         @csrf
@@ -100,7 +99,6 @@
                                 type="submit"> Restart Driving
                         </button>
                     </form>
-
                 @elseif(Auth::user()->role === 'Administrator' && $order->selected === 0)
                     <form class="text-center" method="POST" action="{{route('orders.selectOrder', $order)}}">
                         @csrf
@@ -144,12 +142,6 @@
                         <th>Measurements:</th>
                         <td> {{$orderMaterial->material->measurements}}</td>
                     </tr>
-                    @if($orderMaterial->material->comments !== "")
-                        <tr>
-                            <th>Comments:</th>
-                            <td> {{$orderMaterial->material->comments}}</td>
-                        </tr>
-                    @endif
                     <tr>
                         <th> Quantity Needed:</th>
                         <td> {{$orderMaterial->total_quantity}}</td>
