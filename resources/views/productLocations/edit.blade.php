@@ -15,12 +15,30 @@
                         @method('PUT')
 
                         <div class="mb-3 card-header">
-                            <h3>Change Location</h3>
+                            <h3>Update Location Quantity</h3>
                         </div>
                         <div class="card-body">
+                            <div class="mb-3" hidden>
+                                <label>Location:</label>
+                                <input name="location_id"
+                                       class="form-control" value="{{$palletLocation->id}}" readonly>
+                                @error('location_id')
+                                <p class="text-red">{{ $message }}</p>
+                                @enderror
+                            </div>
                             <div class="mb-3">
                                 <label>Location:</label>
-                                <div>{{$palletLocation->name}}</div>
+                                <input class="form-control" value="{{$palletLocation->name}}" readonly>
+                                @error('location_id')
+                                <p class="text-red">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="mb-3" hidden>
+                                <label >Pallet ID:</label>
+                                <input type="text" name="product_id" class="form-control" value="{{$order->pallet_id}}" readonly>
+                                @error('product_id')
+                                <p class="text-red">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="Quantity">Quantity: </label>
@@ -29,7 +47,6 @@
                                            name="Quantity"
                                            placeholder="{{$palletQuantity->Quantity}}"  value="" required>
                                 </div>
-
                                 @error('Quantity')
                                 <p class="text-red">{{ $message }}</p>
                                 @enderror
@@ -40,7 +57,7 @@
                             <br>
                             <div class="float-left">
                                 <button type="reset" class="btn btn-warning btn-lg">Reset</button>
-                                <a type="button" href="{{ route('productLocations.show', $order) }}" class="btn btn-light btn-lg">Cancel</a>
+                                <a type="button" href="{{ route('productLocations.list', $order) }}" class="btn btn-light btn-lg">Cancel</a>
                             </div>
                         </div>
                     </form>

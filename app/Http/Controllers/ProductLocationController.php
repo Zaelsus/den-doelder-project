@@ -71,11 +71,7 @@ class ProductLocationController extends Controller
      */
     public function edit(Order $order)
     {
-//        dd($order);
-        $productLocationDetails = $this->getPallettLocation($order);
-
-
-        return view('productLocations.edit', compact('productLocation', 'orderId'));
+        //
     }
 
     /**
@@ -108,9 +104,11 @@ class ProductLocationController extends Controller
     }
 
     public function validateLocationChange(Request $request){
+
         $validatedAtributes = $request->validate([
-            ''
-            'Quantity'=>'required',
+            'location_id' => 'required|integer',
+            'product_id' => 'required|integer',
+            'Quantity'=> 'required|integer|min:1',
         ]);
 
         return $validatedAtributes;
@@ -153,9 +151,7 @@ class ProductLocationController extends Controller
      */
     public function addLocation(Order $order)
     {
-        $locations = Location::where('type', 'Pallets')->get();
-//        dd($locations);
-//        $palletQuantity = ProductLocation::where('product_id', $order->pallet_id)->where('location_id', $locationId)->first();
+        $locations = Location::where('type', 'Pallets')->where()->get();
 
         return view('productLocations.create', compact('locations', 'order' ));
     }
@@ -169,8 +165,7 @@ class ProductLocationController extends Controller
      */
     public function storeLocation(Request $request, Order $order)
     {
-        $palletQuantity = ProductLocation::all();
-        $palletQuantity->create($this->validateLocationChange($request));
+        ProductLocation::create($this->validateLocationChange($request));
 
         return redirect(route('productLocations.list', $order));
 
