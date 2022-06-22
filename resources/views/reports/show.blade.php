@@ -90,7 +90,7 @@
         @else
             @for($x = 0; $x < (sizeof($orders) - 1); $x += 1)
                 @if($orders[$x]->end_time !== null)
-                    <h2><span class="badge badge-pill badge-warning">Transition at {{$order->end_time}}</h2>
+                    <h2><span class="badge badge-pill badge-warning">Transition at {{$orders[$x]->end_time}} to {{$orders[$x+1]->start_time}}</h2>
                     <div style="padding-left: 1rem">
                         <p><strong></strong>From <strong>Order {{$orders[$x]->order_number}}</strong> to
                             <strong>Order {{$orders[$x+1]->order_number}}</strong></p>
