@@ -182,4 +182,31 @@ class Order extends Model
         }
 
     }
+
+    public function calculateNoteStoppageIntervals()
+    {
+        $waitTime = [];
+        foreach($this->notes as $note){
+            $noteError = Note::find($note->note_rel);
+            if (is_null($noteError)) {
+                continue;
+            }
+            $time1 = new \DateTime($note->created_at);
+            $time2 = new \DateTime($noteError->created_at);
+            $time = $time1->diff($time2);
+            $waitTime[$note->id] = $time;
+        }
+        return $waitTime;
+    }
+
+    public function calculateTotalStoppageTime()
+    {
+        $waitTimes = $this->calculateNoteStoppageIntervals();
+        $time1 = new \DateTime();
+        $time2 = new \DateTime();
+        foreach($waitTimes as $waitTime) {
+            $time1->add($waitTime);
+        }
+        return $time1->diff($time2);
+    }
 }

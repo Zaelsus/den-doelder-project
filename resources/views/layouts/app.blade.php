@@ -18,7 +18,8 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
 @extends(isset($order) ? 'modals.orders':'blank')
-@extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
+@extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.truck':'blank')
+@extends(Auth::user()->role !=='Administrator' ? 'modals.machines':'blank')
 <div class="wrapper">
     <!-- Main Header -->
     <nav class="main-header navbar navbar-expand navbar-light colour-purple">
@@ -36,7 +37,7 @@
                     <span class="d-none d-md-inline btn colour-orange">Change Production Line</span>
                 </a>
                 <ul class="dropdown-menu  bg-transparent text-center">
-                    @if(Auth::user()->role === 'Production')
+                    @if(Auth::user()->role !== 'Administrator')
                         @php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->where('name','!=','None')->get();@endphp
                         @foreach($machines as $machine)
                             <li class="align-content-center">
@@ -107,15 +108,6 @@
         </section>
     </div>
 
-    {{--    Removed, but code saved if we need it later--}}
-    {{--    <!-- Main Footer -->--}}
-    {{--    <footer class="main-footer bg-blue">--}}
-    {{--        <div class="float-right d-none d-sm-block">--}}
-    {{--            <b>Version</b> 3.0.5--}}
-    {{--        </div>--}}
-    {{--        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights--}}
-    {{--        reserved.--}}
-    {{--    </footer>--}}
 </div>
 
 <script src="{{ mix('js/app.js') }}" defer></script>

@@ -2,11 +2,26 @@
 
 namespace Database\Seeders;
 
+use App\Models\Material;
+use App\Models\Pallet;
 use App\Models\PalletMaterial;
 use Illuminate\Database\Seeder;
 
 class PalletMaterialSeeder extends Seeder
 {
+    use CsvReadable;
+
+    /**
+     * Construct a new ResultSeeder
+     */
+    public function __construct()
+    {
+        $this->path = "seed_files/pallet_materials.csv";
+        $this->delimiter = ";";
+        $this->header_row = 0;
+        $this->start_row = 1;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -14,8 +29,18 @@ class PalletMaterialSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0;$i< 9;$i++) {
-           PalletMaterial::factory(1)->create();
-        }
+        $this->readCsvData(function ($data) {
+//            $this->command->info(json_encode(Pallet::where('name', 'LIKE', '%'.$data['Pallets'].'%')->get()));
+            if (!(Pallet::where('name', 'LIKE', '%'.$data['Pallets'].'%')->get()->isempty())
+            && !(Material::where('measurements','LIKE', $data['Materials'])->get()->isempty())) {
+                PalletMaterial::factory(1)->create([
+                    'pallet_id' => Pallet::where('name', 'LIKE', '%'.$data['Pallets'].'%')->first()->product_id,
+                    'material_id' => (Material::where('measurements','LIKE', $data['Materials'])->first()->product_id),
+                    'total_quantity' => $data['Quantity'],
+                ]);
+            }
+
+
+        });
     }
 }

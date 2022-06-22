@@ -10,6 +10,11 @@ class TruckDriver extends Model
 {
     use HasFactory;
 
+    /**
+     * Get the current order which is in driving status for truck driver status or null if there isnt one
+     * @param Machine $machine
+     * @return null
+     */
     public static function getDrivingOrder(Machine $machine)
     {
         $order = $machine->orders->where('truckDriver_status', 'Driving')->first();

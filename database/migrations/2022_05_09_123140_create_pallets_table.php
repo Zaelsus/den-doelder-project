@@ -22,7 +22,6 @@ class CreatePalletsTable extends Migration
                 ->onDelete('cascade');
             $table->boolean('valid')->default(1);
             $table->string('name');
-            $table->integer('pallet_number')->unsigned();
             $table->string('measurements');
             $table->string('classification');
             $table->string('treatments');

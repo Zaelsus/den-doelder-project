@@ -1,4 +1,4 @@
-@extends('layouts.app', ['orders'=>$orders])
+@extends('layouts.app')
 
 @section('header')
     {{--    TODO: This overlaps with the change machines button and looks unfinished--}}
@@ -83,7 +83,8 @@
                                             @if(Auth::user()->role === 'Driver' || Auth::user()->role === 'Administrator')
                                                 <td class="{{$order->truckDriver_status === null ? 'bg-secondary':''}}
                                                 {{$order->truckDriver_status === 'Delivered' ? 'bg-success':''}}
-                                                {{$order->truckDriver_status === 'Driving' ? 'bg-info':''}}">
+                                                {{$order->truckDriver_status === 'Driving' ? 'bg-info':''}}
+                                                {{$order->truckDriver_status === 'Paused' ? 'bg-warning':''}}">
                                                     @if($order->truckDriver_status === null)
                                                         No Driver
                                                     @else

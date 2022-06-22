@@ -10,7 +10,6 @@ class Material extends Model
 {
     use HasFactory;
     protected $attributes = [
-        'comments' => '',
     ];
 
     /**
