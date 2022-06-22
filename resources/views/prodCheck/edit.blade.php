@@ -44,14 +44,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingAangB" id="" value="{{$production->afmetingAangB}}">
+                                    <input class="input form-control" type="text" name="afmetingAangB" id="" value="{{$production->afmetingAangB}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingCorrectB" id="" value="{{$production->afmetingCorrectB}} ">
+                                    <input class="input form-control" type="text" name="afmetingCorrectB" id="" value="{{$production->afmetingCorrectB}} ">
                                 </div>
                             </td>
                         </tr>
@@ -70,14 +70,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalAang" id="" value="{{$production->aantalAang}} ">
+                                    <input class="input form-control" type="text" name="aantalAang" id="" value="{{$production->aantalAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalCorrect" id="" value="{{$production->aantalCorrect}} ">
+                                    <input class="input form-control" type="text" name="aantalCorrect" id="" value="{{$production->aantalCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -95,14 +95,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spatiesAang" id=" " value="{{$production->spatiesAang}}">
+                                    <input class="input form-control" type="text" name="spatiesAang" id=" " value="{{$production->spatiesAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spatiesCorrect" id="" value="{{$production->spatiesCorrect}}">
+                                    <input class="input form-control" type="text" name="spatiesCorrect" id="" value="{{$production->spatiesCorrect}}">
                                 </div>
                             </td>
                         </tr>
@@ -120,14 +120,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="klampenAang" id="" value="{{$production->klampenAang}}">
+                                    <input class="input form-control" type="text" name="klampenAang" id="" value="{{$production->klampenAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="klampenCorrect" id="" value="{{$production->klampenCorrect}}">
+                                    <input class="input form-control" type="text" name="klampenCorrect" id="" value="{{$production->klampenCorrect}}">
                                 </div>
                             </td>
                         </tr>
@@ -145,14 +145,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="overstekAangB" id="" value="{{$production->overstekAangB}}">
+                                    <input class="input form-control" type="text" name="overstekAangB" id="" value="{{$production->overstekAangB}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="overstekCorrectB" id="" value="{{$production->overstekCorrectB}} ">
+                                    <input class="input form-control" type="text" name="overstekCorrectB" id="" value="{{$production->overstekCorrectB}} ">
                                 </div>
                             </td>
                         </tr>
@@ -164,7 +164,7 @@
                     <section class="hero">
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Klossen</h5>
-                            <p class="card bg-gradient-red subtitle">Select at least one </p>
+                            <p class="card bg-gradient-red subtitle">Select only one </p>
                         </div>
                     </section>
 
@@ -182,7 +182,7 @@
 
                             <td>
                                 <div class="control">
-                                    <select name="soort" class="textarea  @error('soort') is-danger @enderror ">
+                                    <select name="soort" class="textarea custom-select  @error('soort') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Spaan'{{$production->soort === "Spaan" ? 'selected':''}}>Spaan</option>
                                         <option value="Hout" {{$production->soort === "Hout" ? 'selected':''}}>Hout</option>
@@ -196,14 +196,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="soortAang" id="" value={{$production->soortAang}}>
+                                    <input class="input form-control" type="text" name="soortAang" id="" value={{$production->soortAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="soortHtKd" id="" value={{$production->soortHtKd}}>
+                                    <input class="input form-control" type="text" name="soortHtKd" id="" value={{$production->soortHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -214,7 +214,7 @@
 
                             <td>
                                 <div class="control">
-                                    <select name="balk" class="textarea  @error('balk') is-danger @enderror ">
+                                    <select name="balk" class="textarea custom-select  @error('balk') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Afmeting1'{{$production->balk === "Afmeting1" ? 'selected':''}}>Afmeting 1</option>
                                         <option value="Afmeting2" {{$production->balk === "Afmeting2" ? 'selected':''}}>Afmeting 2</option>
@@ -229,14 +229,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkAang" id="" value={{$production->soortAang}}>
+                                    <input class="input form-control" type="text" name="balkAang" id="" value={{$production->soortAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkHtKd" id="" value={{$production->soortHtKd}}>
+                                    <input class="input form-control" type="text" name="balkHtKd" id="" value={{$production->soortHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -253,6 +253,7 @@
 
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
+                            <th></th>
                             <th>Type</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
@@ -260,10 +261,11 @@
                         </tr>
 
                         <tr>
+                            <td>Description</td>
 
                             <td>
                                 <div class="control">
-                                    <select name="onderdek" class="textarea  @error('onderdek') is-danger @enderror ">
+                                    <select name="onderdek" class="textarea custom-select  @error('onderdek') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Brug'{{$production->onderdek === "Brug" ? 'selected':''}}>Brug</option>
                                         <option value="Ronddloper" {{$production->onderdek === "Ronddloper" ? 'selected':''}}>Ronddloper</option>
@@ -282,14 +284,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="onderdekAang" id="" value={{$production->brugAang}}>
+                                    <input class="input form-control" type="text" name="onderdekAang" id="" value={{$production->brugAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="onderdekHtKd" id="" value={{$production->brugHtKd}}>
+                                    <input class="input form-control" type="text" name="onderdekHtKd" id="" value={{$production->brugHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -326,14 +328,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="hoekenAang" id="" value="{{$production->hoekenAang}} ">
+                                    <input class="input form-control" type="text" name="hoekenAang" id="" value="{{$production->hoekenAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="hoekenCorrect" id="" value="{{$production->hoekenCorrect}} ">
+                                    <input class="input form-control" type="text" name="hoekenCorrect" id="" value="{{$production->hoekenCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -351,14 +353,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stempelsAang" id="" value="{{$production->stempelsAang}} ">
+                                    <input class="input form-control" type="text" name="stempelsAang" id="" value="{{$production->stempelsAang}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stempelsCorrect" id="" value="{{$production->stempelsCorrect}} ">
+                                    <input class="input form-control" type="text" name="stempelsCorrect" id="" value="{{$production->stempelsCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -370,20 +372,19 @@
                                 <label for="stapelTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
                                 <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="1" {{$production->stapelTick === 1 ? 'checked': '' }}>
                                 <label for="stapelTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
-
                                 <input type="radio" style = "width:40px; height:40px" id="" name="stapelTick" value="0" {{$production->stapelTick === 0 ? 'checked': '' }}>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stapelAang" id="" value="{{$production->stapelAang}}">
+                                    <input class="input form-control" type="text" name="stapelAang" id="" value="{{$production->stapelAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stapelCorrect" id="" value="{{$production->stapelCorrect}} ">
+                                    <input class="input form-control" type="text" name="stapelCorrect" id="" value="{{$production->stapelCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -393,7 +394,7 @@
 
                             <td>
                                 <div class="control">
-                                    <select name="strappenTick" class="textarea  @error('strappenTick') is-danger @enderror ">
+                                    <select name="strappenTick" class="textarea custom-select  @error('strappenTick') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Strappen'{{$production->strappenTick === "Strappen" ? 'selected':''}}>Strappen</option>
                                         <option value="Markeren" {{$production->strappenTick === "Markeren" ? 'selected':''}}>Markeren</option>
@@ -408,14 +409,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="strappenAang" id="" value="{{$production->strappenAang}}">
+                                    <input class="input form-control" type="text" name="strappenAang" id="" value="{{$production->strappenAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="strappenCorrect" id="" value="{{$production->strappenCorrect}} ">
+                                    <input class="input form-control" type="text" name="strappenCorrect" id="" value="{{$production->strappenCorrect}} ">
                                 </div>
                             </td>
                         </tr>
@@ -423,14 +424,10 @@
                         <tr>
                             <td>Spijkers (BD,TD,OD)</td>
                             <td>
-                                <div class="control">
-                                    <select name="spijkerTick" class="textarea  @error('spijkerTick') is-danger @enderror ">
-                                        <option value="">Choose Type</option>
-                                        <option value='BD'{{$production->spijkerTick === "BD" ? 'selected':''}}>BD</option>
-                                        <option value="TD" {{$production->spijkerTick === "TD" ? 'selected':''}}>TD</option>
-                                        <option value="OD" {{$production->spijkerTick === "OD" ? 'selected':''}}>OD</option>
-                                    </select>
-                                </div>
+                                <label for="spijkerTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="spijkerTick" value="1" {{$production->spijkerTick === 1 ? 'checked': '' }}>
+                                <label for="spijkerTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="spijkerTick" value="0" {{$production->spijkerTick === 0 ? 'checked': '' }}>
                                 @error('spijkerTick')
                                 <p class="help is-danger">{{ $message }}</p>
                                 @enderror
@@ -440,14 +437,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spijkerAang" id="" value="{{$production->spijkerAang}}">
+                                    <input class="input form-control" type="text" name="spijkerAang" id="" value="{{$production->spijkerAang}}">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spijkerCorrect" id="" value="{{$production->spijkerCorrect}} ">
+                                    <input class="input form-control" type="text" name="spijkerCorrect" id="" value="{{$production->spijkerCorrect}} ">
                                 </div>
                             </td>
                         </tr>

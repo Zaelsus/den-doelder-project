@@ -37,10 +37,10 @@ class InitialFactory extends Factory
             $i++;
             if($check) {
                 return [
-                    'onderdek'=>$this->faker->randomElement(['brug', 'rondloper Afm (2x)', 'kruisdek', 'rondloper Afm (3x)','dubbel dek', 'elementen']),
+                    'onderdek'=>$this->faker->randomElement(['Brug', 'Rondloper Afm(2x)', 'Kruisdek', 'Rondloper Afm(3x)','Dubbel dek', 'Elementen']),
                     'order_id' => $order_id,
-                    'strappenTick'=>$this->faker->randomElement(['strappen', 'markeren']),
-                    'kamerTick'=>$this->faker->randomElement(['Q(kamer)', 'loods','A']),
+                    'strappenTick'=>$this->faker->randomElement(['Strappen', 'Markeren']),
+                    'kamerTick'=>$this->faker->randomElement(['Q(kamer)', 'Loods','A']),
                 ];
             }
         }
