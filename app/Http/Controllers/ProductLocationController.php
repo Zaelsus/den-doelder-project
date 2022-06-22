@@ -17,7 +17,7 @@ class ProductLocationController extends Controller
      */
     public function index()
     {
-        //
+        return view('productLocations.index');
     }
 
     /**
@@ -47,12 +47,13 @@ class ProductLocationController extends Controller
      * @param  \App\Models\ProductLocation  $productLocation
      * @return \Illuminate\Http\Response
      */
-    public function show($order)
+    public function show(Order $order)
     {
-        $productLocationDetails = $this->getProductLocation($order);
-        $orderId = $productLocationDetails['orderId'];
-        $pallet = $productLocationDetails['pallet'];
-        $productLocation = $productLocationDetails['productLocation'];
+        dd($order);
+        $productLocationDetails = $this->getPallettLocation($order);
+//        $orderId = $productLocationDetails['orderId'];
+//        $pallet = $productLocationDetails['pallet'];
+//        $productLocation = $productLocationDetails['productLocation'];
 
         if (location === null) {
             $locationName="no location";
@@ -74,7 +75,7 @@ class ProductLocationController extends Controller
      */
     public function edit($order)
     {
-        $productLocationDetails = $this->getProductLocation($order);
+        $productLocationDetails = $this->getPallettLocation($order);
         $orderId = $productLocationDetails['orderId'];
         $productLocation = $productLocationDetails['productLocation'];
 
@@ -91,7 +92,7 @@ class ProductLocationController extends Controller
     public function update(Request $request, $order)
     {
 
-        $productLocationDetails = $this->getProductLocation($order);
+        $productLocationDetails = $this->getPallettLocation($order);
         $location = $productLocationDetails['location'];
 
         $location->update($this->validateLocationChange($request));
@@ -118,10 +119,33 @@ class ProductLocationController extends Controller
         return $validatedAtributes;
     }
 
-    public function getProductLocation(Order $order)
+    public function getPallettLocation(Order $order)
     {
-        $productLocation = ProductLocation::where('product_id', $order->pallet->product_id)->first();
+        $palletId = $order->pallet->product_id;
+        $productLocations = ProductLocation::where('product_id',$palletId)->get();
+        $locationsQuantity=[];
+        foreach($productLocations as $productLocation){
+            $locationsQuantity['location'.'_'.$productLocation->location_id.'_'.'id']=$productLocation->location->id;
+            $locationsQuantity['location'.'_'.$productLocation->location_id.'_'.'name']=$productLocation->location->name;
+            $locationsQuantity['location'.'_'.$productLocation->location_id.'_'.'quantity']=$productLocation->Quantity;
+        }
+        return ['locationsQuantity'=>$locationsQuantity,'productLocations'=>$productLocations];
+    }
 
-        return $productLocation;
+    /**
+     * Function to list all Hourly Check logs for a specific order
+     *
+     * @param $details - the order's slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function list(Order $order)
+    {
+        $productLocationDetails = $this->getPallettLocation($order);
+        $locationsQuantity = $productLocationDetails['locationsQuantity'];
+        $productLocations = $productLocationDetails['productLocations'];
+//        dd($productLocation[0]->location_id);
+
+        return view('productLocations.index', compact('order','locationsQuantity', 'productLocations' ));
+
     }
 }

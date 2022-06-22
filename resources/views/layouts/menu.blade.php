@@ -129,11 +129,6 @@
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
                     </a>
-                    <a href="{{route('productLocations.show',$order)}}"
-                       class="nav-link active bg-gray-dark btn text-left">
-                        <i class="nav-icon fas fa-compass"></i>
-                        <p>Location</p>
-                    </a>
                 @endif
             </div>
         </li>
@@ -267,6 +262,11 @@
                     <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-book"></i>
                         <p>Notes</p>
+                    </a>
+                    <a href="{{route('productLocations.list',$order)}}"
+                       class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-compass"></i>
+                        <p>Location</p>
                     </a>
                 </div>
             </li>

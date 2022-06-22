@@ -161,7 +161,6 @@
                                         @endif
                                     @endif
                                 </ul>
-
                             </td>
                         </tr>
                     @endif

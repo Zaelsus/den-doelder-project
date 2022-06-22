@@ -184,25 +184,8 @@ class OrderController extends Controller
                 $materialsLocations[ $materialId.'_'.$productlocation->location_id.'_'.'quantity'] = $productlocation->Quantity;
             }
         }
+
         return ['materialsLocations' => $materialsLocations,'materialLocationsList'=>$materialLocationsList];
-    }
-
-
-    /**
-     * Function that finds the locations for the pallets
-     *
-     * @param $details
-     * @return array
-     */
-    public function getPalletLocation(Order $order)
-    {
-        $productId = $order->pallet->product_id;
-        $productLocations = ProductLocation::where('product_id',$productId)->get();
-        $locationsAvailability=[];
-        foreach($productLocations as $productLocation){
-            $locationsAvailability[$productLocation->location_id]=$productLocation->location->available_storage_space;
-        }
-        return ['locationsAvailability'=>$locationsAvailability,'productLocations'=>$productLocations];
     }
 
     /**
