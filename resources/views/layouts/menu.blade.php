@@ -122,8 +122,9 @@
                     <p>Notes</p>
                 </a>
                 @if($order->status === 'In Production')
-                    <a href="{{route('orders.editquantity',$order)}}"
-                       class="nav-link active bg-gray-dark btn text-left">
+                    <a class="nav-link active bg-gray-dark btn text-left"
+                            data-toggle="modal"
+                            data-target="#logPallets">
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
                     </a>
