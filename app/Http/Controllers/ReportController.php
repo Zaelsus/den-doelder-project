@@ -60,13 +60,11 @@ class ReportController extends Controller
         $orderTime = $this->calculateOrderTime($orders);
         $hourlyReports = $this->findHourlyReports($machine);
         $stoppageNumber = $this->findStoppageNumber($orders);
-//        $stoppageTotalTime = null;
+        $stoppageTotalTime = null;
         foreach($orders as $order) {
             $stoppageTotalTime[$order->id] = $order->calculateTotalStoppageTime();
-//             = $totalStoppageTime;
         }
         $transitionTime = $this->calculateTransitionTime($orders);
-//        dd($stoppageTotalTime);
         return view('reports.show', compact(
             'machine',
             'notes',
@@ -207,33 +205,6 @@ class ReportController extends Controller
         }
         return $stoppages;
     }
-
-//    /**
-//     * Calculates the stoppage time per order
-//     * @param $orders
-//     * @param $waitTimes
-//     * @return array
-//     */
-//    private function calculateTotalStoppageTime($orders, $waitTimes): array
-//    {
-//        $stoppageTotalTime = [];
-//        $interval = new \DateTime();
-//        $gato = new \DateTime();
-//        foreach($orders as $order) {
-//            $notes = $order->notes;
-//            dd($waitTimes);
-//            $immutable = CarbonImmutable::now();
-//            $timeCollector = new DateInterval('P0S');
-//            foreach($notes as $note) {
-//                if($note->label === "Fix") {
-//                    $timeCollector += $waitTimes[$note->id];
-//                }
-//            }
-//            $stoppageTotalTime[$order->id] = $timeCollector;
-//        }
-//        dd($stoppageTotalTime);
-//        return $stoppageTotalTime;
-//    }
 
     private function calculateTransitionTime($orders)
     {

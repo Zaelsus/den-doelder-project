@@ -1,5 +1,5 @@
 @if(((Auth::user()->role === 'Production') && (\App\Models\Order::isInProduction(Auth::user()->machine) !== 'no production'))
-|| ((Auth::user()->role === 'Administrator'||Auth::user()->role === 'Driver') && ($order !== null)))
+|| (((Auth::user()->role === 'Administrator' && !Request::is('reports*'))||Auth::user()->role === 'Driver') && ($order !== null)))
     <div class="info-box shade brand-text">
         <div class="info-box-content">
             <h4><span class="info-box-text">Order #{{$order->order_number}}</span></h4>
