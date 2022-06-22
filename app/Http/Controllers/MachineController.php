@@ -73,6 +73,7 @@ class MachineController extends Controller
         //can add here for truck drivers as well according to their conditions
     }
 
+
 //not needed maybe remove
 //    /**
 //     * Show the form for creating a new resource.

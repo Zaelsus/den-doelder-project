@@ -75,15 +75,18 @@
         <div class="modal-content">
             <div class="modal-header colour-purple">
                 <h5 class="modal-title" id="startDrivingTitle">
-                    Start Driving
+                    @if($order->truckDriver_status === 'Paused')
+                        Restart Driving
+                    @else
+                        Start Driving
+                    @endif
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p> Are you sure you want to start driving the order number {{$order->order_number}}?</p>
-
+                    <p> Are you sure you want to start driving the order number {{$order->order_number}}?</p>
             </div>
             <div class="modal-footer">
                 <div>
@@ -93,7 +96,12 @@
                 <form method="POST" action="{{route('orders.startDriving', $order)}}">
                     @csrf
                     <button class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
-                            type="submit"> Start Driving
+                            type="submit">
+                        @if($order->truckDriver_status === 'Paused')
+                            Restart Driving
+                        @else
+                            Start Driving
+                        @endif
                     </button>
                 </form>
             </div>
@@ -198,15 +206,16 @@
                         <label class="form-check-label"><b>Label</b></label><br>
                     </div>
                     <div>
-                    <select onchange="isChecked()" name="label" id="labelStoppage" class="custom-select @error('label') is-invalid @enderror" required>
-                        <option value="">Choose a label</option>
-                        <option value="Mechanical Issue (Error)">Mechanical Issue</option>
-                        <option value="Material Issue (Error)">Material Issue</option>
-                        <option value="Technical Issue (Error)">Technical Issue</option>
-                        <option value="Lunch Break" id="lb">Lunch Break</option>
-                        <option value="End of Shift" id="eos">End of Shift</option>
-                        <option value="Cleaning" id="cl">Cleaning</option>
-                    </select>
+                        <select onchange="isChecked()" name="label" id="labelStoppage"
+                                class="custom-select @error('label') is-invalid @enderror" required>
+                            <option value="">Choose a label</option>
+                            <option value="Mechanical Issue (Error)">Mechanical Issue</option>
+                            <option value="Material Issue (Error)">Material Issue</option>
+                            <option value="Technical Issue (Error)">Technical Issue</option>
+                            <option value="Lunch Break" id="lb">Lunch Break</option>
+                            <option value="End of Shift" id="eos">End of Shift</option>
+                            <option value="Cleaning" id="cl">Cleaning</option>
+                        </select>
                     </div>
                     <br>
                     <div>
@@ -261,8 +270,8 @@
             box.style.display = 'none';
             cInput.removeAttribute('required');
             tInput.removeAttribute('required');
-            cInput.value=null;
-            tInput.value=null;
+            cInput.value = null;
+            tInput.value = null;
         } else {
             box.style.display = 'block';
             cInput.setAttribute('required', '');
