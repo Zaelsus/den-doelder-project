@@ -6,6 +6,7 @@ use App\Models\Note;
 use App\Models\Order;
 use App\Models\TruckDriver;
 use App\Providers\NotePriorityChange;
+use App\Providers\StatusChangeProduction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,12 +22,10 @@ class NoteController extends Controller
         //find current order selected
         $order = $this->findOrderForUser();
 
-        //first get all the notes
-        $notes = Note::all();
-
-        //update priority of note, loop through the notes
+        //update priority of note, loop through all the notes
         //and let an eventlistener look if priority should be changed
-        foreach($notes as $note) {
+        $allNotes = Note::all();
+        foreach($allNotes as $note) {
             event(new NotePriorityChange($note));
         }
 
@@ -72,15 +71,8 @@ class NoteController extends Controller
         //store the note with the attributes of the request, together with the set fix, note related and order id
         $note = Note::create($this->validateNote($request, $order->id, $fix, $note_rel));
 
-
-        //Update the status of the order. If the status is in production and an error note is set in, the status is
-        //updated to paused. If the status is paused and the note is a fix note, update the status to in production.
-        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)'
-                || $note->label === 'Lunch Break' || $note->label === 'End of Shift' || $note->label === 'Cleaning')) {
-            $order->update(['status' => 'Paused']);
-        } else if(($order->status === 'Paused') && ($note->label === 'Fix')) {
-            $order->update(['status' => 'In Production']);
-        }
+        //Update the status of the order to Paused or In Production when necessary
+        event(new StatusChangeProduction($order, $note));
 
         //if the label is 'End of Shift', redirect to edit quantity, otherwise redirect to the index page of the note
         if($note->label === 'End of Shift') {

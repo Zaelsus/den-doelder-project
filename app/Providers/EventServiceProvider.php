@@ -26,6 +26,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         NotePriorityChange::class => [
             PriorityErrorNote::class,
+        ],
+        StatusChangeProduction::class => [
+            Paused::class,
+            Production::class,
         ]
     ];
 

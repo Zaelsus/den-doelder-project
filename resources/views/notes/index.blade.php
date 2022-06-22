@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                     @foreach($notes as $note)
-                        @if($note->label !== 'Lunch Break' && $note->label !== 'End of Shift')
+                        @if($note->label !== 'Lunch Break' && $note->label !== 'End of Shift' && $note->label !== 'Cleaning')
                         <tr>
                             <td>
                                 {{ $note->order->order_number}}
