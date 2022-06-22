@@ -414,7 +414,7 @@ class OrderController extends Controller
     {
 //        dd($order);
 //        dd($order->machine);
-        $order->update(['truckDriver_status' => null]);
+        $order->update(['truckDriver_status' => 'Paused']);
         return redirect(route('machines.show', ['machine' => $order->machine]));
     }
 

@@ -18,7 +18,8 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
 @extends(isset($order) ? 'modals.orders':'blank')
-@extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
+@extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.truck':'blank')
+@extends(Auth::user()->role !=='Administrator' ? 'modals.machines':'blank')
 <div class="wrapper">
     <!-- Main Header -->
     <nav class="main-header navbar navbar-expand navbar-light colour-purple">

@@ -1,11 +1,4 @@
-<?php
-
-use App\Models\Note;
-
-
-?>
-
-{{--    Modal for logging Fix --}}
+{{--    Modal for logging Fix--}}
 <div class="modal fade" id="logFix" tabindex="-1" role="dialog"
      aria-labelledby="logFixTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -25,7 +18,7 @@ use App\Models\Note;
                         <div class="mb-3">
                             <label for="title">Title of Error Note</label>
                             <div>
-                                <input class="form-control" type="text" name="title" value="{{$note->title}}">
+                                <input class="form-control" type="text" name="title" value="{{$note->title}}" readonly>
                             </div>
                             @error('title')
                             <p>{{ $message }}</p>
@@ -62,3 +55,9 @@ use App\Models\Note;
         </div>
     </div>
 </div>
+
+
+
+
+
+
