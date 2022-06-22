@@ -209,14 +209,14 @@ class ReportController extends Controller
     private function calculateTransitionTime($orders)
     {
         $transitionTime = [];
-        if(sizeof($orders) > 1) {
+        if(sizeof($orders) > 1 && $orders[0]->end_time !== null) {
             for($x = 0; $x < (sizeof($orders) - 1); $x += 1) {
-                $time1 = new \DateTime($orders[$x]->end_time);
-                $time2 = new \DateTime($orders[$x + 1]->start_time);
-                $time = $time1->diff($time2);
-                $transitionTime[$orders[$x]->id] = $time;
-                // Calculate the difference between order 0 and order 1
-                // Save that to the array in index order[0]->id
+                if($orders[$x]->end_time !== null) {
+                    $time1 = new \DateTime($orders[$x]->end_time);
+                    $time2 = new \DateTime($orders[$x + 1]->start_time);
+                    $time = $time1->diff($time2);
+                    $transitionTime[$orders[$x]->id] = $time;
+                }
             }
         } else {
             return null;
