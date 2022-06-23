@@ -224,8 +224,8 @@
                                     <div class="control">
                                         <select name="balk" class="textarea  custom-select @error ('balk') is-danger @enderror ">
                                             <option value="">Choose Measurement</option>
-                                            <option value="Afmeting1">Afmeting 1</option>
-                                            <option value="Afmeting2">Afmeting 2</option>
+                                            <option value="Afmeting1" @if(old('balk') ==  'Afmeting1') selected @endif>Afmeting 1</option>
+                                            <option value="Afmeting2" @if(old('balk') ==  'Afmeting2') selected @endif>Afmeting 2</option>
                                         </select>
                                     </div>
                                     @error('balk')
@@ -271,11 +271,11 @@
                                     <div class="control">
                                         <select name="onderdek" class="textarea custom-select @error('onderdek') is-danger @enderror">
                                             <option value="">Choose Type</option>
-                                            <option value='Brug'>Brug</option>
-                                            <option value="Ronddloper">Ronddloper</option>
-                                            <option value="Kruisdek">Kruisdek</option>
-                                            <option value="Afmetingen">Afmetingen</option>
-                                            <option value="Overstek">Overstek</option>
+                                            <option value='Brug' @if(old('onderdek') ==  'Brug') selected @endif>Brug</option>
+                                            <option value="Ronddloper" @if(old('onderdek') ==  'Ronddloper') selected @endif>Ronddloper</option>
+                                            <option value="Kruisdek" @if(old('onderdek') ==  'Kruisdek') selected @endif>Kruisdek</option>
+                                            <option value="Afmetingen" @if(old('onderdek') ==  'Afmetingen') selected @endif>Afmetingen</option>
+                                            <option value="Overstek" @if(old('onderdek') ==  'Overstek') selected @endif>Overstek</option>
                                         </select>
                                     </div>
                                     @error('onderdek')
@@ -405,8 +405,8 @@
                                     <div class="control">
                                         <select name="strappenTick" class="textarea custom-select @error('strappenTick') is-danger @enderror">
                                             <option value="">Choose Type</option>
-                                            <option value='Strappen'>Strappen</option>
-                                            <option value="Markeren">Markeren</option>
+                                            <option value='Strappen' @if(old('strappenTick') ==  'Strappen') selected @endif>Strappen</option>
+                                            <option value="Markeren" @if(old('strappenTick') ==  'Markeren') selected @endif>Markeren</option>
                                         </select>
                                     </div>
                                     @error('strappenTick')
