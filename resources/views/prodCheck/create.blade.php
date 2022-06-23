@@ -190,7 +190,7 @@
                             <td>
                                 <div>
                                     <div class="control">
-                                        <select name="soort" class="textarea  @error ('soort') is-danger @enderror ">
+                                        <select name="soort" class="textarea custom-select  @error ('soort') is-danger @enderror ">
                                             <option value="">Choose Type</option>
                                             <option value='Spaan' @if(old('soort') ==  'Spaan') selected @endif>Spaan</option>
                                             <option value="Hout" @if(old('soort') ==  'Hout') selected @endif>Hout</option>
@@ -222,7 +222,7 @@
                             <td>
                                 <div>
                                     <div class="control">
-                                        <select name="balk" class="textarea   @error ('balk') is-danger @enderror ">
+                                        <select name="balk" class="textarea  custom-select @error ('balk') is-danger @enderror ">
                                             <option value="">Choose Measurement</option>
                                             <option value="Afmeting1">Afmeting 1</option>
                                             <option value="Afmeting2">Afmeting 2</option>
@@ -258,18 +258,18 @@
                     </section>
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
-
-
+                            <th></th>
                             <th>Type</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
                         </tr>
 
                         <tr>
+                            <td>Description</td>
                             <td>
                                 <div>
                                     <div class="control">
-                                        <select name="onderdek" class="textarea  @error('onderdek') is-danger @enderror">
+                                        <select name="onderdek" class="textarea custom-select @error('onderdek') is-danger @enderror">
                                             <option value="">Choose Type</option>
                                             <option value='Brug'>Brug</option>
                                             <option value="Ronddloper">Ronddloper</option>
@@ -403,7 +403,7 @@
                             <td>
                                 <div >
                                     <div class="control">
-                                        <select name="strappenTick" class="textarea  @error('strappenTick') is-danger @enderror">
+                                        <select name="strappenTick" class="textarea custom-select @error('strappenTick') is-danger @enderror">
                                             <option value="">Choose Type</option>
                                             <option value='Strappen'>Strappen</option>
                                             <option value="Markeren">Markeren</option>
@@ -477,4 +477,5 @@
             </section>
         </form>
     </section>
+    <script src="/js/disable.js"></script>
 @endsection
