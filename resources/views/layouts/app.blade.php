@@ -128,5 +128,39 @@
 @yield('third_party_scripts')
 
 @stack('page_scripts')
+<script type="text/javascript">
+    let soortBtn = document.getElementsByName('soort');
+    let balkBtn = document.getElementsByName('balk');
+
+    let soort = soortBtn[0];
+    let balk = balkBtn[0];
+
+
+    function disableBalk() {
+        if(soort.value.length > 0 && balk.value.length == 0)
+        {
+            balk.disabled = true;
+        }
+        else
+        {
+            balk.disabled = false;
+        }
+    }
+
+    function disableSoort() {
+        if(balk.value.length > 0 && soort.value.length == 0)
+        {
+            soort.disabled = true;
+        }
+        else
+        {
+            soort.disabled = false;
+        }
+    }
+
+    soort.addEventListener('click', disableBalk);
+    balk.addEventListener('click', disableSoort);
+
+</script>
 </body>
 </html>

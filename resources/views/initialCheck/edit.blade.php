@@ -156,7 +156,7 @@
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
-                        <p class="card bg-gradient-red subtitle">Select only one </p>
+                        <p class="card bg-gradient-red subtitle form-control">Select only one </p>
                     </section>
 
                     <table class="table table-bordered table-hover table-secondary">
@@ -204,7 +204,7 @@
 
                             <td>
                                 <div class="control">
-                                    <select name="balk" class="textarea custom-select  @error('balk') is-danger @enderror ">
+                                    <select  name="balk" class="textarea custom-select  @error('balk') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Afmeting1'{{$initial->balk === "Afmeting1" ? 'selected':''}}>Afmeting 1</option>
                                         <option value="Afmeting2" {{$initial->balk === "Afmeting2" ? 'selected':''}}>Afmeting 2</option>

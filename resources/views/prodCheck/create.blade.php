@@ -174,7 +174,7 @@
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
-                        <p class="card bg-gradient-red subtitle">Select only one </p>
+                        <p class="card bg-gradient-red subtitle form-control">Select only one </p>
                     </section>
 
                     <table class="table table-bordered table-hover table-secondary">
