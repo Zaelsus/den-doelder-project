@@ -234,7 +234,7 @@ class ReportController extends Controller
                 }
             }
         } else {
-            return null;
+            return [null, $transitionOrders];
         }
 //        dd($transitionTime);
         return [$transitionTime, $transitionOrders];
