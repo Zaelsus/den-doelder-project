@@ -33,7 +33,7 @@ class ProductLocationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,7 +44,7 @@ class ProductLocationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProductLocation  $productLocation
+     * @param \App\Models\ProductLocation $productLocation
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
@@ -66,7 +66,7 @@ class ProductLocationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductLocation  $productLocation
+     * @param \App\Models\ProductLocation $productLocation
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -77,8 +77,8 @@ class ProductLocationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductLocation  $productLocation
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\ProductLocation $productLocation
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $order)
@@ -95,7 +95,7 @@ class ProductLocationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProductLocation  $productLocation
+     * @param \App\Models\ProductLocation $productLocation
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProductLocation $productLocation)
@@ -103,12 +103,12 @@ class ProductLocationController extends Controller
         //
     }
 
-    public function validateLocationChange(Request $request){
-
+    public function validateLocationChange(Request $request)
+    {
         $validatedAtributes = $request->validate([
             'location_id' => 'required|integer',
             'product_id' => 'required|integer',
-            'Quantity'=> 'required|integer|min:0',
+            'Quantity' => 'required|integer|min:0|',
         ]);
 
         return $validatedAtributes;
@@ -117,14 +117,14 @@ class ProductLocationController extends Controller
     public function getPallettLocation(Order $order)
     {
         $palletId = $order->pallet->product_id;
-        $productLocations = ProductLocation::where('product_id',$palletId)->get();
-        $locationsQuantity=[];
-        foreach($productLocations as $productLocation){
-            $locationsQuantity['location'.'_'.$productLocation->location_id.'_'.'id']=$productLocation->location->id;
-            $locationsQuantity['location'.'_'.$productLocation->location_id.'_'.'name']=$productLocation->location->name;
-            $locationsQuantity['location'.'_'.$productLocation->location_id.'_'.'quantity']=$productLocation->Quantity;
+        $productLocations = ProductLocation::where('product_id', $palletId)->get();
+        $locationsQuantity = [];
+        foreach ($productLocations as $productLocation) {
+            $locationsQuantity['location' . '_' . $productLocation->location_id . '_' . 'id'] = $productLocation->location->id;
+            $locationsQuantity['location' . '_' . $productLocation->location_id . '_' . 'name'] = $productLocation->location->name;
+            $locationsQuantity['location' . '_' . $productLocation->location_id . '_' . 'quantity'] = $productLocation->Quantity;
         }
-        return ['locationsQuantity'=>$locationsQuantity,'productLocations'=>$productLocations];
+        return ['locationsQuantity' => $locationsQuantity, 'productLocations' => $productLocations];
     }
 
     /**
@@ -139,7 +139,7 @@ class ProductLocationController extends Controller
         $locationsQuantity = $productLocationDetails['locationsQuantity'];
         $productLocations = $productLocationDetails['productLocations'];
 
-        return view('productLocations.index', compact('order','locationsQuantity', 'productLocations' ));
+        return view('productLocations.index', compact('order', 'locationsQuantity', 'productLocations'));
     }
 
     /**
@@ -153,7 +153,7 @@ class ProductLocationController extends Controller
     {
         $locations = Location::where('type', 'Pallets')->get();
 
-        return view('productLocations.create', compact('locations', 'order' ));
+        return view('productLocations.create', compact('locations', 'order'));
     }
 
     /**

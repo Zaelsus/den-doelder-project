@@ -42,9 +42,9 @@
                                 <div class="mb-3">
                                     <label for="Quantity">Quantity: </label>
                                     <div>
-                                        <input type="text" class="form-control "
+                                        <input type="number" min="0" max="1000" class="form-control"
                                                name="Quantity"
-                                               placeholder="0" value="" required>
+                                               placeholder="Max 1000" value="" required>
                                     </div>
 
                                     @error('Quantity')

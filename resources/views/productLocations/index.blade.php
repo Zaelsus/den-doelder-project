@@ -19,7 +19,7 @@
                                     <tr>
                                         <th scope="col">Pallet</th>
                                         <th scope="col">Location</th>
-                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Quantity at location</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
@@ -38,18 +38,19 @@
                                                 </td>
                                                 <td>
                                                     <form method="GET"
-                                                          action="{{ route('productLocations.editLocation', ['order' => $order, 'locationId' =>  $productLocations[$i]->location_id]) }}"
+                                                          action="{{route('productLocations.editLocation', ['order' => $order, 'locationId' => $productLocations[$i]->location_id])}}"
                                                         {{!App\Models\ProductLocation::checkAvailableSpace($productLocations[$i]->location_id) ?
-                                                            'hidden' : ''}}>
+                                                          'hidden' : ''}}>
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary float-left">Add</button>
+                                                        <button type="submit" class="btn btn-primary float-left">Add
+                                                        </button>
                                                     </form>
 
-{{--                                                    <form method="get"--}}
-{{--                                                          action="{{ route('productLocations.editLocation', ['order' => $order, 'locationId' =>  $productLocations[$i]->location_id]) }}">--}}
-{{--                                                        @csrf--}}
-{{--                                                        <button type="submit" class="btn btn-warning float-left">Take</button>--}}
-{{--                                                    </form>--}}
+                                                    {{--                                                    <form method="get"--}}
+                                                    {{--                                                          action="{{ route('productLocations.editLocation', ['order' => $order, 'locationId' =>  $productLocations[$i]->location_id]) }}">--}}
+                                                    {{--                                                        @csrf--}}
+                                                    {{--                                                        <button type="submit" class="btn btn-warning float-left">Take</button>--}}
+                                                    {{--                                                    </form>--}}
                                                 </td>
                                             </tr>
                                         @endfor

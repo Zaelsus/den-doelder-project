@@ -53,7 +53,9 @@
                                 <div class="mb-3">
                                     <label for="Quantity">Quantity to Add: </label>
                                     <div>
-                                        <input type="text" class="form-control "
+                                        <input type="number" min="0"
+                                               max="{{$palletLocation->available_storage_space - $palletQuantity->Quantity}}"
+                                               class="form-control"
                                                name="Quantity"
                                                placeholder="0" value="" required>
                                     </div>
