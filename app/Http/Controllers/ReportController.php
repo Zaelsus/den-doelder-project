@@ -35,7 +35,7 @@ class ReportController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,7 +46,7 @@ class ReportController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -61,10 +61,12 @@ class ReportController extends Controller
         $hourlyReports = $this->findHourlyReports($machine);
         $stoppageNumber = $this->findStoppageNumber($orders);
         $stoppageTotalTime = null;
-        foreach($orders as $order) {
+        foreach ($orders as $order) {
             $stoppageTotalTime[$order->id] = $order->calculateTotalStoppageTime();
         }
-        $transitionTime = $this->calculateTransitionTime($orders);
+        $transitions = $this->calculateTransitionTime($machine);
+        $transitionTime = $transitions[0];
+        $transitionOrders = $transitions[1];
         return view('reports.show', compact(
             'machine',
             'notes',
@@ -74,14 +76,15 @@ class ReportController extends Controller
             'orderTime',
             'stoppageNumber',
             'stoppageTotalTime',
-            'transitionTime'
+            'transitionTime',
+            'transitionOrders'
         ));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,8 +95,8 @@ class ReportController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -104,7 +107,7 @@ class ReportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -122,7 +125,7 @@ class ReportController extends Controller
         $notesAll = Note::all();
         $machineNotes = [];
         foreach ($notesAll as $note) {
-            if($note->order->machine->name === $machine->name && $note->label === "Fix") {
+            if ($note->order->machine->name === $machine->name && $note->label === "Fix") {
                 $machineNotes[] = $note;
             }
         }
@@ -134,9 +137,10 @@ class ReportController extends Controller
      * @param $notes
      * @return array
      */
-    private function calculateTime($notes){
+    private function calculateTime($notes)
+    {
         $waitTime = [];
-        foreach($notes as $note){
+        foreach ($notes as $note) {
             $noteError = Note::find($note->note_rel);
             $time1 = new \DateTime($note->created_at);
             $time2 = new \DateTime($noteError->created_at);
@@ -156,7 +160,7 @@ class ReportController extends Controller
         $hourlyReportsAll = HourlyReport::all();
         $machineHourlyReports = [];
         foreach ($hourlyReportsAll as $hourlyReport) {
-            if($hourlyReport->order->machine->name === $machine->name) {
+            if ($hourlyReport->order->machine->name === $machine->name) {
                 $machineHourlyReports[] = $hourlyReport;
             }
         }
@@ -172,8 +176,8 @@ class ReportController extends Controller
     private function calculateOrderTime($orders)
     {
         $orderTime = [];
-        foreach($orders as $order){
-            if($order->end_time !== null) {
+        foreach ($orders as $order) {
+            if ($order->end_time !== null) {
                 $time1 = new \DateTime($order->start_time);
                 $time2 = new \DateTime($order->end_time);
                 $time = $time1->diff($time2);
@@ -192,12 +196,11 @@ class ReportController extends Controller
     {
         $stoppages = [];
 //        dd($orders);
-        foreach($orders as $order)
-        {
+        foreach ($orders as $order) {
             $stoppageCounter = 0;
             $notes = $order->notes;
-            foreach($notes as $note) {
-                if($note->label === "Fix") {
+            foreach ($notes as $note) {
+                if ($note->label === "Fix") {
                     $stoppageCounter += 1;
                 }
             }
@@ -206,21 +209,34 @@ class ReportController extends Controller
         return $stoppages;
     }
 
-    private function calculateTransitionTime($orders)
+    private function calculateTransitionTime($machine)
     {
+        $transitionOrders = Order::where('machine_id', $machine->id)->where('start_time', '!=', null)->orderby('start_time')->get();
+//        dd($unOrders);
+//        $orders = [];
+//        $i = 0;
+//        for ($x = 0; $x < (sizeof($unOrders)); $x++) {
+//            if ($unOrders[$x]->start_time !== null) {
+//                $orders[$i] = $unOrders[$x];
+//                $i += 1;
+//            }
+//        }
+
+//        dd($orders);
         $transitionTime = [];
-        if(sizeof($orders) > 1 && $orders[0]->end_time !== null) {
-            for($x = 0; $x < (sizeof($orders) - 1); $x += 1) {
-                if($orders[$x]->end_time !== null) {
-                    $time1 = new \DateTime($orders[$x]->end_time);
-                    $time2 = new \DateTime($orders[$x + 1]->start_time);
+        if (sizeof($transitionOrders) > 1 && $transitionOrders[0]->end_time !== null) {
+            for ($x = 0; $x < (sizeof($transitionOrders) - 1); $x += 1) {
+                if ($transitionOrders[$x]->end_time !== null && $transitionOrders[$x + 1]->start_time !== null) {
+                    $time1 = new \DateTime($transitionOrders[$x]->end_time);
+                    $time2 = new \DateTime($transitionOrders[$x + 1]->start_time);
                     $time = $time1->diff($time2);
-                    $transitionTime[$orders[$x]->id] = $time;
+                    $transitionTime[$transitionOrders[$x]->id] = $time;
                 }
             }
         } else {
             return null;
         }
-        return $transitionTime;
+//        dd($transitionTime);
+        return [$transitionTime, $transitionOrders];
     }
 }
