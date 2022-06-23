@@ -26,7 +26,7 @@ class CreateProductLocationsTable extends Migration
                 ->on('products')
                 ->onDelete('cascade');
             $table->integer('Quantity');
-            $table->string('test')->default('works');
+            $table->string('test')->nullable();
             $table->timestamps();
         });
     }

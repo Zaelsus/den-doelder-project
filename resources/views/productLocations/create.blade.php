@@ -24,7 +24,7 @@
                                                 class="custom-select @error('location_id') is-invalid @enderror"
                                                 required>
                                             @foreach($locations as $location)
-                                                @if ($location->)
+
                                                 <option
                                                     value={{$location->id}} {{ old('location_id') ? 'selected' : ''}}>
                                                     {{$location->name}}

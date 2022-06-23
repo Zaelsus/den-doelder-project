@@ -151,7 +151,7 @@ class ProductLocationController extends Controller
      */
     public function addLocation(Order $order)
     {
-        $locations = Location::where('type', 'Pallets')->where()->get();
+        $locations = Location::where('type', 'Pallets')->get();
 
         return view('productLocations.create', compact('locations', 'order' ));
     }
