@@ -8,7 +8,9 @@ use App\Http\Controllers\{InitialController,
     ProductionController,
     PalletController,
     ProductLocationController,
-    MachineController};
+    MachineController,
+    ReportController,
+    TruckDriverController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +43,9 @@ Route::resource('/orders', OrderController::class);
 
 // Pallets
 Route::resource('/pallets', PalletController::class);
+
+// Reports
+Route::resource('/reports', ReportController::class);
 
 //Production View
 //start production route
@@ -112,5 +117,5 @@ Route::post('/productLocations/storeLocation/{order}', [ProductLocationControlle
 Route::get('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'editLocation'])->name('productLocations.editLocation');
 Route::put('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'updateLocation'])->name('productLocations.updateLocation');
 
-// Truck Driver
-
+// Truck Driver - see the list of orders
+Route::get('/driver/list/{machine}', [TruckDriverController::class, 'list'])->name('truckDrivers.list');

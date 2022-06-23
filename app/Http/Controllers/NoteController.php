@@ -71,9 +71,11 @@ class NoteController extends Controller
         //store the note with the attributes of the request, together with the set fix, note related and order id
         $note = Note::create($this->validateNote($request, $order->id, $fix, $note_rel));
 
+
         //Update the status of the order. If the status is in production and an error note is set in, the status is
         //updated to paused. If the status is paused and the note is a fix note, update the status to in production.
-        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)' || $note->label === 'Lunch Break' || $note->label === 'End of Shift')) {
+        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)'
+                || $note->label === 'Lunch Break' || $note->label === 'End of Shift' || $note->label === 'Cleaning')) {
             $order->update(['status' => 'Paused']);
         } else if(($order->status === 'Paused') && ($note->label === 'Fix')) {
             $order->update(['status' => 'In Production']);
@@ -108,8 +110,12 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
+        $fix = $this->setFix($note->label);
+
+        //if it comes from fixStoppage, get the error note related to the fix
+        $note_rel = $request->input('note_rel');
         $order_id = $note->order_id;
-        $note->update($this->validateNote($request, $order_id));
+        $note->update($this->validateNote($request, $order_id, $fix, $note_rel));
 
         return redirect('/notes');
     }
@@ -216,12 +222,13 @@ class NoteController extends Controller
      */
     public function validateNote(Request $request, $order_id, $fix, $note_rel): array
     {
-
         $validatedAttributes = $request->validate([
-            'title'=>'required',
-            'content'=>'required',
-            'label'=>'required',
+            'title'=>'',
+            'content'=>'',
+            'fixContent'=>'',
+            'label'=>'',
         ]);
+
         $validatedAttributes['order_id'] = $order_id;
         $validatedAttributes['note_rel'] = $note_rel;
         $validatedAttributes['priority'] = 'low';
@@ -236,7 +243,6 @@ class NoteController extends Controller
         } else {
             $validatedAttributes['creator'] = 'Driver';
         }
-
 
         return $validatedAttributes;
     }

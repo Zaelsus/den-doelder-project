@@ -73,7 +73,7 @@ class CreateProductionsTable extends Migration
             $table->string('strappenAang')->nullable();
             $table->string('strappenCorrect')->nullable();
 
-            $table->string('spijkerTick');
+            $table->boolean('spijkerTick')->default(0);
             $table->string('spijkerAang')->nullable();
             $table->string('spijkerCorrect')->nullable();
 

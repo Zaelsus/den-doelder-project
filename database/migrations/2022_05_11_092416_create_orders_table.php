@@ -37,7 +37,7 @@ class CreateOrdersTable extends Migration
             $table->string('status');
             $table->string('truckDriver_status')->nullable();
             $table->dateTime('start_time')->default(null)->nullable();
-            $table->date('end_time')->default(null)->nullable();
+            $table->dateTime('end_time')->default(null)->nullable();
             // Temporary until sections for admin nav
             $table->boolean('selected')->default(0);
             $table->boolean('active_driver')->default(0);

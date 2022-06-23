@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Production;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 
 class ProductionController extends Controller
 {
@@ -37,8 +38,7 @@ class ProductionController extends Controller
      */
     public function store(Request $request, Production $production)
     {
-        $order = Order::isSelected();
-
+        $order = Order::getOrder(Auth::user()->machine);
         $production = Production::create($this->validateProduction($request));
 
         $production->assignorderid($order->id);
@@ -156,7 +156,7 @@ class ProductionController extends Controller
             'strappenAang'=>'min:0',
             'strappenCorrect'=>'min:0',
 
-            'spijkerTick'=>'required',
+            'spijkerTick'=>'required|boolean',
             'spijkerAang'=>'min:0',
             'spijkerCorrect'=>'min:0',
 

@@ -38,6 +38,8 @@
                         badge-info
                 @elseif($order->truckDriver_status === 'Delivered')
                         badge-success
+                        @elseif($order->truckDriver_status === 'Paused')
+                        badge-warning
                 @endif  ">
                         @if($order->truckDriver_status === null)
                             No Driver
@@ -71,7 +73,6 @@
                 </div>
             </div>
             <div class="icon">
-                {{--                {{dd($order->machine->orders)}}--}}
                 <i class="fas fa-pallet"></i>
             </div>
             <div>
@@ -79,17 +80,28 @@
                     <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
                             data-toggle="modal"
                             data-target="#startProduction">
-                        Start
+                        Start Production
                     </button>
-                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production') && Auth::user()->role === 'Driver' && $order->truckDriver_status === null && App\Models\TruckDriver::getDrivingOrder( Auth::user()->machine) === null)
-                    <form method="POST" action="{{route('orders.startDriving', $order)}}">
-                        @csrf
-                        <button onclick="return confirm('Start driving for order {{$order->order_number}}?')"
-                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"
-                                type="submit"> Start Driving
-                        </button>
-                    </form>
-
+                @elseif(($order->status !== 'Admin Hold') && Auth::user()->role === 'Driver' && ($order->truckDriver_status === null ||
+                          $order->truckDriver_status === 'Paused') &&
+                           App\Models\TruckDriver::getDrivingOrder(Auth::user()->machine) === null)
+                    <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                            data-toggle="modal"
+                            data-target="#startDriving">
+                        @if($order->truckDriver_status === 'Paused')
+                            Restart Driving
+                        @else
+                            Start Driving
+                        @endif
+                    </button>
+{{--                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production' || $order->status === 'Done') && Auth::user()->role === 'Driver' && $order->truckDriver_status === 'Paused' && App\Models\TruckDriver::getDrivingOrder($order->machine) === null)--}}
+{{--                    <form method="POST" action="{{route('orders.startDriving', $order)}}">--}}
+{{--                        @csrf--}}
+{{--                        <button onclick="return confirm('Restart driving for order {{$order->order_number}}?')"--}}
+{{--                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"--}}
+{{--                                type="submit"> Restart Driving--}}
+{{--                        </button>--}}
+{{--                    </form>--}}
                 @elseif(Auth::user()->role === 'Administrator' && $order->selected === 0)
                     <form class="text-center" method="POST" action="{{route('orders.selectOrder', $order)}}">
                         @csrf
@@ -133,21 +145,15 @@
                         <th>Measurements:</th>
                         <td> {{$orderMaterial->material->measurements}}</td>
                     </tr>
-                    @if($orderMaterial->material->comments !== "")
-                        <tr>
-                            <th>Comments:</th>
-                            <td> {{$orderMaterial->material->comments}}</td>
-                        </tr>
-                    @endif
                     <tr>
                         <th> Quantity Needed:</th>
                         <td> {{$orderMaterial->total_quantity}}</td>
                     </tr>
                     @if(Auth::user()->role === 'Driver')
                         <tr>
-                            <th> Locations:</th>
+                            <th style="margin-bottom: 4px;"> Locations:</th>
                             <td>
-                                <ul>
+                                <ul style="margin-bottom: 4px; padding-left: 0px">
                                     @if($materialLocationsList!==null)
                                         @if(!($materialLocationsList[$orderMaterial->material_id]->isempty()))
                                             @for($i = 0; $i < count($materialLocationsList[$orderMaterial->material_id]);$i++)
