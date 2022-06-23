@@ -243,6 +243,22 @@
                                 @enderror
                             </div>
                         </div>
+                        <div id="boxLogP" style="display:none">
+                            <div class="mb-3">
+                                <h3>Log Pallets</h3>
+                                <div class="card-content table table-bordered table-hover table-light ">
+                                    <div>
+                                        Quantity produced: {{$order->quantity_produced}}
+                                    </div>
+                                    <div>
+                                        Quantity to be produced: {{$order->toproduce}}
+                                    </div>
+                                    <div>
+                                        Log Quantity: <input class="input" type="number" name="numberLog" id=" " value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Log reason of stoppage
                         </button>
                     </div>
@@ -265,14 +281,20 @@
         const box = document.getElementById('box');
         const tInput = document.getElementById('titleSt');
         const cInput = document.getElementById('content');
+        const logPallets = document.getElementById('boxLogP')
 
-        if (labels.value === "Lunch Break" || labels.value === "End of Shift" || labels.value === "Cleaning") {
+        if (labels.value === "Lunch Break" || labels.value === "Cleaning") {
+            logPallets.style.display = 'none';
             box.style.display = 'none';
             cInput.removeAttribute('required');
             tInput.removeAttribute('required');
             cInput.value = null;
             tInput.value = null;
+        } else if (labels.value === "End of Shift") {
+            logPallets.style.display = 'block';
+            box.style.display = 'none';
         } else {
+            logPallets.style.display = 'none';
             box.style.display = 'block';
             cInput.setAttribute('required', '');
             tInput.setAttribute('required', '');

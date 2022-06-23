@@ -36,4 +36,17 @@ class Note extends Model
 
         $this->save();
     }
+
+    public function logPalletQuantity($order) {
+        $order->quantity_produced += $this->numberLog;
+        $order->save();
+
+        if($order->quantity_produced > $order->quantity_production) {
+            $error = true;
+        }
+        else {
+            $error = false;
+        }
+        return $error;
+    }
 }
