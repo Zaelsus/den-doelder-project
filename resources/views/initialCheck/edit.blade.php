@@ -39,14 +39,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingAangB" id="" value="{{$initial->afmetingAangB}} ">
+                                    <input class="input form-control" type="text" name="afmetingAangB" id="" value="{{$initial->afmetingAangB}} ">
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingHtKdB" id="" value="{{$initial->afmetingHtKdB}} ">
+                                    <input class="input form-control" type="text" name="afmetingHtKdB" id="" value="{{$initial->afmetingHtKdB}} ">
                                 </div>
                             </td>
                         </tr>
@@ -64,14 +64,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalAang" id="" value={{$initial->aantalAang}}>
+                                    <input class="input form-control" type="text" name="aantalAang" id="" value={{$initial->aantalAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalHtKd" id="" value={{$initial->aantalHtKd}}>
+                                    <input class="input form-control" type="text" name="aantalHtKd" id="" value={{$initial->aantalHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -88,14 +88,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="klampenAang" id="" value={{$initial->klampenAang}}>
+                                    <input class="input form-control" type="text" name="klampenAang" id="" value={{$initial->klampenAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="klampenHtKd" id="" value={{$initial->klampenHtKd}}>
+                                    <input class="input form-control" type="text" name="klampenHtKd" id="" value={{$initial->klampenHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -113,14 +113,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="schimmelAang" id="" value={{$initial->schimmelAang}}>
+                                    <input class="input form-control" type="text" name="schimmelAang" id="" value={{$initial->schimmelAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="schimmelHtKd" id="" value={{$initial->schimmelHtKd}}>
+                                    <input class="input form-control" type="text" name="schimmelHtKd" id="" value={{$initial->schimmelHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -137,14 +137,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="waanAang" id="" value={{$initial->waanAang}}>
+                                    <input class="input form-control" type="text" name="waanAang" id="" value={{$initial->waanAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="waanHtKd" id="" value={{$initial->waanHtKd}}>
+                                    <input class="input form-control" type="text" name="waanHtKd" id="" value={{$initial->waanHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -156,7 +156,7 @@
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
-                        <p class="card bg-gradient-red subtitle">Select at least one </p>
+                        <p class="card bg-gradient-red subtitle form-control">Select only one </p>
                     </section>
 
                     <table class="table table-bordered table-hover table-secondary">
@@ -172,7 +172,7 @@
 
                             <td>
                                 <div class="control">
-                                    <select name="soort" class="textarea  @error('soort') is-danger @enderror ">
+                                    <select name="soort" class="textarea custom-select  @error('soort') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Spaan'{{$initial->soort === "Spaan" ? 'selected':''}}>Spaan</option>
                                         <option value="Hout" {{$initial->soort === "Hout" ? 'selected':''}}>Hout</option>
@@ -187,14 +187,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="soortAang" id="" value={{$initial->soortAang}}>
+                                    <input class="input form-control" type="text" name="soortAang" id="" value={{$initial->soortAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="soortHtKd" id="" value={{$initial->soortHtKd}}>
+                                    <input class="input form-control" type="text" name="soortHtKd" id="" value={{$initial->soortHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -204,7 +204,7 @@
 
                             <td>
                                 <div class="control">
-                                    <select name="balk" class="textarea  @error('balk') is-danger @enderror ">
+                                    <select  name="balk" class="textarea custom-select  @error('balk') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Afmeting1'{{$initial->balk === "Afmeting1" ? 'selected':''}}>Afmeting 1</option>
                                         <option value="Afmeting2" {{$initial->balk === "Afmeting2" ? 'selected':''}}>Afmeting 2</option>
@@ -220,14 +220,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkAang" id="" value={{$initial->soortAang}}>
+                                    <input class="input form-control" type="text" name="balkAang" id="" value={{$initial->soortAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkHtKd" id="" value={{$initial->soortHtKd}}>
+                                    <input class="input form-control" type="text" name="balkHtKd" id="" value={{$initial->soortHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -245,6 +245,7 @@
 
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
+                            <th></th>
                             <th>Type</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
@@ -252,9 +253,10 @@
 
                         <tr>
 
+                            <td>Description</td>
                             <td>
                                 <div class="control">
-                                    <select name="onderdek" class="textarea  @error('onderdek') is-danger @enderror ">
+                                    <select name="onderdek" class="textarea custom-select  @error('onderdek') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Brug'{{$initial->onderdek === "Brug" ? 'selected':''}}>Brug</option>
                                         <option value="Ronddloper Afm(2x)" {{$initial->onderdek === "Ronddloper Afm(2x)" ? 'selected':''}}>Ronddloper Afm(2x)</option>
@@ -273,14 +275,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="onderdekAang" id="" value={{$initial->brugAang}}>
+                                    <input class="input form-control" type="text" name="onderdekAang" id="" value={{$initial->brugAang}}>
                                 </div>
 
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="onderdekHtKd" id="" value={{$initial->brugHtKd}}>
+                                    <input class="input form-control" type="text" name="onderdekHtKd" id="" value={{$initial->brugHtKd}}>
                                 </div>
                             </td>
                         </tr>
@@ -316,7 +318,7 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="hoekenAang" id="" value={{$initial->hoekenAang}}>
+                                    <input class="input form-control" type="text" name="hoekenAang" id="" value={{$initial->hoekenAang}}>
                                 </div>
 
                             </td>
@@ -334,7 +336,7 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stempelsAang" id="" value={{$initial->stempelsAang}}>
+                                    <input class="input form-control" type="text" name="stempelsAang" id="" value={{$initial->stempelsAang}}>
                                 </div>
 
                             </td>
@@ -352,7 +354,7 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stapelAang" id="" value={{$initial->stapelAang}}>
+                                    <input class="input form-control" type="text" name="stapelAang" id="" value={{$initial->stapelAang}}>
                                 </div>
 
                             </td>
@@ -364,7 +366,7 @@
 
                             <td>
                                 <div class="control">
-                                    <select name="strappenTick" class="textarea  @error('strappenTick') is-danger @enderror ">
+                                    <select name="strappenTick" class="textarea custom-select  @error('strappenTick') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Strappen'{{$initial->strappenTick === "Strappen" ? 'selected':''}}>Strappen</option>
                                         <option value="Markeren" {{$initial->strappenTick === "Markeren" ? 'selected':''}}>Markeren</option>
@@ -379,7 +381,7 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="strappenAang" id="" value={{$initial->strappenAang}}>
+                                    <input class="input form-control" type="text" name="strappenAang" id="" value={{$initial->strappenAang}}>
                                 </div>
                             </td>
 
@@ -390,7 +392,7 @@
 
                             <td>
                                 <div class="control">
-                                    <select name="kamerTick" class="textarea  @error('kamerTick') is-danger @enderror ">
+                                    <select name="kamerTick" class="textarea custom-select   @error('kamerTick') is-danger @enderror ">
                                         <option value="">Choose Type</option>
                                         <option value='Q(kamer)'{{$initial->kamerTick === "Q(kamer)" ? 'selected':''}}>Q(kamer)</option>
                                         <option value="Loods" {{$initial->kamerTick === "Loods" ? 'selected':''}}>Loods</option>
@@ -405,7 +407,7 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="kamerAang" id="" value={{$initial->kamerAang}}>
+                                    <input class="input form-control" type="text" name="kamerAang" id="" value={{$initial->kamerAang}}>
                                 </div>
 
                             </td>
@@ -432,4 +434,5 @@
             </section>
         </form>
     </section>
+    <script src="/js/disable.js"></script>
 @endsection

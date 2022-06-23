@@ -37,6 +37,11 @@ class Note extends Model
         $this->save();
     }
 
+  /**
+   * adds the pallet amount that is logged when restart label is end of shift.
+   * and returns a boolean to see if an error message should be sent through.
+   * @return $error boolean
+   */
     public function logPalletQuantity($order) {
         $order->quantity_produced += $this->numberLog;
         $order->save();

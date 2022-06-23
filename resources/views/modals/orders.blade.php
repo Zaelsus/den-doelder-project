@@ -45,7 +45,6 @@
             </div>
             <div class="modal-body">
                 <p> Are you sure you want to start production for order number {{$order->order_number}}?</p>
-
             </div>
             <div class="modal-footer">
                 <div>

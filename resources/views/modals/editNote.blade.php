@@ -20,6 +20,29 @@
                 <form class="was-validated" method="POST" action="{{ route('notes.update',$note) }}">
                     @csrf
                     @method('PUT')
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div>
+                                <label class="form-check-label"><b>Label</b></label><br>
+                            </div>
+                            <select name="label" id="labelEdit" class="custom-select @error('label') is-invalid @enderror" required>
+                                <option value="" >Choose a label</option>
+                                <option value="Regular Note"
+                                    {{$note->label === 'Regular Note' ? 'selected':''}}>
+                                    Regular Note</option>
+                                <option value="Mechanical Issue"
+                                    {{$note->label === 'Mechanical Issue' || $note->label === 'Mechanical Issue (Error)' ? 'selected':''}}>
+                                    Mechanical Issue</option>
+                                <option value="Material Issue"
+                                    {{$note->label === 'Material Issue' || $note->label === 'Material Issue (Error)' ? 'selected':''}}>
+                                    Material Issue</option>
+                                <option value="Technical Issue"
+                                    {{$note->label === 'Technical Issue' || $note->label === 'Technical Issue (Error)' ? 'selected':''}}>
+                                    Technical Issue</option>
+                            </select>
+                            <br>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <div class="mb-3">
                             <label class="requirednote" for="title">Title</label>
@@ -41,30 +64,6 @@
                             <p class="help is-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                    <div>
-                        <label class="form-check-label"><b>Labels</b></label><br>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="labelEdit" value="Regular Note"
-                                       {{$note->label === 'Regular Note' ? 'checked' : ''}} required>Regular Note
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="labelEdit" value="Mechanical Issue"
-                                       {{$note->label === 'Mechanical Issue' ? 'checked' : ''}}required>Mechanical Issue
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="labelEdit" value="Material Issue"
-                                       {{$note->label === 'Material Issue' ? 'checked' : ''}} required>Material Issue
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="labelEdit" value="Technical Issue"
-                                       {{$note->label === 'Technical Issue' ? 'checked' : ''}} required>Technical Issue
-                            </div>
-                            <br>
-                        </div>
-                    </div>
                     </div>
                         <button type="submit" class="btn btn-lg btn-block bg-gradient-olive">Submit</button>
                 </form>

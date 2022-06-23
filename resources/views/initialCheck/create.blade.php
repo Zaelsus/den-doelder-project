@@ -46,12 +46,12 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingAangB" id=""  >
+                                    <input class="input form-control" value="{{old('afmetingAangB')}}" type="text" name="afmetingAangB" id=""  >
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingHtKdB" id="" >
+                                    <input class="input form-control" value="{{old('afmetingHtKdB')}}" type="text" name="afmetingHtKdB" id="" >
                                 </div>
                             </td>
                         </tr>
@@ -73,13 +73,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalAang" id="" >
+                                    <input class="input form-control" value="{{old('aantalAang')}}" type="text" name="aantalAang" id="" >
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalHtKd" id="">
+                                    <input class="input form-control" value="{{old('aantalHtKd')}}" type="text" name="aantalHtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -101,13 +101,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="klampenAang" id=" ">
+                                    <input class="input form-control" value="{{old('klampenAang')}}" type="text" name="klampenAang" id=" ">
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="klampenHtKd" id="">
+                                    <input class="input form-control" value="{{old('klampenHtKd')}}" type="text" name="klampenHtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -129,12 +129,12 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="schimmelAang" id=" ">
+                                    <input class="input form-control" value="{{old('schimmelAang')}}" type="text" name="schimmelAang" id=" ">
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="schimmelHtKd" id="">
+                                    <input class="input form-control" value="{{old('schimmelHtKd')}}" type="text" name="schimmelHtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -156,12 +156,12 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="waanAang" id=" ">
+                                    <input class="input form-control" value="{{old('waanAang')}}" type="text" name="waanAang" id=" ">
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="waanHtKd" id="">
+                                    <input class="input form-control" value="{{old('waanHtKd')}}" type="text" name="waanHtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -174,7 +174,7 @@
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
-                        <p class="card bg-gradient-red subtitle">Select at least one </p>
+                        <p class="card bg-gradient-red subtitle form-control">Select only one </p>
                     </section>
 
                     <table class="table table-bordered table-hover table-secondary">
@@ -190,7 +190,7 @@
                             <td>
                                 <div>
                                     <div class="control">
-                                        <select name="soort" class="textarea  @error ('soort') is-danger @enderror ">
+                                        <select name="soort" class="textarea custom-select  @error ('soort') is-danger @enderror ">
                                             <option value="">Choose Type</option>
                                             <option value='Spaan' @if(old('soort') ==  'Spaan') selected @endif>Spaan</option>
                                             <option value="Hout" @if(old('soort') ==  'Hout') selected @endif>Hout</option>
@@ -205,13 +205,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="soortAang" id="" >
+                                    <input class="input form-control" value="{{old('soortAang')}}" type="text" name="soortAang" id="" >
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="soortHtKd" id="">
+                                    <input class="input form-control" value="{{old('soortHtKd')}}" type="text" name="soortHtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -222,7 +222,7 @@
                             <td>
                                 <div>
                                     <div class="control">
-                                        <select name="balk" class="textarea   @error ('balk') is-danger @enderror ">
+                                        <select name="balk" class="textarea custom-select   @error ('balk') is-danger @enderror ">
                                             <option value="">Choose Measurement</option>
                                             <option value="Afmeting1">Afmeting 1</option>
                                             <option value="Afmeting2">Afmeting 2</option>
@@ -237,14 +237,14 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkAang" id="">
+                                    <input class="input form-control" value="{{old('balkAang')}}" type="text" name="balkAang" id="">
                                 </div>
                             </td>
 
                             <td>
 
                                 <div class="control ">
-                                    <input class="input " type="text" name="balkHtKd" id="" >
+                                    <input class="input form-control" value="{{old('balkHtKd')}}" type="text" name="balkHtKd" id="" >
                                 </div>
                             </td>
                         </tr>
@@ -260,24 +260,25 @@
                     </section>
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
-
+                            <th></th>
                             <th>Type</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
                         </tr>
 
                         <tr>
-                        <td>
+                        <td> Description</td>
+                            <td>
                                 <div>
                                     <div class="control">
-                                        <select name="onderdek" class="textarea  @error('onderdek') is-danger @enderror">
+                                        <select name="onderdek" class="textarea custom-select  @error('onderdek') is-danger @enderror">
                                             <option value="">Choose Type</option>
-                                            <option value='Brug'>Brug</option>
-                                            <option value="Ronddloper Afm(2x)">Ronddloper Afm(2x)</option>
-                                            <option value="Ronddloper Afm(3x)">Ronddloper Afm(3x)</option>
-                                            <option value="Kruisdek">Kruisdek</option>
-                                            <option value="Elementen">Elementen</option>
-                                            <option value="Dubbel Dek">Dubbel Dek</option>
+                                            <option value='Brug' @if(old('onderdek') ==  'Brug') selected @endif>Brug</option>
+                                            <option value="Ronddloper Afm(2x)" @if(old('onderdek') ==  'Ronddloper Afm(2x)') selected @endif>Ronddloper Afm(2x)</option>
+                                            <option value="Ronddloper Afm(3x)" @if(old('onderdek') ==  'Ronddloper Afm(3x)') selected @endif>Ronddloper Afm(3x)</option>
+                                            <option value="Kruisdek" @if(old('onderdek') ==  'Kruisdek') selected @endif>Kruisdek</option>
+                                            <option value="Elementen" @if(old('onderdek') ==  'Elementen') selected @endif>Elementen</option>
+                                            <option value="Dubbel Dek" @if(old('onderdek') ==  'Dubbel Dek') selected @endif>Dubbel Dek</option>
                                         </select>
                                     </div>
                                     @error('onderdek')
@@ -288,13 +289,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="onderdekAang" id="" >
+                                    <input class="input form-control" value="{{old('onderdekAang')}}" type="text" name="onderdekAang" id="" >
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="onderdekHtKd" id="">
+                                    <input class="input form-control" value="{{old('onderdekHtKd')}}" type="text" name="onderdekHtKd" id="">
 
                                 </div>
                             </td>
@@ -335,7 +336,7 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="hoekenAang" id="" >
+                                    <input class="input form-control" value="{{old('hoekenAang')}}" type="text" name="hoekenAang" id="" >
                                 </div>
                             </td>
 
@@ -357,7 +358,7 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="stempelsAang" id="" >
+                                    <input class="input form-control" value="{{old('stempelsAang')}}" type="text" name="stempelsAang" id="" >
                                 </div>
                             </td>
                         </tr>
@@ -379,7 +380,7 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="stapelAang" id=" ">
+                                    <input class="input form-control" value="{{old('stapelAang')}}" type="text" name="stapelAang" id=" ">
                                 </div>
                             </td>
                         </tr>
@@ -388,10 +389,10 @@
                             <td>
                                 <div >
                                     <div class="control">
-                                        <select name="strappenTick" class="textarea  @error('strappenTick') is-danger @enderror">
+                                        <select name="strappenTick" class="textarea custom-select  @error('strappenTick') is-danger @enderror">
                                             <option value="">Choose Type</option>
-                                            <option value='Strappen'>Strappen</option>
-                                            <option value="Markeren">Markeren</option>
+                                            <option value='Strappen' @if(old('strappenTick') ==  'Strappen') selected @endif>Strappen</option>
+                                            <option value="Markeren" @if(old('strappenTick') ==  'Markeren') selected @endif>Markeren</option>
                                         </select>
                                     </div>
                                     @error('strappenTick')
@@ -403,7 +404,7 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="strappenAang" id=" ">
+                                    <input class="input form-control" value="{{old('strappenAang')}}" type="text" name="strappenAang" id=" ">
                                 </div>
                             </td>
 
@@ -416,11 +417,11 @@
                             <td>
                                 <div >
                                     <div class="control">
-                                        <select name="kamerTick" class="textarea  @error('kamerTick') is-danger @enderror">
+                                        <select name="kamerTick" class="textarea custom-select  @error('kamerTick') is-danger @enderror">
                                             <option value="">Choose Type</option>
-                                            <option value='Q(kamer)'>Q(kamer)</option>
-                                            <option value="Loods">Loods</option>
-                                            <option value="A">A</option>
+                                            <option value='Q(kamer)' @if(old('kamerTick') ==  'Q(kamer)') selected @endif >Q(kamer)</option>
+                                            <option value="Loods" @if(old('kamerTick') ==  'Loods') selected @endif>Loods</option>
+                                            <option value="A" @if(old('kamerTick') ==  'A') selected @endif>A</option>
                                         </select>
                                     </div>
                                     @error('kamerTick')
@@ -431,7 +432,7 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="kamerAang" id=" ">
+                                    <input class="input form-control" value="{{old('kamerAang')}}" type="text" name="kamerAang" id=" ">
                                 </div>
                             </td>
                         </tr>
@@ -459,4 +460,5 @@
             </section>
         </form>
     </section>
+    <script src="/js/disable.js"></script>
 @endsection

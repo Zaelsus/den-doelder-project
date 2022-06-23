@@ -134,7 +134,6 @@
 
 @section('custom_js')
     <script>
-
         // Function to automatically populate the "Extra Info" field with set data based off the Def ID selection
         function addExtraInfo() {
             let options = document.getElementById("def_id")

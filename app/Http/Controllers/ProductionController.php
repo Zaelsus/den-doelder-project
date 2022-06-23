@@ -156,7 +156,7 @@ class ProductionController extends Controller
             'strappenAang'=>'min:0',
             'strappenCorrect'=>'min:0',
 
-            'spijkerTick'=>'required',
+            'spijkerTick'=>'required|boolean',
             'spijkerAang'=>'min:0',
             'spijkerCorrect'=>'min:0',
 
