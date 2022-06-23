@@ -21,6 +21,7 @@
 @extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.finishProduction':'blank')
 @extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.truck':'blank')
 @extends(Auth::user()->role !=='Administrator' ? 'modals.machines':'blank')
+@extends(Auth::user()->role !=='Administrator' && isset($order, $machine) ? 'modals.logPallets':'blank')
 <div class="wrapper">
     <!-- Main Header -->
     <nav class="main-header navbar navbar-expand navbar-light colour-purple">

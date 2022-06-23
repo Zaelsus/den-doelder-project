@@ -20,9 +20,38 @@ class Note extends Model
         return $this->belongsTo(Order::class, 'order_id');
     }
 
-//    public function setFixLogContent()
-//    {
-//        $fixLog = Note::where('note_rel', $note->id);
-//        dd($fixlog);
-//    }
+    /**
+     * if there is an error note without a fix note, the priority is high.
+     * if there is an error note with a fixe note, the priority goes to low again.
+     * @return void
+     */
+    public function updatePriority(): void
+    {
+        if($this->fix === 'Error!') {
+           $this->update(['priority' => 'high']);
+        }
+        if($this->note_rel !== null) {
+            self::where('id', $this->note_rel)->update(['priority' => 'low']);
+        }
+
+        $this->save();
+    }
+
+  /**
+   * adds the pallet amount that is logged when restart label is end of shift.
+   * and returns a boolean to see if an error message should be sent through.
+   * @return $error boolean
+   */
+    public function logPalletQuantity($order) {
+        $order->quantity_produced += $this->numberLog;
+        $order->save();
+
+        if($order->quantity_produced > $order->quantity_production) {
+            $error = true;
+        }
+        else {
+            $error = false;
+        }
+        return $error;
+    }
 }
