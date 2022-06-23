@@ -7,9 +7,6 @@
 @section('content')
     <div class="column is-9-desktop ">
         <section class="content" >
-            <div class="has-text-right">
-                <a href="{{route('production.edit', $production)}}" class="btn btn-info btn-lg float-right">Edit</a>
-            </div>
     @if(Auth::user()->role === 'Production')
                 <div class="has-text-right">
                     <a href="{{route('production.edit', $production)}}" class="btn btn-info btn-lg float-right">Edit</a>
