@@ -14,9 +14,9 @@ class LocationFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->randomLetter,
-            'available_storage_space'=>$this->faker->numberBetween(0,100),
-            'type'=>$this->faker->randomElement(['Pallets', 'Materials']),
+            'name'=>$this->faker->unique()->randomLetter,
+            'available_storage_space'=>$this->faker->numberBetween(0,2000),
+            'type'=>'Materials',
         ];
     }
 }
