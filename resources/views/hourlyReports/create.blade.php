@@ -29,25 +29,29 @@
                                         required>
                                     <option value="">Select one</option>
                                     <option
-                                        value=1 {{ old('def_id') ? 'selected' : ''}}>
+                                        value='No Issues' {{ old('def_id') ? 'selected' : ''}}>
+                                        No Issues
+                                    </option>
+                                    <option
+                                        value='Stable Stacked Pallets' {{ old('def_id') ? 'selected' : ''}}>
                                         1. Stable Stacked Pallets
                                     </option>
                                     <option
-                                        value='2' {{ old('def_id') ? 'selected' : ''}}>
+                                        value='Dust, Fungi & Quality Planks' {{ old('def_id') ? 'selected' : ''}}>
                                         2. Dust, Fungi & Quality Planks
                                     </option>
                                     <option
-                                        value='3' {{ old('def_id') ? 'selected' : ''}}>
+                                        value='Measurement Pallet & Parts' {{ old('def_id') ? 'selected' : ''}}>
                                         3. Measurement Pallet & Parts
                                     </option>
-                                    <option value='4' {{ old('def_id') ? 'selected' : ''}}>
+                                    <option value='Position Nails' {{ old('def_id') ? 'selected' : ''}}>
                                         4. Position Nails
                                     </option>
-                                    <option value='5' {{ old('def_id') ? 'selected' : ''}}>
+                                    <option value='Corners/Stamps' {{ old('def_id') ? 'selected' : ''}}>
                                         5. Corners/Stamps
                                     </option>
                                     <option
-                                        value='6' {{ old('def_id') ? 'selected' : ''}}>
+                                        value='Abnormality Material' {{ old('def_id') ? 'selected' : ''}}>
                                         6. Abnormality Material
                                     </option>
                                 </select>
@@ -140,17 +144,19 @@
             let selected = options.value;
             let extraInfo = document.getElementById("extra_info");
 
-            if (selected == 1) {
+            if (selected === 'No Issues') {
+                extraInfo.value = 'No Issues';
+            } else if (selected === 'Stable Stacked Pallets') {
                 extraInfo.value = 'No Shaky Pallets';
-            } else if (selected == 2) {
+            } else if (selected === 'Dust, Fungi & Quality Planks') {
                 extraInfo.value = 'Per Pallet and Customer Dependent';
-            } else if (selected == 3) {
+            } else if (selected === 'Measurement Pallet & Parts') {
                 extraInfo.value = 'Clear and Easy to Read';
-            } else if (selected == 4) {
+            } else if (selected === 'Position Nails') {
                 extraInfo.value = 'Length, Width & Height';
-            } else if (selected == 5) {
+            } else if (selected === 'Corners/Stamps') {
                 extraInfo.value = 'No Protruding Nails';
-            } else if (selected == 6) {
+            } else if (selected === 'Abnormality Material') {
                 extraInfo.value = 'All Corners & Stamps Correct';
             }
         }

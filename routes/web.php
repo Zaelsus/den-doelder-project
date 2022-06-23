@@ -114,8 +114,8 @@ Route::resource('/productLocations', ProductLocationController::class);
 Route::get('/productLocations/list/{order}', [ProductLocationController::class, 'list'])->name('productLocations.list'); // Custom Index
 Route::get('/productLocations/addLocation/{order}', [ProductLocationController::class, 'addLocation'])->name('productLocations.addLocation'); // Custom Create
 Route::post('/productLocations/storeLocation/{order}', [ProductLocationController::class, 'storeLocation'])->name('productLocations.storeLocation'); // Custom Store
-Route::get('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'editLocation'])->name('productLocations.editLocation');
-Route::put('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'updateLocation'])->name('productLocations.updateLocation');
+Route::get('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'editLocation'])->name('productLocations.editLocation'); // Custom Edit
+Route::put('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'updateLocation'])->name('productLocations.updateLocation'); // Custom Update
 
 // Truck Driver - see the list of orders
 Route::get('/driver/list/{machine}', [TruckDriverController::class, 'list'])->name('truckDrivers.list');
