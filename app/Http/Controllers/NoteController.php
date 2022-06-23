@@ -27,6 +27,7 @@ class NoteController extends Controller
         $allNotes = Note::all();
         foreach($allNotes as $note) {
             event(new NotePriorityChange($note));
+//            $fixLogContent = Note::setFixLogContent($note);
         }
 
         //different note collections for different roles, get the

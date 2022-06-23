@@ -19,4 +19,10 @@ class Note extends Model
     {
         return $this->belongsTo(Order::class, 'order_id');
     }
+
+//    public function setFixLogContent()
+//    {
+//        $fixLog = Note::where('note_rel', $note->id);
+//        dd($fixlog);
+//    }
 }
