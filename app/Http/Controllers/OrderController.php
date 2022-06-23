@@ -350,19 +350,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for editing only quantity produced
-     *
-     * @param \App\Models\Order $order
-     * @return \Illuminate\Http\Response
-     */
-    public function editquantity(Order $order)
-    {
-//        dd($order);
-
-        return view('orders.editquantity', compact('order'));
-    }
-
-    /**
      * Update the quantity produced in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -377,9 +364,14 @@ class OrderController extends Controller
         try {
             $order->update($validated);
             $order->addProduced();
-            return redirect(route('orders.editquantity', $order));
+            if($order->quantity_produced > $order->quantity_production) {
+                return redirect(route('orders.show', $order))->with('error', 'Required amount of pallets reached, production of order can be finished');
+            }
+            else {
+                return redirect(route('orders.show', $order));
+            }
         } catch (\Exception $exception) {
-            return redirect(route('orders.editquantity', $order))->with('error', 'The value is higher than the quantity to be produced');
+            return redirect(route('orders.show', $order))->with('error', 'The value is higher than the quantity to be produced');
 
         }
 

@@ -4,7 +4,7 @@
     @extends('modals.orders')
     <br>
     @if(session()->has('error'))
-        <div class="alert alert-danger alert-dismissible fade show">
+        <div class="alert alert-warning alert-dismissible fade show">
             {{ session()->get('error') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -94,14 +94,6 @@
                             Start Driving
                         @endif
                     </button>
-{{--                @elseif(($order->status === 'Production Pending' || $order->status === 'In Production' || $order->status === 'Done') && Auth::user()->role === 'Driver' && $order->truckDriver_status === 'Paused' && App\Models\TruckDriver::getDrivingOrder($order->machine) === null)--}}
-{{--                    <form method="POST" action="{{route('orders.startDriving', $order)}}">--}}
-{{--                        @csrf--}}
-{{--                        <button onclick="return confirm('Restart driving for order {{$order->order_number}}?')"--}}
-{{--                                class="far fas fa-arrow-alt-circle-up btn btn-success btn-block small-box-footer"--}}
-{{--                                type="submit"> Restart Driving--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
                 @elseif(Auth::user()->role === 'Administrator' && $order->selected === 0)
                     <form class="text-center" method="POST" action="{{route('orders.selectOrder', $order)}}">
                         @csrf

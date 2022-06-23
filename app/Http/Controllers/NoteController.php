@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Order;
 use App\Models\TruckDriver;
+use App\Providers\NotePriorityChange;
+use App\Providers\StatusChangeProduction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,13 +22,12 @@ class NoteController extends Controller
         //find current order selected
         $order = $this->findOrderForUser();
 
-        //first get all the notes
-        $notes = Note::all();
-
-        //update priority of note, loop through the notes
-        //to see if the priority should be updated
-        foreach($notes as $note) {
-            $note->updatePriority();
+        //update priority of note, loop through all the notes
+        //and let an eventlistener look if priority should be changed
+        $allNotes = Note::all();
+        foreach($allNotes as $note) {
+            event(new NotePriorityChange($note));
+//            $fixLogContent = Note::setFixLogContent($note);
         }
 
         //different note collections for different roles, get the
@@ -71,21 +72,18 @@ class NoteController extends Controller
         //store the note with the attributes of the request, together with the set fix, note related and order id
         $note = Note::create($this->validateNote($request, $order->id, $fix, $note_rel));
 
-
-        //Update the status of the order. If the status is in production and an error note is set in, the status is
-        //updated to paused. If the status is paused and the note is a fix note, update the status to in production.
-        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)'
-                || $note->label === 'Lunch Break' || $note->label === 'End of Shift' || $note->label === 'Cleaning')) {
-            $order->update(['status' => 'Paused']);
-        } else if(($order->status === 'Paused') && ($note->label === 'Fix')) {
-            $order->update(['status' => 'In Production']);
-        }
+        //Update the status of the order to Paused or In Production when necessary
+        event(new StatusChangeProduction($order, $note));
 
         //if the label is 'End of Shift', redirect to edit quantity, otherwise redirect to the index page of the note
-        if($note->label === 'End of Shift') {
-            return redirect(route('orders.editquantity', $order));
+        if($note->numberLog !== null) {
+           $error = $note->logPalletQuantity($order);
+           if($error === true) {
+               return redirect(route('orders.show', $order))->with('error', 'Required amount of pallets reached, production of order can be finished');
+           } else {
+               return redirect(route('orders.show', $order));
+           }
         }
-
         return redirect(route('notes.index', $note));
     }
 
@@ -227,6 +225,7 @@ class NoteController extends Controller
             'content'=>'',
             'fixContent'=>'',
             'label'=>'',
+            'numberLog'=>''
         ]);
 
         $validatedAttributes['order_id'] = $order_id;

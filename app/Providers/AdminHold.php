@@ -31,7 +31,7 @@ class AdminHold
 
         if ($userInfo->role === 'Administrator') {
             foreach ($orders as $order) {
-                if (count($order->orderMaterials) === 0 || $order->machine->name === 'None' || $order->start_date === null) {
+                if ((count($order->orderMaterials) === 0 || $order->machine->name === 'None' || $order->start_date === null)&& $order->status !=='Canceled') {
                     $order->update(['status' => 'Admin Hold']);
                 }
             }

@@ -472,4 +472,5 @@
             </section>
         </form>
     </section>
+    <script src="/js/disable.js"></script>
 @endsection
