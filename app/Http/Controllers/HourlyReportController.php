@@ -123,6 +123,7 @@ class HourlyReportController extends Controller
      */
     public function list(Order $order)
     {
+        dd($order);
             $hourlyReports = $order->hourlyReports;
 
         return view('hourlyReports.index', compact('order', 'hourlyReports'));
@@ -140,18 +141,4 @@ class HourlyReportController extends Controller
 
         return view('hourlyReports.create', ['order' => $order, 'hourlyReports' => $hourlyReports]);
     }
-
-//    /**
-//     * Function that accepts the order's slug and finds the corresponding attributes in the Order's table
-//     * @param $details - the order's slug
-//     * @return array containing specific attributes associated with the order's slug
-//     */
-//    public function getReportDetails($details)
-//    {
-//        $order = Order::find($details);
-//        $orderId = $order->id;
-//        $hourlyReports = HourlyReport::where('order_id', $orderId)->get();
-//
-//        return ['order' => $order, 'orderId' => $orderId, 'hourlyReports' => $hourlyReports];
-//    }
 }

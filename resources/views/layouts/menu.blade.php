@@ -66,17 +66,15 @@
                                     data-target="#pauseProd">
                                 Pause
                             </button>
+
                         </a>
                         <a class="nav-item">
-                            <form method="POST"
-                                  action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
-                                @csrf
-                                <button onclick="return confirm('Is this order completed?')"
-                                        class="far fa-stop-circle btn btn-danger btn-block "
-                                        type="submit"> Finish Order
+                                <button type="button" class="far fa-stop-circle btn btn-danger btn-block "
+                                        data-toggle="modal"
+                                        data-target="#finishOrder">
+                                    Finish Order
                                 </button>
-                            </form>
-                        </a>
+                       </a>
                     @endif
 
             </div>
@@ -126,11 +124,6 @@
                        class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
-                    </a>
-                    <a href="{{route('productLocations.show',$order)}}"
-                       class="nav-link active bg-gray-dark btn text-left">
-                        <i class="nav-icon fas fa-compass"></i>
-                        <p>Location</p>
                     </a>
                 @endif
             </div>
@@ -277,6 +270,11 @@
                     <a href="{{route('notes.index')}}" class="nav-link active bg-gray-dark btn text-left">
                         <i class="nav-icon fas fa-book"></i>
                         <p>Notes</p>
+                    </a>
+                    <a href="{{route('productLocations.list',$order)}}"
+                       class="nav-link active bg-gray-dark btn text-left">
+                        <i class="nav-icon fas fa-compass"></i>
+                        <p>Location</p>
                     </a>
                 </div>
             </li>
