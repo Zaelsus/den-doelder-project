@@ -5,10 +5,9 @@
 @endsection
 
 @section('content')
-
+    <div class="column is-9-desktop ">
+        <section class="content" >
     @if(Auth::user()->role === 'Production')
-        <div class="column is-9-desktop ">
-            <section class="content" >
                 <div class="has-text-right">
                     <a href="{{route('production.edit', $production)}}" class="btn btn-info btn-lg float-right">Edit</a>
                 </div>
@@ -18,10 +17,6 @@
                     <section class="hero">
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Bovendek</h5>
-                            {{--set to danger--}}
-                            <p class="card bg-gradient-red subtitle">
-                                Controle na eerste stapel bovendekken!
-                            </p>
                         </div>
                     </section>
 
@@ -179,6 +174,7 @@
 
                     <table class="table table-bordered table-hover table-secondary">
                         <tr>
+                            <th></th>
                             <th>Type</th>
                             <th>Aangepast naar</th>
                             <th>Ht/Kd: vocht %</th>
@@ -186,6 +182,7 @@
 
 
                         <tr>
+                            <td>Description</td>
 
                             <td>
                                 {{$production->onderdek}}
@@ -283,7 +280,7 @@
                         <tr>
                             <td>Spijkers</td>
                             <td>
-                                {{$production->spijkerTick }}
+                                {{$production->spijkerTick === 1 ? '✔': '✖' }}
                             </td>
 
                             <td>

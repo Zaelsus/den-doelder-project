@@ -111,7 +111,6 @@
                                 <div class="hero-body">
                                     <h5 class="card bg-gradient-purple">Klossen</h5>
                                 </div>
-                                <p class="card bg-gradient-red subtitle">Select at least one</p>
                             </section>
 
                             <table class="table table-bordered table-hover table-secondary">
@@ -175,6 +174,7 @@
 
                             <table class="table table-bordered table-hover table-secondary">
                                 <tr>
+                                    <th>            </th>
                                     <th>Type</th>
                                     <th>Aangepast naar</th>
                                     <th>Ht/Kd: vocht %</th>
@@ -183,6 +183,7 @@
 
                                 <tr>
 
+                                    <td>Description</td>
                                     <td>
                                         {{$initial->onderdek}}
                                     </td>
