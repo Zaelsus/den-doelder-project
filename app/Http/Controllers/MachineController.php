@@ -58,7 +58,7 @@ class MachineController extends Controller
             $order = TruckDriver::getDrivingOrder($machine);
             if($order === null){
                 $orders = Order::where('machine_id', $machine->id)
-                    ->where('status','!=','Admin Hold')
+                    ->where('status','!=','Admin Hold')->where('status','!=','Quality Check Pending')
                     ->where(function($query) {
                         $query->where('truckDriver_status','!=','Delivered')
                         ->orwhere('truckDriver_status',null);
