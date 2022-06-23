@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Order;
 use App\Models\TruckDriver;
+use App\Providers\NotePriorityChange;
+use App\Providers\StatusChangeProduction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,13 +22,12 @@ class NoteController extends Controller
         //find current order selected
         $order = $this->findOrderForUser();
 
-        //first get all the notes
-        $notes = Note::all();
-
-        //update priority of note, loop through the notes
-        //to see if the priority should be updated
-        foreach($notes as $note) {
-            $note->updatePriority();
+        //update priority of note, loop through all the notes
+        //and let an eventlistener look if priority should be changed
+        $allNotes = Note::all();
+        foreach($allNotes as $note) {
+            event(new NotePriorityChange($note));
+//            $fixLogContent = Note::setFixLogContent($note);
         }
 
         //different note collections for different roles, get the
@@ -71,13 +72,8 @@ class NoteController extends Controller
         //store the note with the attributes of the request, together with the set fix, note related and order id
         $note = Note::create($this->validateNote($request, $order->id, $fix, $note_rel));
 
-        //Update the status of the order. If the status is in production and an error note is set in, the status is
-        //updated to paused. If the status is paused and the note is a fix note, update the status to in production.
-        if(($order->status === 'In Production') && (substr($note->label, -7) === '(Error)' || $note->label === 'Lunch Break' || $note->label === 'End of Shift')) {
-            $order->update(['status' => 'Paused']);
-        } else if(($order->status === 'Paused') && ($note->label === 'Fix')) {
-            $order->update(['status' => 'In Production']);
-        }
+        //Update the status of the order to Paused or In Production when necessary
+        event(new StatusChangeProduction($order, $note));
 
         //if the label is 'End of Shift', redirect to edit quantity, otherwise redirect to the index page of the note
         if($note->label === 'End of Shift') {
@@ -108,8 +104,12 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
+        $fix = $this->setFix($note->label);
+
+        //if it comes from fixStoppage, get the error note related to the fix
+        $note_rel = $request->input('note_rel');
         $order_id = $note->order_id;
-        $note->update($this->validateNote($request, $order_id));
+        $note->update($this->validateNote($request, $order_id, $fix, $note_rel));
 
         return redirect('/notes');
     }
@@ -161,15 +161,10 @@ class NoteController extends Controller
     public function getOrder() {
         $machine = Auth::user()->machine;
         if(Auth::user()->role === 'Driver') {
-            $order = TruckDriver::findDriverOrder();
+            $order = TruckDriver::getDrivingOrder($machine);
         } else {
-            if (Order::isInProduction($machine) === 'In Production') {
-                $order = Order::where('status', 'In Production')->first();
-            } elseif (Order::isInProduction($machine) === 'Paused') {
-                $order = Order::where('status', 'Paused')->first();
-            }
+           $order=Order::getOrder($machine);
         }
-
         return $order;
     }
 
@@ -182,7 +177,7 @@ class NoteController extends Controller
             $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('priority', 'asc')->orderBy('created_at', 'desc')->get();
         } else {
             //truck driver sees notes that are made by truck drivers and only for this order
-            $notes = Note::where('order_id', $order->id)->where('creator', 'Driver');
+            $notes = Note::where('order_id', $order->id)->where('creator', 'Driver')->orderBy('created_at', 'desc')->get();
         }
 
         return $notes;
@@ -221,12 +216,13 @@ class NoteController extends Controller
      */
     public function validateNote(Request $request, $order_id, $fix, $note_rel): array
     {
-
         $validatedAttributes = $request->validate([
-            'title'=>'required',
-            'content'=>'required',
-            'label'=>'required',
+            'title'=>'',
+            'content'=>'',
+            'fixContent'=>'',
+            'label'=>'',
         ]);
+
         $validatedAttributes['order_id'] = $order_id;
         $validatedAttributes['note_rel'] = $note_rel;
         $validatedAttributes['priority'] = 'low';
@@ -241,7 +237,6 @@ class NoteController extends Controller
         } else {
             $validatedAttributes['creator'] = 'Driver';
         }
-
 
         return $validatedAttributes;
     }

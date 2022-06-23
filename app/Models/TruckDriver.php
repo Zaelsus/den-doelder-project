@@ -11,22 +11,13 @@ class TruckDriver extends Model
     use HasFactory;
 
     /**
-     * returns if there is an order selected (for truck driver view)
+     * Get the current order which is in driving status for truck driver status or null if there isnt one
+     * @param Machine $machine
+     * @return null
      */
-    public static function isSelected()
+    public static function getDrivingOrder(Machine $machine)
     {
-        $orderSelected = Order::where('active_driver', 1)->first();
-        if ($orderSelected !== null) {
-            return $orderSelected;
-        }
-        return null;
-    }
-
-    public static function findDriverOrder()
-    {
-        $machine = Auth::user()->machine;
         $order = $machine->orders->where('truckDriver_status', 'Driving')->first();
-
         if($order === null){
             return null;
         }

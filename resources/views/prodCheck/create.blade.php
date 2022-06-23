@@ -48,12 +48,12 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingAangB" id=""  >
+                                    <input class="input form-control" value="{{old('afmetingAangB')}}" type="text" name="afmetingAangB" id=""  >
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="afmetingCorrectB" id="" >
+                                    <input class="input form-control" value="{{old('afmetingCorrectB')}}" type="text" name="afmetingCorrectB" id="" >
                                 </div>
                             </td>
                         </tr>
@@ -75,13 +75,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalAang" id="" >
+                                    <input class="input form-control" value="{{old('aantalAang')}}" type="text" name="aantalAang" id="" >
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="aantalCorrect" id="">
+                                    <input class="input form-control" value="{{old('aantalCorrect')}}" type="text" name="aantalCorrect" id="">
                                 </div>
                             </td>
                         </tr>
@@ -103,12 +103,12 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spatiesAang" id=" ">
+                                    <input class="input form-control" value="{{old('spatiesAang')}}" type="text" name="spatiesAang" id=" ">
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="spatiesCorrect" id="">
+                                    <input class="input form-control" value="{{old('spatiesCorrect')}}" type="text" name="spatiesCorrect" id="">
                                 </div>
                             </td>
                         </tr>
@@ -129,13 +129,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="klampenAang" id=" ">
+                                    <input class="input form-control" value="{{old('klampenAang')}}" type="text" name="klampenAang" id=" ">
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="klampenCorrect" id="">
+                                    <input class="input form-control" value="{{old('klampenCorrect')}}" type="text" name="klampenCorrect" id="">
                                 </div>
                             </td>
                         </tr>
@@ -157,12 +157,12 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="overstekAangB" id=" ">
+                                    <input class="input form-control" value="{{old('overstekAangB')}}" type="text" name="overstekAangB" id=" ">
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="overstekCorrectB" id="">
+                                    <input class="input form-control" value="{{old('overstekCorrectB')}}" type="text" name="overstekCorrectB" id="">
                                 </div>
                             </td>
                         </tr>
@@ -174,7 +174,7 @@
                         <div class="hero-body">
                             <h5 class="card bg-gradient-purple">Klossen</h5>
                         </div>
-                        <p class="card bg-gradient-red subtitle">Select at least one </p>
+                        <p class="card bg-gradient-red subtitle form-control">Select only one </p>
                     </section>
 
                     <table class="table table-bordered table-hover table-secondary">
@@ -205,13 +205,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="soortAang" id="" >
+                                    <input class="input form-control" value="{{old('soortAang')}}" type="text" name="soortAang" id="" >
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="soortHtKd" id="">
+                                    <input class="input form-control" value="{{old('soortHtKd')}}" type="text" name="soortHtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -237,13 +237,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="balkAang" id="">
+                                    <input class="input form-control" value="{{old('balkAang')}}" type="text" name="balkAang" id="">
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="balkHtKd" id="" >
+                                    <input class="input form-control" value="{{old('balkHtKd')}}" type="text" name="balkHtKd" id="" >
 
                                 </div>
                             </td>
@@ -286,13 +286,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="onderdekAang" id="" >
+                                    <input class="input form-control" value="{{old('onderdekAang')}}" type="text" name="onderdekAang" id="" >
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="onderdekHtKd" id="">
+                                    <input class="input form-control" value="{{old('onderdekHtKd')}}" type="text" name="onderdekHtKd" id="">
                                 </div>
                             </td>
                         </tr>
@@ -335,12 +335,12 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="hoekenAang" id="" >
+                                    <input class="input form-control" value="{{old('hoekenAang')}}" type="text" name="hoekenAang" id="" >
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="hoekenCorrect" id="">
+                                    <input class="input form-control" value="{{old('hoekenCorrect')}}" type="text" name="hoekenCorrect" id="">
                                 </div>
                             </td>
                         </tr>
@@ -361,13 +361,13 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="stempelsAang" id="" >
+                                    <input class="input form-control" value="{{old('stempelsAang')}}" type="text" name="stempelsAang" id="" >
                                 </div>
                             </td>
 
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="stempelsCorrect" id="" >
+                                    <input class="input form-control" value="{{old('stempelsCorrect')}}" type="text" name="stempelsCorrect" id="" >
                                 </div>
                             </td>
                         </tr>
@@ -389,12 +389,12 @@
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="stapelAang" id=" ">
+                                    <input class="input form-control" value="{{old('stapelAang')}}" type="text" name="stapelAang" id=" ">
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="stapelCorrect" id="">
+                                    <input class="input form-control" value="{{old('stapelCorrect')}}" type="text" name="stapelCorrect" id="">
                                 </div>
                             </td>
                         </tr>
@@ -418,7 +418,7 @@
 
                             <td>
                                 <div class="control ">
-                                    <input class="input" type="text" name="strappenAang" id=" ">
+                                    <input class="input form-control" value="{{old('strappenAang')}}" type="text" name="strappenAang" id=" ">
                                 </div>
                             </td>
 
@@ -428,30 +428,29 @@
                         <tr>
                             <td>Spijkers </td>
 
-                            <td>
-                                <div >
-                                    <div class="control">
-                                        <select name="spijkerTick" class="textarea  @error('spijkerTick') is-danger @enderror">
-                                            <option value="">Choose Type</option>
-                                            <option value='BD'>BD</option>
-                                            <option value="TD">TD</option>
-                                            <option value="OD">OD</option>
-                                        </select>
-                                    </div>
-                                    @error('spijkerTick')
-                                    <p class="help is-danger">{{ $message }}</p>
-                                    @enderror
 
+                            <td>
+
+                                <div @error('spijkerTick') is-danger @enderror" >
+                                <label for="spijkerTick" class="has-text-success has-text-weight-bold" style = "font-size: 35px;">&check;</label>
+                                <input type="radio" style = "width:40px; height:40px" id="" name="spijkerTick" value="1" @if(old('spijkerTick') ==  '1') checked @endif>
+                                <label for="stapelTick" class="has-text-danger has-text-weight-bold" style = "font-size: 35px;">&cross;</label>
+
+                                <input type="radio" style = "width:40px; height:40px" id="" name="spijkerTick" value="0" @if(old('spijkerTick') ==  '0') checked @endif>
+                                </div>
+                                @error('spijkerTick')
+                                <p class="help is-danger">{{ $message }}</p>
+                                @enderror
+                            </td>
+
+                            <td>
+                                <div class="control ">
+                                    <input class="input form-control" value="{{old('spijkerAang')}}" type="text" name="spijkerAang" id=" ">
                                 </div>
                             </td>
                             <td>
                                 <div class="control ">
-                                    <input class="input " type="text" name="spijkerAang" id=" ">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="control ">
-                                    <input class="input " type="text" name="spijkerCorrect" id="">
+                                    <input class="input form-control" value="{{old('spijkerCorrect')}}" type="text" name="spijkerCorrect" id="">
                                 </div>
                             </td>
                         </tr>
@@ -461,7 +460,7 @@
                 <section class="section">
                     <label class='' for='additionalNotes'>Additional Notes:</label>
                     <div class="control ">
-                        <input class="table table-bordered table-hover table-secondary" type="text" name="additionalNotes" id="" placeholder="Optional comments">
+                        <input class="table table-bordered table-hover table-secondary" value="{{old('additionalNotes')}}" type="text" name="additionalNotes" id="" placeholder="Optional comments">
                     </div>
                 </section>
                 <section class="section">

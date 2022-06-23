@@ -18,7 +18,9 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
 @extends(isset($order) ? 'modals.orders':'blank')
-@extends(Auth::user()->role ==='Production' ? 'modals.machines':'blank')
+@extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.finishProduction':'blank')
+@extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.truck':'blank')
+@extends(Auth::user()->role !=='Administrator' ? 'modals.machines':'blank')
 <div class="wrapper">
     <!-- Main Header -->
     <nav class="main-header navbar navbar-expand navbar-light colour-purple">
@@ -36,7 +38,7 @@
                     <span class="d-none d-md-inline btn colour-orange">Change Production Line</span>
                 </a>
                 <ul class="dropdown-menu  bg-transparent text-center">
-                    @if(Auth::user()->role === 'Production')
+                    @if(Auth::user()->role !== 'Administrator')
                         @php $machines=\App\Models\Machine::where('id','!=',Auth::user()->machine->id)->where('name','!=','None')->get();@endphp
                         @foreach($machines as $machine)
                             <li class="align-content-center">
@@ -96,11 +98,8 @@
     </nav>
 
     <!-- Left side column. contains the logo and sidebar -->
-@if(isset($order))
-    @include('layouts.sidebar',['order'=>$order])
-@else
     @include('layouts.sidebar')
-@endif
+
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -110,15 +109,6 @@
         </section>
     </div>
 
-    {{--    Removed, but code saved if we need it later--}}
-    {{--    <!-- Main Footer -->--}}
-    {{--    <footer class="main-footer bg-blue">--}}
-    {{--        <div class="float-right d-none d-sm-block">--}}
-    {{--            <b>Version</b> 3.0.5--}}
-    {{--        </div>--}}
-    {{--        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights--}}
-    {{--        reserved.--}}
-    {{--    </footer>--}}
 </div>
 
 <script src="{{ mix('js/app.js') }}" defer></script>
@@ -128,5 +118,58 @@
 @yield('third_party_scripts')
 
 @stack('page_scripts')
+<script type="text/javascript">
+    let soortBtn = document.getElementsByName('soort');
+    let soortAangBtn = document.getElementsByName('soortAang');
+    let soortHtKdBtn = document.getElementsByName('soortHtKd');
+
+    let balkBtn = document.getElementsByName('balk');
+    let balkAangBtn = document.getElementsByName('balkAang');
+    let balkHtKdBtn = document.getElementsByName('balkHtKd');
+
+    let soort = soortBtn[0];
+    let soortAang = soortAangBtn[0];
+    let soortHtKd = soortHtKdBtn[0];
+
+    let balk = balkBtn[0];
+    let balkAang = balkAangBtn[0];
+    let balkHtKd = balkHtKdBtn[0];
+
+
+    function disableBalk() {
+        if(soort.value.length > 0 && balk.value.length < 1)
+        {
+            balk.disabled = true;
+            balkAang.disabled = true;
+            balkHtKd.disabled = true;
+
+        }
+        else
+        {
+            balk.disabled = false;
+            balkAang.disabled = false;
+            balkHtKd.disabled = false;
+        }
+    }
+
+    function disableSoort() {
+        if(balk.value.length > 0 && soort.value.length < 1)
+        {
+            soort.disabled = true;
+            soortAang.disabled = true;
+            soortHtKd.disabled = true;
+        }
+        else
+        {
+            soort.disabled = false;
+            soortAang.disabled = false;
+            soortHtKd.disabled = false;
+        }
+    }
+
+    soort.addEventListener('click', disableBalk);
+    balk.addEventListener('click', disableSoort);
+
+</script>
 </body>
 </html>

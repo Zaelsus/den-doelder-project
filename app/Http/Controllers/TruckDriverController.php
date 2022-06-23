@@ -2,12 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Machine;
 use App\Models\Order;
 use App\Models\TruckDriver;
 use Illuminate\Http\Request;
 
 class TruckDriverController extends Controller
 {
+
+    /**
+     * This method will return a list of all orders for the current machine for truck drivers
+     * @param \App\Models\Machine $machine
+     * @return \Illuminate\Http\Response
+     */
+    public function list(Machine $machine)
+    {
+        $orders = Order::where('machine_id', $machine->id)
+            ->where('status', '!=', 'Admin Hold')
+            ->where(function ($query) {
+                $query->where('truckDriver_status', '!=', 'Delivered')
+                    ->orwhere('truckDriver_status', null);
+            })
+            ->orderBy('status', 'asc')
+            ->orderBy('start_date', 'desc')->get();
+        $previousMachine = null;
+        return view('orders.index', compact('orders', 'previousMachine'));
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +53,7 @@ class TruckDriverController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +64,7 @@ class TruckDriverController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TruckDriver  $truckDriver
+     * @param \App\Models\TruckDriver $truckDriver
      * @return \Illuminate\Http\Response
      */
     public function show(TruckDriver $truckDriver)
@@ -53,7 +75,7 @@ class TruckDriverController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TruckDriver  $truckDriver
+     * @param \App\Models\TruckDriver $truckDriver
      * @return \Illuminate\Http\Response
      */
     public function edit(TruckDriver $truckDriver)
@@ -64,8 +86,8 @@ class TruckDriverController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TruckDriver  $truckDriver
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\TruckDriver $truckDriver
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, TruckDriver $truckDriver)
@@ -76,29 +98,11 @@ class TruckDriverController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TruckDriver  $truckDriver
+     * @param \App\Models\TruckDriver $truckDriver
      * @return \Illuminate\Http\Response
      */
     public function destroy(TruckDriver $truckDriver)
     {
         //
-    }
-
-    /**
-     * changes the "selected" status of the current order to selected
-     */
-    public static function selectOrder(Order $order)
-    {
-        $order->update(['active_driver' => 1]);
-        return redirect(route('orders.show', $order));
-    }
-
-    /**
-     * changes the "selected" status of the current order to unselected
-     */
-    public static function unselectOrder(Order $order)
-    {
-        $order->update(['active_driver' => 0]);
-        return redirect(route('orders.index'));
     }
 }

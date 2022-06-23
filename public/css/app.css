@@ -43274,3 +43274,7 @@ input:required {
 .pointer {
     cursor: pointer;
 }
+
+.invisibleSelection {
+    display: none
+}

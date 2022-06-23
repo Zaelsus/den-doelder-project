@@ -22,6 +22,14 @@ class EventServiceProvider extends ServiceProvider
             ReadyForProductionPending::class,
             InitialCheckPending::class,
             AdminHold::class,
+            InProduction::class,
+        ],
+        NotePriorityChange::class => [
+            PriorityErrorNote::class,
+        ],
+        StatusChangeProduction::class => [
+            Paused::class,
+            Production::class,
         ]
     ];
 
