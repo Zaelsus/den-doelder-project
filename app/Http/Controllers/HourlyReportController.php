@@ -123,7 +123,6 @@ class HourlyReportController extends Controller
      */
     public function list(Order $order)
     {
-        dd($order);
             $hourlyReports = $order->hourlyReports;
 
         return view('hourlyReports.index', compact('order', 'hourlyReports'));
