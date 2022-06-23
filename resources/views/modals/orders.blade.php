@@ -163,7 +163,12 @@
                     </button>
                 </div>
                 <?php use App\Models\Note;$note = Note::where('order_id', $order->id)->where('priority', 'high')->first();?>
-                @if($note === null)
+                @if($note !== null)
+                    <a class="btn btn-danger btn-lg float-right" data-dismiss="modal"
+                       data-toggle="modal" href="#logFix">
+                        Restart
+                    </a>
+                @elseif($order)
                     <form method="POST" action="{{route('orders.startProduction', $order)}}">
                         @csrf
                         <div class="btn-group">
@@ -175,11 +180,6 @@
                             </div>
                         </div>
                     </form>
-                @else
-                    <a class="btn btn-danger btn-lg float-right" data-dismiss="modal"
-                       data-toggle="modal" href="#logFix">
-                        Restart
-                    </a>
                 @endif
             </div>
         </div>
