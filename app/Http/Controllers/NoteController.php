@@ -76,10 +76,14 @@ class NoteController extends Controller
         event(new StatusChangeProduction($order, $note));
 
         //if the label is 'End of Shift', redirect to edit quantity, otherwise redirect to the index page of the note
-        if($note->label === 'End of Shift') {
-            return redirect(route('orders.editquantity', $order));
+        if($note->numberLog !== null) {
+           $error = $note->logPalletQuantity($order);
+           if($error === true) {
+               return redirect(route('orders.show', $order))->with('error', 'Required amount of pallets reached, production of order can be finished');
+           } else {
+               return redirect(route('orders.show', $order));
+           }
         }
-
         return redirect(route('notes.index', $note));
     }
 
@@ -221,6 +225,7 @@ class NoteController extends Controller
             'content'=>'',
             'fixContent'=>'',
             'label'=>'',
+            'numberLog'=>''
         ]);
 
         $validatedAttributes['order_id'] = $order_id;
