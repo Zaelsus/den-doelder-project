@@ -74,6 +74,7 @@ class OrderMaterialController extends Controller
         $order = $request->session()->get('order');
         $request->session()->forget('order');
         $array1 = $request->product;
+
         $array2 = $request->existMaterial;
 
         if ($array1 !== null) {
@@ -115,10 +116,6 @@ class OrderMaterialController extends Controller
                 $materials->push($collection);
             }
         }
-//        foreach($materials as $key=>$products){
-//            dd($products->product_id);
-//        }
-
         return view('orders.edit-step-two', compact('order', 'materials', 'orderMaterials'));
     }
 
@@ -158,13 +155,13 @@ class OrderMaterialController extends Controller
                     }
                     $j++;
                 }
-                if ($exists === false) {
-                    if ($array2[$i]['total_quantity'] > 0) {
-                        $quantity = $request->product[$i]['total_quantity'] * $order->quantity_production;
-                        OrderMaterial::create(['order_id' => $request->product[$i]['order_id'],
-                            'material_id' => $request->product[$i]['material_id'], 'total_quantity' => $quantity]);
-                    }
-                }
+//                if ($exists === false) {
+//                    if ($array2[$i]['total_quantity'] > 0) {
+//                        $quantity = $request->product[$i]['total_quantity'] * $order->quantity_production;
+//                        OrderMaterial::create(['order_id' => $request->product[$i]['order_id'],
+//                            'material_id' => $request->product[$i]['material_id'], 'total_quantity' => $quantity]);
+//                    }
+//                }
             }
         }
 

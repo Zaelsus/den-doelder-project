@@ -57,11 +57,11 @@ Route::post('/orders/stop/{order}/{machine}', [OrderController::class, 'stopProd
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');
 
 //Truck Driver Routes
-//start production route
+//start driving route
 Route::post('/orders/startDriving/{order}', [OrderController::class, 'startDriving'])->name('orders.startDriving');
-//stop production route
+//stop driving route
 Route::post('/orders/stopDriving/{order}', [OrderController::class, 'stopDriving'])->name('orders.stopDriving');
-//stop production route
+//stop driving route
 Route::post('/orders/pauseDriving/{order}', [OrderController::class, 'pauseDriving'])->name('orders.pauseDriving');
 
 
@@ -76,7 +76,7 @@ Route::post('/orders/cancel/{order}', [OrderController::class, 'cancelOrder'])->
 // OrderMaterials
 Route::resource('/orderMaterials', OrderMaterialController::class);
 
-//pallet editing route
+//pallet -sting route
 Route::get('/orders/{order}/editquantity', [OrderController::class, 'editquantity'])->name('orders.editquantity');
 Route::put('/orders/{order}/updatequantity', [OrderController::class, 'updatequantity'])->name('orders.updatequantity');
 
@@ -106,6 +106,7 @@ Route::post('/create-step-two', [OrderMaterialController::class, 'postCreateStep
 //Double Form Create
 Route::get('/edit-step-one/{order}', [OrderController::Class, 'editStepOne'])->name('orders.edit.step.one');
 Route::put('/edit-step-one/{order}', [OrderController::class, 'updateEditStepOne'])->name('orders.update.step.one.post');
+
 
 Route::get('/edit-step-two/{order}', [OrderMaterialController::class, 'editStepTwo'])->name('orders.edit.step.two');
 Route::put('/edit-step-two/{order}', [OrderMaterialController::class, 'updateEditStepTwo'])->name('orders.update.step.two.post');

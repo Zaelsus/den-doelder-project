@@ -34,7 +34,7 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <div class="custom-control custom-checkbox">
-                                <input onclick=isChecked() type="checkbox" class="custom-control-input" id="type_checkbox" name="order_type">
+                                <input onclick=isChecked() type="checkbox" class="custom-control-input" id="type_checkbox" name="type_order">
                                 <label class="custom-control-label" for="type_checkbox">Check this box if this is a special order and not CP</label>
                             </div>
                             @error('type_order')
@@ -159,28 +159,6 @@
         </div>
     </div>
 
-    <script>
-        const checkbox = document.getElementById('type_checkbox');
-
-        const box = document.getElementById('clientName-box');
-        const input = document.getElementById('clientName');
-
-        function isChecked() {
-            if (checkbox.checked) {
-                box.style.display = 'block';
-                checkbox.value=1;
-                input.setAttribute('required', '');
-            } else {
-                box.style.display = 'none';
-                checkbox.value=0;
-                input.removeAttribute('required');
-            }
-        }
-    </script>
+    <script src="/js/orderCreate.js"></script>
 
 @endsection
-
-
-{{--<input type="string" class="form-control" id="order_number" aria-describedby="emailHelp">--}}
-{{--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--}}
-{{--</div>--}}

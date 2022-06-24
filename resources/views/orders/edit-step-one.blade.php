@@ -7,7 +7,7 @@
         <div class="card create-order-card">
             <div class="card-header bg-gradient-info">
                 <h3 class="  text-center ">Edit the
-                    order {{$order->order_number . ' of customer ' . $order->client_name}}</h3>
+                    order {{$order->order_number}}</h3>
                 <div class="card-tools">
                     <!-- Buttons, labels, and many other things can be placed here! -->
                     <!-- Here is a label for example -->
@@ -85,13 +85,13 @@
                             <label for="type_order">Is this a special order (not CP)?</label>
                             <div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input onclick=isChecked() type="radio" id="t1" name="type_order"
+                                    <input onclick=isCheckedEdit() type="radio" id="t1" name="type_order"
                                            class="custom-control-input" value=1
                                            {{$order->type_order===1 ? 'checked='.'"'.'checked'.'"' : '' }} required>
                                     <label class="custom-control-label" for="t1">Yes</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input onclick=isChecked() type="radio" id="t2" name="type_order"
+                                    <input onclick=isCheckedEdit() type="radio" id="t2" name="type_order"
                                            class="custom-control-input" value=0
                                            {{$order->type_order===0 ? 'checked='.'"'.'checked'.'"' : '' }}required>
                                     <label class="custom-control-label" for="t2">No</label>
@@ -101,8 +101,8 @@
                             <p class="text-red">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div id="clientName-box" @if($order->type_order ===0) style="display:none"
-                             @endif class="col-md-6 mb-3">
+                        <div id="clientName-box" style="{{$order->type_order===0 ? 'display:none':'block'}}"
+                        class="col-md-6 mb-3">
                             <label class="required" for="client_name">Client Name for this order</label>
                             <div>
                                 <input id="clientName" type="text" class="form-control is-invalid"
@@ -229,23 +229,6 @@
         </div>
     </div>
 
-    <script>
-        const yes = document.getElementById('t1');
-        const no = document.getElementById('t2');
-
-        const box = document.getElementById('clientName-box');
-        const input = document.getElementById('clientName');
-
-        function isChecked() {
-            if (yes.checked) {
-                box.style.display = 'block';
-                input.setAttribute('required', '');
-            } else {
-                box.style.display = 'none';
-                input.removeAttribute('required');
-                input.value = null;
-            }
-        }
-    </script>
+    <script src="/js/orderEdit.js"></script>
 
 @endsection
