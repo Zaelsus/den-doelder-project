@@ -30,7 +30,6 @@ class PalletMaterialSeeder extends Seeder
     public function run()
     {
         $this->readCsvData(function ($data) {
-//            $this->command->info(json_encode(Pallet::where('name', 'LIKE', '%'.$data['Pallets'].'%')->get()));
             if (!(Pallet::where('name', 'LIKE', '%'.$data['Pallets'].'%')->get()->isempty())
             && !(Material::where('measurements','LIKE', $data['Materials'])->get()->isempty())) {
                 PalletMaterial::factory(1)->create([
