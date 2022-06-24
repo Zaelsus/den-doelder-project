@@ -195,7 +195,6 @@ class ReportController extends Controller
     private function findStoppageNumber($orders)
     {
         $stoppages = [];
-//        dd($orders);
         foreach ($orders as $order) {
             $stoppageCounter = 0;
             $notes = $order->notes;
@@ -212,17 +211,6 @@ class ReportController extends Controller
     private function calculateTransitionTime($machine)
     {
         $transitionOrders = Order::where('machine_id', $machine->id)->where('start_time', '!=', null)->orderby('start_time')->get();
-//        dd($unOrders);
-//        $orders = [];
-//        $i = 0;
-//        for ($x = 0; $x < (sizeof($unOrders)); $x++) {
-//            if ($unOrders[$x]->start_time !== null) {
-//                $orders[$i] = $unOrders[$x];
-//                $i += 1;
-//            }
-//        }
-
-//        dd($orders);
         $transitionTime = [];
         if (sizeof($transitionOrders) > 1 && $transitionOrders[0]->end_time !== null) {
             for ($x = 0; $x < (sizeof($transitionOrders) - 1); $x += 1) {
@@ -236,7 +224,6 @@ class ReportController extends Controller
         } else {
             return [null, $transitionOrders];
         }
-//        dd($transitionTime);
         return [$transitionTime, $transitionOrders];
     }
 }
