@@ -26,6 +26,9 @@
                                         class="custom-select @error('def_id') is-danger @enderror"
                                         required>
                                     <option value="">Select one</option>
+                                    <option value=0 {{ old('def_id') ? 'selected' : ''}}>
+                                        No Issues
+                                    </option>
                                     <option value='1' {{ $hourlyReport->def_id === '1' ? 'selected' : ''}}>1.
                                         Stable Stacked Pallets
                                     </option>
