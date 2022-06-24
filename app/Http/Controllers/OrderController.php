@@ -137,30 +137,9 @@ class OrderController extends Controller
         $materialsLocations = $productLocationsDetails['materialsLocations'];
         //automatic status change
         $this->statusChangeCheck();
-//        $driving = $this->testForDriving($order);
         return view('orders.show', compact('order', 'materialLocationsList', 'materialsLocations'));
 
     }
-
-//    /**
-//     * Function that tests if a driver is driving for an order on the same machine
-//     *
-//     * @param $order
-//     * @return bool
-//     */
-//    public function testForDriving($order): bool
-//    {
-//        $orders = $order->machine->orders;
-//
-//        foreach ($orders as $order) {
-//            if ($order->truckDriver_status === "Driving") {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-
 
     /**
      * Function that finds the locations for the materials
