@@ -196,7 +196,6 @@ class ProductLocationController extends Controller
     public function updateLocation(Request $request, Order $order, $locationId)
     {
         $palletQuantity = ProductLocation::where('product_id', $order->pallet_id)->where('location_id', $locationId)->first();
-//        $palletQuantity->update($this->validateLocationChange($request));
         $this->validateLocationChange($request);
 
         $loggedAmount = $request->Quantity;

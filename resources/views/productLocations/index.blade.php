@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@if (isset($productLocation))
+    @extends ('modals.updateLocation')
+@endif
+
+@extends('modals.createLocation')
+
 @section('content')
     <section class="section">
         <div class="container-fluid">
@@ -25,44 +31,48 @@
                                     </thead>
                                     <tbody>
                                     @if ($productLocations !== null)
-                                        @for($i = 0; $i < count($productLocations); $i++)
+                                        {{--                                        @for($i = 0; $i < count($productLocations); $i++)--}}
+                                        @foreach($productLocations as $productLocation)
+                                            @php
+                                                $location = App\Models\Location::where('id', $productLocation->location_id)->first();
+
+                                            @endphp
                                             <tr>
                                                 <td>{{$order->pallet->name}}</td>
-                                                <td>{{$locationsQuantity['location'.'_'.$productLocations[$i]->location_id.'_'.'name']}}</td>
-                                                <td>{{$locationsQuantity['location'.'_'.$productLocations[$i]->location_id.'_'.'quantity']}}
+                                                <td>{{$locationsQuantity['location'.'_'.$productLocation->location_id.'_'.'name']}}</td>
+                                                <td>{{$locationsQuantity['location'.'_'.$productLocation->location_id.'_'.'quantity']}}
                                                     <br>
-                                                    <h1 class="{{!App\Models\ProductLocation::checkAvailableSpace($productLocations[$i]->location_id) ?
+                                                    <h1 class="{{!App\Models\ProductLocation::checkAvailableSpace($productLocation->location_id) ?
                                                         'badge bg-danger' : ''}}">
-                                                        {{!App\Models\ProductLocation::checkAvailableSpace($productLocations[$i]->location_id) ?
+                                                        {{!App\Models\ProductLocation::checkAvailableSpace($productLocation->location_id) ?
                                                         'Location Full' : ''}}</h1>
                                                 </td>
                                                 <td>
-                                                    <form method="GET"
-                                                          action="{{route('productLocations.editLocation', ['order' => $order, 'locationId' => $productLocations[$i]->location_id])}}"
-                                                        {{!App\Models\ProductLocation::checkAvailableSpace($productLocations[$i]->location_id) ?
-                                                          'hidden' : ''}}>
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-primary float-left">Add
-                                                        </button>
-                                                    </form>
-
-                                                    {{--                                                    <form method="get"--}}
-                                                    {{--                                                          action="{{ route('productLocations.editLocation', ['order' => $order, 'locationId' =>  $productLocations[$i]->location_id]) }}">--}}
-                                                    {{--                                                        @csrf--}}
-                                                    {{--                                                        <button type="submit" class="btn btn-warning float-left">Take</button>--}}
-                                                    {{--                                                    </form>--}}
+                                                    <button type="button"
+                                                            class="btn bg-info"
+                                                            data-toggle="modal"
+{{--                                                            data-target="#updatePalletLocation"--}}
+                                                            data-target=" {{"#updatePalletLocation" . $productLocation->location_id}}"
+                                                    >
+                                                        Update
+                                                    </button>
                                                 </td>
                                             </tr>
-                                        @endfor
+                                        @endforeach
                                     @endif
                                     </tbody>
                                 </table>
                                 <br>
                                 <div class="">
-                                    <a href="{{route('productLocations.addLocation', $order )}}"
-                                       class="btn btn-info btn-lg float-left">
-                                        Add to new location
-                                    </a>
+                                    @php
+                                        $palletLocations = App\Models\Location::where('type', 'Pallets')->get();
+                                    @endphp
+                                    <button type="button"
+                                            class="btn btn-lg bg-info"
+                                            data-toggle="modal"
+                                            data-target="#createPalletLocation">
+                                        Add new Location
+                                    </button>
                                 </div>
                             </div>
                         </div>
