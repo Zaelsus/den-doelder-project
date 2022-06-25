@@ -108,7 +108,7 @@ class ProductLocationController extends Controller
         $validatedAtributes = $request->validate([
             'location_id' => 'required|integer',
             'product_id' => 'required|integer',
-            'Quantity' => 'required|integer|min:0|',
+            'Quantity' => 'required|integer|min:0',
         ]);
 
         return $validatedAtributes;
