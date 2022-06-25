@@ -2,7 +2,7 @@
      aria-labelledby="createPalletLocationTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-gradient-olive">
+            <div class="modal-header bg-secondary">
                 <h5 class="modal-title" id="createPalletLocationTitle">
                     Update Location Quantity
                 </h5>
