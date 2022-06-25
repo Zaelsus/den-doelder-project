@@ -155,7 +155,6 @@ class NoteController extends Controller
             return redirect(route('orders.show', $order));
         } else {
             return view('notes.fixStoppage', compact('order', 'note'));
-//            return view('modals.logFix', compact('order', 'note'));
         }
 
 
