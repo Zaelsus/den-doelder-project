@@ -1,7 +1,6 @@
-
-@extends('modals.createNote')
 @extends('layouts.app')
 @section('content')
+@extends('modals.createNote')
 @extends(isset($note) ? 'modals.editNote' : 'blank')
 @extends('modals.noteFix')
     <!-- Button trigger modal -->
@@ -83,7 +82,8 @@
                                     <span class="badge badge-success">fixed</span>
                                 @elseif($note->fix === 'Error!' && $note->priority === 'high')
                                     <span class="badge badge-danger">log fix when restart</span>
-                                @elseif($note->label === 'Mechanical Issue' || $note->label === 'Material Issue' || $note->label === 'Technical Issue')
+                                @elseif($note->label === 'Mechanical Issue' || $note->label === 'Material Issue'
+                                || $note->label === 'Technical Issue')
                                     @if($note->fixContent === null)
                                     <button type="button" class="btn btn-lg bg-gradient-olive opacity-70"
                                              data-toggle="modal"
@@ -119,13 +119,19 @@
         </div>
     </div>
     <script>
+        /**
+         * This function changes the button when it's clicked,
+         * and calls the filterTable function
+         *
+         * @param order_number
+         * @param machine
+         */
         function changeButton(order_number, machine) {
             overviewButton = document.getElementById("overviewButton")
             if (overviewButton.innerText === "Notes for current order") {
                 overviewButton.innerText = "Notes for current machine";
                 filterTable(order_number, 0);
             } else {
-                console.log('changeButton');
                 overviewButton.innerText = "Notes for current order";
                 filterTable(machine, 1);
                 document.getElementById("buttonAllNotes").innerHTML =
@@ -136,6 +142,14 @@
             }
         }
 
+        /**
+         * This function will be called by the changeButton function, and
+         * it will filter the table according to the parameters (either on
+         * order number or on machine)
+         *
+         * @param input
+         * @param n
+         */
         function filterTable(input, n) {
             let filter = input;
             let table = document.getElementById("myTable");
@@ -146,8 +160,7 @@
             for (let i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[n];
                 if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    console.log(txtValue);
+                    txtValue = td.textContent|| td.innerText;
                     if (txtValue.indexOf(filter) > -1) {
                         tr[i].style.display = "";
                     } else {
