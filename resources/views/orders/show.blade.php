@@ -129,6 +129,7 @@
                 </tr>
                 </tbody>
             </table>
+            <br>
             <h6 class="card bg-gray" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Materials:</h6>
             <table>
                 <tbody>
@@ -166,6 +167,8 @@
                 @endforeach
                 </tbody>
             </table>
+            <br>
+            <h6 class="card bg-gray" style="padding-left: 3px; padding-top: 3px; padding-bottom: 3px">Additional Production Instructions:</h6>
             <p>{{$order->production_instructions}}</p>
             <div class="text-center">
                 <strong class="text-center"> Scheduled Production Date: {{$order->start_date}}</strong>

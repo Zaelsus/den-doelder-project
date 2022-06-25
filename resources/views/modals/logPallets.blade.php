@@ -23,7 +23,7 @@
                                 Quantity to be produced: {{$order->toproduce}}
                             </div>
                             <div>
-                                Log Quantity: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
+                                Log Quantity: <input class="input" type="number" name="add_quantity" id=" " value="">
                             </div>
                         </div>
 

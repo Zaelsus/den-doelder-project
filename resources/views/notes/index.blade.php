@@ -14,7 +14,7 @@
             <div class="card-body">
                 @if( Auth::user()->role === 'Administrator' )
                 <button id="overviewButton" class="btn btn-lg bg-gradient-olive opacity-70"
-                        onclick="changeButton({{$order->order_number}}, '{{ $order->machine->name }}')">
+                        onclick="changeButton('{{$order->order_number}}', '{{ $order->machine->name }}')">
                     Notes for current machine</button>
                 <br>
                 <br>
@@ -127,7 +127,7 @@
          * @param machine
          */
         function changeButton(order_number, machine) {
-            overviewButton = document.getElementById("overviewButton")
+            overviewButton = document.getElementById("overviewButton");
             if (overviewButton.innerText === "Notes for current order") {
                 overviewButton.innerText = "Notes for current machine";
                 filterTable(order_number, 0);
@@ -138,7 +138,7 @@
                     `<button class="btn btn-lg bg-gradient-olive opacity-70"
                 onclick=window.location.href="{{route('notes.index')}}">
                     Overview all notes
-                </button>`
+                </button>`;
             }
         }
 
