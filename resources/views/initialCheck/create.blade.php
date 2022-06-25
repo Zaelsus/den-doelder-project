@@ -224,8 +224,8 @@
                                     <div class="control">
                                         <select name="balk" class="textarea custom-select   @error ('balk') is-danger @enderror ">
                                             <option value="">Choose Measurement</option>
-                                            <option value="Afmeting1">Afmeting 1</option>
-                                            <option value="Afmeting2">Afmeting 2</option>
+                                            <option value="Afmeting1" @if(old('balk') ==  'Afmeting1') selected @endif>Afmeting 1</option>
+                                            <option value="Afmeting2" @if(old('balk') ==  'Afmeting2') selected @endif>Afmeting 2</option>
                                         </select>
                                     </div>
                                     @error('balk')
@@ -442,7 +442,7 @@
                 <section class="section">
                     <label class='' for='additionalNotes'>Additional Notes:</label>
                     <div class="control ">
-                        <input class="table table-bordered table-hover table-secondary" type="text" name="additionalNotes" id="" placeholder="Optional comments">
+                        <input class="table table-bordered table-hover table-secondary" value="{{old('additionalNotes')}}" type="text" name="additionalNotes" id="" placeholder="Optional comments">
                     </div>
                 </section>
 

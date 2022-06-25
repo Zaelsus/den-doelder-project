@@ -67,7 +67,7 @@ class CreateInitialsTable extends Migration
             $table->boolean('stapelTick')->default(0);
             $table->string('stapelAang')->nullable();
 
-            $table->string('strappenTick');
+            $table->string('strappenTick')->nullable();
             $table->string('strappenAang')->nullable();
 
             $table->string('kamerTick');
