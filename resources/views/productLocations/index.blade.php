@@ -51,9 +51,9 @@
                                                     <button type="button"
                                                             class="btn bg-info"
                                                             data-toggle="modal"
-{{--                                                            data-target="#updatePalletLocation"--}}
                                                             data-target=" {{"#updatePalletLocation" . $productLocation->location_id}}"
-                                                    >
+                                                        {{!App\Models\ProductLocation::checkAvailableSpace($productLocation->location_id) ?
+                                                        'hidden' : ''}}>
                                                         Update
                                                     </button>
                                                 </td>
