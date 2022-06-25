@@ -10,7 +10,8 @@ use App\Http\Controllers\{InitialController,
     ProductLocationController,
     MachineController,
     ReportController,
-    TruckDriverController};
+    TruckDriverController
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,7 +73,7 @@ Route::post('/orders/cancel/{order}', [OrderController::class, 'cancelOrder'])->
 // OrderMaterials
 Route::resource('/orderMaterials', OrderMaterialController::class);
 
-//pallet editing route
+//pallet -sting route
 Route::get('/orders/{order}/editquantity', [OrderController::class, 'editquantity'])->name('orders.editquantity');
 Route::put('/orders/{order}/updatequantity', [OrderController::class, 'updatequantity'])->name('orders.updatequantity');
 
@@ -93,26 +94,27 @@ Route::get('/notes/stoppage/{order}', [NoteController::class, 'stoppage'])->name
 Route::get('/notes/fixStoppage/{order}', [NoteController::class, 'fixStoppage'])->name('notes.fixStoppage');
 
 //Double Form Create
-Route::get('/create-step-one', [OrderController::Class,'createStepOne'])->name('orders.create.step.one');
-Route::post('/create-step-one', [OrderController::class,'postCreateStepOne'])->name('orders.create.step.one.post');
+Route::get('/create-step-one', [OrderController::Class, 'createStepOne'])->name('orders.create.step.one');
+Route::post('/create-step-one', [OrderController::class, 'postCreateStepOne'])->name('orders.create.step.one.post');
 
-Route::get('/create-step-two', [OrderMaterialController::class,'createStepTwo'])->name('orders.create.step.two');
-Route::post('/create-step-two', [OrderMaterialController::class,'postCreateStepTwo'])->name('orders.create.step.two.post');
+Route::get('/create-step-two', [OrderMaterialController::class, 'createStepTwo'])->name('orders.create.step.two');
+Route::post('/create-step-two', [OrderMaterialController::class, 'postCreateStepTwo'])->name('orders.create.step.two.post');
 
-//Double Form Edit
-Route::get('/edit-step-one/{order}', [OrderController::Class,'editStepOne'])->name('orders.edit.step.one');
-Route::put('/edit-step-one/{order}', [OrderController::class,'updateEditStepOne'])->name('orders.update.step.one.post');
+//Double Form Create
+Route::get('/edit-step-one/{order}', [OrderController::Class, 'editStepOne'])->name('orders.edit.step.one');
+Route::put('/edit-step-one/{order}', [OrderController::class, 'updateEditStepOne'])->name('orders.update.step.one.post');
 
-Route::get('/edit-step-two/{order}', [OrderMaterialController::class,'editStepTwo'])->name('orders.edit.step.two');
-Route::put('/edit-step-two/{order}', [OrderMaterialController::class,'updateEditStepTwo'])->name('orders.update.step.two.post');
+
+Route::get('/edit-step-two/{order}', [OrderMaterialController::class, 'editStepTwo'])->name('orders.edit.step.two');
+Route::put('/edit-step-two/{order}', [OrderMaterialController::class, 'updateEditStepTwo'])->name('orders.update.step.two.post');
 
 // Locations
 Route::resource('/productLocations', ProductLocationController::class);
 Route::get('/productLocations/list/{order}', [ProductLocationController::class, 'list'])->name('productLocations.list'); // Custom Index
 Route::get('/productLocations/addLocation/{order}', [ProductLocationController::class, 'addLocation'])->name('productLocations.addLocation'); // Custom Create
 Route::post('/productLocations/storeLocation/{order}', [ProductLocationController::class, 'storeLocation'])->name('productLocations.storeLocation'); // Custom Store
-Route::get('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'editLocation'])->name('productLocations.editLocation');
-Route::put('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'updateLocation'])->name('productLocations.updateLocation');
+Route::get('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'editLocation'])->name('productLocations.editLocation'); // Custom Edit
+Route::put('/productLocations/editLocation/{order}/{locationId}', [ProductLocationController::class, 'updateLocation'])->name('productLocations.updateLocation'); // Custom Update
 
 // Truck Driver - see the list of orders
 Route::get('/driver/list/{machine}', [TruckDriverController::class, 'list'])->name('truckDrivers.list');

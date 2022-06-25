@@ -24,25 +24,27 @@
                                                 class="custom-select @error('location_id') is-invalid @enderror"
                                                 required>
                                             @foreach($locations as $location)
-
-                                                <option
-                                                    value={{$location->id}} {{ old('location_id') ? 'selected' : ''}}>
-                                                    {{$location->name}}
-                                                </option>
+                                                @if(!(App\Models\ProductLocation::checkPalletExists($order->pallet_id, $location->id)))
+                                                    <option
+                                                        value={{$location->id}} {{ old('location_id') ? 'selected' : ''}}>
+                                                        {{$location->name}}
+                                                    </option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="mb-3" hidden>
                                     <label>Pallet ID:</label>
-                                    <input type="text" name="product_id" class="form-control" value="{{$order->pallet_id}}" readonly>
+                                    <input type="text" name="product_id" class="form-control"
+                                           value="{{$order->pallet_id}}" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label for="Quantity">Quantity: </label>
                                     <div>
-                                        <input type="text" class="form-control "
+                                        <input type="number" min="0" max="1000" class="form-control"
                                                name="Quantity"
-                                               placeholder="0" value="" required>
+                                               placeholder="Max 1000" value="" required>
                                     </div>
 
                                     @error('Quantity')
