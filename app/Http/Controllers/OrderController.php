@@ -185,7 +185,7 @@ class OrderController extends Controller
     }
 
     /**
-     * changes the status of the current order to in production
+     * Changes the status of the current order to in production
      */
     public static function startProduction(Order $order)
     {
@@ -201,13 +201,13 @@ class OrderController extends Controller
             return redirect(route('orders.show', $order))->with('error', 'Cannot start production for this order at the moment please contact administration');
         }
     }
+
     /**
      * changes the truck driver status of the current order to driving
      */
     public static function startDriving(Order $order)
     {
-        if ($order->machine !== null && $order->start_date !== null && ($order->status !== 'Admin Hold'))
-        {
+        if ($order->machine !== null && $order->start_date !== null && ($order->status !== 'Admin Hold')) {
             $order->update(['truckDriver_status' => 'Driving']);
         }
         return redirect(route('orders.show', $order));
@@ -216,8 +216,29 @@ class OrderController extends Controller
     /**
      * changes the status of the current order to done
      */
-    public static function stopProduction(Order $order, Machine $machine)
+    public static function stopProduction(Request $request, Order $order, Machine $machine)
     {
+        $validated = $request->validate([
+            'add_quantity' => 'required|integer',
+        ]);
+        $order->logFinalQuantity($validated);
+        // remove all code above this comment if we split the finish order into 2 functions
+
+        $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
+        return redirect(route('machines.show', compact('machine')));
+    }
+
+    /**
+     * changes the status of the current order to done
+     */
+    public static function finishAndLogPallets(Request $request, Order $order, Machine $machine)
+    {
+        $validated = $request->validate([
+            'add_quantity' => 'required|integer',
+        ]);
+
+        //call the function in order model to pass in the order, use add_quantity to add to the total quantity
+        $order->logFinalQuantity($validated);
         $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
         return redirect(route('machines.show', compact('machine')));
     }
@@ -343,17 +364,14 @@ class OrderController extends Controller
         try {
             $order->update($validated);
             $order->addProduced();
-            if($order->quantity_produced > $order->quantity_production) {
+            if ($order->quantity_produced > $order->quantity_production) {
                 return redirect(route('orders.show', $order))->with('error', 'Required amount of pallets reached, production of order can be finished');
-            }
-            else {
+            } else {
                 return redirect(route('orders.show', $order));
             }
         } catch (\Exception $exception) {
             return redirect(route('orders.show', $order))->with('error', 'The value is higher than the quantity to be produced');
-
         }
-
     }
 
     /**

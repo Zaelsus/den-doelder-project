@@ -25,7 +25,7 @@ class NoteController extends Controller
         //update priority of note, loop through all the notes
         //and let an eventlistener look if priority should be changed
         $allNotes = Note::all();
-        foreach($allNotes as $note) {
+        foreach ($allNotes as $note) {
             event(new NotePriorityChange($note));
 //            $fixLogContent = Note::setFixLogContent($note);
         }
@@ -52,7 +52,7 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -76,13 +76,13 @@ class NoteController extends Controller
         event(new StatusChangeProduction($order, $note));
 
         //if the label is 'End of Shift', redirect to edit quantity, otherwise redirect to the index page of the note
-        if($note->numberLog !== null) {
-           $error = $note->logPalletQuantity($order);
-           if($error === true) {
-               return redirect(route('orders.show', $order))->with('error', 'Required amount of pallets reached, production of order can be finished');
-           } else {
-               return redirect(route('orders.show', $order));
-           }
+        if ($note->numberLog !== null) {
+            $error = $note->logPalletQuantity($order);
+            if ($error === true) {
+                return redirect(route('orders.show', $order))->with('error', 'Required amount of pallets reached, production of order can be finished');
+            } else {
+                return redirect(route('orders.show', $order));
+            }
         }
         return redirect(route('notes.index', $note));
     }
@@ -90,7 +90,7 @@ class NoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Note  $note
+     * @param \App\Models\Note $note
      * @return \Illuminate\Http\Response
      */
     public function edit(Note $note)
@@ -102,8 +102,8 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Note  $note
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Note $note
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Note $note)
@@ -121,7 +121,7 @@ class NoteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Note  $note
+     * @param \App\Models\Note $note
      * @return \Illuminate\Http\Response
      */
     public function destroy(Note $note)
@@ -136,7 +136,8 @@ class NoteController extends Controller
      * @param Order $order
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function stoppage(Order $order) {
+    public function stoppage(Order $order)
+    {
         return view('notes.stoppage', compact('order'));
     }
 
@@ -146,11 +147,12 @@ class NoteController extends Controller
      * @param Order $order
      *
      */
-    public function fixStoppage(Order $order) {
+    public function fixStoppage(Order $order)
+    {
         $note = Note::where('order_id', $order->id)->where('priority', 'high')->first();
 
-        if($note === null) {
-            if(Note::where('order_id', $order->id)->first()->label === 'End of Shift') {
+        if ($note === null) {
+            if (Note::where('order_id', $order->id)->first()->label === 'End of Shift') {
                 dd('change of shift');
             }
             return redirect(route('orders.show', $order));
@@ -162,21 +164,23 @@ class NoteController extends Controller
 
     }
 
-    public function getOrder() {
+    public function getOrder()
+    {
         $machine = Auth::user()->machine;
-        if(Auth::user()->role === 'Driver') {
+        if (Auth::user()->role === 'Driver') {
             $order = TruckDriver::getDrivingOrder($machine);
         } else {
-           $order=Order::getOrder($machine);
+            $order = Order::getOrder($machine);
         }
         return $order;
     }
 
-    public function getNotes($order) {
-        if(Auth::user()->role === 'Administrator') {
+    public function getNotes($order)
+    {
+        if (Auth::user()->role === 'Administrator') {
             //admin sees all notes
             $notes = Note::orderBy('created_at', 'desc')->get();
-        } else if(Auth::user()->role === 'Production') {
+        } else if (Auth::user()->role === 'Production') {
             //production sees notes that are made by production and only for this order
             $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('priority', 'asc')->orderBy('created_at', 'desc')->get();
         } else {
@@ -187,8 +191,9 @@ class NoteController extends Controller
         return $notes;
     }
 
-    public function findOrderForUser() {
-        if(Auth::user()->role === 'Administrator') {
+    public function findOrderForUser()
+    {
+        if (Auth::user()->role === 'Administrator') {
             $order = Order::isSelected();
         } else
             $order = $this->getOrder();
@@ -203,8 +208,9 @@ class NoteController extends Controller
      * @param $label
      * @return bool
      */
-    public function setFix($label): bool {
-        if($label === 'Material Issue (Error)' || $label === 'Mechanical Issue (Error)' || $label === 'Technical Issue (Error)') {
+    public function setFix($label): bool
+    {
+        if ($label === 'Material Issue (Error)' || $label === 'Mechanical Issue (Error)' || $label === 'Technical Issue (Error)') {
             $fix = false;
         } else {
             $fix = true;
@@ -221,17 +227,17 @@ class NoteController extends Controller
     public function validateNote(Request $request, $order_id, $fix, $note_rel): array
     {
         $validatedAttributes = $request->validate([
-            'title'=>'',
-            'content'=>'',
-            'fixContent'=>'',
-            'label'=>'',
-            'numberLog'=>''
+            'title' => '',
+            'content' => '',
+            'fixContent' => '',
+            'label' => '',
+            'numberLog' => ''
         ]);
 
         $validatedAttributes['order_id'] = $order_id;
         $validatedAttributes['note_rel'] = $note_rel;
         $validatedAttributes['priority'] = 'low';
-        if($fix === false) {
+        if ($fix === false) {
             $validatedAttributes['fix'] = 'Error!';
         }
 

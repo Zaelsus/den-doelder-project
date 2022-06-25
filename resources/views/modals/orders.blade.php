@@ -85,7 +85,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <p> Are you sure you want to start driving the order number {{$order->order_number}}?</p>
+                <p> Are you sure you want to start driving the order number {{$order->order_number}}?</p>
             </div>
             <div class="modal-footer">
                 <div>
@@ -253,7 +253,8 @@
                                         Quantity to be produced: {{$order->toproduce}}
                                     </div>
                                     <div>
-                                        Log Quantity: <input class="input" type="number" name="numberLog" id=" " value="">
+                                        Log Quantity: <input class="input" type="number" name="numberLog" id=" "
+                                                             value="">
                                     </div>
                                 </div>
                             </div>

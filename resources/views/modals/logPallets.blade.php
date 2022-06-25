@@ -23,26 +23,30 @@
                                 Quantity to be produced: {{$order->toproduce}}
                             </div>
                             <div>
-                                Log Quantity: <input class="input" type="number" name="add_quantity" id=" " value="{{$order->add_quantity}}">
+                                Log Quantity: <input class="input" type="number" name="add_quantity" id=" " value="">
                             </div>
                         </div>
 
                         <div class="field is-grouped">
                             <div>
-                                <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" id="submitNew">Save</button>
+                                <button type="submit" class="btn btn-info btn-lg btn-block" id="submitNew">Save & Continue Production</button>
                             </div>
                         </div>
                 </form>
                 <div class="control">
                     @if($order->quantity_produced >= $order->quantity_production)
-                        <form method="POST"
-                              action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
-                            @csrf
-                            <button onclick="return confirm('Is this order completed?')"
-                                    class="far fa-stop-circle btn btn-danger btn-block "
-                                    type="submit"> Stop Production
-                            </button>
-                        </form>
+{{--                        <form method="POST"--}}
+{{--                              action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">--}}
+{{--                            @csrf--}}
+{{--                            <button class="far fa-stop-circle btn btn-danger btn-lg btn-block "--}}
+{{--                                    type="submit"> Save & Finish Order--}}
+{{--                            </button>--}}
+{{--                        </form>--}}
+                        <button type="button" class="far fa-stop-circle btn btn-danger btn-block "
+                                data-toggle="modal"
+                                data-target="#finishOrder">
+                            Finish Order
+                        </button>
                     @endif
                 </div>
             </div>

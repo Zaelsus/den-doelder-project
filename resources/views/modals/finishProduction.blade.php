@@ -1,7 +1,6 @@
-{{--    Modal for finishing an order--}}
-<div class="modal fade" id="finishOrder" tabindex="-1" role="dialog"
-     aria-labelledby="finishOrderTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+<div class="modal fade" id="finishOrder" aria-hidden="true" aria-labelledby="finishOrderToggleLabel" tabindex="-1"
+     role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header colour-purple">
                 <h5 class="modal-title" id="finishOrderTitle">
@@ -16,16 +15,15 @@
             </div>
             <div class="modal-footer">
                 <div>
-                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">
+                        Cancel
                     </button>
                 </div>
-                <form method="POST"
-                      action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">
-                    @csrf
-                    <button class="btn btn-danger float-right"
-                            type="submit"> Finish Order
-                    </button>
-                </form>
+
+                <button class="btn btn-danger float-right" data-target="#endOrder" data-toggle="modal"
+                        data-dismiss="modal">
+                    Log Pallets & Finish Order
+                </button>
             </div>
         </div>
     </div>
