@@ -43,12 +43,8 @@
                         <p><strong>Elapsed Time: {{$orderTime[$order->id]->format('%h:%I:%S')}}</strong></p>
                         <p>Number of Stoppages: {{$stoppageNumber[$order->id]}}</p>
                         <p>Total Stoppages: {{$stoppageTotalTime[$order->id]->format('%h:%I:%S')}}</p>
-                        {{--                        {{dd($stoppageTotalTime[$order->id]->format('%S'))}}--}}
                         <?php
-
                         if (((int)$stoppageTotalTime[$order->id]->format('%S')) !== 0) {
-
-
                             $seconds = (int)$stoppageTotalTime[$order->id]->format('%S') / $stoppageNumber[$order->id];
                             $minutes = 0;
                             $hours = 0;
@@ -89,17 +85,16 @@
             <h2><span class="badge badge-pill badge-warning">No Transition Times to Display!</span></h2>
         @else
             @for($x = 0; $x < (sizeof($transitionOrders) - 1); $x += 1)
-{{--                @if($trantitionOrders[$x]->end_time !== null)--}}
-                    <h2><span
-                            class="badge badge-pill badge-warning">Transition at {{$transitionOrders[$x]->end_time}} to {{$transitionOrders[$x+1]->start_time}}
-                    </h2>
-                    <div style="padding-left: 1rem">
-                        <p><strong></strong>From <strong>Order {{$transitionOrders[$x]->order_number}}</strong> to
-                            <strong>Order {{$transitionOrders[$x+1]->order_number}}</strong></p>
-                        <p><strong></strong>Transition Time: {{$transitionTime[$transitionOrders[$x]->id]->format('%h:%I:%S')}}
-                        </p>
-                    </div>
-{{--                @endif--}}
+                <h2><span
+                        class="badge badge-pill badge-warning">Transition at {{$transitionOrders[$x]->end_time}} to {{$transitionOrders[$x+1]->start_time}}
+                </h2>
+                <div style="padding-left: 1rem">
+                    <p><strong></strong>From <strong>Order {{$transitionOrders[$x]->order_number}}</strong> to
+                        <strong>Order {{$transitionOrders[$x+1]->order_number}}</strong></p>
+                    <p><strong></strong>Transition
+                        Time: {{$transitionTime[$transitionOrders[$x]->id]->format('%h:%I:%S')}}
+                    </p>
+                </div>
             @endfor
         @endif
     </div>

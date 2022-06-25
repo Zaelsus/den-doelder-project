@@ -1,7 +1,6 @@
 console.log('javascript is working lol')
 
 document.getElementById('selection').onchange = function() {
-// console.log('change')
     let selectionValue = this.value
     document.getElementById('errors').className = 'invisibleSelection'
     document.getElementById('productionTimes').className = 'invisibleSelection'
