@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('header')
-    {{--    TODO: This overlaps with the change machines button and looks unfinished--}}
     Orders Overview
 @endsection
 @section('custom_css')
