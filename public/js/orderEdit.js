@@ -4,9 +4,10 @@ const no = document.getElementById('t2');
 const box = document.getElementById('clientName-box');
 const input = document.getElementById('clientName');
 
-
-console.log('box ' + box.style, 'input ' + input.attributes);
-
+/**
+ * Will check if yes or no is chosen from the radio buttons and will
+ * change the form of edit order accordingly if client name is needed or not
+ */
 function isCheckedEdit() {
     if (yes.checked) {
         box.style.display = 'block';

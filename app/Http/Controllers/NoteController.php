@@ -27,7 +27,6 @@ class NoteController extends Controller
         $allNotes = Note::all();
         foreach ($allNotes as $note) {
             event(new NotePriorityChange($note));
-//            $fixLogContent = Note::setFixLogContent($note);
         }
 
         //different note collections for different roles, get the
@@ -158,7 +157,6 @@ class NoteController extends Controller
             return redirect(route('orders.show', $order));
         } else {
             return view('notes.fixStoppage', compact('order', 'note'));
-//            return view('modals.logFix', compact('order', 'note'));
         }
 
 
@@ -182,7 +180,8 @@ class NoteController extends Controller
             $notes = Note::orderBy('created_at', 'desc')->get();
         } else if (Auth::user()->role === 'Production') {
             //production sees notes that are made by production and only for this order
-            $notes = Note::where('order_id', $order->id)->where('creator', 'Production')->orderBy('priority', 'asc')->orderBy('created_at', 'desc')->get();
+            $notes = Note::where('order_id', $order->id)->where('creator', 'Production')
+                ->orderBy('priority', 'asc')->orderBy('created_at', 'desc')->get();
         } else {
             //truck driver sees notes that are made by truck drivers and only for this order
             $notes = Note::where('order_id', $order->id)->where('creator', 'Driver')->orderBy('created_at', 'desc')->get();

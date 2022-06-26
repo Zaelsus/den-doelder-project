@@ -381,8 +381,7 @@ class OrderController extends Controller
      */
     public function listOrders()
     {
-        //looking about adding another order by accoridng to status as well as scheduled production
-//        $orders = Order::where('status', 'Production Pending', 'In Production')->orderBy('machine_id', 'desc')->get();
+        //looking about adding another order according to status as well as scheduled production
         $orders = 1;
         dd($orders);
         $previousMachine = null;
@@ -391,8 +390,6 @@ class OrderController extends Controller
 
     public function pauseDriving(Order $order)
     {
-//        dd($order);
-//        dd($order->machine);
         $order->update(['truckDriver_status' => 'Paused']);
         return redirect(route('machines.show', ['machine' => $order->machine]));
     }

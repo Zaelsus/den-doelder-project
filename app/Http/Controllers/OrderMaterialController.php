@@ -155,13 +155,6 @@ class OrderMaterialController extends Controller
                     }
                     $j++;
                 }
-//                if ($exists === false) {
-//                    if ($array2[$i]['total_quantity'] > 0) {
-//                        $quantity = $request->product[$i]['total_quantity'] * $order->quantity_production;
-//                        OrderMaterial::create(['order_id' => $request->product[$i]['order_id'],
-//                            'material_id' => $request->product[$i]['material_id'], 'total_quantity' => $quantity]);
-//                    }
-//                }
             }
         }
 
@@ -232,7 +225,4 @@ class OrderMaterialController extends Controller
 
         return $validatedAtributes;
     }
-
-    // status manipulation
-
 }

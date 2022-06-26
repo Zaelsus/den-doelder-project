@@ -121,7 +121,7 @@ class ProductionController extends Controller
             'klampenAang'=>'min:0',
             'klampenCorrect'=>'min:0',
 
-            'overstekTickB'=>'required|boolean',
+            'overstekTickB'=>'min:0|boolean',
             'overstekAangB'=>'min:0',
             'overstekCorrectB'=>'min:0',
 
@@ -152,7 +152,7 @@ class ProductionController extends Controller
             'stapelAang'=>'min:0',
             'stapelCorrect'=>'min:0',
 
-            'strappenTick'=>'required',
+            'strappenTick'=>'min:0',
             'strappenAang'=>'min:0',
             'strappenCorrect'=>'min:0',
 

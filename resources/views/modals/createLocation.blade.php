@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header bg-secondary">
                 <h5 class="modal-title" id="createPalletLocationTitle">
-                    Update Location Quantity
+                    Add Pallets to New Location
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="badge bg-white align-content-lg-stretch justify-content-center">&times;</span>
@@ -14,9 +14,6 @@
                 <form class="was-validated" method="POST"
                       action="{{ route('productLocations.storeLocation',['order' =>$order]) }}">
                     @csrf
-                    <div class="mb-3 card-header">
-                        <h3>Add to New Location</h3>
-                    </div>
                     <div class="card-body">
                         <div class="mb-3">
                             <label>Location:</label>
@@ -25,7 +22,8 @@
                                         class="custom-select @error('location_id') is-invalid @enderror"
                                         required>
                                     @foreach($palletLocations as $location)
-                                        @if(!(App\Models\ProductLocation::checkPalletExists($order->pallet_id, $location->id)))
+                                        @if(!(App\Models\ProductLocation::checkPalletExists($order->pallet_id, $location->id)) && App\Models\ProductLocation::checkAvailableSpace($location->id))
+                                            )
                                             <option
                                                 value={{$location->id}} {{ old('location_id') ? 'selected' : ''}}>
                                                 {{$location->name}}

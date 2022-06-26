@@ -37,7 +37,7 @@ class CreateProductionsTable extends Migration
             $table->string('klampenAang')->nullable();
             $table->string('klampenCorrect')->nullable();
 
-            $table->boolean('overstekTickB')->default(0);
+            $table->boolean('overstekTickB')->default(0)->nullable();
             $table->string('overstekAangB')->nullable();
             $table->string('overstekCorrectB')->nullable();
 
@@ -69,7 +69,7 @@ class CreateProductionsTable extends Migration
             $table->string('stapelAang')->nullable();
             $table->string('stapelCorrect')->nullable();
 
-            $table->string('strappenTick');
+            $table->string('strappenTick')->nullable();
             $table->string('strappenAang')->nullable();
             $table->string('strappenCorrect')->nullable();
 

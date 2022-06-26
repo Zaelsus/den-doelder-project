@@ -31,15 +31,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-// this is temporary until we add the login to the right role and the right production line
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 // Machines
 Route::resource('/machines', MachineController::class);
-//select machine
+// Select machine
 Route::post('/machines/{machine}/{user}', [MachineController::class, 'selectMachine'])->name('machines.selectMachine');
 
-//// Order
+// Order
 Route::resource('/orders', OrderController::class);
 
 // Pallets

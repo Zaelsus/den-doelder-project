@@ -47,7 +47,7 @@ class Note extends Model
         $order->save();
         // add this into Order function to log final quantity (change $this->>numberLog to add_quantity)
 
-        if($order->quantity_produced > $order->quantity_production) {
+        if($order->quantity_produced >= $order->quantity_production) {
             $error = true;
         }
         else {
