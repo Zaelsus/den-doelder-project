@@ -51,9 +51,9 @@ Route::resource('/reports', ReportController::class);
 //Production View
 //start production route
 Route::post('/orders/start/{order}', [OrderController::class, 'startProduction'])->name('orders.startProduction');
-//stop production route
-Route::put('/orders/stop/{order}/{machine}', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
-//Route::put('/orders/stop/{order}/{machine}', [OrderController::class, 'finishAndLogPallets'])->name('orders.finishAndLogPallets');
+//stop production routes
+Route::get('/orders/stop/{order}/{machine}/finish', [OrderController::class, 'stopProduction'])->name('orders.stopProduction');
+Route::put('/orders/stop/{order}/{machine}', [OrderController::class, 'finishAndLogPallets'])->name('orders.finishAndLogPallets');
 
 //stop production route
 Route::post('/orders/pause/{order}', [OrderController::class, 'pauseProduction'])->name('orders.pauseProduction');

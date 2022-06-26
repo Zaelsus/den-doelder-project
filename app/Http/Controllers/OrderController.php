@@ -216,13 +216,13 @@ class OrderController extends Controller
     /**
      * changes the status of the current order to done
      */
-    public static function stopProduction(Request $request, Order $order, Machine $machine)
+    public static function stopProduction(Order $order, Machine $machine)
     {
-        $validated = $request->validate([
-            'add_quantity' => 'required|integer|min:0',
-        ]);
-        $order->logFinalQuantity($validated);
-        // remove all code above this comment if we split the finish order into 2 functions
+//        $validated = $request->validate([
+//            'add_quantity' => 'required|integer|min:0',
+//        ]);
+//        $order->logFinalQuantity($validated);
+//        // remove all code above this comment if we split the finish order into 2 functions
 
         $order->update(['status' => 'Done', 'end_time' => date('Y-m-d H:i:s')]);
         return redirect(route('machines.show', compact('machine')));

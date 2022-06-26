@@ -35,9 +35,10 @@
                 </form>
                 <div class="control">
                     @if($order->quantity_produced >= $order->quantity_production)
-                        <button type="button" class="far fa-stop-circle btn btn-danger btn-block "
+                        <button type="button" class="far fa-stop-circle btn btn-danger btn-lg btn-block "
                                 data-toggle="modal"
-                                data-target="#finishOrder">
+                                data-dismiss="modal"
+                                data-target="#stopOrder">
                             Finish Order
                         </button>
                     @endif

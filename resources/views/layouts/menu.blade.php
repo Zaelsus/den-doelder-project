@@ -76,7 +76,6 @@
                         </button>
                     </a>
                 @endif
-
             </div>
 
             <div class="nav-item">

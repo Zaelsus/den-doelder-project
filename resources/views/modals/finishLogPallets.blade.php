@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <form method="POST"
-                      action="{{ route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine]) }}">
+                      action="{{ route('orders.finishAndLogPallets', ['order'=>$order,'machine'=>Auth::user()->machine]) }}">
                     @csrf
                     @method('PUT')
                     <div class="card-content table table-bordered table-hover table-light ">
