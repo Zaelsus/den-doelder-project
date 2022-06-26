@@ -35,13 +35,6 @@
                 </form>
                 <div class="control">
                     @if($order->quantity_produced >= $order->quantity_production)
-{{--                        <form method="POST"--}}
-{{--                              action="{{route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine])}}">--}}
-{{--                            @csrf--}}
-{{--                            <button class="far fa-stop-circle btn btn-danger btn-lg btn-block "--}}
-{{--                                    type="submit"> Save & Finish Order--}}
-{{--                            </button>--}}
-{{--                        </form>--}}
                         <button type="button" class="far fa-stop-circle btn btn-danger btn-block "
                                 data-toggle="modal"
                                 data-target="#finishOrder">

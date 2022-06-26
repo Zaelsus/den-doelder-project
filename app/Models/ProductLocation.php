@@ -19,7 +19,6 @@ class ProductLocation extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-
     /**
      * Gets the location related to the productlocation
      */
@@ -29,11 +28,11 @@ class ProductLocation extends Model
     }
 
     /**
-     * Check if a pallet already exists at a specific location
+     * Check if the pallet already exists at a specific location
      *
      * @param $palletId - The pallet's product_id from the database
-     * @param $locationId - The location where the pallet will be stored
-     * @returns - True if that pallet type is already there, False if it is not
+     * @param $locationId - The location for where the pallet will be stored
+     * @returns boolean - True if that pallet type is already there, False if it is not
      */
     public static function checkPalletExists($palletId, $locationId)
     {
@@ -49,17 +48,6 @@ class ProductLocation extends Model
     public function increasePalletQuantity($loggedAmount)
     {
         $this->Quantity += $loggedAmount;
-        $this->save();
-    }
-
-    /**
-     * Function to decrease the total number of pallets at a location
-     *
-     * @param $loggedAmount - The amount being removed
-     */
-    public function decreasePalletQuantity($loggedAmount)
-    {
-        $this->Quantity -= $loggedAmount;
         $this->save();
     }
 

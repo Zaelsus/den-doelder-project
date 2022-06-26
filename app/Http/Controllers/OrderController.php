@@ -219,7 +219,7 @@ class OrderController extends Controller
     public static function stopProduction(Request $request, Order $order, Machine $machine)
     {
         $validated = $request->validate([
-            'add_quantity' => 'required|integer',
+            'add_quantity' => 'required|integer|min:0',
         ]);
         $order->logFinalQuantity($validated);
         // remove all code above this comment if we split the finish order into 2 functions

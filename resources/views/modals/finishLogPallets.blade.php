@@ -12,7 +12,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <form method="POST" action="{{ route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine]) }}">
+                <form method="POST"
+                      action="{{ route('orders.stopProduction', ['order'=>$order,'machine'=>Auth::user()->machine]) }}">
                     @csrf
                     @method('PUT')
                     <div class="card-content table table-bordered table-hover table-light ">
@@ -23,13 +24,19 @@
                             Quantity to be produced: {{$order->toproduce}}
                         </div>
                         <div>
-                            Log Quantity: <input class="input" type="number" name="add_quantity" id=" " value="0">
+                            Log Quantity: <input class="input @error('add_quantity') is-invalid @enderror" type="number"
+                                                 min="0" name="add_quantity" value="0">
+                            @error('add_quantity')
+                            <p class="help is-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="field is-grouped">
                         <div>
-                            <button type="submit" class="btn btn-danger btn-lg btn-block" id="submitNew">Save & Finish Order</button>
+                            <button type="submit" class="btn btn-danger btn-lg btn-block" id="submitNew">Save & Finish
+                                Order
+                            </button>
                         </div>
                     </div>
                 </form>

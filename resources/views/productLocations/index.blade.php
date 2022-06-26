@@ -35,7 +35,6 @@
                                         @foreach($productLocations as $productLocation)
                                             @php
                                                 $location = App\Models\Location::where('id', $productLocation->location_id)->first();
-
                                             @endphp
                                             <tr>
                                                 <td>{{$order->pallet->name}}</td>
@@ -55,7 +54,7 @@
                                                             data-target=" {{"#updatePalletLocation" . $productLocation->location_id}}"
                                                         {{!App\Models\ProductLocation::checkAvailableSpace($productLocation->location_id) ?
                                                             'hidden' : ''}}>
-                                                        Update
+                                                        Add Pallets
                                                     </button>
                                                 </td>
                                             </tr>
@@ -72,7 +71,7 @@
                                             class="btn btn-lg bg-info"
                                             data-toggle="modal"
                                             data-target="#createPalletLocation">
-                                        Add new Location
+                                        Add New Location
                                     </button>
                                 </div>
                             </div>
