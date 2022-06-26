@@ -54,7 +54,7 @@
                                                             data-target=" {{"#updatePalletLocation" . $productLocation->location_id}}"
                                                         {{!App\Models\ProductLocation::checkAvailableSpace($productLocation->location_id) ?
                                                         'hidden' : ''}}>
-                                                        Update
+                                                        Add
                                                     </button>
                                                 </td>
                                             </tr>
@@ -71,7 +71,7 @@
                                             class="btn btn-lg bg-info"
                                             data-toggle="modal"
                                             data-target="#createPalletLocation">
-                                        Add new Location
+                                        Add New Location
                                     </button>
                                 </div>
                             </div>
