@@ -29,19 +29,18 @@
 
                         <div class="field is-grouped">
                             <div>
-                                <button type="submit" class="btn btn-info btn-lg btn-lg btn-block" id="submitNew">Save</button>
+                                <button type="submit" class="btn btn-info btn-lg btn-block" id="submitNew">Save & Continue Production</button>
                             </div>
                         </div>
                 </form>
                 <div class="control">
                     @if($order->quantity_produced >= $order->quantity_production)
-                        <a class="nav-item">
-                            <button type="button" class="far fa-stop-circle btn btn-danger btn-block "
-                                    data-toggle="modal"
-                                    data-target="#finishOrder">
-                                Finish Order
-                            </button>
-                        </a>
+                        <button type="button" class="far fa-stop-circle btn btn-danger btn-lg btn-block "
+                                data-toggle="modal"
+                                data-dismiss="modal"
+                                data-target="#stopOrder">
+                            Finish Order
+                        </button>
                     @endif
                 </div>
             </div>

@@ -45,6 +45,7 @@ class Note extends Model
     public function logPalletQuantity($order) {
         $order->quantity_produced += $this->numberLog;
         $order->save();
+        // add this into Order function to log final quantity (change $this->>numberLog to add_quantity)
 
         if($order->quantity_produced >= $order->quantity_production) {
             $error = true;

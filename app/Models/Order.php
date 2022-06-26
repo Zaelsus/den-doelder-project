@@ -107,7 +107,7 @@ class Order extends Model
             $order = Order::where('status', 'In Production')->first();
         } elseif (Order::isInProduction($machine) === 'Paused') {
             $order = Order::where('status', 'Paused')->first();
-        } else{
+        } else {
             return null;
         }
         return $order;
@@ -133,7 +133,7 @@ class Order extends Model
     public static function initialCheckExists(Order $order)
     {
         $initialCheck = $order->initial;
-        if($initialCheck !== null) {
+        if ($initialCheck !== null) {
             return true;
         }
         return false;
@@ -152,14 +152,14 @@ class Order extends Model
     }
 
 
-  /**
+    /**
      * Function to add pallets to the quantity produced
      * @return void
      */
     public function addProduced()
     {
-        $total = $this->quantity_produced +  $this->add_quantity;
-        $this->quantity_produced +=  $this->add_quantity;
+        $total = $this->quantity_produced + $this->add_quantity;
+        $this->quantity_produced += $this->add_quantity;
         $this->add_quantity = 0;
         $this->save();
     }
@@ -171,12 +171,9 @@ class Order extends Model
      */
     public function getToProduceAttribute()
     {
-        if($this->quantity_production - $this->quantity_produced > 0)
-        {
-            return $this->quantity_production -$this->quantity_produced;
-        }
-        else
-        {
+        if ($this->quantity_production - $this->quantity_produced > 0) {
+            return $this->quantity_production - $this->quantity_produced;
+        } else {
             return 0;
 
         }
@@ -186,7 +183,7 @@ class Order extends Model
     public function calculateNoteStoppageIntervals()
     {
         $waitTime = [];
-        foreach($this->notes as $note){
+        foreach ($this->notes as $note) {
             $noteError = Note::find($note->note_rel);
             if (is_null($noteError)) {
                 continue;
@@ -204,9 +201,20 @@ class Order extends Model
         $waitTimes = $this->calculateNoteStoppageIntervals();
         $time1 = new \DateTime();
         $time2 = new \DateTime();
-        foreach($waitTimes as $waitTime) {
+        foreach ($waitTimes as $waitTime) {
             $time1->add($waitTime);
         }
         return $time1->diff($time2);
+    }
+
+    /**
+     * adds the pallet amount that is logged when restart label is end of shift.
+     * and returns a boolean to see if an error message should be sent through.
+     * @return $error boolean
+     */
+    public function logFinalQuantity($validated)
+    {
+        $this->quantity_produced += $validated['add_quantity'];
+        $this->save();
     }
 }

@@ -19,6 +19,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 @extends(isset($order) ? 'modals.orders':'blank')
 @extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.finishProduction':'blank')
+@extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.finishLogPallets':'blank')
 @extends(Auth::user()->role !=='Administrator' && isset($order)  ? 'modals.truck':'blank')
 @extends(Auth::user()->role !=='Administrator' ? 'modals.machines':'blank')
 @extends(Auth::user()->role !=='Administrator' && isset($order, $machine) ? 'modals.logPallets':'blank')
@@ -103,7 +104,7 @@
 
 
 
-<!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <section class="content">
             @yield('content')

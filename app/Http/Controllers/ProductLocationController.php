@@ -108,7 +108,7 @@ class ProductLocationController extends Controller
         $validatedAtributes = $request->validate([
             'location_id' => 'required|integer',
             'product_id' => 'required|integer',
-            'Quantity' => 'required|integer|min:0|',
+            'Quantity' => 'required|integer|min:0',
         ]);
 
         return $validatedAtributes;
@@ -130,7 +130,7 @@ class ProductLocationController extends Controller
     /**
      * Function to list all pallet locations
      *
-     * @param $order - the order
+     * @param $order - the order details from the database
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function list(Order $order)
@@ -204,6 +204,6 @@ class ProductLocationController extends Controller
         $palletQuantity->update();
 
         return redirect(route('productLocations.list', $order));
-
     }
 }
+

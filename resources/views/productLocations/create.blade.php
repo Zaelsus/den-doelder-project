@@ -42,7 +42,7 @@
                                 <div class="mb-3">
                                     <label for="Quantity">Quantity: </label>
                                     <div>
-                                        <input type="number" min="0" max="1000" class="form-control"
+                                        <input type="number" min="0" max="1000" class="form-control @error('Quantity') is-invalid @enderror"
                                                name="Quantity"
                                                placeholder="Max 1000" value="" required>
                                     </div>

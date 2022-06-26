@@ -50,33 +50,32 @@
     @if($order !== null)
         <li class="nav-item">
             <div class="card bg-gray-dark" style="margin-bottom: .2rem">
-                    @if($order->status === 'Paused')
-                        <a class="nav-item">
-                            <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
-                                    data-toggle="modal"
-                                    data-target="#restartProd">
-                                Restart
-                            </button>
-                        </a>
-                    @endif
-                    @if($order->status === 'In Production')
-                        <a class="nav-item">
-                            <button type="button" class="far fa-pause-circle btn btn-warning btn-block"
-                                    data-toggle="modal"
-                                    data-target="#pauseProd">
-                                Pause
-                            </button>
+                @if($order->status === 'Paused')
+                    <a class="nav-item">
+                        <button type="button" class="far fas fa-arrow-alt-circle-up btn btn-success btn-block"
+                                data-toggle="modal"
+                                data-target="#restartProd">
+                            Restart
+                        </button>
+                    </a>
+                @endif
+                @if($order->status === 'In Production')
+                    <a class="nav-item">
+                        <button type="button" class="far fa-pause-circle btn btn-warning btn-block"
+                                data-toggle="modal"
+                                data-target="#pauseProd">
+                            Pause
+                        </button>
 
-                        </a>
-                        <a class="nav-item">
-                                <button type="button" class="far fa-stop-circle btn btn-danger btn-block "
-                                        data-toggle="modal"
-                                        data-target="#finishOrder">
-                                    Finish Order
-                                </button>
-                       </a>
-                    @endif
-
+                    </a>
+                    <a class="nav-item">
+                        <button type="button" class="far fa-stop-circle btn btn-danger btn-block "
+                                data-toggle="modal"
+                                data-target="#finishOrder">
+                            Finish Order
+                        </button>
+                    </a>
+                @endif
             </div>
 
             <div class="nav-item">
@@ -121,8 +120,8 @@
                 </a>
                 @if($order->status === 'In Production')
                     <a class="nav-link active bg-gray-dark btn text-left"
-                            data-toggle="modal"
-                            data-target="#logPallets">
+                       data-toggle="modal"
+                       data-target="#logPallets">
                         <i class="nav-icon fas fa-clipboard-check"></i>
                         <p>Log Pallets</p>
                     </a>
@@ -238,22 +237,22 @@
         @if($order->truckDriver_status === 'Driving')
             <li class="nav-item">
                 <div class="card bg-gray-dark" style="margin-bottom: .2rem">
-                        <a class="nav-item">
-                             <button type="button" class="nav-link active btn text-left bg-warning"
-                                    data-toggle="modal"
-                                    data-target="#pauseDriving">
-                                <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
-                                <p class="brand-text" style="color: white"> Pause Driving</p>
-                            </button>
-                        </a>
-                        <a class="nav-item">
-                             <button type="button" class="nav-link active btn text-left bg-danger"
-                                    data-toggle="modal"
-                                    data-target="#finishDriving">
-                                <i class="nav-icon fas fa-stop-circle text-left"></i>
-                                <p class="brand-text"> Finish Driving</p>
-                            </button>
-                        </a>
+                    <a class="nav-item">
+                        <button type="button" class="nav-link active btn text-left bg-warning"
+                                data-toggle="modal"
+                                data-target="#pauseDriving">
+                            <i class="nav-icon fas fa-pause-circle text-left" style="color: white"></i>
+                            <p class="brand-text" style="color: white"> Pause Driving</p>
+                        </button>
+                    </a>
+                    <a class="nav-item">
+                        <button type="button" class="nav-link active btn text-left bg-danger"
+                                data-toggle="modal"
+                                data-target="#finishDriving">
+                            <i class="nav-icon fas fa-stop-circle text-left"></i>
+                            <p class="brand-text"> Finish Driving</p>
+                        </button>
+                    </a>
                 </div>
             <li class="nav-item">
                 <div class="nav-item">
